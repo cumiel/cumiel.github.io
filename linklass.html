@@ -14,6 +14,52 @@
       min-height: 100vh;
     }
 
+    /* Language Toggle */
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a1a2e;
+      transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px;
+      height: 24px;
+      background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .lang-switch .track .thumb {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    body.lang-en .lang-switch .track .thumb { left: 21px; }
+    .en { display: none; }
+    body.lang-en .ko { display: none; }
+    body.lang-en .en { display: inline; }
+
     /* Hero */
     .hero {
       text-align: center;
@@ -234,15 +280,24 @@
 </head>
 <body>
 
+  <div class="lang-switch" onclick="toggleLang()">
+    <span class="flag" id="flag-ko">🇰🇷 KR</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag dim" id="flag-en">EN 🇺🇸</span>
+  </div>
+
   <!-- Hero -->
   <section class="hero">
     <img src="linklass-icon.png" alt="Linklass" class="hero-icon">
     <h1><span class="lin">Lin</span><span class="k">k</span><span class="lass">lass</span></h1>
-    <p class="subtitle">수업 예약 & 스케줄 관리</p>
+    <p class="subtitle"><span class="ko">수업 예약 & 스케줄 관리</span><span class="en">Lesson Booking & Schedule Management</span></p>
     <p class="desc">
-      강사와 학생을 연결하는 수업 예약 앱.<br>
+      <span class="ko">강사와 학생을 연결하는 수업 예약 앱.<br>
       하나의 주간 시간표 위에서 수업을 관리하고,<br>
-      수강권과 출석까지 한번에 해결하세요.
+      수강권과 출석까지 한번에 해결하세요.</span>
+      <span class="en">A lesson booking app that connects instructors and students.<br>
+      Manage classes on a single weekly timetable,<br>
+      with lesson credits and attendance all in one place.</span>
     </p>
     <div class="badges">
       <a href="#" class="badge">
@@ -258,65 +313,65 @@
 
   <!-- Features -->
   <section class="features">
-    <h2>주요 기능</h2>
-    <p class="section-desc">강사도, 학생도 하나의 앱으로 모든 수업을 관리합니다</p>
+    <h2><span class="ko">주요 기능</span><span class="en">Features</span></h2>
+    <p class="section-desc"><span class="ko">강사도, 학생도 하나의 앱으로 모든 수업을 관리합니다</span><span class="en">One app for both instructors and students to manage all lessons</span></p>
     <div class="feature-grid">
       <div class="feature-card">
         <div class="icon">📅</div>
-        <h3>주간 시간표</h3>
-        <p>24시간, 10분 단위의 정밀한 시간표. 내 수업과 수강 일정을 한눈에 확인하세요.</p>
+        <h3><span class="ko">주간 시간표</span><span class="en">Weekly Timetable</span></h3>
+        <p><span class="ko">24시간, 10분 단위의 정밀한 시간표. 내 수업과 수강 일정을 한눈에 확인하세요.</span><span class="en">Precise 24-hour, 10-minute interval timetable. See all your lessons at a glance.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🔗</div>
-        <h3>간편한 클래스 연결</h3>
-        <p>6자리 코드 또는 QR 스캔으로 강사의 클래스에 바로 참여할 수 있습니다.</p>
+        <h3><span class="ko">간편한 클래스 연결</span><span class="en">Easy Class Connection</span></h3>
+        <p><span class="ko">6자리 코드 또는 QR 스캔으로 강사의 클래스에 바로 참여할 수 있습니다.</span><span class="en">Join an instructor's class instantly with a 6-digit code or QR scan.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🎫</div>
-        <h3>수강권 관리</h3>
-        <p>수강 횟수 부여, 수업 완료 시 자동 차감. 강사와 학생 모두 투명하게 관리합니다.</p>
+        <h3><span class="ko">수강권 관리</span><span class="en">Lesson Credits</span></h3>
+        <p><span class="ko">수강 횟수 부여, 수업 완료 시 자동 차감. 강사와 학생 모두 투명하게 관리합니다.</span><span class="en">Issue credits and auto-deduct on completion. Transparent tracking for both sides.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">✅</div>
-        <h3>상호 확인 시스템</h3>
-        <p>수업 완료는 강사와 학생 양쪽 확인 후 처리. 신뢰할 수 있는 수업 기록을 남깁니다.</p>
+        <h3><span class="ko">상호 확인 시스템</span><span class="en">Mutual Confirmation</span></h3>
+        <p><span class="ko">수업 완료는 강사와 학생 양쪽 확인 후 처리. 신뢰할 수 있는 수업 기록을 남깁니다.</span><span class="en">Lessons are completed only after both parties confirm. Reliable lesson records.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🔔</div>
-        <h3>실시간 알림</h3>
-        <p>예약 요청, 수업 리마인더, 완료 확인까지 놓치지 않도록 알림을 보내드립니다.</p>
+        <h3><span class="ko">실시간 알림</span><span class="en">Real-time Notifications</span></h3>
+        <p><span class="ko">예약 요청, 수업 리마인더, 완료 확인까지 놓치지 않도록 알림을 보내드립니다.</span><span class="en">Booking requests, lesson reminders, and confirmations — never miss a thing.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🔒</div>
-        <h3>프라이버시 보호</h3>
-        <p>학생은 강사의 다른 스케줄을 볼 수 없습니다. 예약 가능한 시간만 안전하게 표시됩니다.</p>
+        <h3><span class="ko">프라이버시 보호</span><span class="en">Privacy Protection</span></h3>
+        <p><span class="ko">학생은 강사의 다른 스케줄을 볼 수 없습니다. 예약 가능한 시간만 안전하게 표시됩니다.</span><span class="en">Students cannot see the instructor's other schedules. Only available slots are shown.</span></p>
       </div>
     </div>
   </section>
 
   <!-- How it works -->
   <section class="how">
-    <h2>이렇게 사용해요</h2>
+    <h2><span class="ko">이렇게 사용해요</span><span class="en">How It Works</span></h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <h3>클래스 만들기</h3>
-        <p>수업 이름, 시간, 정원을 설정하고 클래스를 개설하세요.</p>
+        <h3><span class="ko">클래스 만들기</span><span class="en">Create a Class</span></h3>
+        <p><span class="ko">수업 이름, 시간, 정원을 설정하고 클래스를 개설하세요.</span><span class="en">Set the lesson name, time, and capacity to open a class.</span></p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <h3>학생 초대</h3>
-        <p>공유 코드나 QR을 학생에게 보내면 바로 참여할 수 있습니다.</p>
+        <h3><span class="ko">학생 초대</span><span class="en">Invite Students</span></h3>
+        <p><span class="ko">공유 코드나 QR을 학생에게 보내면 바로 참여할 수 있습니다.</span><span class="en">Share a code or QR with students for instant access.</span></p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <h3>수업 시간 등록</h3>
-        <p>시간표에서 수업 시간을 오픈하면 학생이 예약할 수 있습니다.</p>
+        <h3><span class="ko">수업 시간 등록</span><span class="en">Open Time Slots</span></h3>
+        <p><span class="ko">시간표에서 수업 시간을 오픈하면 학생이 예약할 수 있습니다.</span><span class="en">Open lesson times on the timetable for students to book.</span></p>
       </div>
       <div class="step">
         <div class="step-num">4</div>
-        <h3>수업 완료 확인</h3>
-        <p>수업이 끝나면 양쪽이 확인하고, 수강권이 자동으로 차감됩니다.</p>
+        <h3><span class="ko">수업 완료 확인</span><span class="en">Confirm Completion</span></h3>
+        <p><span class="ko">수업이 끝나면 양쪽이 확인하고, 수강권이 자동으로 차감됩니다.</span><span class="en">Both parties confirm and credits are automatically deducted.</span></p>
       </div>
     </div>
   </section>
@@ -324,23 +379,23 @@
   <!-- Target Users -->
   <section class="target">
     <div class="target-inner">
-      <h2>이런 분들에게 추천합니다</h2>
+      <h2><span class="ko">이런 분들에게 추천합니다</span><span class="en">Who is it for?</span></h2>
       <div class="target-chips">
-        <span class="chip">🎹 음악 레슨 강사</span>
-        <span class="chip">💪 PT / 운동 트레이너</span>
-        <span class="chip">📚 과외 선생님</span>
-        <span class="chip">🎨 미술 / 공예 강사</span>
-        <span class="chip">💼 1:1 상담사</span>
-        <span class="chip">🏫 소규모 스튜디오</span>
-        <span class="chip">👨‍🎓 수업을 듣는 학생</span>
+        <span class="chip"><span class="ko">🎹 음악 레슨 강사</span><span class="en">🎹 Music Instructors</span></span>
+        <span class="chip"><span class="ko">💪 PT / 운동 트레이너</span><span class="en">💪 Personal Trainers</span></span>
+        <span class="chip"><span class="ko">📚 과외 선생님</span><span class="en">📚 Private Tutors</span></span>
+        <span class="chip"><span class="ko">🎨 미술 / 공예 강사</span><span class="en">🎨 Art / Craft Instructors</span></span>
+        <span class="chip"><span class="ko">💼 1:1 상담사</span><span class="en">💼 1:1 Consultants</span></span>
+        <span class="chip"><span class="ko">🏫 소규모 스튜디오</span><span class="en">🏫 Small Studios</span></span>
+        <span class="chip"><span class="ko">👨‍🎓 수업을 듣는 학생</span><span class="en">👨‍🎓 Students</span></span>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta">
-    <h2>지금 시작해보세요</h2>
-    <p>무료로 클래스를 만들고 학생을 초대할 수 있습니다.</p>
+    <h2><span class="ko">지금 시작해보세요</span><span class="en">Get Started</span></h2>
+    <p><span class="ko">무료로 클래스를 만들고 학생을 초대할 수 있습니다.</span><span class="en">Create a class and invite students for free.</span></p>
     <div class="badges">
       <a href="#" class="badge">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -357,11 +412,26 @@
   <footer>
     <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
     <p style="margin-top: 8px;">
-      <a href="mailto:contact@cumiel.com">문의하기</a>
+      <a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
       &nbsp;&middot;&nbsp;
-      <a href="#">개인정보처리방침</a>
+      <a href="#"><span class="ko">개인정보처리방침</span><span class="en">Privacy Policy</span></a>
     </p>
   </footer>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('lang-en');
+      var isEn = document.body.classList.contains('lang-en');
+      localStorage.setItem('lang', isEn ? 'en' : 'ko');
+      document.getElementById('flag-ko').classList.toggle('dim', isEn);
+      document.getElementById('flag-en').classList.toggle('dim', !isEn);
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      document.body.classList.add('lang-en');
+      document.getElementById('flag-ko').classList.add('dim');
+      document.getElementById('flag-en').classList.remove('dim');
+    }
+  </script>
 
 </body>
 </html>

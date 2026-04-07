@@ -13,12 +13,63 @@
       line-height: 1.7;
     }
 
+    /* Language Toggle */
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1E293B;
+      transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px;
+      height: 24px;
+      background: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .lang-switch .track .thumb {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    body.lang-en .lang-switch .track .thumb { left: 21px; }
+    .en { display: none; }
+    body.lang-en .ko { display: none; }
+    body.lang-en .en { display: inline; }
+
     /* 히어로 */
     .hero {
       background: linear-gradient(135deg, #3B82F6, #06B6D4);
       color: white;
       text-align: center;
       padding: 80px 20px 60px;
+    }
+    .hero .lang-toggle {
+      color: white;
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.3);
     }
     .hero-icon {
       width: 100px;
@@ -225,6 +276,12 @@
 </head>
 <body>
 
+  <div class="lang-switch" onclick="toggleLang()">
+    <span class="flag" id="flag-ko">🇰🇷 KR</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag dim" id="flag-en">EN 🇺🇸</span>
+  </div>
+
   <!-- 히어로 -->
   <div class="hero">
     <div class="hero-icon">
@@ -238,17 +295,17 @@
         <circle cx="46" cy="23" r="2" fill="white"/>
       </svg>
     </div>
-    <h1>홈릿</h1>
+    <h1><span class="ko">홈릿</span><span class="en">Homlit</span></h1>
     <p class="subtitle">HOMLIT</p>
-    <p class="tagline">새 매물, 놓치지 마세요</p>
-    <p class="desc">관심 아파트에 새 매물이 올라오면 바로 알려주는 네이버부동산 매물 알리미</p>
+    <p class="tagline"><span class="ko">새 매물, 놓치지 마세요</span><span class="en">Never miss a new listing</span></p>
+    <p class="desc"><span class="ko">관심 아파트에 새 매물이 올라오면 바로 알려주는 네이버부동산 매물 알리미</span><span class="en">Get instant alerts when new listings appear for your favorite apartments on Naver Real Estate</span></p>
     <div class="badges">
-      <span class="badge badge-blue">매매</span>
-      <span class="badge badge-purple">전세</span>
-      <span class="badge badge-orange">월세</span>
+      <span class="badge badge-blue"><span class="ko">매매</span><span class="en">Buy</span></span>
+      <span class="badge badge-purple"><span class="ko">전세</span><span class="en">Jeonse</span></span>
+      <span class="badge badge-orange"><span class="ko">월세</span><span class="en">Rent</span></span>
     </div>
     <div class="store-buttons">
-      <a href=" https://apps.apple.com/kr/app/homlit/id6761394879" class="store-btn">
+      <a href="https://apps.apple.com/kr/app/homlit/id6761394879" class="store-btn">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         App Store
       </a>
@@ -261,68 +318,86 @@
 
   <!-- 주요 기능 -->
   <div class="section">
-    <h2>주요 기능</h2>
+    <h2><span class="ko">주요 기능</span><span class="en">Features</span></h2>
     <div class="features">
       <div class="feature-card">
         <div class="feature-icon fi-blue">🔍</div>
-        <h3>단지 검색</h3>
-        <p>네이버부동산에 등록된 아파트, 오피스텔을 검색하고 관심 단지를 즐겨찾기에 추가하세요.</p>
+        <h3><span class="ko">단지 검색</span><span class="en">Search Complexes</span></h3>
+        <p><span class="ko">네이버부동산에 등록된 아파트, 오피스텔을 검색하고 관심 단지를 즐겨찾기에 추가하세요.</span><span class="en">Search apartments and officetels on Naver Real Estate and add your favorites.</span></p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-cyan">📋</div>
-        <h3>매물 실시간 조회</h3>
-        <p>즐겨찾기 단지의 매매, 전세, 월세 매물을 한눈에 확인할 수 있습니다.</p>
+        <h3><span class="ko">매물 실시간 조회</span><span class="en">Live Listings</span></h3>
+        <p><span class="ko">즐겨찾기 단지의 매매, 전세, 월세 매물을 한눈에 확인할 수 있습니다.</span><span class="en">View buy, jeonse, and rent listings for your saved complexes at a glance.</span></p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-yellow">🔔</div>
-        <h3>새 매물 알림</h3>
-        <p>새로 올라온 매물을 자동으로 감지하고 알림으로 알려드립니다.</p>
+        <h3><span class="ko">새 매물 알림</span><span class="en">New Listing Alerts</span></h3>
+        <p><span class="ko">새로 올라온 매물을 자동으로 감지하고 알림으로 알려드립니다.</span><span class="en">Automatically detects new listings and sends you push notifications.</span></p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-purple">🏷️</div>
-        <h3>거래유형 필터</h3>
-        <p>매매, 전세, 월세를 단지별로 선택하여 원하는 유형만 모니터링할 수 있습니다.</p>
+        <h3><span class="ko">거래유형 필터</span><span class="en">Transaction Filter</span></h3>
+        <p><span class="ko">매매, 전세, 월세를 단지별로 선택하여 원하는 유형만 모니터링할 수 있습니다.</span><span class="en">Filter by buy, jeonse, or rent per complex to monitor only the types you want.</span></p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-orange">🔗</div>
-        <h3>바로가기</h3>
-        <p>매물을 탭하면 네이버부동산 상세 페이지로 바로 이동합니다.</p>
+        <h3><span class="ko">바로가기</span><span class="en">Quick Link</span></h3>
+        <p><span class="ko">매물을 탭하면 네이버부동산 상세 페이지로 바로 이동합니다.</span><span class="en">Tap a listing to jump directly to the Naver Real Estate detail page.</span></p>
       </div>
       <div class="feature-card">
         <div class="feature-icon fi-green">⭐</div>
-        <h3>즐겨찾기 관리</h3>
-        <p>여러 단지를 동시에 즐겨찾기하고 한 곳에서 관리하세요.</p>
+        <h3><span class="ko">즐겨찾기 관리</span><span class="en">Favorites</span></h3>
+        <p><span class="ko">여러 단지를 동시에 즐겨찾기하고 한 곳에서 관리하세요.</span><span class="en">Save multiple complexes and manage them all in one place.</span></p>
       </div>
     </div>
   </div>
 
   <!-- 추천 대상 -->
   <div class="section">
-    <h2>이런 분께 추천합니다</h2>
+    <h2><span class="ko">이런 분께 추천합니다</span><span class="en">Who is it for?</span></h2>
     <div class="recommend">
       <ul>
-        <li>이사를 준비 중인데 매물을 매번 확인하기 번거로운 분</li>
-        <li>특정 단지의 매물 동향을 꾸준히 지켜보고 싶은 분</li>
-        <li>새 매물이 올라오면 빠르게 확인하고 싶은 분</li>
-        <li>여러 단지를 동시에 모니터링하고 싶은 분</li>
+        <li><span class="ko">이사를 준비 중인데 매물을 매번 확인하기 번거로운 분</span><span class="en">Planning to move but tired of checking listings manually</span></li>
+        <li><span class="ko">특정 단지의 매물 동향을 꾸준히 지켜보고 싶은 분</span><span class="en">Want to keep track of listing trends for specific complexes</span></li>
+        <li><span class="ko">새 매물이 올라오면 빠르게 확인하고 싶은 분</span><span class="en">Want to be the first to know when new listings appear</span></li>
+        <li><span class="ko">여러 단지를 동시에 모니터링하고 싶은 분</span><span class="en">Want to monitor multiple complexes at once</span></li>
       </ul>
     </div>
 
     <div class="notice">
-      본 앱은 네이버부동산 공식 앱이 아니며 네이버와 무관합니다.<br>
+      <span class="ko">본 앱은 네이버부동산 공식 앱이 아니며 네이버와 무관합니다.<br>
       매물 정보의 정확성은 네이버부동산 원본 데이터에 따릅니다.<br>
-      인터넷 연결이 필요합니다.
+      인터넷 연결이 필요합니다.</span>
+      <span class="en">This app is not an official Naver product and is not affiliated with Naver.<br>
+      Listing accuracy depends on the original Naver Real Estate data.<br>
+      Internet connection required.</span>
     </div>
   </div>
 
   <!-- 푸터 -->
   <div class="footer">
     <div class="footer-links">
-      <a href="privacy-policy.html">개인정보 처리방침</a>
-      <a href="mailto:contact@cumiel.com">문의하기</a>
+      <a href="privacy-policy.html"><span class="ko">개인정보 처리방침</span><span class="en">Privacy Policy</span></a>
+      <a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
     </div>
     <p>&copy; 2026 Cumiel. All rights reserved.</p>
   </div>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('lang-en');
+      var isEn = document.body.classList.contains('lang-en');
+      localStorage.setItem('lang', isEn ? 'en' : 'ko');
+      document.getElementById('flag-ko').classList.toggle('dim', isEn);
+      document.getElementById('flag-en').classList.toggle('dim', !isEn);
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      document.body.classList.add('lang-en');
+      document.getElementById('flag-ko').classList.add('dim');
+      document.getElementById('flag-en').classList.remove('dim');
+    }
+  </script>
 
 </body>
 </html>

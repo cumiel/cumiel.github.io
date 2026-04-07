@@ -16,6 +16,52 @@
       flex-direction: column;
     }
 
+    /* Language Toggle */
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px;
+      height: 24px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .lang-switch .track .thumb {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    body.lang-en .lang-switch .track .thumb { left: 21px; }
+    .en { display: none; }
+    body.lang-en .ko { display: none; }
+    body.lang-en .en { display: inline; }
+
     /* Header */
     .header {
       text-align: center;
@@ -144,9 +190,15 @@
 </head>
 <body>
 
+  <div class="lang-switch" onclick="toggleLang()">
+    <span class="flag" id="flag-ko">🇰🇷 KR</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag dim" id="flag-en">EN 🇺🇸</span>
+  </div>
+
   <header class="header">
     <h1><span>Cumiel</span></h1>
-    <p>Simple apps, crafted with care.</p>
+    <p><span class="ko">일상을 함께하는 기술</span><span class="en">Apps for your everyday.</span></p>
   </header>
 
   <section class="app-grid">
@@ -154,26 +206,25 @@
       <img src="catchwave-icon.png" alt="CatchWave" class="app-icon">
       <div class="app-info">
         <h2>CatchWave</h2>
-        <p>Listen to radio stations from around the world. KBS, MBC, SBS, NPR, BBC and more.</p>
+        <p><span class="ko">전 세계 라디오를 실시간으로. KBS, MBC, SBS, NPR, BBC 등.</span><span class="en">Listen to radio stations from around the world. KBS, MBC, SBS, NPR, BBC and more.</span></p>
       </div>
       <span class="app-tag">Radio</span>
     </a>
 
     <a href="homlit.html" class="app-card">
-      <img src="homlit-icon.png" alt="homlit" class="app-icon">
+      <img src="homlit-icon.png" alt="Homlit" class="app-icon">
       <div class="app-info">
         <h2>Homlit</h2>
-        <p>관심 아파트에 새 매물이 올라오면 바로 확인! 네이버부동산 매매·전세·월세 매물을 즐겨찾기하고 새 매물 알림을 받아보세요.
-</p>
+        <p><span class="ko">관심 아파트에 새 매물이 올라오면 바로 확인! 네이버부동산 매매/전세/월세 매물 알리미.</span><span class="en">Get notified when new listings appear for your favorite apartments on Naver Real Estate.</span></p>
       </div>
-      <span class="app-tag">RealEstate</span>
+      <span class="app-tag">Real Estate</span>
     </a>
 
     <div class="app-card coming-soon">
       <div class="placeholder-icon">+</div>
       <div class="app-info">
-        <h2>Coming Soon</h2>
-        <p>New app in the works. Stay tuned!</p>
+        <h2><span class="ko">준비 중</span><span class="en">Coming Soon</span></h2>
+        <p><span class="ko">새로운 앱을 준비하고 있습니다.</span><span class="en">New app in the works. Stay tuned!</span></p>
       </div>
     </div>
   </section>
@@ -181,9 +232,24 @@
   <footer>
     <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
     <p style="margin-top: 8px;">
-      <a href="mailto:contact@cumiel.com">Contact</a>
+      <a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
     </p>
   </footer>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('lang-en');
+      var isEn = document.body.classList.contains('lang-en');
+      localStorage.setItem('lang', isEn ? 'en' : 'ko');
+      document.getElementById('flag-ko').classList.toggle('dim', isEn);
+      document.getElementById('flag-en').classList.toggle('dim', !isEn);
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      document.body.classList.add('lang-en');
+      document.getElementById('flag-ko').classList.add('dim');
+      document.getElementById('flag-en').classList.remove('dim');
+    }
+  </script>
 
 </body>
 </html>

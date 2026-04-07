@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CatchWave - World Radio Live</title>
+  <title>CatchWave - Global Radio Streaming</title>
   <meta name="description" content="Listen to radio stations from around the world. KBS, MBC, SBS, NPR, BBC and more.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,6 +13,52 @@
       color: #fff;
       min-height: 100vh;
     }
+
+    /* Language Toggle */
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px;
+      height: 24px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .lang-switch .track .thumb {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    body.lang-en .lang-switch .track .thumb { left: 21px; }
+    .en { display: none; }
+    body.lang-en .ko { display: none; }
+    body.lang-en .en { display: inline; }
 
     /* Hero */
     .hero {
@@ -153,11 +199,17 @@
 </head>
 <body>
 
+  <div class="lang-switch" onclick="toggleLang()">
+    <span class="flag" id="flag-ko">🇰🇷 KR</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag dim" id="flag-en">EN 🇺🇸</span>
+  </div>
+
   <!-- Hero -->
   <section class="hero">
     <img src="catchwave-icon.png" alt="CatchWave" class="hero-icon">
     <h1>Catch<span>Wave</span></h1>
-    <p class="subtitle">World Radio Live</p>
+    <p class="subtitle">Global Radio Streaming</p>
     <div class="badges">
       <a href="https://apps.apple.com/app/id6760520514" class="badge">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -172,61 +224,61 @@
 
   <!-- Features -->
   <section class="features">
-    <h2>Features</h2>
+    <h2><span class="ko">주요 기능</span><span class="en">Features</span></h2>
     <div class="feature-grid">
       <div class="feature-card">
         <div class="icon">🌍</div>
-        <h3>World Radio</h3>
-        <p>Listen to hundreds of radio channels from Korea, Japan, USA, UK, Europe, and more.</p>
+        <h3><span class="ko">세계 라디오</span><span class="en">World Radio</span></h3>
+        <p><span class="ko">한국, 일본, 미국, 영국, 유럽 등 수백 개의 라디오 채널을 들어보세요.</span><span class="en">Listen to hundreds of radio channels from Korea, Japan, USA, UK, Europe, and more.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🔍</div>
-        <h3>Search & Filter</h3>
-        <p>Find channels by name, country, or genre. Filter by region with a single tap.</p>
+        <h3><span class="ko">검색 & 필터</span><span class="en">Search & Filter</span></h3>
+        <p><span class="ko">이름, 국가, 장르로 채널을 검색하세요. 한 번의 탭으로 지역별 필터링.</span><span class="en">Find channels by name, country, or genre. Filter by region with a single tap.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">❤️</div>
-        <h3>Favorites</h3>
-        <p>Save your favorite channels for quick access anytime.</p>
+        <h3><span class="ko">즐겨찾기</span><span class="en">Favorites</span></h3>
+        <p><span class="ko">좋아하는 채널을 저장해서 언제든 빠르게 접근하세요.</span><span class="en">Save your favorite channels for quick access anytime.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🎧</div>
-        <h3>Background Play</h3>
-        <p>Keep listening with the app closed. Control playback from the lock screen.</p>
+        <h3><span class="ko">백그라운드 재생</span><span class="en">Background Play</span></h3>
+        <p><span class="ko">앱을 닫아도 계속 청취. 잠금 화면에서 재생을 제어하세요.</span><span class="en">Keep listening with the app closed. Control playback from the lock screen.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🌐</div>
-        <h3>Bilingual</h3>
-        <p>Switch between Korean and English with one tap.</p>
+        <h3><span class="ko">한/영 지원</span><span class="en">Bilingual</span></h3>
+        <p><span class="ko">한국어와 영어를 한 번의 탭으로 전환할 수 있습니다.</span><span class="en">Switch between Korean and English with one tap.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🎨</div>
-        <h3>Dark Theme</h3>
-        <p>Beautiful dark UI designed for comfortable listening day and night.</p>
+        <h3><span class="ko">다크 테마</span><span class="en">Dark Theme</span></h3>
+        <p><span class="ko">낮과 밤 모두 편안한 청취를 위한 아름다운 다크 UI.</span><span class="en">Beautiful dark UI designed for comfortable listening day and night.</span></p>
       </div>
     </div>
   </section>
 
   <!-- Channels -->
   <section class="channels">
-    <h2>Channels from Around the World</h2>
-    <p class="desc">Powered by Radio Browser open-source database</p>
+    <h2><span class="ko">전 세계 라디오 채널</span><span class="en">Channels from Around the World</span></h2>
+    <p class="desc"><span class="ko">Radio Browser 오픈소스 데이터베이스 기반</span><span class="en">Powered by Radio Browser open-source database</span></p>
     <div class="flags">
-      <span class="flag-chip">🇰🇷 Korea</span>
-      <span class="flag-chip">🇯🇵 Japan</span>
-      <span class="flag-chip">🇺🇸 USA</span>
-      <span class="flag-chip">🇬🇧 UK</span>
-      <span class="flag-chip">🇫🇷 France</span>
-      <span class="flag-chip">🇩🇪 Germany</span>
-      <span class="flag-chip">🇮🇹 Italy</span>
-      <span class="flag-chip">🇪🇸 Spain</span>
-      <span class="flag-chip">🇳🇱 Netherlands</span>
-      <span class="flag-chip">🇨🇭 Switzerland</span>
-      <span class="flag-chip">🇦🇺 Australia</span>
-      <span class="flag-chip">🇨🇦 Canada</span>
-      <span class="flag-chip">🇧🇷 Brazil</span>
-      <span class="flag-chip">🇮🇳 India</span>
-      <span class="flag-chip">and more...</span>
+      <span class="flag-chip"><span class="ko">🇰🇷 한국</span><span class="en">🇰🇷 Korea</span></span>
+      <span class="flag-chip"><span class="ko">🇯🇵 일본</span><span class="en">🇯🇵 Japan</span></span>
+      <span class="flag-chip"><span class="ko">🇺🇸 미국</span><span class="en">🇺🇸 USA</span></span>
+      <span class="flag-chip"><span class="ko">🇬🇧 영국</span><span class="en">🇬🇧 UK</span></span>
+      <span class="flag-chip"><span class="ko">🇫🇷 프랑스</span><span class="en">🇫🇷 France</span></span>
+      <span class="flag-chip"><span class="ko">🇩🇪 독일</span><span class="en">🇩🇪 Germany</span></span>
+      <span class="flag-chip"><span class="ko">🇮🇹 이탈리아</span><span class="en">🇮🇹 Italy</span></span>
+      <span class="flag-chip"><span class="ko">🇪🇸 스페인</span><span class="en">🇪🇸 Spain</span></span>
+      <span class="flag-chip"><span class="ko">🇳🇱 네덜란드</span><span class="en">🇳🇱 Netherlands</span></span>
+      <span class="flag-chip"><span class="ko">🇨🇭 스위스</span><span class="en">🇨🇭 Switzerland</span></span>
+      <span class="flag-chip"><span class="ko">🇦🇺 호주</span><span class="en">🇦🇺 Australia</span></span>
+      <span class="flag-chip"><span class="ko">🇨🇦 캐나다</span><span class="en">🇨🇦 Canada</span></span>
+      <span class="flag-chip"><span class="ko">🇧🇷 브라질</span><span class="en">🇧🇷 Brazil</span></span>
+      <span class="flag-chip"><span class="ko">🇮🇳 인도</span><span class="en">🇮🇳 India</span></span>
+      <span class="flag-chip"><span class="ko">그 외 다수...</span><span class="en">and more...</span></span>
     </div>
   </section>
 
@@ -234,11 +286,26 @@
   <footer>
     <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
     <p style="margin-top: 8px;">
-      <a href="https://cumiel.github.io/catchwave/privacy-policy.html">Privacy Policy</a>
+      <a href="https://cumiel.github.io/catchwave/privacy-policy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy Policy</span></a>
       &nbsp;&middot;&nbsp;
-      <a href="mailto:contact@cumiel.com">Contact</a>
+      <a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
     </p>
   </footer>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('lang-en');
+      var isEn = document.body.classList.contains('lang-en');
+      localStorage.setItem('lang', isEn ? 'en' : 'ko');
+      document.getElementById('flag-ko').classList.toggle('dim', isEn);
+      document.getElementById('flag-en').classList.toggle('dim', !isEn);
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      document.body.classList.add('lang-en');
+      document.getElementById('flag-ko').classList.add('dim');
+      document.getElementById('flag-en').classList.remove('dim');
+    }
+  </script>
 
 </body>
 </html>
