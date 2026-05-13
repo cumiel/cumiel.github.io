@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linklass — 계정 삭제 요청</title>
+  <meta name="description" content="Linklass 앱의 계정 및 관련 데이터 삭제 요청 방법을 안내합니다.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Pretendard', sans-serif;
+      background: #FAFBFC;
+      color: #1a1a2e;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .lang-switch {
+      position: fixed; top: 20px; right: 20px;
+      display: flex; align-items: center; gap: 8px;
+      z-index: 100; cursor: pointer;
+      -webkit-user-select: none; user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px; font-weight: 600;
+      color: #1a1a2e; transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px; height: 24px;
+      background: rgba(37,99,235,0.1);
+      border-radius: 12px; position: relative;
+    }
+    .lang-switch .thumb {
+      position: absolute; top: 2px; left: 2px;
+      width: 20px; height: 20px;
+      background: #2563EB; border-radius: 50%;
+      transition: transform 0.25s ease;
+    }
+    .lang-switch.en .thumb { transform: translateX(20px); }
+
+    .container {
+      max-width: 720px; margin: 0 auto;
+      padding: 80px 24px 60px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 32px;
+    }
+    .logo img { width: 36px; height: 36px; border-radius: 8px; }
+    .logo .name {
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.4px; color: #1B2838;
+    }
+    h1 {
+      font-size: 30px; font-weight: 800;
+      letter-spacing: -0.6px; color: #1B2838;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 15px; color: #64748B;
+      margin-bottom: 36px;
+    }
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E8EDF3;
+      border-radius: 16px;
+      padding: 28px; margin-bottom: 20px;
+    }
+    .card h2 {
+      font-size: 18px; font-weight: 700;
+      color: #1B2838; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px;
+      background: #2563EB; color: #fff;
+      border-radius: 50%;
+      font-size: 13px; font-weight: 700;
+    }
+    .card p {
+      font-size: 14px; color: #475569;
+      margin-bottom: 8px;
+    }
+    .card ul {
+      padding-left: 20px; margin: 8px 0;
+    }
+    .card ul li {
+      font-size: 14px; color: #475569;
+      margin-bottom: 4px;
+    }
+    .email-box {
+      display: inline-block;
+      padding: 8px 14px;
+      background: #F1F5F9;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; color: #2563EB;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .note {
+      background: #FAF0DC;
+      border-left: 4px solid #D89C3F;
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 13px; color: #6b5419;
+      margin-top: 12px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; margin-top: 8px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #E8EDF3;
+    }
+    th {
+      background: #F8FAFC;
+      font-weight: 700; color: #1B2838;
+    }
+    .footer {
+      margin-top: 36px;
+      text-align: center;
+      font-size: 13px; color: #94A3B8;
+    }
+    .footer a {
+      color: #2563EB; text-decoration: none;
+      margin: 0 6px;
+    }
+    .lang-en { display: none; }
+    body.en .lang-ko { display: none; }
+    body.en .lang-en { display: block; }
+    @media (max-width: 600px) {
+      .container { padding: 70px 18px 50px; }
+      h1 { font-size: 24px; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-switch" onclick="document.body.classList.toggle('en'); this.classList.toggle('en');">
+    <span class="flag ko">KO</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag en dim">EN</span>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <img src="linklass-icon.png" alt="Linklass">
+      <span class="name">Linklass</span>
+    </div>
+
+    <!-- KOREAN -->
+    <div class="lang-ko">
+      <h1>계정 삭제 요청</h1>
+      <p class="subtitle">Linklass 계정 및 관련 데이터의 영구 삭제를 요청할 수 있습니다.</p>
+
+      <div class="card">
+        <h2><span class="step-num">1</span> 앱 내에서 직접 삭제 (권장)</h2>
+        <p>가장 빠르고 즉시 처리되는 방법입니다.</p>
+        <ul>
+          <li>Linklass 앱 실행 → 로그인</li>
+          <li>하단 네비게이션 <b>프로필</b> 탭</li>
+          <li><b>앱 설정</b> 진입</li>
+          <li><b>계정 삭제</b> 항목 선택</li>
+          <li>안내된 확인 절차 진행</li>
+        </ul>
+        <div class="note">앱 내 삭제는 즉시 처리되며, 모든 데이터가 영구 삭제됩니다.</div>
+      </div>
+
+      <div class="card">
+        <h2><span class="step-num">2</span> 이메일로 삭제 요청</h2>
+        <p>앱 접속이 어렵거나 계정에 문제가 있는 경우 아래 이메일로 요청해 주세요.</p>
+        <div class="email-box">contact@cumiel.com</div>
+        <p style="margin-top: 14px;"><b>메일에 포함할 정보:</b></p>
+        <ul>
+          <li>제목: <code>[Linklass] 계정 삭제 요청</code></li>
+          <li>가입 시 사용한 휴대폰 번호 또는 이메일</li>
+          <li>가입자 이름 또는 닉네임</li>
+        </ul>
+        <div class="note">신원 확인 후 영업일 기준 7일 이내에 처리됩니다.</div>
+      </div>
+
+      <div class="card">
+        <h2>삭제되는 데이터</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>항목</th><th>처리 방식</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>프로필 (이름, 닉네임, 전화번호, 이메일, 프로필 사진)</td><td>즉시 삭제</td></tr>
+              <tr><td>시간표 (개인 슬롯, 개인 시간 블록)</td><td>즉시 삭제</td></tr>
+              <tr><td>운영 중인 클래스 (강사로 생성한 모든 클래스)</td><td>즉시 삭제</td></tr>
+              <tr><td>수강 중인 클래스 멤버십, 수강권, 이력</td><td>즉시 삭제</td></tr>
+              <tr><td>알림 기록</td><td>즉시 삭제</td></tr>
+              <tr><td>구독 정보 (Firestore)</td><td>즉시 삭제</td></tr>
+              <tr><td>법령상 보존 의무 데이터 (결제 기록 등)</td><td>관련 법령에 따른 기간 보관 후 파기</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          구독 자체의 해지는 Apple App Store 또는 Google Play Store의 구독 관리 페이지에서 별도로 진행해야 합니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-en">
+      <h1>Account Deletion Request</h1>
+      <p class="subtitle">You can request permanent deletion of your Linklass account and associated data.</p>
+
+      <div class="card">
+        <h2><span class="step-num">1</span> Delete from within the app (recommended)</h2>
+        <p>The fastest method, processed immediately.</p>
+        <ul>
+          <li>Open Linklass app → Sign in</li>
+          <li>Tap <b>Profile</b> on the bottom navigation</li>
+          <li>Open <b>App Settings</b></li>
+          <li>Tap <b>Delete Account</b></li>
+          <li>Follow the confirmation steps</li>
+        </ul>
+        <div class="note">In-app deletion is processed immediately and all data is permanently removed.</div>
+      </div>
+
+      <div class="card">
+        <h2><span class="step-num">2</span> Request via email</h2>
+        <p>If you cannot access the app or have an issue with your account, please email us.</p>
+        <div class="email-box">contact@cumiel.com</div>
+        <p style="margin-top: 14px;"><b>Include in your email:</b></p>
+        <ul>
+          <li>Subject: <code>[Linklass] Account Deletion Request</code></li>
+          <li>Phone number or email used for sign-up</li>
+          <li>Name or nickname</li>
+        </ul>
+        <div class="note">Will be processed within 7 business days after identity verification.</div>
+      </div>
+
+      <div class="card">
+        <h2>Data that will be deleted</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Item</th><th>Treatment</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Profile (name, nickname, phone, email, profile picture)</td><td>Immediate deletion</td></tr>
+              <tr><td>Timetable (personal slots, time blocks)</td><td>Immediate deletion</td></tr>
+              <tr><td>Operated classes (all classes created as instructor)</td><td>Immediate deletion</td></tr>
+              <tr><td>Class memberships, lesson credits, history</td><td>Immediate deletion</td></tr>
+              <tr><td>Notification records</td><td>Immediate deletion</td></tr>
+              <tr><td>Subscription info (Firestore)</td><td>Immediate deletion</td></tr>
+              <tr><td>Data subject to legal retention (payment records)</td><td>Retained per applicable law, then destroyed</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          Cancellation of the subscription itself must be done separately through your Apple App Store or Google Play Store subscription management page.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="linklass.html">Linklass</a> ·
+      <a href="https://cumiel.github.io/linklass/">Privacy Policy</a> ·
+      <a href="https://cumiel.github.io/linklass/terms.html">Terms</a>
+      <p style="margin-top: 8px;">© Cumiel Inc.</p>
+    </div>
+  </div>
+</body>
+</html>
