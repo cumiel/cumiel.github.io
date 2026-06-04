@@ -354,7 +354,34 @@
       border-radius: 6px;
     }
 
+    /* KakaoTalk Floating Button */
+    .kakao-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FEE500;
+      color: #191600;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kakao-fab:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+    }
+    .kakao-fab svg { width: 22px; height: 22px; flex-shrink: 0; }
+
     @media (max-width: 600px) {
+      .kakao-fab { padding: 12px; }
+      .kakao-fab .kakao-label { display: none; }
       .hero { padding: 60px 20px 40px; }
       .hero h1 { font-size: 32px; }
       .hero .subtitle { font-size: 16px; }
@@ -434,6 +461,21 @@
         <div class="icon">🔒</div>
         <h3><span class="ko">프라이버시 보호</span><span class="en">Privacy Protection</span></h3>
         <p><span class="ko">학생은 강사의 다른 스케줄을 볼 수 없습니다. 예약 가능한 시간만 안전하게 표시됩니다.</span><span class="en">Students cannot see the instructor's other schedules. Only available slots are shown.</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📲</div>
+        <h3><span class="ko">홈 화면 위젯</span><span class="en">Home Screen Widget</span></h3>
+        <p><span class="ko">앱을 열지 않아도 홈 화면 위젯에서 이번 주 시간표와 다음 수업을 바로 확인하세요. (iOS · Android)</span><span class="en">Check this week's schedule and your next lesson right from a home screen widget, without opening the app. (iOS · Android)</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔄</div>
+        <h3><span class="ko">역할 모드 선택</span><span class="en">Role Mode</span></h3>
+        <p><span class="ko">강사 전용, 학생 전용, 또는 둘 다 모드를 선택해 나에게 맞는 화면으로 사용할 수 있습니다.</span><span class="en">Choose Instructor, Student, or Both mode to tailor the app to how you use it.</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⏱️</div>
+        <h3><span class="ko">학생별 개인 수업시간</span><span class="en">Per-Student Lesson Time</span></h3>
+        <p><span class="ko">같은 클래스에서도 학생마다 수업 시간을 다르게 설정할 수 있어 유연한 일정 관리가 가능합니다.</span><span class="en">Set a different lesson duration for each student within the same class for flexible scheduling.</span></p>
       </div>
       <div class="feature-card">
         <div class="icon">🌐</div>
@@ -568,8 +610,16 @@
       <a href="https://cumiel.github.io/linklass/terms.html"><span class="ko">이용약관</span><span class="en">Terms of Service</span></a>
       &nbsp;&middot;&nbsp;
       <a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
+      &nbsp;&middot;&nbsp;
+      <a href="http://pf.kakao.com/_tQSGX" target="_blank" rel="noopener"><span class="ko">카카오톡 문의</span><span class="en">KakaoTalk Channel</span></a>
     </p>
   </footer>
+
+  <!-- KakaoTalk Inquiry Floating Button -->
+  <a href="http://pf.kakao.com/_tQSGX" target="_blank" rel="noopener" class="kakao-fab" aria-label="KakaoTalk inquiry">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.99c0 2.84 1.9 5.33 4.76 6.74-.16.57-.86 3.06-.88 3.26 0 0-.02.16.08.22.1.06.23.01.23.01.29-.04 3.4-2.23 3.94-2.6.58.08 1.17.13 1.77.13 5.52 0 10-3.58 10-7.79C22 6.58 17.52 3 12 3z"/></svg>
+    <span class="kakao-label"><span class="ko">문의 / 개선요청</span><span class="en">Ask / Suggest</span></span>
+  </a>
 
   <script>
     function toggleLang() {
