@@ -118,6 +118,23 @@
     .hero-left {
       max-width: 520px;
     }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+    }
+    .brand .brand-name {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
     .hero-pill {
       display: inline-flex;
       align-items: center;
@@ -804,6 +821,10 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-left">
+        <div class="brand">
+          <img src="nemo-logo.png" alt="Nemo">
+          <span class="brand-name">Nemo</span>
+        </div>
         <span class="hero-pill">
           <span class="ko">Note Every Money Operation</span>
           <span class="en">Note Every Money Operation</span>
