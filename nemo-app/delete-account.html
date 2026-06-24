@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemo — 계정 삭제 요청</title>
+  <meta name="description" content="Nemo(네모) 앱의 계정 및 관련 데이터 삭제 요청 방법을 안내합니다.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Pretendard', sans-serif;
+      background: #FAFBFC;
+      color: #1a1a2e;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .lang-switch {
+      position: fixed; top: 20px; right: 20px;
+      display: flex; align-items: center; gap: 8px;
+      z-index: 100; cursor: pointer;
+      -webkit-user-select: none; user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px; font-weight: 600;
+      color: #1a1a2e; transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px; height: 24px;
+      background: rgba(13,147,115,0.12);
+      border-radius: 12px; position: relative;
+    }
+    .lang-switch .thumb {
+      position: absolute; top: 2px; left: 2px;
+      width: 20px; height: 20px;
+      background: #0D9373; border-radius: 50%;
+      transition: transform 0.25s ease;
+    }
+    .lang-switch.en .thumb { transform: translateX(20px); }
+
+    .container {
+      max-width: 720px; margin: 0 auto;
+      padding: 80px 24px 60px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 32px;
+    }
+    .logo img { width: 36px; height: 36px; border-radius: 8px; }
+    .logo .name {
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.4px; color: #0F2E25;
+    }
+    h1 {
+      font-size: 30px; font-weight: 800;
+      letter-spacing: -0.6px; color: #0F2E25;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 15px; color: #5B7A70;
+      margin-bottom: 36px;
+    }
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E6ECE9;
+      border-radius: 16px;
+      padding: 28px; margin-bottom: 20px;
+    }
+    .card h2 {
+      font-size: 18px; font-weight: 700;
+      color: #0F2E25; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px;
+      background: #0D9373; color: #fff;
+      border-radius: 50%;
+      font-size: 13px; font-weight: 700;
+    }
+    .card p {
+      font-size: 14px; color: #475569;
+      margin-bottom: 8px;
+    }
+    .card ul {
+      padding-left: 20px; margin: 8px 0;
+    }
+    .card ul li {
+      font-size: 14px; color: #475569;
+      margin-bottom: 4px;
+    }
+    .email-box {
+      display: inline-block;
+      padding: 8px 14px;
+      background: #EEF5F2;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; color: #0D9373;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .note {
+      background: #EAF6F1;
+      border-left: 4px solid #0D9373;
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 13px; color: #15604A;
+      margin-top: 12px;
+    }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; margin-top: 8px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #E6ECE9;
+    }
+    th {
+      background: #F4F8F6;
+      font-weight: 700; color: #0F2E25;
+    }
+    .footer {
+      margin-top: 36px;
+      text-align: center;
+      font-size: 13px; color: #94A3B8;
+    }
+    .footer a {
+      color: #0D9373; text-decoration: none;
+      margin: 0 6px;
+    }
+    .lang-en { display: none; }
+    body.en .lang-ko { display: none; }
+    body.en .lang-en { display: block; }
+    @media (max-width: 600px) {
+      .container { padding: 70px 18px 50px; }
+      h1 { font-size: 24px; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-switch" onclick="document.body.classList.toggle('en'); this.classList.toggle('en');">
+    <span class="flag ko">KO</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag en dim">EN</span>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <img src="nemo-logo.png" alt="Nemo">
+      <span class="name">Nemo</span>
+    </div>
+
+    <!-- KOREAN -->
+    <div class="lang-ko">
+      <h1>계정 삭제 요청</h1>
+      <p class="subtitle">Nemo(네모) · 개발자 Cumiel. 계정 및 관련 데이터의 영구 삭제를 요청할 수 있습니다.</p>
+
+      <div class="card">
+        <h2><span class="step-num">1</span> 앱 내에서 직접 삭제 (권장)</h2>
+        <p>가장 빠르고 즉시 처리되는 방법입니다.</p>
+        <ul>
+          <li>Nemo 앱 실행 → 로그인</li>
+          <li>하단 네비게이션 <b>마이</b> 탭</li>
+          <li><b>계정 삭제</b> 항목 선택</li>
+          <li>본인 확인 (전화번호 OTP 또는 Google/Apple 재로그인)</li>
+          <li>안내된 확인 절차 진행</li>
+        </ul>
+        <div class="note">앱 내 삭제는 즉시 처리되며, 모든 데이터가 영구 삭제됩니다.</div>
+      </div>
+
+      <div class="card">
+        <h2><span class="step-num">2</span> 이메일로 삭제 요청</h2>
+        <p>앱 접속이 어렵거나 계정에 문제가 있는 경우 아래 이메일로 요청해 주세요.</p>
+        <div class="email-box">contact@cumiel.com</div>
+        <p style="margin-top: 14px;"><b>메일에 포함할 정보:</b></p>
+        <ul>
+          <li>제목: <code>[Nemo] 계정 삭제 요청</code></li>
+          <li>가입 시 사용한 휴대폰 번호 또는 이메일</li>
+          <li>가입자 이름</li>
+        </ul>
+        <div class="note">신원 확인 후 영업일 기준 7일 이내에 처리됩니다.</div>
+      </div>
+
+      <div class="card">
+        <h2>일부 데이터만 삭제하고 싶다면</h2>
+        <p>계정을 유지하면서 특정 데이터만 삭제할 수도 있습니다. 앱 내에서 직접 처리 가능합니다.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>삭제할 데이터</th><th>앱 내 경로</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>개별 거래 내역</td><td>홈 또는 장부 → 거래 선택 → 삭제</td></tr>
+              <tr><td>장부 (보관 후 영구 삭제)</td><td>마이 → 보관한 장부 → 영구 삭제</td></tr>
+              <tr><td>자산 (통장·카드·예적금·대출·주식)</td><td>마이 → 해당 자산 → 항목 선택 → 삭제</td></tr>
+              <tr><td>카테고리</td><td>마이 → 카테고리 관리 → 항목 삭제</td></tr>
+              <tr><td>프로필 사진</td><td>마이 → 프로필 편집 → 사진 제거</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          이메일 요청(<b>contact@cumiel.com</b>)으로도 특정 데이터의 삭제를 요청할 수 있습니다. 위 "이메일로 삭제 요청"과 동일한 절차로 처리됩니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>삭제되는 데이터 및 보관 기간</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>항목</th><th>처리 방식</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>계정 정보 (이름, 전화번호, 이메일, 프로필 사진)</td><td>즉시 삭제</td></tr>
+              <tr><td>개인 장부의 모든 거래·메모</td><td>즉시 삭제</td></tr>
+              <tr><td>카테고리 설정</td><td>즉시 삭제</td></tr>
+              <tr><td>자산 정보 (통장·카드·예금·적금·대출·주식)</td><td>즉시 삭제</td></tr>
+              <tr><td>알림 기록 및 앱 설정</td><td>즉시 삭제</td></tr>
+              <tr><td>공동(공유) 장부에서 다른 멤버와 함께 기록한 거래</td><td>남은 멤버를 위해 유지될 수 있으며, 탈퇴자의 개인 식별 정보는 제거·익명화</td></tr>
+              <tr><td>법령상 보존 의무 데이터</td><td>관련 법령에 따른 기간 보관 후 파기</td></tr>
+              <tr><td>시스템 백업 사본</td><td>최대 30일 이내 완전 삭제</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">삭제된 데이터는 복구할 수 없습니다.</div>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-en">
+      <h1>Account Deletion Request</h1>
+      <p class="subtitle">Nemo · developed by Cumiel. You can request permanent deletion of your account and associated data.</p>
+
+      <div class="card">
+        <h2><span class="step-num">1</span> Delete from within the app (recommended)</h2>
+        <p>The fastest method, processed immediately.</p>
+        <ul>
+          <li>Open Nemo app → Sign in</li>
+          <li>Tap <b>My</b> on the bottom navigation</li>
+          <li>Tap <b>Delete Account</b></li>
+          <li>Verify identity (phone OTP or Google/Apple re-login)</li>
+          <li>Follow the confirmation steps</li>
+        </ul>
+        <div class="note">In-app deletion is processed immediately and all data is permanently removed.</div>
+      </div>
+
+      <div class="card">
+        <h2><span class="step-num">2</span> Request via email</h2>
+        <p>If you cannot access the app or have an issue with your account, please email us.</p>
+        <div class="email-box">contact@cumiel.com</div>
+        <p style="margin-top: 14px;"><b>Include in your email:</b></p>
+        <ul>
+          <li>Subject: <code>[Nemo] Account Deletion Request</code></li>
+          <li>Phone number or email used for sign-up</li>
+          <li>Your name</li>
+        </ul>
+        <div class="note">Will be processed within 7 business days after identity verification.</div>
+      </div>
+
+      <div class="card">
+        <h2>Want to delete only some data?</h2>
+        <p>You can keep your account and delete only specific data. All of this can be done within the app.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Data to delete</th><th>In-app path</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Individual transactions</td><td>Home or Ledger → Select transaction → Delete</td></tr>
+              <tr><td>Ledger (archive then permanently delete)</td><td>My → Archived ledgers → Permanently delete</td></tr>
+              <tr><td>Assets (accounts, cards, savings, loans, stocks)</td><td>My → Select asset → Choose item → Delete</td></tr>
+              <tr><td>Categories</td><td>My → Manage categories → Delete item</td></tr>
+              <tr><td>Profile picture</td><td>My → Edit profile → Remove photo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          You may also request deletion of specific data via email at <b>contact@cumiel.com</b>, processed the same way as account deletion above.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Data deleted &amp; retention period</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Item</th><th>Treatment</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Account info (name, phone, email, profile picture)</td><td>Immediate deletion</td></tr>
+              <tr><td>All transactions &amp; memos in personal ledgers</td><td>Immediate deletion</td></tr>
+              <tr><td>Category settings</td><td>Immediate deletion</td></tr>
+              <tr><td>Assets (accounts, cards, savings, loans, stocks)</td><td>Immediate deletion</td></tr>
+              <tr><td>Notification records &amp; app settings</td><td>Immediate deletion</td></tr>
+              <tr><td>Transactions recorded with others in shared ledgers</td><td>May be retained for remaining members; the leaving user's personal identifiers are removed/anonymized</td></tr>
+              <tr><td>Data subject to legal retention</td><td>Retained per applicable law, then destroyed</td></tr>
+              <tr><td>System backup copies</td><td>Fully purged within 30 days</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">Deleted data cannot be recovered.</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="index.html">Nemo</a> ·
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <p style="margin-top: 8px;">© Cumiel Inc.</p>
+    </div>
+  </div>
+</body>
+</html>
