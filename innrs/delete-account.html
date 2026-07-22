@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계정 삭제 안내 · Innrs</title>
+<meta name="description" content="Innrs(이너즈) 계정 및 관련 데이터의 영구 삭제를 요청하는 방법 안내.">
+<link rel="icon" type="image/png" href="innrs-logo.png">
+<style>
+  :root {
+    --green: #3E7461;
+    --green-dark: #2A4B3E;
+    --green-soft: #DDE9E2;
+    --warn: #B4553C;
+    --warn-soft: #FBEEE9;
+    --bg: #F6F8F6;
+    --card: #FFFFFF;
+    --text: #1A2B25;
+    --body: #37413C;
+    --muted: #7C9389;
+    --line: #E9F3EE;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(246, 248, 246, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  .header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-inner img { width: 30px; height: 30px; border-radius: 9px; }
+  .brand { font-weight: 800; font-size: 18px; letter-spacing: -0.5px; color: var(--text); text-decoration: none; }
+  .back {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+  }
+  .back:hover { background: #EFF5F1; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 26px; letter-spacing: -0.8px; margin: 0 0 6px; }
+  .meta { color: var(--muted); font-size: 13px; margin-bottom: 26px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 17px;
+    letter-spacing: -0.3px;
+    color: var(--green-dark);
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    background: var(--green);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  p, li { font-size: 14.5px; color: var(--body); }
+  ul { padding-left: 20px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  a { color: var(--green); }
+  code {
+    background: var(--green-soft);
+    color: var(--green-dark);
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 13px;
+  }
+  .note {
+    margin-top: 12px;
+    background: #EFF5F1;
+    border-radius: 12px;
+    padding: 11px 14px;
+    font-size: 13.5px;
+    color: var(--green-dark);
+  }
+  .note.warn { background: var(--warn-soft); color: var(--warn); }
+  .email-box {
+    margin-top: 10px;
+    background: var(--green-soft);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+  .email-box a { text-decoration: none; color: var(--green-dark); }
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 0;
+    font-size: 13.5px;
+  }
+  th, td { border: 1px solid var(--line); padding: 9px 11px; text-align: left; vertical-align: top; }
+  th { background: #EFF5F1; color: var(--green-dark); font-weight: 700; }
+  footer {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer a { margin-right: 10px; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12201A; --card: #17281F; --text: #E6ECE8; --body: #C4D2CB;
+      --muted: #8CA79A; --line: #24382F; --green: #7FB79C; --green-dark: #9CC3B2;
+      --green-soft: #1E332A; --warn: #E0A08B; --warn-soft: #2E211C;
+    }
+    header { background: rgba(18, 32, 26, 0.92); }
+    th, .note { background: #1B2E26; }
+    .back { background: var(--card); }
+    .back:hover { background: #1B2E26; }
+    .step-num { background: var(--green); color: #12201A; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="innrs-logo.png" alt="Innrs">
+    <a href="index.html" class="brand">Innrs</a>
+    <a href="index.html" class="back">← 홈으로</a>
+  </div>
+</header>
+
+<main>
+<h1>계정 삭제 안내</h1>
+<p class="meta">Innrs(이너즈) · 개발자 Cumiel · 계정 및 관련 데이터의 영구 삭제를 요청할 수 있습니다.</p>
+
+<div class="card">
+  <h2><span class="step-num">1</span> 앱에서 직접 탈퇴 (권장)</h2>
+  <p>가장 빠르고 즉시 처리되는 방법입니다.</p>
+  <ul>
+    <li>Innrs 앱 실행 → 로그인</li>
+    <li>하단 탭 <b>내 정보</b></li>
+    <li><b>회원 탈퇴</b> 선택</li>
+    <li>안내 문구를 확인하고 <b>탈퇴하기</b></li>
+  </ul>
+  <div class="note">탈퇴는 즉시 처리되며, 계정과 활동 기록이 영구 삭제됩니다. 복구할 수 없습니다.</div>
+</div>
+
+<div class="card">
+  <h2><span class="step-num">2</span> 이메일로 삭제 요청</h2>
+  <p>앱에 접속할 수 없거나 계정에 문제가 있는 경우 아래 이메일로 요청해 주세요.</p>
+  <div class="email-box"><a href="mailto:teddy@cumiel.com?subject=%5BInnrs%5D%20%EA%B3%84%EC%A0%95%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD">teddy@cumiel.com</a></div>
+  <p style="margin-top:14px;"><b>메일에 포함할 정보:</b></p>
+  <ul>
+    <li>제목: <code>[Innrs] 계정 삭제 요청</code></li>
+    <li>가입에 사용한 이메일 주소</li>
+    <li>앱에서 사용 중인 닉네임</li>
+  </ul>
+  <div class="note">신원 확인 후 영업일 기준 7일 이내에 처리됩니다.</div>
+</div>
+
+<div class="card">
+  <h2>⚠️ 클럽 리더라면 꼭 확인하세요</h2>
+  <p>현재 버전에는 리더 위임 기능이 없습니다. 따라서 <b>탈퇴하면 본인이 리더인 클럽은 해산되어 통째로 삭제</b>됩니다.
+  소속 멤버 정보, 그 클럽의 모임과 참여 기록, 구독 정보가 함께 사라집니다.</p>
+  <div class="note warn">클럽을 유지하고 싶다면 탈퇴 전에 클럽을 정리하거나, 새 리더가 클럽을 다시 개설하도록 안내해 주세요.</div>
+</div>
+
+<div class="card">
+  <h2>삭제되는 데이터</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>항목</th><th>처리 방식</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>계정 정보 (이메일, 이름, 닉네임, 프로필 사진)</td><td>즉시 삭제</td></tr>
+        <tr><td>클럽 가입 기록(멤버십), 가입 신청서</td><td>즉시 삭제</td></tr>
+        <tr><td>모임 참여·대기 기록</td><td>즉시 삭제</td></tr>
+        <tr><td>알림 기록, 푸시 토큰(FCM), 앱 설정</td><td>즉시 삭제</td></tr>
+        <tr><td>본인이 리더인 클럽</td><td>멤버·모임·참여·구독까지 함께 삭제(해산)</td></tr>
+        <tr><td>로그인 계정 (Google·Apple·Kakao 연동)</td><td>즉시 삭제 — 동일 계정으로 재로그인 불가</td></tr>
+        <tr><td>법령상 보존 의무 데이터</td><td>관련 법령에 따른 기간 보관 후 파기</td></tr>
+        <tr><td>시스템 백업 사본</td><td>최대 30일 이내 완전 삭제</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">삭제된 데이터는 복구할 수 없습니다.</div>
+</div>
+
+<div class="card">
+  <h2>구독을 이용 중이라면</h2>
+  <p>프리미엄 구독은 Apple App Store 또는 Google Play 계정에서 관리됩니다.
+  <b>계정을 삭제해도 스토어 구독은 자동으로 해지되지 않으므로</b>, 탈퇴 전에 각 스토어의 구독 설정에서 먼저 해지해 주세요.</p>
+  <ul>
+    <li>iOS: 설정 → [내 이름] → 구독 → Innrs → 구독 취소</li>
+    <li>Android: Play 스토어 → 프로필 → 결제 및 정기 결제 → 정기 결제 → Innrs → 구독 취소</li>
+  </ul>
+</div>
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">Innrs 홈</a>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="terms.html">이용약관</a>
+    <a href="mailto:teddy@cumiel.com">문의하기</a>
+  </p>
+  <p>© 2026 Cumiel. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

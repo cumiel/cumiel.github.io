@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innrs - 우리끼리, 모임의 시작</title>
+  <meta name="description" content="폐쇄형 모임 매칭 앱. 멤버가 일정과 장소를 올리면 같은 클럽 멤버끼리만 빈 자리를 채웁니다. 운동·스터디·독서·취미까지.">
+  <link rel="icon" type="image/png" href="innrs-logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cumiel.github.io/innrs/">
+  <meta property="og:title" content="Innrs - 우리끼리, 모임의 시작">
+  <meta property="og:description" content="폐쇄형 모임 매칭 앱. 멤버가 일정과 장소를 올리면 같은 클럽 멤버끼리만 빈 자리를 채웁니다.">
+  <meta property="og:image" content="https://cumiel.github.io/innrs/innrs-logo.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Innrs - 우리끼리, 모임의 시작">
+  <meta name="twitter:description" content="폐쇄형 모임 매칭 앱. 같은 클럽 멤버끼리만 빈 자리를 채웁니다.">
+  <meta name="twitter:image" content="https://cumiel.github.io/innrs/innrs-logo.png">
+  <style>
+    :root {
+      --green: #3E7461;
+      --green-dark: #2A4B3E;
+      --green-soft: #DDE9E2;
+      --gold: #C2A055;
+      --gold-soft: #F6EFDD;
+      --peach: #D99A72;
+      --sky: #7DA6B8;
+      --bg: #F6F8F6;
+      --card: #FFFFFF;
+      --text: #1A2B25;
+      --sub: #5A6E65;
+      --muted: #A9BCB3;
+      --line: #E9F3EE;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .num {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: 'tnum' 1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ====== Lang toggle ====== */
+    .lang-switch {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px;
+      height: 24px;
+      background: rgba(62, 116, 97, 0.1);
+      border: 1px solid rgba(62, 116, 97, 0.2);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .lang-switch .track .thumb {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    body.lang-en .lang-switch .track .thumb { left: 21px; }
+    .en { display: none; }
+    body.lang-en .ko { display: none; }
+    body.lang-en .en { display: inline; }
+
+    /* ====== Hero ====== */
+    .hero {
+      position: relative;
+      padding: 80px 20px 120px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(62, 116, 97, 0.14), transparent 52%),
+        radial-gradient(circle at 82% 28%, rgba(194, 160, 85, 0.12), transparent 50%),
+        linear-gradient(180deg, #FFFFFF 0%, var(--bg) 100%);
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-left { max-width: 520px; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+    }
+    .brand .brand-name {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--text);
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .hero-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: -1.6px;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+    .hero h1 .accent { color: var(--green); }
+    .hero .lead {
+      font-size: 17px;
+      color: var(--sub);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .hero .cta-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--text);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .badge:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(26, 43, 37, 0.18); }
+    .badge svg { width: 22px; height: 22px; }
+    .badge.coming {
+      background: #fff;
+      color: var(--sub);
+      border: 1px solid var(--line);
+      cursor: default;
+    }
+    .badge.coming:hover { transform: none; box-shadow: none; }
+    .badge.coming .soon {
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+    .web-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 10px;
+      transition: background 0.2s;
+      margin-top: 10px;
+      margin-left: -14px;
+    }
+    .web-link:hover { background: var(--green-soft); }
+    .web-link svg { width: 16px; height: 16px; }
+
+    /* ====== Hero right: stacked mock cards ====== */
+    .mock-stack {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      height: 470px;
+    }
+    .mock-card {
+      position: absolute;
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: 0 24px 48px -16px rgba(26, 43, 37, 0.20),
+                  0 4px 12px rgba(26, 43, 37, 0.05);
+      padding: 18px;
+      transition: transform 0.3s;
+    }
+    /* Card 1 — 클럽 (back) */
+    .mock-club {
+      top: 0;
+      left: 0;
+      width: 285px;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+      color: #fff;
+      transform: rotate(-3deg);
+    }
+    .mock-club:hover { transform: rotate(-3deg) translateY(-4px); }
+    .mock-club .lock {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.18);
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .mock-club .club-name {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+    .mock-club .club-meta {
+      font-size: 11.5px;
+      opacity: 0.82;
+      margin-top: 5px;
+    }
+    .mock-club .chip-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .mock-club .tag-chip {
+      background: rgba(255,255,255,0.18);
+      padding: 4px 9px;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Card 2 — 모임 (front) */
+    .mock-session {
+      top: 138px;
+      right: 0;
+      width: 265px;
+      transform: rotate(2deg);
+      border: 1px solid var(--line);
+    }
+    .mock-session:hover { transform: rotate(2deg) translateY(-4px); }
+    .mock-session .header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+    .mock-session .dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+    .mock-session .title {
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .mock-session .pill {
+      margin-left: auto;
+      font-size: 9px;
+      font-weight: 800;
+      background: var(--gold-soft);
+      color: #96762F;
+      padding: 3px 7px;
+      border-radius: 5px;
+    }
+    .mock-session .when {
+      font-size: 12px;
+      color: var(--sub);
+      line-height: 1.6;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .seats {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-top: 12px;
+    }
+    .seat {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .seat.open {
+      background: transparent;
+      border: 1.5px dashed var(--muted);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .seats .count {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    /* Card 3 — 대기열 (bottom) */
+    .mock-wait {
+      bottom: 0;
+      left: 24px;
+      width: 248px;
+      transform: rotate(-2deg);
+      border: 1px solid var(--line);
+    }
+    .mock-wait:hover { transform: rotate(-2deg) translateY(-4px); }
+    .mock-wait .w-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+    .mock-wait .w-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 11px;
+    }
+    .w-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 0;
+      border-top: 1px solid var(--line);
+    }
+    .w-row:first-of-type { border-top: 0; }
+    .w-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .w-row .w-name { font-size: 12px; font-weight: 700; flex: 1; }
+    .w-row .w-state { font-size: 10.5px; font-weight: 700; color: var(--muted); }
+    .w-row .w-state.up { color: var(--green); }
+
+    /* ====== Stats strip ====== */
+    .stats {
+      max-width: 1100px;
+      margin: -60px auto 0;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .stats-inner {
+      background: #fff;
+      border-radius: 22px;
+      padding: 24px 28px;
+      box-shadow: 0 20px 40px -12px rgba(26, 43, 37, 0.10);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat .v {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green);
+    }
+    .stat .v.accent { color: var(--gold); }
+    .stat .k {
+      font-size: 12px;
+      color: var(--sub);
+      margin-top: 2px;
+    }
+
+    /* ====== Section ====== */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+    .section-head {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-eyebrow.accent { color: var(--gold); }
+    .section h2 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    .section h2 .accent { color: var(--green); }
+    .section-desc {
+      color: var(--sub);
+      font-size: 15px;
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ====== Closed-community spotlight ====== */
+    .spotlight {
+      background: linear-gradient(135deg, #EDF4F0 0%, #FFFFFF 58%, #F7F2E6 100%);
+      border: 1px solid rgba(62, 116, 97, 0.18);
+      border-radius: 26px;
+      padding: 40px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .spotlight .copy h3 {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .spotlight .copy p {
+      color: var(--sub);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .points { list-style: none; padding: 0; margin: 0; }
+    .points li {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .points li::before {
+      content: '🔑';
+      flex-shrink: 0;
+      font-size: 13px;
+    }
+
+    /* Flow visualization */
+    .flow-viz {
+      background: #fff;
+      border-radius: 20px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 36px -12px rgba(62, 116, 97, 0.18);
+    }
+    .flow-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .flow-head .who { font-size: 14px; font-weight: 800; }
+    .flow-head .who small {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .flow-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 16px 0 6px;
+    }
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .avatar.lg { width: 40px; height: 40px; font-size: 15px; }
+    .avatar.leader { background: var(--green); box-shadow: 0 0 0 3px rgba(62,116,97,0.16); }
+    .avatar.m1 { background: var(--sky); }
+    .avatar.m2 { background: var(--peach); }
+    .avatar.m3 { background: var(--gold); }
+    .avatar.m4 { background: #8D7BA8; }
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+    }
+    .flow-row + .flow-row { border-top: 1px solid var(--line); }
+    .flow-row .name { flex: 1; font-size: 13px; font-weight: 700; }
+    .flow-row .name small {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 1px;
+    }
+    .state {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .state.ok { background: var(--green-soft); color: var(--green-dark); }
+    .state.pending { background: var(--gold-soft); color: #96762F; }
+    .state.blocked { background: #F3F0F0; color: #9A8F8F; }
+    .flow-foot {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 2px dashed var(--line);
+      font-size: 12.5px;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+    .flow-foot b { color: var(--green-dark); }
+
+    /* ====== Feature grids ====== */
+    .feature-cat { margin-top: 36px; }
+    .cat-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .cat-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .cat-icon.club { background: var(--green-soft); }
+    .cat-icon.session { background: rgba(125, 166, 184, 0.16); }
+    .cat-icon.leader { background: var(--gold-soft); }
+    .cat-title { font-size: 18px; font-weight: 800; letter-spacing: -0.4px; }
+    .cat-sub { font-size: 12px; color: var(--muted); margin-left: auto; }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .feat {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .feat:hover {
+      box-shadow: 0 8px 24px rgba(62, 116, 97, 0.10);
+      transform: translateY(-2px);
+    }
+    .feat .ico { font-size: 22px; margin-bottom: 8px; }
+    .feat .name { font-size: 14px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.2px; }
+    .feat .body { font-size: 13px; color: var(--sub); line-height: 1.6; }
+
+    /* ====== Pricing ====== */
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .price {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px 22px;
+    }
+    .price.hi {
+      border-color: rgba(62, 116, 97, 0.35);
+      box-shadow: 0 14px 34px -14px rgba(62, 116, 97, 0.28);
+      position: relative;
+    }
+    .price.hi::after {
+      content: '30일 무료체험';
+      position: absolute;
+      top: -11px;
+      left: 22px;
+      background: var(--green);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    body.lang-en .price.hi::after { content: '30-day free trial'; }
+    .price .tier { font-size: 13px; font-weight: 800; color: var(--green); letter-spacing: 0.4px; }
+    .price .amt {
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin: 6px 0 2px;
+    }
+    .price .amt span { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: 0; }
+    .price ul { list-style: none; margin: 14px 0 0; padding: 0; }
+    .price li {
+      font-size: 13px;
+      color: var(--sub);
+      padding: 5px 0 5px 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .price li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 800;
+    }
+    .price-note {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    /* ====== Target chips ====== */
+    .target {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .target h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 8px; }
+    .target .desc { color: var(--sub); font-size: 15px; margin-bottom: 28px; }
+    .chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 60px;
+      background: #fff;
+    }
+    footer a { color: var(--green); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .foot-links { margin-top: 10px; line-height: 2; }
+    .foot-links a { margin: 0 6px; }
+
+    /* ====== Contact fab ====== */
+    .kakao-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kakao-fab:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.22); }
+    .kakao-fab svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    /* ====== Mobile ====== */
+    @media (max-width: 880px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 56px; }
+      .hero h1 { font-size: 36px; }
+      .mock-stack { height: 450px; max-width: 380px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .spotlight { grid-template-columns: 1fr; padding: 28px 22px; }
+      .section { padding: 60px 20px; }
+      .section h2 { font-size: 26px; }
+      .cat-sub { margin-left: 0; width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 56px 20px 100px; }
+      .hero h1 { font-size: 30px; }
+      .hero .lead { font-size: 15px; }
+      .mock-stack { height: 410px; }
+      .mock-club, .mock-session, .mock-wait { width: 244px; }
+      .stats-inner { padding: 18px; }
+      .stat .v { font-size: 18px; }
+      .kakao-fab { padding: 12px; }
+      .kakao-fab .kakao-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switch" onclick="toggleLang()">
+    <span class="flag" id="flag-ko">🇰🇷 KR</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag dim" id="flag-en">EN 🇺🇸</span>
+  </div>
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="brand">
+          <img src="innrs-logo.png" alt="Innrs">
+          <span class="brand-name">Innrs</span>
+        </div>
+        <span class="hero-pill">
+          <span class="ko">우리끼리, 모임의 시작</span>
+          <span class="en">Members only. Always.</span>
+        </span>
+        <h1>
+          <span class="ko">우리끼리 모이는<br><span class="accent">가장 쉬운 방법</span></span>
+          <span class="en">The easiest way to<br>meet up <span class="accent">with your people</span></span>
+        </h1>
+        <p class="lead">
+          <span class="ko">멤버가 일정과 장소를 올리면, 같은 클럽 멤버끼리만 빈 자리를 채웁니다. 단톡방에서 "누구 오실 분?" 물어볼 필요도, 모르는 사람이 끼어들 걱정도 없어요.</span>
+          <span class="en">A member posts a time and place — and only fellow club members fill the open spots. No more "anyone in?" in the group chat, and no strangers dropping in.</span>
+        </p>
+        <div class="cta-row">
+          <span class="badge coming">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+            <span class="soon"><span class="ko">준비 중</span><span class="en">Soon</span></span>
+          </span>
+          <span class="badge coming">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.046.424.12.612l11.112-11.108L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg>
+            Google Play
+            <span class="soon"><span class="ko">준비 중</span><span class="en">Soon</span></span>
+          </span>
+        </div>
+        <div>
+          <a href="https://innrs.cumiel.com" class="web-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span class="ko">웹에서 먼저 둘러보기</span><span class="en">Browse on the Web</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: floating mock cards -->
+      <div class="hero-right">
+        <div class="mock-stack">
+          <!-- Card 1: 클럽 -->
+          <div class="mock-card mock-club">
+            <span class="lock">🔒 <span class="ko">가입 승인제</span><span class="en">Approval required</span></span>
+            <div class="club-name">
+              <span class="ko">수요일 테니스</span><span class="en">Wednesday Tennis</span>
+            </div>
+            <div class="club-meta">
+              <span class="ko">멤버 14명 · 서울 강남</span><span class="en">14 members · Gangnam, Seoul</span>
+            </div>
+            <div class="chip-row">
+              <span class="tag-chip">🏃 <span class="ko">운동</span><span class="en">Sports</span></span>
+              <span class="tag-chip"><span class="ko">테니스</span><span class="en">Tennis</span></span>
+            </div>
+          </div>
+
+          <!-- Card 2: 모임 -->
+          <div class="mock-card mock-session">
+            <div class="header">
+              <span class="dot">🎾</span>
+              <span class="title"><span class="ko">저녁 게임 한 판</span><span class="en">Evening rally</span></span>
+              <span class="pill"><span class="ko">모집중</span><span class="en">OPEN</span></span>
+            </div>
+            <div class="when">
+              <span class="ko">수 19:00 – 21:00<br>양재 시민의숲 코트 3번</span>
+              <span class="en">Wed 7:00 – 9:00 PM<br>Yangjae Forest Court #3</span>
+            </div>
+            <div class="seats">
+              <span class="avatar seat" style="background:var(--green)">호</span>
+              <span class="avatar seat" style="background:var(--sky)">지</span>
+              <span class="avatar seat" style="background:var(--peach)">현</span>
+              <span class="seat open">+</span>
+              <span class="count num">3/4</span>
+            </div>
+          </div>
+
+          <!-- Card 3: 대기열 -->
+          <div class="mock-card mock-wait">
+            <div class="w-title"><span class="ko">대기열</span><span class="en">Waitlist</span></div>
+            <div class="w-meta">
+              <span class="ko">자리가 나면 순서대로 자동 승계</span>
+              <span class="en">Auto-promoted in order</span>
+            </div>
+            <div class="w-row">
+              <span class="w-num num">1</span>
+              <span class="w-name"><span class="ko">서연</span><span class="en">Seoyeon</span></span>
+              <span class="w-state up"><span class="ko">참여 확정 ↑</span><span class="en">Confirmed ↑</span></span>
+            </div>
+            <div class="w-row">
+              <span class="w-num num">2</span>
+              <span class="w-name"><span class="ko">민준</span><span class="en">Minjun</span></span>
+              <span class="w-state"><span class="ko">대기</span><span class="en">Waiting</span></span>
+            </div>
+            <div class="w-row">
+              <span class="w-num num">3</span>
+              <span class="w-name"><span class="ko">하늘</span><span class="en">Haneul</span></span>
+              <span class="w-state"><span class="ko">대기</span><span class="en">Waiting</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Stats strip ============ -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="v">🔒</div>
+        <div class="k">
+          <span class="ko">멤버만 참여 가능</span><span class="en">Members-only join</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="v num">8</div>
+        <div class="k">
+          <span class="ko">명까지 클럽 영구 무료</span><span class="en">Members free forever</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="v num accent">3</div>
+        <div class="k">
+          <span class="ko">자리 나면 대기열 자동 승계</span><span class="en">Auto-promoted waitlist</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="v num">45<span style="font-size:15px">+</span></div>
+        <div class="k">
+          <span class="ko">운동·스터디·취미 카테고리</span><span class="en">Sports, study &amp; hobby categories</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Closed community spotlight ============ -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">🔑 Why Innrs</span>
+      <h2>
+        <span class="ko">아무나 오는 모임은, <span class="accent">우리 모임이 아니니까</span></span>
+        <span class="en">A club that <span class="accent">anyone</span> can join isn't a club</span>
+      </h2>
+      <p class="section-desc">
+        <span class="ko">공개 매칭 앱은 처음 보는 사람과 한 팀이 됩니다. Innrs은 리더의 승인을 받은 멤버만 참여할 수 있어요. 둘러보기에서 클럽은 보이지만, 참여는 우리끼리.</span>
+        <span class="en">Open matching apps put you on a team with total strangers. On Innrs only leader-approved members can join. Clubs are discoverable — participation is not.</span>
+      </p>
+    </div>
+
+    <div class="spotlight">
+      <div class="copy">
+        <h3>
+          <span class="ko">가입은 신청과 승인으로</span>
+          <span class="en">Request, then approval</span>
+        </h3>
+        <p>
+          <span class="ko">비회원은 클럽을 둘러보고 가입 신청서를 낼 수 있을 뿐입니다. 리더가 승인해야 비로소 모임에 들어올 수 있어요.</span>
+          <span class="en">Non-members can browse clubs and submit a join request — nothing more. Only after the leader approves can they enter a session.</span>
+        </p>
+        <ul class="points">
+          <li>
+            <span class="ko"><b>가입 신청서</b> — 왜 함께하고 싶은지 남기고, 리더가 보고 판단</span>
+            <span class="en"><b>Join request</b> — say why you want in; the leader decides</span>
+          </li>
+          <li>
+            <span class="ko"><b>레벨 조건</b> — 리더가 정한 실력·경험 단계에 맞는 멤버만 모집</span>
+            <span class="en"><b>Level conditions</b> — recruit only members at the level the leader sets</span>
+          </li>
+          <li>
+            <span class="ko"><b>클럽 내부 기록</b> — 노쇼 경고는 그 클럽 안에서만. 앱 전역 평판 점수는 없습니다</span>
+            <span class="en"><b>Kept in-club</b> — no-show warnings stay inside the club. No app-wide reputation score</span>
+          </li>
+          <li>
+            <span class="ko"><b>카톡으로 초대</b> — 링크 하나로 우리 클럽에 바로 초대</span>
+            <span class="en"><b>Invite via KakaoTalk</b> — one link brings people straight to your club</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flow-viz">
+        <div class="flow-head">
+          <span class="avatar lg leader">👑</span>
+          <div class="who">
+            <span class="ko">수요일 테니스</span><span class="en">Wednesday Tennis</span>
+            <small>
+              <span class="ko">리더 · 태디</span><span class="en">Leader · Teddy</span>
+            </small>
+          </div>
+        </div>
+
+        <div class="flow-title">
+          <span class="ko">가입 신청</span><span class="en">Join requests</span>
+        </div>
+        <div class="flow-row">
+          <span class="avatar m1">지</span>
+          <span class="name">
+            <span class="ko">지수</span><span class="en">Jisu</span>
+            <small><span class="ko">"주 1회 꾸준히 치고 싶어요"</span><span class="en">"Looking to play weekly"</span></small>
+          </span>
+          <span class="state ok"><span class="ko">승인</span><span class="en">Approved</span></span>
+        </div>
+        <div class="flow-row">
+          <span class="avatar m2">현</span>
+          <span class="name">
+            <span class="ko">현우</span><span class="en">Hyunwoo</span>
+            <small><span class="ko">"구력 3년, 강남 거주"</span><span class="en">"3 yrs, lives in Gangnam"</span></small>
+          </span>
+          <span class="state pending"><span class="ko">검토중</span><span class="en">Pending</span></span>
+        </div>
+
+        <div class="flow-title">
+          <span class="ko">모임 참여</span><span class="en">Session access</span>
+        </div>
+        <div class="flow-row">
+          <span class="avatar m1">지</span>
+          <span class="name"><span class="ko">지수 · 멤버</span><span class="en">Jisu · Member</span></span>
+          <span class="state ok"><span class="ko">참여 가능</span><span class="en">Can join</span></span>
+        </div>
+        <div class="flow-row">
+          <span class="avatar m4">?</span>
+          <span class="name"><span class="ko">비회원</span><span class="en">Non-member</span></span>
+          <span class="state blocked"><span class="ko">참여 불가</span><span class="en">Blocked</span></span>
+        </div>
+
+        <div class="flow-foot">
+          <span class="ko">둘러보기에는 클럽이 <b>보이지만</b>, 모임 참여는 <b>승인된 멤버만</b> 가능합니다.</span>
+          <span class="en">Clubs are <b>visible</b> in Discover — but only <b>approved members</b> can join a session.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Features ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-head">
+      <span class="section-eyebrow">Features</span>
+      <h2>
+        <span class="ko">클럽을 만들고, 모임을 올리고, 함께</span>
+        <span class="en">Start a club, post a session, show up</span>
+      </h2>
+    </div>
+
+    <!-- Club -->
+    <div class="feature-cat">
+      <div class="cat-head">
+        <span class="cat-icon club">🏛</span>
+        <span class="cat-title"><span class="ko">클럽</span><span class="en">Clubs</span></span>
+        <span class="cat-sub">
+          <span class="ko">가입해서 소속되는 폐쇄 커뮤니티</span>
+          <span class="en">The closed community you belong to</span>
+        </span>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="ico">🔎</div>
+          <div class="name"><span class="ko">둘러보기</span><span class="en">Discover</span></div>
+          <div class="body"><span class="ko">카테고리·지역으로 우리 동네 클럽을 찾고 가입 신청.</span><span class="en">Find clubs near you by category and region, then request to join.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">📮</div>
+          <div class="name"><span class="ko">가입 신청 &amp; 승인</span><span class="en">Request &amp; approve</span></div>
+          <div class="body"><span class="ko">신청서를 남기면 리더가 확인하고 승인. 승인 즉시 알림.</span><span class="en">Leave a request; the leader reviews and approves. Instant push on approval.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🏷</div>
+          <div class="name"><span class="ko">2단 카테고리</span><span class="en">Two-level categories</span></div>
+          <div class="body"><span class="ko">운동·스터디·독서·취미·게임·자기계발… 대분류 + 세부 종목.</span><span class="en">Sports, study, reading, hobby, games, growth — top level plus specifics.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🎚</div>
+          <div class="name"><span class="ko">레벨 조건</span><span class="en">Level conditions</span></div>
+          <div class="body"><span class="ko">리더가 실력 단계를 정하고, 모임마다 참여 조건으로 사용.</span><span class="en">Leaders define skill tiers and use them as session requirements.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session -->
+    <div class="feature-cat">
+      <div class="cat-head">
+        <span class="cat-icon session">📅</span>
+        <span class="cat-title"><span class="ko">모임</span><span class="en">Sessions</span></span>
+        <span class="cat-sub">
+          <span class="ko">멤버가 직접 올리는 개별 일정</span>
+          <span class="en">Individual meetups posted by members</span>
+        </span>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="ico">📍</div>
+          <div class="name"><span class="ko">장소 검색</span><span class="en">Place search</span></div>
+          <div class="body"><span class="ko">카카오맵으로 코트·스터디룸·카페를 찾아 바로 첨부. 온라인도 OK.</span><span class="en">Attach a court, study room or cafe via Kakao Map. Online works too.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">👥</div>
+          <div class="name"><span class="ko">정원 &amp; 대기열</span><span class="en">Capacity &amp; waitlist</span></div>
+          <div class="body"><span class="ko">정원이 차면 최대 3명 대기. 취소가 나오면 순서대로 자동 승계.</span><span class="en">Up to 3 wait when full — auto-promoted in order when someone cancels.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">♾️</div>
+          <div class="name"><span class="ko">인원 제한 없음</span><span class="en">Unlimited mode</span></div>
+          <div class="body"><span class="ko">독서모임·세미나처럼 정원이 무의미한 모임은 제한 없이.</span><span class="en">For book clubs and seminars where a headcount cap makes no sense.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">⏰</div>
+          <div class="name"><span class="ko">취소 마감시각</span><span class="en">Cancel deadline</span></div>
+          <div class="body"><span class="ko">마감 전엔 자유롭게 취소. 이후 취소는 재모집으로 이어져요.</span><span class="en">Free cancellation before the cutoff; after that the spot reopens.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🔔</div>
+          <div class="name"><span class="ko">푸시 알림</span><span class="en">Push notifications</span></div>
+          <div class="body"><span class="ko">새 모임·승인·대기 승계·취소를 놓치지 않게. 알림 on/off 설정도.</span><span class="en">New sessions, approvals, promotions, cancellations — with on/off settings.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🗓</div>
+          <div class="name"><span class="ko">내 시간표</span><span class="en">My schedule</span></div>
+          <div class="body"><span class="ko">여러 클럽의 모임을 하나의 시간표로. 같은 시간 중복은 자동 정리.</span><span class="en">All your clubs on one timeline — overlapping times resolved automatically.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leader -->
+    <div class="feature-cat">
+      <div class="cat-head">
+        <span class="cat-icon leader">👑</span>
+        <span class="cat-title"><span class="ko">리더 도구</span><span class="en">Leader tools</span></span>
+        <span class="cat-sub">
+          <span class="ko">운영하는 사람이 편해야 모임이 굴러가니까</span>
+          <span class="en">Because the club runs on whoever runs it</span>
+        </span>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="ico">📋</div>
+          <div class="name"><span class="ko">멤버 명부</span><span class="en">Member roster</span></div>
+          <div class="body"><span class="ko">누가 언제 들어왔고 어떤 레벨인지 한눈에 관리.</span><span class="en">See who joined when and at what level, all in one place.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">⚠️</div>
+          <div class="name"><span class="ko">경고 기록</span><span class="en">Warnings</span></div>
+          <div class="body"><span class="ko">노쇼·잦은 취소는 경고로. 클럽 내부에만 남고 밖으로 나가지 않아요.</span><span class="en">Log no-shows and repeat cancels. Stays inside the club, never leaves.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">💬</div>
+          <div class="name"><span class="ko">카톡 공유</span><span class="en">KakaoTalk share</span></div>
+          <div class="body"><span class="ko">모임·클럽을 카톡으로 보내면 링크를 눌러 바로 앱으로.</span><span class="en">Share a club or session to Kakao — the link deep-links right into the app.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Pricing ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-head">
+      <span class="section-eyebrow accent">Pricing</span>
+      <h2>
+        <span class="ko">작은 모임은 <span class="accent">계속 무료</span></span>
+        <span class="en">Small clubs stay <span class="accent">free</span></span>
+      </h2>
+      <p class="section-desc">
+        <span class="ko">멤버는 언제나 무료입니다. 클럽이 커졌을 때 리더만 구독을 선택하면 돼요.</span>
+        <span class="en">Members never pay. Only the leader subscribes — and only once the club grows.</span>
+      </p>
+    </div>
+
+    <div class="price-grid">
+      <div class="price">
+        <div class="tier">Free</div>
+        <div class="amt">₩0</div>
+        <ul>
+          <li><span class="ko">멤버 8명까지 영구 무료</span><span class="en">Up to 8 members, forever</span></li>
+          <li><span class="ko">모임 올리기·대기열·알림 전부 포함</span><span class="en">Sessions, waitlist &amp; push all included</span></li>
+          <li><span class="ko">멤버는 항상 무료</span><span class="en">Members always free</span></li>
+        </ul>
+      </div>
+      <div class="price hi">
+        <div class="tier">Basic</div>
+        <div class="amt num">₩9,900<span> / <span class="ko">월</span><span class="en">mo</span></span></div>
+        <ul>
+          <li><span class="ko">멤버 수 확장</span><span class="en">Grow past the free member cap</span></li>
+          <li><span class="ko">예정 모임 한도 확대</span><span class="en">More concurrent upcoming sessions</span></li>
+          <li><span class="ko">9번째 멤버 승인 시 30일 무료체험</span><span class="en">30-day trial starts at your 9th member</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">
+      <span class="ko">구독을 해지해도 기존 멤버와 모임 기록은 그대로 유지됩니다. 결제·해지는 App Store / Google Play 계정에서 관리해요.</span>
+      <span class="en">Cancel anytime — existing members and history stay put. Billing is handled by your App Store / Google Play account.</span>
+    </p>
+  </section>
+
+  <!-- ============ Target chips ============ -->
+  <section class="target">
+    <h2>
+      <span class="ko">이런 모임에 딱이에요</span>
+      <span class="en">Made for groups like these</span>
+    </h2>
+    <p class="desc">
+      <span class="ko">종목은 달라도, 모이는 방식은 똑같으니까</span>
+      <span class="en">Different activities, same way of gathering</span>
+    </p>
+    <div class="chips">
+      <span class="chip"><span class="ko">🎾 테니스·배드민턴 동호회</span><span class="en">🎾 Tennis &amp; badminton clubs</span></span>
+      <span class="chip"><span class="ko">⚽ 조기축구·풋살팀</span><span class="en">⚽ Football &amp; futsal teams</span></span>
+      <span class="chip"><span class="ko">📚 스터디 그룹</span><span class="en">📚 Study groups</span></span>
+      <span class="chip"><span class="ko">📖 독서모임</span><span class="en">📖 Book clubs</span></span>
+      <span class="chip"><span class="ko">🏃 러닝 크루</span><span class="en">🏃 Running crews</span></span>
+      <span class="chip"><span class="ko">🎲 보드게임 모임</span><span class="en">🎲 Board game nights</span></span>
+      <span class="chip"><span class="ko">🏢 사내 동호회</span><span class="en">🏢 Company clubs</span></span>
+      <span class="chip"><span class="ko">🌱 사이드프로젝트·네트워킹</span><span class="en">🌱 Side projects &amp; networking</span></span>
+    </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer>
+    <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
+    <p class="foot-links">
+      <a href="privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy Policy</span></a>
+      &middot;
+      <a href="terms.html"><span class="ko">이용약관</span><span class="en">Terms of Service</span></a>
+      &middot;
+      <a href="delete-account.html"><span class="ko">계정 삭제</span><span class="en">Delete Account</span></a>
+      &middot;
+      <a href="mailto:teddy@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
+      &middot;
+      <a href="../"><span class="ko">Cumiel 앱 더보기</span><span class="en">More Cumiel apps</span></a>
+    </p>
+  </footer>
+
+  <!-- Inquiry FAB -->
+  <a href="mailto:teddy@cumiel.com?subject=%5BInnrs%20%EB%AC%B8%EC%9D%98%5D" class="kakao-fab" aria-label="Innrs inquiry">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="kakao-label"><span class="ko">문의 / 개선요청</span><span class="en">Ask / Suggest</span></span>
+  </a>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('lang-en');
+      var isEn = document.body.classList.contains('lang-en');
+      localStorage.setItem('lang', isEn ? 'en' : 'ko');
+      document.getElementById('flag-ko').classList.toggle('dim', isEn);
+      document.getElementById('flag-en').classList.toggle('dim', !isEn);
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      document.body.classList.add('lang-en');
+      document.getElementById('flag-ko').classList.add('dim');
+      document.getElementById('flag-en').classList.remove('dim');
+    }
+  </script>
+
+</body>
+</html>
