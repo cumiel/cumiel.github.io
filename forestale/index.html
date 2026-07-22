@@ -111,7 +111,7 @@
       border-radius: 26px; border: 1px solid var(--hairline);
       box-shadow: 0 16px 40px rgba(74,59,34,.14);
     }
-    .showcase img { width: min(340px, 78vw); border-radius: 18px; display: block; }
+    .showcase img { width: min(300px, 72vw); border-radius: 16px; display: block; }
     .showcase p.cap { margin-top: 14px; color: var(--ink-soft); font-size: .9rem; }
 
     /* ====== Promise ====== */
@@ -151,6 +151,25 @@
     }
     footer a { color: var(--amber-deep); text-decoration: none; font-weight: 700; }
     footer .links { display: flex; gap: 18px; justify-content: center; margin-bottom: 10px; flex-wrap: wrap; }
+
+    /* ====== KakaoTalk 문의 플로팅 버튼 (Cumiel 공통 패턴) ====== */
+    .kakao-fab {
+      position: fixed; right: 20px; bottom: 20px; z-index: 100;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #FEE500; color: #191600; text-decoration: none;
+      font-size: 14px; font-weight: 700; padding: 12px 18px;
+      border-radius: 999px; box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .kakao-fab:not(.soon):hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.22); }
+    .kakao-fab svg { width: 22px; height: 22px; flex-shrink: 0; }
+    /* 채널 개설 전: 비활성 (스토어 버튼과 동일한 '준비 중' 처리) */
+    .kakao-fab.soon { opacity: .55; pointer-events: none; cursor: default;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+    @media (max-width: 600px) {
+      .kakao-fab { padding: 12px; }
+      .kakao-fab .kakao-label { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -192,9 +211,9 @@
              <span class="en">Photograph a paper drawing or draw right in the app — and watch it wake up.</span></p>
         </div>
         <div class="feature"><div class="emoji">💃</div>
-          <h3><span class="ko">모션캡처 기반 20+ 동작</span><span class="en">20+ real-mocap motions</span></h3>
-          <p><span class="ko">댄스·발레·축구·복싱… 진짜 모션캡처에서 온 자연스러운 움직임.</span>
-             <span class="en">Dance, ballet, soccer, boxing — natural moves from real motion capture.</span></p>
+          <h3><span class="ko">모션캡처 기반 40+ 동작</span><span class="en">40+ real-mocap motions</span></h3>
+          <p><span class="ko">댄스·발레·축구·복싱·줄넘기… 진짜 모션캡처에서 온 자연스러운 움직임이 40가지 넘게.</span>
+             <span class="en">Dance, ballet, soccer, boxing, jump rope — 40+ natural moves from real motion capture.</span></p>
         </div>
         <div class="feature"><div class="emoji">🌙</div>
           <h3><span class="ko">밤낮이 흐르는 동화 마을</span><span class="en">A village with day &amp; night</span></h3>
@@ -221,10 +240,13 @@
 
     <section class="block showcase">
       <h2 class="display"><span class="ko">친구들이 사는 마을</span><span class="en">The village they live in</span></h2>
-      <div class="frame"><img src="village-day.jpg" alt="Forestale 마을"></div>
+      <div class="frame"><img src="Forestale_sample_web.jpg"
+        alt="Forestale 앱 화면 — 바닷가에서 노는 아이 그림 친구들"></div>
       <p class="cap">
-        <span class="ko">낮과 밤, 네 곳의 풍경 — 아이의 친구들이 여기서 살아가요.</span>
-        <span class="en">Four sceneries, day and night — where your child's friends live.</span>
+        <span class="ko">마을·광장·숲·바닷가, 낮과 밤 — 아이가 그린 친구들이
+          여기서 함께 살아가요. (실제 앱 화면)</span>
+        <span class="en">Village, square, forest and beach, day and night — your child's
+          own drawings, all living here together. (An actual app screen.)</span>
       </p>
     </section>
 
@@ -246,6 +268,19 @@
     </section>
     <section class="block faq">
       <h2 class="display"><span class="ko">자주 묻는 질문</span><span class="en">FAQ</span></h2>
+      <details>
+        <summary><span class="ko">무료로 어디까지 쓸 수 있나요?</span><span class="en">How much is free?</span></summary>
+        <p><span class="ko">친구 5명까지 만들 수 있고, 기본 모션 6종과 GIF·동영상·스티커
+          내보내기(워터마크 포함)를 무료로 써요 — 광고는 없습니다. 더 필요하면
+          <b>친구 슬롯 팩</b>(한 번 사면 사라지지 않아요)이나, 친구 무제한 + 전체 모션 +
+          워터마크 없는 HD·투명 내보내기의 <b>평생 패스</b>를 선택할 수 있어요.
+          구독은 없습니다.</span>
+          <span class="en">You can create up to 5 friends and use 6 basic motions plus GIF, video
+          and sticker export (with a watermark) for free — with no ads. For more, choose a
+          <b>friend-slot pack</b> (yours to keep, never expires) or the <b>Lifetime Pass</b>:
+          unlimited friends, every motion, and watermark-free HD &amp; transparent exports.
+          There are no subscriptions.</span></p>
+      </details>
       <details>
         <summary><span class="ko">회원가입이 필요한가요?</span><span class="en">Do I need an account?</span></summary>
         <p><span class="ko">아니요. Forestale 은 회원가입이 없습니다. 유료 기능 결제도 기기에
@@ -290,10 +325,19 @@
     <div class="links">
       <a href="privacy-policy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy Policy</span></a>
       <a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
+      <!-- 채널 개설 후 <a href="http://pf.kakao.com/_tQSGX" target="_blank" rel="noopener"> 로 교체 -->
+      <span style="opacity:.55"><span class="ko">카카오톡 준비 중</span><span class="en">KakaoTalk (soon)</span></span>
       <a href="../"><span class="ko">Cumiel 홈</span><span class="en">Cumiel Home</span></a>
     </div>
     <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
   </footer>
+
+  <!-- KakaoTalk 문의 플로팅 버튼 — 채널 개설 후 span 을 아래 a 로 교체해 연결:
+       <a href="http://pf.kakao.com/_tQSGX" target="_blank" rel="noopener" class="kakao-fab" ...> (soon 클래스 제거) -->
+  <span class="kakao-fab soon" aria-label="KakaoTalk inquiry (coming soon)">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.99c0 2.84 1.9 5.33 4.76 6.74-.16.57-.86 3.06-.88 3.26 0 0-.02.16.08.22.1.06.23.01.23.01.29-.04 3.4-2.23 3.94-2.6.58.08 1.17.13 1.77.13 5.52 0 10-3.58 10-7.79C22 6.58 17.52 3 12 3z"/></svg>
+    <span class="kakao-label"><span class="ko">카카오톡 준비 중</span><span class="en">KakaoTalk soon</span></span>
+  </span>
 
   <script>
     function toggleLang() {
