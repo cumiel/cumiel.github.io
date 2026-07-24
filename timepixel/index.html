@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimePixel - 시간 예측력을 기르는 타임박싱</title>
+  <meta name="description" content="타임박싱으로 하루를 계획하고, 플래시카드 원리로 시간 예측력을 훈련하고, 크루와 같은 시각에 동시 인증하는 앱.">
+  <link rel="icon" type="image/png" href="timepixel-logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cumiel.github.io/timepixel/">
+  <meta property="og:title" content="TimePixel - 시간 예측력을 기르는 타임박싱">
+  <meta property="og:description" content="타임박싱으로 하루를 계획하고, 플래시카드 원리로 시간 예측력을 훈련하고, 크루와 같은 시각에 동시 인증하는 앱.">
+  <meta property="og:image" content="https://cumiel.github.io/timepixel/timepixel-logo.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TimePixel - 시간 예측력을 기르는 타임박싱">
+  <meta name="twitter:description" content="타임박싱으로 하루를 계획하고, 플래시카드 원리로 시간 예측력을 훈련하고, 크루와 같은 시각에 동시 인증하는 앱.">
+  <meta name="twitter:image" content="https://cumiel.github.io/timepixel/timepixel-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    :root {
+      --bg: #1C1C1F;
+      --card: #252528;
+      --card2: #2D2D31;
+      --line: #34343A;
+      --line2: #3A3A40;
+      --text: #F6F6F4;
+      --sub: #8A8A90;
+      --muted: #62626A;
+      --teal: #3FBD92;
+      --teal-soft: #16241F;
+      --teal-soft-bd: #234037;
+      --teal-text: #9FE1CB;
+      --amber: #E0A23F;
+      --amber-soft: #241C10;
+      --amber-text: #E8C489;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .num {
+      font-family: 'Outfit', 'Pretendard Variable', sans-serif;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: 'tnum' 1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ====== Lang toggle ====== */
+    .lang-switch {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 100;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .lang-switch .flag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      transition: opacity 0.2s;
+    }
+    .lang-switch .flag.dim { opacity: 0.35; }
+    .lang-switch .track {
+      width: 44px;
+      height: 24px;
+      background: rgba(63, 189, 146, 0.12);
+      border: 1px solid rgba(63, 189, 146, 0.25);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+      backdrop-filter: blur(10px);
+    }
+    .lang-switch .track .thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--teal);
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+    body.lang-en .lang-switch .track .thumb { left: 21px; }
+    .en { display: none; }
+    body.lang-en .ko { display: none; }
+    body.lang-en .en { display: inline; }
+
+    /* ====== Hero ====== */
+    .hero {
+      position: relative;
+      padding: 80px 20px 120px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(63, 189, 146, 0.14), transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(224, 162, 63, 0.08), transparent 50%),
+        linear-gradient(180deg, #141416 0%, var(--bg) 100%);
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-left { max-width: 520px; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+    }
+    .brand .brand-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal-soft);
+      border: 1px solid var(--teal-soft-bd);
+      color: var(--teal-text);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+    .hero-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+    }
+    .hero h1 {
+      font-family: 'Outfit', 'Pretendard Variable', sans-serif;
+      font-size: 46px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+    .hero h1 .accent { color: var(--teal); }
+    .hero .lead {
+      font-size: 17px;
+      color: var(--sub);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .hero .cta-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--text);
+      color: #0D1512;
+      padding: 12px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .badge:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+    .badge svg { width: 22px; height: 22px; }
+    .badge.coming {
+      background: var(--card2);
+      color: var(--sub);
+      border: 1px solid var(--line2);
+      cursor: default;
+    }
+    .badge.coming:hover { transform: none; box-shadow: none; }
+    .hero-meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ====== Hero right: real UI shots ====== */
+    .hero-shots {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      height: 560px;
+    }
+    .shot {
+      position: absolute;
+      width: 225px;
+      border-radius: 30px;
+      box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.55),
+                  0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s;
+    }
+    .shot.back {
+      right: 0;
+      top: 0;
+      transform: rotate(4deg);
+    }
+    .shot.back:hover { transform: rotate(4deg) translateY(-4px); }
+    .shot.front {
+      left: 0;
+      top: 60px;
+      transform: rotate(-4deg);
+    }
+    .shot.front:hover { transform: rotate(-4deg) translateY(-4px); }
+
+    /* ====== Stats strip ====== */
+    .stats {
+      max-width: 1100px;
+      margin: -60px auto 0;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .stats-inner {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px 28px;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat .v {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .stat .v.accent { color: var(--amber); }
+    .stat .k {
+      font-size: 12px;
+      color: var(--sub);
+      margin-top: 2px;
+    }
+
+    /* ====== Section ====== */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+    .section-head {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section h2 {
+      font-family: 'Outfit', 'Pretendard Variable', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+    }
+    .section h2 .accent { color: var(--teal); }
+    .section-desc {
+      color: var(--sub);
+      font-size: 15px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ====== Flashcard spotlight ====== */
+    .spotlight {
+      background: linear-gradient(135deg, var(--teal-soft) 0%, var(--card) 55%, var(--teal-soft) 100%);
+      border: 1px solid var(--teal-soft-bd);
+      border-radius: 24px;
+      padding: 40px 32px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .spotlight .copy h3 {
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .spotlight .copy p {
+      color: var(--sub);
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .spot-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .spot-points li {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .spot-points li::before {
+      content: '🌱';
+      flex-shrink: 0;
+    }
+    .spot-points b { color: var(--teal-text); }
+
+    /* Real UI shot in spotlight */
+    .spot-shot { text-align: center; }
+    .spot-shot img {
+      width: 100%;
+      max-width: 260px;
+      border-radius: 32px;
+      box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.55);
+    }
+    .spot-caption {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ====== Screens gallery ====== */
+    .gallery {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px 4px 18px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gallery::-webkit-scrollbar { height: 8px; }
+    .gallery::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 4px; }
+    .gallery::-webkit-scrollbar-track { background: transparent; }
+    .gallery figure {
+      flex: 0 0 auto;
+      width: 216px;
+      scroll-snap-align: center;
+    }
+    .gallery img {
+      width: 100%;
+      display: block;
+      border-radius: 28px;
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5);
+    }
+    .gallery figcaption {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--sub);
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    .gallery figcaption .step { color: var(--teal); }
+    .gallery-hint {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ====== Feature category grids ====== */
+    .feature-cat { margin-top: 36px; }
+    .cat-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .cat-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .cat-icon.loop { background: var(--teal-soft); border: 1px solid var(--teal-soft-bd); }
+    .cat-icon.crew { background: rgba(123, 104, 196, 0.15); border: 1px solid rgba(123, 104, 196, 0.3); }
+    .cat-icon.premium { background: var(--amber-soft); border: 1px solid rgba(224, 162, 63, 0.3); }
+    .cat-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .cat-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: auto;
+    }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .feat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .feat:hover {
+      border-color: var(--teal-soft-bd);
+      box-shadow: 0 8px 24px rgba(63, 189, 146, 0.08);
+      transform: translateY(-2px);
+    }
+    .feat .ico {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .feat .name {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .feat .body {
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.55;
+    }
+
+    /* ====== Target chips ====== */
+    .target {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .target h2 {
+      font-family: 'Outfit', 'Pretendard Variable', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .target .desc {
+      color: var(--sub);
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+    .chips {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 60px;
+      background: #161618;
+    }
+    footer a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+    .foot-links { margin-top: 10px; }
+    .foot-links a { margin: 0 6px; }
+
+    /* ====== KakaoTalk fab ====== */
+    .kakao-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FEE500;
+      color: #191600;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kakao-fab:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+    }
+    .kakao-fab svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    /* ====== Mobile ====== */
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+      .hero h1 { font-size: 36px; }
+      .hero-shots { height: 540px; max-width: 400px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .spotlight {
+        grid-template-columns: 1fr;
+        padding: 28px 22px;
+      }
+      .section { padding: 60px 20px; }
+      .section h2 { font-size: 26px; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px 100px; }
+      .hero h1 { font-size: 30px; }
+      .hero .lead { font-size: 15px; }
+      .hero-shots { height: 460px; max-width: 340px; }
+      .shot { width: 180px; }
+      .shot.front { top: 50px; }
+      .stats-inner { padding: 18px; }
+      .stat .v { font-size: 18px; }
+      .gallery figure { width: 190px; }
+      .kakao-fab { padding: 12px; }
+      .kakao-fab .kakao-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switch" onclick="toggleLang()">
+    <span class="flag" id="flag-ko">🇰🇷 KR</span>
+    <div class="track"><div class="thumb"></div></div>
+    <span class="flag dim" id="flag-en">EN 🇺🇸</span>
+  </div>
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="brand">
+          <img src="timepixel-logo.png" alt="TimePixel">
+          <span class="brand-name">TimePixel</span>
+        </div>
+        <span class="hero-pill">
+          <span class="ko">Timeboxing &amp; Time Training</span>
+          <span class="en">Timeboxing &amp; Time Training</span>
+        </span>
+        <h1>
+          <span class="ko">타임박싱으로 기르는<br>나의 <span class="accent">시간 예측력</span></span>
+          <span class="en">Timeboxing that trains<br>your <span class="accent">time sense</span></span>
+        </h1>
+        <p class="lead">
+          <span class="ko">계획은 누구나 세워요. TimePixel은 내 시간 예측이 얼마나 맞았는지 매일 데이터로 알려주는 코치, 그리고 크루와 같은 시각에 동시 인증하는 소셜 책임 앱이에요.</span>
+          <span class="en">Anyone can plan. TimePixel is a coach that shows you daily how accurate your time estimates really are — plus a crew that checks in together at the same moment, every day.</span>
+        </p>
+        <div class="cta-row">
+          <span class="badge coming">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span class="ko">App Store 준비 중</span><span class="en">App Store — soon</span>
+          </span>
+          <span class="badge coming">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.046.424.12.612l11.112-11.108L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg>
+            <span class="ko">Google Play 준비 중</span><span class="en">Google Play — soon</span>
+          </span>
+        </div>
+        <div class="hero-meta">
+          <span class="ko">Android · iOS 출시 준비 중이에요. 카카오톡 채널에서 소식을 받아보세요.</span>
+          <span class="en">Coming soon on Android &amp; iOS. Follow our KakaoTalk channel for updates.</span>
+        </div>
+      </div>
+
+      <!-- Right: real UI screenshots -->
+      <div class="hero-right">
+        <div class="hero-shots">
+          <img class="shot back" src="screens/crew-home-v1.png" alt="크루 홈 화면 — 크루 잔디와 멤버 인증 현황" loading="eager">
+          <img class="shot front" src="screens/timebox-v1.png" alt="타임박싱 그리드 화면 — 블록을 끌어서 하루에 배치" loading="eager">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Stats strip ============ -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="v num">BIG 3</div>
+        <div class="k">
+          <span class="ko">오늘 가장 중요한 딱 3가지</span><span class="en">Just 3 top priorities a day</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="v num">10<span style="font-size:14px">분</span></div>
+        <div class="k">
+          <span class="ko">타임박싱 스냅 단위</span><span class="en">Timeboxing snap unit</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="v num">2~4<span style="font-size:14px">인</span></div>
+        <div class="k">
+          <span class="ko">크루 동시 인증</span><span class="en">Crew live check-in</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="v accent num">3<span style="font-size:14px">축</span></div>
+        <div class="k">
+          <span class="ko">잔디 점수 (실행·예측·정시)</span><span class="en">Grass score axes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Flashcard spotlight ============ -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-eyebrow">🌱 Signature Feature</span>
+      <h2>
+        <span class="ko">추측 먼저, 평균은 <span class="accent">그다음</span></span>
+        <span class="en">Guess first, <span class="accent">then</span> see your average</span>
+      </h2>
+      <p class="section-desc">
+        <span class="ko">플래시카드 원리. 과거 평균을 먼저 보여주면 거기에 끌려가요(앵커링). TimePixel은 내가 먼저 추측한 뒤에야 데이터를 공개해서, 진짜 예측력이 자라게 해요.</span>
+        <span class="en">Like flashcards: seeing the answer first anchors you. TimePixel reveals your past average only after you guess — so your real time sense grows.</span>
+      </p>
+    </div>
+
+    <div class="spotlight">
+      <div class="copy">
+        <h3>
+          <span class="ko">시간 감각은 훈련하면 늘어요</span>
+          <span class="en">Time sense is trainable</span>
+        </h3>
+        <p>
+          <span class="ko">"30분이면 되겠지"가 매번 1시간이 되나요? 할 일마다 과거 기록이 자동으로 쌓이고, 추측 → 공개 → 보정 루프를 반복할수록 예측 정확도가 눈에 보이게 올라가요.</span>
+          <span class="en">Does "30 minutes, tops" always become an hour? TimePixel logs every task's history and runs a guess → reveal → adjust loop that visibly raises your prediction accuracy.</span>
+        </p>
+        <ul class="spot-points">
+          <li>
+            <span class="ko"><b>앵커링 방지</b> — 추측 전 카드에는 "탭해서 시간을 추측해보세요"만 보여요</span>
+            <span class="en"><b>No anchoring</b> — before you guess, a card shows only "tap to estimate"</span>
+          </li>
+          <li>
+            <span class="ko"><b>자동 축적</b> — 추측하면 "지난 5번 평균 38분"이 공개돼요</span>
+            <span class="en"><b>Auto history</b> — after guessing, "your 5-run average: 38 min" unlocks</span>
+          </li>
+          <li>
+            <span class="ko"><b>예측 정확도 추적</b> — 회고에서 예측 vs 실제를 매일 확인</span>
+            <span class="en"><b>Accuracy tracking</b> — daily estimate-vs-actual review</span>
+          </li>
+          <li>
+            <span class="ko"><b>스냅샷 채점</b> — 전날 "계획 완료" 시점 기준으로 정시성 평가</span>
+            <span class="en"><b>Snapshot scoring</b> — punctuality graded against last night's plan</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="spot-shot">
+        <img src="screens/estimate-v1.png" alt="시간 추정 화면 — 추측 전 카드는 과거 평균이 숨겨져 있고, 추측한 카드에만 지난 5번 평균이 공개된다" loading="lazy">
+        <p class="spot-caption">
+          <span class="ko">실제 시간 추정 화면 — 맨 아래 카드는 아직 추측 전이라 평균이 숨겨져 있어요</span>
+          <span class="en">The real estimate screen — the bottom card hasn't been guessed yet, so its average stays hidden</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Screens gallery ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-head">
+      <span class="section-eyebrow">Screens</span>
+      <h2>
+        <span class="ko">하루 루프, 화면으로 <span class="accent">미리 보기</span></span>
+        <span class="en">The daily loop, <span class="accent">screen by screen</span></span>
+      </h2>
+      <p class="section-desc">
+        <span class="ko">옆으로 넘기며 Brain Dump부터 크루 인증까지 실제 화면을 구경해보세요.</span>
+        <span class="en">Swipe through the real screens — from Brain Dump to crew check-in.</span>
+      </p>
+    </div>
+
+    <div class="gallery">
+      <figure>
+        <img src="screens/brain-dump-v1.png" alt="Brain Dump 화면" loading="lazy">
+        <figcaption><span class="step">①</span> <span class="ko">Brain Dump — 머릿속 비우기</span><span class="en">Brain Dump</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/big3-v1.png" alt="BIG 3 선정 화면" loading="lazy">
+        <figcaption><span class="step">②</span> <span class="ko">BIG 3 선정</span><span class="en">Pick your BIG 3</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/estimate-v1.png" alt="시간 추정 화면" loading="lazy">
+        <figcaption><span class="step">③</span> <span class="ko">시간 추정</span><span class="en">Estimate time</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/timebox-v1.png" alt="타임박싱 그리드 화면" loading="lazy">
+        <figcaption><span class="step">④</span> <span class="ko">타임박싱</span><span class="en">Timebox your day</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/focus-v1.png" alt="포커스 모드 화면" loading="lazy">
+        <figcaption><span class="step">⑤</span> <span class="ko">포커스 모드</span><span class="en">Focus mode</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/recap-v1.png" alt="회고 및 잔디 화면" loading="lazy">
+        <figcaption><span class="step">⑥</span> <span class="ko">회고 &amp; 잔디</span><span class="en">Review &amp; grass</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/crew-home-v1.png" alt="크루 홈 화면" loading="lazy">
+        <figcaption><span class="ko">크루 홈</span><span class="en">Crew home</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/crew-vote-v1.png" alt="크루 시각 투표 화면" loading="lazy">
+        <figcaption><span class="ko">시각 투표</span><span class="en">Time voting</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/crew-countdown-v1.png" alt="크루 동시 세션 카운트다운 화면" loading="lazy">
+        <figcaption><span class="ko">3·2·1 동시 세션</span><span class="en">Live countdown</span></figcaption>
+      </figure>
+      <figure>
+        <img src="screens/crew-feed-v1.png" alt="크루 4분할 피드 화면" loading="lazy">
+        <figcaption><span class="ko">크루 피드</span><span class="en">Crew feed</span></figcaption>
+      </figure>
+    </div>
+    <p class="gallery-hint">
+      <span class="ko">← 옆으로 스크롤 →</span>
+      <span class="en">← scroll sideways →</span>
+    </p>
+  </section>
+
+  <!-- ============ Features by category ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-head">
+      <span class="section-eyebrow">Features</span>
+      <h2>
+        <span class="ko">계획부터 인증까지, 하루가 한 루프</span>
+        <span class="en">Plan to proof — one daily loop</span>
+      </h2>
+    </div>
+
+    <!-- 개인 루프 -->
+    <div class="feature-cat">
+      <div class="cat-head">
+        <span class="cat-icon loop">🌱</span>
+        <span class="cat-title">
+          <span class="ko">개인 타임박싱 루프</span><span class="en">Personal Timeboxing Loop</span>
+        </span>
+        <span class="cat-sub">
+          <span class="ko">쏟아내고 → 고르고 → 추측하고 → 박싱</span>
+          <span class="en">Dump → pick → guess → box</span>
+        </span>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="ico">🧠</div>
+          <div class="name"><span class="ko">Brain Dump</span><span class="en">Brain Dump</span></div>
+          <div class="body"><span class="ko">떠오르는 일을 채팅하듯 하단 입력창에 전부 쏟아내요. 엔터로 착착.</span><span class="en">Pour out every to-do like a chat — Enter adds, keep typing.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">3️⃣</div>
+          <div class="name"><span class="ko">BIG 3 선정</span><span class="en">Pick your BIG 3</span></div>
+          <div class="body"><span class="ko">오늘 가장 중요한 딱 3개만. 4개째는 안 돼요.</span><span class="en">Only the 3 that matter today. A 4th? Blocked.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">⏱️</div>
+          <div class="name"><span class="ko">시간 추정</span><span class="en">Time estimating</span></div>
+          <div class="body"><span class="ko">세 카드를 나란히 비교하며 시간 분배. 추측 후에야 과거 평균 공개.</span><span class="en">Compare all three side by side; averages unlock after you guess.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">📐</div>
+          <div class="name"><span class="ko">타임박싱 그리드</span><span class="en">Timeboxing grid</span></div>
+          <div class="body"><span class="ko">00~24시 하루 전체, 10분 스냅, 겹침 방지. 위아래 핸들로 조절.</span><span class="en">Full 24h grid with 10-min snap, no overlaps, drag handles.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🎯</div>
+          <div class="name"><span class="ko">포커스 모드</span><span class="en">Focus mode</span></div>
+          <div class="body"><span class="ko">예측 시간 기준으로 차오르는 링 + 실시간 코칭. 완료하면 실제 시간 자동 기록.</span><span class="en">A ring fills against your estimate, with live coaching. Actual time logs itself.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🌾</div>
+          <div class="name"><span class="ko">회고 &amp; 잔디</span><span class="en">Review &amp; grass</span></div>
+          <div class="body"><span class="ko">예측 vs 실제 막대, 3축 잔디, 스트릭. 어제 계획 복사도 무료.</span><span class="en">Estimate-vs-actual bars, 3-axis grass, streaks — plus free plan copy.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 크루 -->
+    <div class="feature-cat">
+      <div class="cat-head">
+        <span class="cat-icon crew">🤝</span>
+        <span class="cat-title">
+          <span class="ko">크루</span><span class="en">Crew</span>
+        </span>
+        <span class="cat-sub">
+          <span class="ko">2~4인, 하루 1회 같은 시각에 동시 인증</span>
+          <span class="en">2–4 people, one shared check-in a day</span>
+        </span>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="ico">📱</div>
+          <div class="name"><span class="ko">QR·코드 초대</span><span class="en">QR &amp; code invite</span></div>
+          <div class="body"><span class="ko">초대 코드는 5분만 유효. 승인제로 안전하게.</span><span class="en">Invite codes expire in 5 minutes; joins need approval.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🗳️</div>
+          <div class="name"><span class="ko">시각 자동 추천</span><span class="en">Smart time voting</span></div>
+          <div class="body"><span class="ko">모두의 타임박싱을 분석해 다 같이 비는 시각을 자동 추천. 일정 내용은 공유 안 해요.</span><span class="en">Analyzes everyone's timeboxes to suggest free slots — schedules stay private.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">⏲️</div>
+          <div class="name"><span class="ko">3·2·1 동시 세션</span><span class="en">3·2·1 live session</span></div>
+          <div class="body"><span class="ko">카운트다운이 끝나면 다 같이 카메라로. 같은 순간의 인증이에요.</span><span class="en">When the countdown hits zero, everyone's camera opens — same moment, together.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🖼️</div>
+          <div class="name"><span class="ko">4분할 피드</span><span class="en">Quad-split feed</span></div>
+          <div class="body"><span class="ko">2×2 그리드에 등록 순서대로. 사진과 영상 인증이 한 화면에 공존.</span><span class="en">A 2×2 grid in check-in order — photo and video check-ins coexist.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🕐</div>
+          <div class="name"><span class="ko">48시간 자동 삭제</span><span class="en">48-hour auto-delete</span></div>
+          <div class="body"><span class="ko">인증 사진은 48시간 뒤 자동 삭제. 부담 없이 찍어요.</span><span class="en">Check-in photos vanish after 48 hours. Snap without worry.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프리미엄 -->
+    <div class="feature-cat">
+      <div class="cat-head">
+        <span class="cat-icon premium">💎</span>
+        <span class="cat-title">
+          <span class="ko">프리미엄</span><span class="en">Premium</span>
+        </span>
+        <span class="cat-sub">
+          <span class="ko">분석이 곁에서 돕는 성장 도구 · 광고 없음</span>
+          <span class="en">Deeper analysis, zero ads</span>
+        </span>
+      </div>
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="ico">🎥</div>
+          <div class="name"><span class="ko">영상 인증</span><span class="en">Video check-in</span></div>
+          <div class="body"><span class="ko">사진 대신 영상으로 생생하게. 크루 피드에서 바로 재생.</span><span class="en">Check in with video, played right in the crew feed.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">📈</div>
+          <div class="name"><span class="ko">패턴 분석 &amp; 자동 보정</span><span class="en">Patterns &amp; auto-adjust</span></div>
+          <div class="body"><span class="ko">시간대별 인사이트와 추정 자동 보정으로 계획이 점점 정확해져요.</span><span class="en">Time-of-day insights and estimate auto-correction sharpen your plans.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">🧩</div>
+          <div class="name"><span class="ko">스마트 자투리 채우기</span><span class="en">Smart gap filling</span></div>
+          <div class="body"><span class="ko">계획 사이 자투리 시간에 맞는 일을 똑똑하게 제안.</span><span class="en">Smart suggestions for the odd gaps between blocks.</span></div>
+        </div>
+        <div class="feat">
+          <div class="ico">♾️</div>
+          <div class="name"><span class="ko">무제한 잔디 히스토리</span><span class="en">Unlimited grass history</span></div>
+          <div class="body"><span class="ko">쌓아온 모든 잔디와 기록을 끝까지 돌아볼 수 있어요.</span><span class="en">Scroll back through every day of grass you've ever grown.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Target chips ============ -->
+  <section class="target">
+    <h2>
+      <span class="ko">이런 분들에게 추천해요</span>
+      <span class="en">Who is it for?</span>
+    </h2>
+    <p class="desc">
+      <span class="ko">계획을 세우는 사람 말고, 지키고 싶은 사람</span>
+      <span class="en">Not for making plans — for keeping them</span>
+    </p>
+    <div class="chips">
+      <span class="chip"><span class="ko">⏰ 일이 늘 예상보다 오래 걸리는 사람</span><span class="en">⏰ "It always takes longer than I thought"</span></span>
+      <span class="chip"><span class="ko">🌅 갓생 도전러</span><span class="en">🌅 Self-improvement grinders</span></span>
+      <span class="chip"><span class="ko">📚 수험생 · 고시생</span><span class="en">📚 Exam preppers</span></span>
+      <span class="chip"><span class="ko">💻 재택 · 프리랜서</span><span class="en">💻 Remote workers &amp; freelancers</span></span>
+      <span class="chip"><span class="ko">🧑‍🤝‍🧑 스터디 · 미라클모닝 크루</span><span class="en">🧑‍🤝‍🧑 Study &amp; morning crews</span></span>
+      <span class="chip"><span class="ko">🌱 습관 만들기 도전 중</span><span class="en">🌱 Habit builders</span></span>
+    </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer>
+    <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
+    <p class="foot-links">
+      <a href="/timepixel/privacy-policy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy Policy</span></a>
+      &middot;
+      <a href="mailto:teddy@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
+      &middot;
+      <a href="#" rel="noopener"><span class="ko">카카오톡 문의</span><span class="en">KakaoTalk Channel</span></a>
+    </p>
+  </footer>
+
+  <!-- KakaoTalk Inquiry FAB -->
+  <a href="#" rel="noopener" class="kakao-fab" aria-label="KakaoTalk inquiry">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.99c0 2.84 1.9 5.33 4.76 6.74-.16.57-.86 3.06-.88 3.26 0 0-.02.16.08.22.1.06.23.01.23.01.29-.04 3.4-2.23 3.94-2.6.58.08 1.17.13 1.77.13 5.52 0 10-3.58 10-7.79C22 6.58 17.52 3 12 3z"/></svg>
+    <span class="kakao-label"><span class="ko">문의 / 소식받기</span><span class="en">Ask / Follow</span></span>
+  </a>
+
+  <script>
+    function toggleLang() {
+      document.body.classList.toggle('lang-en');
+      var isEn = document.body.classList.contains('lang-en');
+      localStorage.setItem('lang', isEn ? 'en' : 'ko');
+      document.getElementById('flag-ko').classList.toggle('dim', isEn);
+      document.getElementById('flag-en').classList.toggle('dim', !isEn);
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      document.body.classList.add('lang-en');
+      document.getElementById('flag-ko').classList.add('dim');
+      document.getElementById('flag-en').classList.remove('dim');
+    }
+  </script>
+
+</body>
+</html>

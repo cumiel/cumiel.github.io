@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TimePixel 개인정보 처리방침 / Privacy Policy</title>
+  <link rel="icon" type="image/png" href="timepixel-logo.png">
+  <style>
+    :root {
+      --primary: #3FBD92;
+      --primary-soft: #16241F;
+      --primary-bd: #234037;
+      --primary-text: #9FE1CB;
+      --text: #F6F6F4;
+      --sub: #8A8A90;
+      --muted: #62626A;
+      --line: #34343A;
+      --card: #252528;
+      --bg: #1C1C1F;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+    .header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    .lang-toggle {
+      display: inline-flex;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+    }
+    .lang-toggle button {
+      border: 0;
+      background: transparent;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sub);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-toggle button.active {
+      background: var(--primary);
+      color: #0D1512;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 800;
+      margin: 32px 0 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    h2:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 18px 0 6px;
+      color: var(--sub);
+    }
+    p, ul {
+      font-size: 14px;
+      color: var(--text);
+      margin: 6px 0;
+    }
+    ul { padding-left: 20px; }
+    li { margin: 4px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      background: var(--primary-soft);
+      color: var(--primary-text);
+      font-weight: 700;
+    }
+    code {
+      background: var(--line);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+    [data-lang="en"] { display: none; }
+    body.lang-en [data-lang="ko"] { display: none; }
+    body.lang-en [data-lang="en"] { display: block; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <span class="brand">TimePixel</span>
+      <div class="lang-toggle" role="tablist">
+        <button id="btn-ko" class="active" onclick="setLang('ko')">한국어</button>
+        <button id="btn-en" onclick="setLang('en')">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================== 한국어 =========================== -->
+    <div data-lang="ko">
+      <h1>TimePixel 개인정보 처리방침</h1>
+      <p class="meta">시행일: 2026년 7월 22일</p>
+
+      <p>
+        TimePixel (이하 "앱") 은 사용자의 개인정보를 소중히 다루며,
+        「개인정보 보호법」 등 관련 법령을 준수합니다. 이 처리방침은 앱이
+        어떤 개인정보를 어떻게 수집·이용·보관·공유하는지 안내합니다.
+      </p>
+
+      <h2>1. 수집하는 개인정보 항목</h2>
+
+      <h3>가. 회원가입 및 로그인</h3>
+      <table>
+        <tr><th>항목</th><th>수집 방법</th></tr>
+        <tr><td>이메일 주소</td><td>Google · Apple 로그인</td></tr>
+        <tr><td>닉네임, 핸들(@아이디), 프로필 사진 URL</td><td>소셜 로그인 응답 또는 사용자 입력</td></tr>
+      </table>
+
+      <h3>나. 서비스 이용 과정에서 수집</h3>
+      <table>
+        <tr><th>항목</th><th>목적</th></tr>
+        <tr><td>할 일·타임박싱·회고 기록</td><td>타임박싱 및 회고 기능 제공</td></tr>
+        <tr><td>시간 예측 통계 (할 일별 평균 소요 시간)</td><td>예측력 훈련 · 추정 보정 기능 제공</td></tr>
+        <tr><td>크루 정보 (크루명, 멤버, 세션 시각, 인증 기록)</td><td>크루 기능 제공</td></tr>
+        <tr><td>인증 사진·영상</td><td>크루 동시 인증 기능 제공 (48시간 후 자동 삭제)</td></tr>
+        <tr><td>FCM 토큰</td><td>푸시 알림 발송</td></tr>
+      </table>
+
+      <h3>다. 카메라·사진</h3>
+      <p>
+        크루 인증 사진·영상 촬영, QR 코드 스캔, 프로필 이미지 등록 등 사용자가
+        명시적으로 기능을 사용할 때만 카메라에 접근합니다. 인증 사진은 촬영
+        단계부터 저화질로 처리해 업로드하며, 업로드 후 48시간이 지나면 서버에서
+        자동 삭제됩니다.
+      </p>
+
+      <h2>2. 개인정보의 이용 목적</h2>
+      <ul>
+        <li>회원 식별, 로그인, 본인 확인</li>
+        <li>타임박싱·시간 추정·회고·잔디 기능 제공</li>
+        <li>크루 멤버 간 인증 사진·영상, 잔디, 정시성 점수 공유</li>
+        <li>크루 세션 시각 추천 — 단, 크루에게는 "몇 시가 비어 있는지"만 공유되며 일정의 내용은 공유되지 않습니다</li>
+        <li>푸시 알림 발송 (블록 시작·종료, 크루 세션 카운트다운, 회고 등)</li>
+        <li>유료 구독(프리미엄·크루 플랜) 관리</li>
+        <li>서비스 개선을 위한 통계 분석</li>
+      </ul>
+
+      <h2>3. 개인정보의 보관 및 파기</h2>
+      <ul>
+        <li>인증 사진·영상은 업로드 후 <b>48시간이 지나면 자동 삭제</b>됩니다.</li>
+        <li>회원 탈퇴 시 사용자의 개인정보와 기록 데이터는 즉시 삭제됩니다.</li>
+        <li>다만 크루에 다른 멤버가 있는 경우, 크루 피드에 남긴 글 등 공동 기록은
+          남은 멤버를 위해 익명화되어 유지될 수 있습니다.</li>
+        <li>법령에 따라 보관이 필요한 경우 해당 기간 동안만 분리 보관 후 파기합니다.</li>
+      </ul>
+
+      <h2>4. 개인정보의 제3자 제공·처리위탁</h2>
+      <p>앱은 다음 서비스에 개인정보 처리를 위탁합니다:</p>
+      <table>
+        <tr><th>수탁사</th><th>위탁 업무</th><th>보관 위치</th></tr>
+        <tr><td>Google (Firebase)</td><td>인증, 데이터 저장, 푸시 알림, 분석</td><td>해외 (미국 등)</td></tr>
+        <tr><td>Apple</td><td>Sign in with Apple, 인앱결제, 알림</td><td>해외 (미국 등)</td></tr>
+        <tr><td>Google Play</td><td>인앱결제</td><td>해외 (미국 등)</td></tr>
+        <tr><td>Cloudflare</td><td>인증 영상 저장 (R2)</td><td>해외 (미국 등)</td></tr>
+      </table>
+      <p>
+        위 수탁사는 각 사의 개인정보 처리방침에 따라 데이터를 처리합니다. 위 외의
+        제3자에게는 사용자의 동의 없이 개인정보를 제공하지 않습니다.
+      </p>
+
+      <h2>5. 광고 및 추적</h2>
+      <p>
+        앱은 광고를 게재하지 않으며, 광고 식별자 (IDFA / AAID) 를 수집하지
+        않습니다. 맞춤형 광고 목적의 추적도 하지 않습니다.
+      </p>
+
+      <h2>6. 사용자의 권리</h2>
+      <ul>
+        <li>본인의 개인정보 열람·정정·삭제·처리정지 요구</li>
+        <li>앱 내 "마이 → 계정 삭제" 로 즉시 처리 가능</li>
+        <li>또는 아래 연락처로 요청 시 지체 없이 처리</li>
+      </ul>
+
+      <h2>7. 만 14세 미만 아동의 개인정보</h2>
+      <p>
+        앱은 만 14세 미만 아동의 개인정보를 수집하지 않습니다. 만 14세 미만으로
+        확인된 경우 즉시 계정과 데이터를 삭제합니다.
+      </p>
+
+      <h2>8. 안전 조치</h2>
+      <ul>
+        <li>Firebase 의 TLS 암호화 통신</li>
+        <li>Firestore 보안 규칙 기반 접근 제어 — 본인 또는 같은 크루 멤버만 데이터 접근</li>
+        <li>인증 사진·영상의 48시간 자동 삭제 및 해시 검증</li>
+        <li>로컬 캐시의 OS 샌드박스 보호</li>
+      </ul>
+
+      <h2>9. 변경 고지</h2>
+      <p>
+        본 처리방침의 내용이 변경될 경우 앱 또는 본 페이지를 통해 사전 공지합니다.
+        중요한 변경 사항은 시행 7일 전, 사용자에게 불리한 변경은 30일 전 공지합니다.
+      </p>
+
+      <h2>10. 문의</h2>
+      <ul>
+        <li>이메일: <a href="mailto:teddy@cumiel.com">teddy@cumiel.com</a></li>
+        <li>운영자: Cumiel</li>
+      </ul>
+    </div>
+
+    <!-- =========================== English =========================== -->
+    <div data-lang="en">
+      <h1>TimePixel Privacy Policy</h1>
+      <p class="meta">Effective Date: July 22, 2026</p>
+
+      <p>
+        TimePixel ("the App") respects your privacy and complies with applicable
+        privacy laws including the Korean Personal Information Protection Act
+        (PIPA). This policy explains what personal information we collect,
+        how we use, store, and share it.
+      </p>
+
+      <h2>1. Information We Collect</h2>
+
+      <h3>a. Account &amp; Sign-In</h3>
+      <table>
+        <tr><th>Data</th><th>Source</th></tr>
+        <tr><td>Email address</td><td>Google · Apple sign-in</td></tr>
+        <tr><td>Nickname, handle (@id), profile image URL</td><td>Social sign-in response or user input</td></tr>
+      </table>
+
+      <h3>b. Collected During Use</h3>
+      <table>
+        <tr><th>Data</th><th>Purpose</th></tr>
+        <tr><td>Tasks, timeboxes, review records</td><td>Provide timeboxing &amp; review features</td></tr>
+        <tr><td>Time-estimate statistics (per-task average duration)</td><td>Prediction training &amp; estimate calibration</td></tr>
+        <tr><td>Crew data (name, members, session time, check-in records)</td><td>Provide crew features</td></tr>
+        <tr><td>Check-in photos &amp; videos</td><td>Crew live check-in (auto-deleted after 48 hours)</td></tr>
+        <tr><td>FCM token</td><td>Push notifications</td></tr>
+      </table>
+
+      <h3>c. Camera &amp; Photos</h3>
+      <p>
+        We access the camera only when you explicitly use a feature that
+        requires it (crew check-in photo/video, QR scan, profile image).
+        Check-in photos are captured at reduced resolution and are
+        automatically deleted from our servers 48 hours after upload.
+      </p>
+
+      <h2>2. How We Use Your Information</h2>
+      <ul>
+        <li>Authenticate and identify you</li>
+        <li>Provide timeboxing, time-estimating, review, and grass features</li>
+        <li>Share check-in photos/videos, grass, and punctuality scores among crew members</li>
+        <li>Recommend crew session times — crews only see <b>which hours are free</b>; the contents of your schedule are never shared</li>
+        <li>Send push notifications (block start/end, crew countdown, daily review)</li>
+        <li>Manage paid subscriptions (Premium, Crew Plan)</li>
+        <li>Aggregate statistics to improve the service</li>
+      </ul>
+
+      <h2>3. Retention &amp; Deletion</h2>
+      <ul>
+        <li>Check-in photos and videos are <b>automatically deleted 48 hours</b> after upload.</li>
+        <li>When you delete your account, your personal data and records are deleted immediately.</li>
+        <li>In a crew with other members, shared records such as crew feed posts may be
+          retained in anonymized form for the remaining members.</li>
+        <li>Where law requires retention, we keep the data in separated storage only for
+          the required period and then destroy it.</li>
+      </ul>
+
+      <h2>4. Third-Party Processors</h2>
+      <p>We use the following processors to operate the App:</p>
+      <table>
+        <tr><th>Processor</th><th>Function</th><th>Region</th></tr>
+        <tr><td>Google (Firebase)</td><td>Auth, storage, push, analytics</td><td>Overseas (e.g. US)</td></tr>
+        <tr><td>Apple</td><td>Sign in with Apple, in-app purchases, notifications</td><td>Overseas (e.g. US)</td></tr>
+        <tr><td>Google Play</td><td>In-app purchases</td><td>Overseas (e.g. US)</td></tr>
+        <tr><td>Cloudflare</td><td>Check-in video storage (R2)</td><td>Overseas (e.g. US)</td></tr>
+      </table>
+      <p>
+        Each processor handles data under its own privacy policy. We do not
+        share your personal data with any other third party without your
+        consent.
+      </p>
+
+      <h2>5. Advertising &amp; Tracking</h2>
+      <p>
+        The App shows no ads and does not collect advertising identifiers
+        (IDFA / AAID). We do not track you for advertising purposes.
+      </p>
+
+      <h2>6. Your Rights</h2>
+      <ul>
+        <li>Right to access, correct, delete your data or restrict processing</li>
+        <li>Use "My → Delete account" in the App for immediate handling</li>
+        <li>Or contact us at the address below; we will respond without delay</li>
+      </ul>
+
+      <h2>7. Children Under 14</h2>
+      <p>
+        The App does not knowingly collect personal data from children under 14.
+        If we discover such an account, we delete it and its data immediately.
+      </p>
+
+      <h2>8. Security Measures</h2>
+      <ul>
+        <li>TLS-encrypted transport via Firebase</li>
+        <li>Firestore security rules — only you or your crew members can access your data</li>
+        <li>48-hour auto-deletion and hash verification of check-in media</li>
+        <li>Local cache protected by the OS sandbox</li>
+      </ul>
+
+      <h2>9. Changes to This Policy</h2>
+      <p>
+        Any change to this policy will be announced in the App or on this page
+        in advance. Material changes will be announced at least 7 days before
+        effect, and changes unfavorable to users at least 30 days before.
+      </p>
+
+      <h2>10. Contact</h2>
+      <ul>
+        <li>Email: <a href="mailto:teddy@cumiel.com">teddy@cumiel.com</a></li>
+        <li>Operator: Cumiel</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Cumiel · TimePixel
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      const body = document.body;
+      const btnKo = document.getElementById('btn-ko');
+      const btnEn = document.getElementById('btn-en');
+      if (lang === 'en') {
+        body.classList.add('lang-en');
+        document.documentElement.lang = 'en';
+        btnKo.classList.remove('active');
+        btnEn.classList.add('active');
+      } else {
+        body.classList.remove('lang-en');
+        document.documentElement.lang = 'ko';
+        btnEn.classList.remove('active');
+        btnKo.classList.add('active');
+      }
+      try {
+        localStorage.setItem('timepixel-pp-lang', lang);
+      } catch (_) {}
+    }
+    // 페이지 진입 시 OS/저장된 언어 반영. 기본 한국어.
+    (function () {
+      let lang;
+      try {
+        lang = localStorage.getItem('timepixel-pp-lang');
+      } catch (_) {}
+      if (!lang) {
+        lang = (navigator.language || 'ko').toLowerCase().startsWith('ko')
+          ? 'ko'
+          : 'en';
+      }
+      setLang(lang);
+    })();
+  </script>
+</body>
+</html>
