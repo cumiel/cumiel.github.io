@@ -31,6 +31,18 @@
     "innrs": {
       "rotateSec": 20,
       "show": ["linklass", "forestale", "homlit", "nemo"]
+    },
+    "nemo": {
+      "rotateSec": 20,
+      "show": ["linklass", "forestale", "homlit"]
+    },
+    "linklass": {
+      "rotateSec": 20,
+      "show": ["forestale", "homlit", "nemo"]
+    },
+    "homlit": {
+      "rotateSec": 30,
+      "show": ["linklass", "forestale", "nemo"]
     }
   }
 }
