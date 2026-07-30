@@ -30,23 +30,23 @@
   "apps": {
     "innrs": {
       "rotateSec": 20,
-      "show": ["linklass", "homlit", "nemo"]
+      "show": ["linklass", "homlit", "nemo", "forestale"]
     },
     "nemo": {
       "rotateSec": 20,
-      "show": ["linklass", "homlit"]
+      "show": ["linklass", "homlit", "forestale"]
     },
     "linklass": {
       "rotateSec": 20,
-      "show": ["homlit", "nemo"]
+      "show": ["homlit", "nemo", "forestale"]
     },
     "homlit": {
       "rotateSec": 20,
-      "show": ["linklass", "nemo"]
+      "show": ["linklass", "nemo", "forestale"]
     },
      "catchwave": { 
       "rotateSec": 20, 
-      "show": ["linklass", "nemo", "homlit"], 
+      "show": ["linklass", "nemo", "homlit", "forestale"], 
       "enabled": true 
     }
   }
