@@ -1,30 +1,34 @@
 {
   "v": 1,
-  "note": "Cumiel 앱 크로스 프로모 하우스 광고. 이 파일만 고치면 전 앱 반영(재빌드 X). 광고 추가=ads에 항목+img/에 PNG, 앱별 송출=apps.<앱>.show 목록.",
+  "note": "Cumiel 앱 크로스 프로모 하우스 광고. 이 파일만 고치면 전 앱 반영(재빌드 X). 광고 추가=ads에 항목+img/에 PNG, 앱별 송출=apps.<앱>.show 목록. bg=크리에이티브 배경색(선택) — 배너 좌우 여백을 이 색으로 채워 이어져 보이게 함.",
   "ads": [
     {
       "id": "linklass",
       "banner": "img/linklass_banner.png",
       "mrec": "img/linklass_mrec.png",
-      "url": "https://cumiel.github.io/linklass.html"
+      "url": "https://cumiel.github.io/linklass.html",
+      "bg": "#F6F2EA"
     },
     {
       "id": "forestale",
       "banner": "img/forestale_banner.png",
       "mrec": "img/forestale_mrec.png",
-      "url": "https://cumiel.github.io/forestale/"
+      "url": "https://cumiel.github.io/forestale/",
+      "bg": "#FBF6EA"
     },
     {
       "id": "homlit",
       "banner": "img/homlit_banner.png",
       "mrec": "img/homlit_mrec.png",
-      "url": "https://cumiel.github.io/homlit.html"
+      "url": "https://cumiel.github.io/homlit.html",
+      "bg": "#F6F9FC"
     },
     {
       "id": "nemo",
       "banner": "img/nemo_banner.png",
       "mrec": "img/nemo_mrec.png",
-      "url": "https://cumiel.github.io/nemo-app/"
+      "url": "https://cumiel.github.io/nemo-app/",
+      "bg": "#F7F8FA"
     }
   ],
   "apps": {
@@ -44,10 +48,10 @@
       "rotateSec": 20,
       "show": ["linklass", "nemo"]
     },
-     "catchwave": { 
-      "rotateSec": 20, 
-      "show": ["linklass", "nemo", "homlit"], 
-      "enabled": true 
+     "catchwave": {
+      "rotateSec": 20,
+      "show": ["linklass", "nemo", "homlit"],
+      "enabled": true
     }
   }
 }
