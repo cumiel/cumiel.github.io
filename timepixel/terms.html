@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TimePixel 이용약관 / Terms of Service</title>
+  <link rel="icon" type="image/png" href="timepixel-logo.png">
+  <style>
+    :root {
+      --primary: #3FBD92;
+      --primary-soft: #16241F;
+      --primary-bd: #234037;
+      --primary-text: #9FE1CB;
+      --text: #F6F6F4;
+      --sub: #8A8A90;
+      --muted: #62626A;
+      --line: #34343A;
+      --card: #252528;
+      --bg: #1C1C1F;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+    .header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    .lang-toggle {
+      display: inline-flex;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+    }
+    .lang-toggle button {
+      border: 0;
+      background: transparent;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sub);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-toggle button.active {
+      background: var(--primary);
+      color: #0D1512;
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 800;
+      margin: 32px 0 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    h2:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 18px 0 6px;
+      color: var(--sub);
+    }
+    p, ul {
+      font-size: 14px;
+      color: var(--text);
+      margin: 6px 0;
+    }
+    ul { padding-left: 20px; }
+    li { margin: 4px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 12px;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      background: var(--primary-soft);
+      color: var(--primary-text);
+      font-weight: 700;
+    }
+    code {
+      background: var(--line);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+    [data-lang="en"] { display: none; }
+    body.lang-en [data-lang="ko"] { display: none; }
+    body.lang-en [data-lang="en"] { display: block; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <span class="brand">TimePixel</span>
+      <div class="lang-toggle" role="tablist">
+        <button id="btn-ko" class="active" onclick="setLang('ko')">한국어</button>
+        <button id="btn-en" onclick="setLang('en')">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================== 한국어 =========================== -->
+    <div data-lang="ko">
+      <h1>TimePixel 이용약관</h1>
+      <p class="meta">시행일: 2026년 7월 31일</p>
+
+      <p>
+        본 약관은 주식회사 큐미엘(Cumiel, 이하 "회사")이 제공하는 모바일
+        애플리케이션 TimePixel(이하 "서비스")의 이용 조건과 회사·이용자 간
+        권리·의무를 규정합니다. 서비스를 설치·이용함으로써 본 약관에 동의한
+        것으로 봅니다.
+      </p>
+
+      <h2>1. 서비스 내용</h2>
+      <p>
+        TimePixel은 타임박싱 기반의 시간 예측력 훈련과 친구(크루)와의 동시 인증
+        기능을 제공하는 개인 생산성 앱입니다. 회사는 서비스의 품질 향상을 위해
+        기능을 변경하거나 일부를 중단할 수 있으며, 중요한 변경은 앱 또는 이메일로
+        사전 고지합니다.
+      </p>
+
+      <h2>2. 계정</h2>
+      <ul>
+        <li>서비스 일부 기능은 Google 또는 Apple 계정으로 로그인해야 이용할 수 있습니다.</li>
+        <li>이용자는 본인 계정의 활동에 책임을 지며, 타인의 계정을 도용해서는 안 됩니다.</li>
+        <li>이용자는 언제든지 앱 내 <strong>[마이 → 계정 삭제]</strong> 또는
+          <a href="delete-account.html">계정 삭제 안내</a> 절차로 계정과 관련 데이터를 삭제할 수 있습니다.</li>
+      </ul>
+
+      <h2>3. 유료 구독 및 결제</h2>
+      <ul>
+        <li>프리미엄 및 크루 플랜은 Apple App Store · Google Play를 통해 결제되며, 실제 청구·환불은 각 스토어 정책을 따릅니다.</li>
+        <li>구독은 기간 만료 전 해지하지 않으면 자동 갱신됩니다. 갱신 해지는 각 스토어의 구독 관리 화면에서 할 수 있습니다.</li>
+        <li>평생 이용권은 1회 결제로 영구 이용되는 비소모성 상품입니다.</li>
+        <li>크루 플랜은 크루장이 결제하며, 결제가 유효한 동안 소속 크루원 전원에게 프리미엄 기능이 적용됩니다.</li>
+      </ul>
+
+      <h2>4. 이용자 콘텐츠</h2>
+      <ul>
+        <li>크루 인증 사진·영상, 크루 소식 글 등 이용자가 등록한 콘텐츠의 권리는 이용자에게 있습니다.</li>
+        <li>인증 사진·영상은 소속 크루원 간에 공유되며, 등록 후 <strong>48시간이 지나면 자동 삭제</strong>됩니다.</li>
+        <li>타인의 권리를 침해하거나 불법·유해한 콘텐츠를 등록해서는 안 되며, 회사는 관련 법령을 위반한 콘텐츠를 삭제할 수 있습니다.</li>
+      </ul>
+
+      <h2>5. 금지 행위</h2>
+      <p>
+        서비스의 정상 운영을 방해하는 행위, 결제·인증을 우회하거나 조작하는 행위,
+        타인을 사칭·괴롭히는 행위, 관련 법령에 위반되는 행위는 금지됩니다.
+      </p>
+
+      <h2>6. 책임의 한계</h2>
+      <p>
+        서비스는 "있는 그대로(as is)" 제공됩니다. 회사는 천재지변, 이용자 기기·통신
+        환경, 스토어·클라우드 등 제3자 서비스의 장애로 발생한 손해에 대하여 관련
+        법령이 허용하는 범위에서 책임을 지지 않습니다.
+      </p>
+
+      <h2>7. 약관의 변경</h2>
+      <p>
+        회사는 필요 시 본 약관을 개정할 수 있으며, 개정 시 본 페이지에 게시하고
+        중요한 변경은 앱 내 공지 또는 이메일로 알립니다. 개정 약관의 시행일 이후
+        서비스를 계속 이용하면 변경에 동의한 것으로 봅니다.
+      </p>
+
+      <h2>8. 문의</h2>
+      <p>서비스 관련 문의: <a href="mailto:teddy@cumiel.com">teddy@cumiel.com</a></p>
+      <p style="margin-top:14px;">
+        개인정보 처리에 관한 사항은 <a href="privacy-policy.html">개인정보 처리방침</a>을 참고하세요.
+      </p>
+    </div>
+
+    <!-- =========================== English =========================== -->
+    <div data-lang="en">
+      <h1>TimePixel Terms of Service</h1>
+      <p class="meta">Effective Date: July 31, 2026</p>
+
+      <p>
+        These Terms govern your use of TimePixel (the "Service"), a mobile
+        application provided by Cumiel (the "Company"). By installing or using
+        the Service, you agree to these Terms.
+      </p>
+
+      <h2>1. The Service</h2>
+      <p>
+        TimePixel is a personal productivity app for timeboxing, time-estimation
+        training, and synchronized check-ins with friends ("crews"). The Company
+        may change or discontinue features to improve the Service and will give
+        advance notice of material changes in the app or by email.
+      </p>
+
+      <h2>2. Accounts</h2>
+      <ul>
+        <li>Some features require signing in with a Google or Apple account.</li>
+        <li>You are responsible for activity on your account and must not use another person's account.</li>
+        <li>You may delete your account and associated data at any time via
+          <strong>[My → Delete account]</strong> in the app or the
+          <a href="delete-account.html">account deletion guide</a>.</li>
+      </ul>
+
+      <h2>3. Subscriptions &amp; Payments</h2>
+      <ul>
+        <li>Premium and Crew plans are billed through the Apple App Store and Google Play; billing and refunds follow each store's policies.</li>
+        <li>Subscriptions renew automatically unless canceled before the period ends. Manage renewals in your store's subscription settings.</li>
+        <li>The Lifetime plan is a one-time, non-consumable purchase.</li>
+        <li>The Crew plan is paid by the crew leader; while active, premium features apply to all members of that crew.</li>
+      </ul>
+
+      <h2>4. Your Content</h2>
+      <ul>
+        <li>You retain rights to content you post, including crew proof photos/videos and crew posts.</li>
+        <li>Proof photos/videos are shared among your crew members and are <strong>automatically deleted 48 hours</strong> after upload.</li>
+        <li>You must not post content that infringes others' rights or is unlawful or harmful; the Company may remove content that violates applicable law.</li>
+      </ul>
+
+      <h2>5. Prohibited Conduct</h2>
+      <p>
+        You must not disrupt the Service, circumvent or manipulate payments or
+        check-ins, impersonate or harass others, or violate applicable laws.
+      </p>
+
+      <h2>6. Limitation of Liability</h2>
+      <p>
+        The Service is provided "as is." To the extent permitted by law, the
+        Company is not liable for damages arising from force majeure, your device
+        or network, or third-party services such as app stores and cloud providers.
+      </p>
+
+      <h2>7. Changes to These Terms</h2>
+      <p>
+        The Company may revise these Terms and will post updates on this page,
+        notifying you of material changes in the app or by email. Continued use
+        after the effective date constitutes acceptance.
+      </p>
+
+      <h2>8. Contact</h2>
+      <p>Questions: <a href="mailto:teddy@cumiel.com">teddy@cumiel.com</a></p>
+      <p style="margin-top:14px;">
+        For data practices, see our <a href="privacy-policy.html">Privacy Policy</a>.
+      </p>
+    </div>
+  </main>
+  <footer>
+    © 2026 Cumiel · TimePixel
+  </footer>
+  <script>
+    function setLang(lang) {
+      const body = document.body;
+      const btnKo = document.getElementById('btn-ko');
+      const btnEn = document.getElementById('btn-en');
+      if (lang === 'en') {
+        body.classList.add('lang-en');
+        document.documentElement.lang = 'en';
+        btnKo.classList.remove('active');
+        btnEn.classList.add('active');
+      } else {
+        body.classList.remove('lang-en');
+        document.documentElement.lang = 'ko';
+        btnEn.classList.remove('active');
+        btnKo.classList.add('active');
+      }
+      try {
+        localStorage.setItem('timepixel-pp-lang', lang);
+      } catch (_) {}
+    }
+    // 페이지 진입 시 OS/저장된 언어 반영. 기본 한국어.
+    (function () {
+      let lang;
+      try {
+        lang = localStorage.getItem('timepixel-pp-lang');
+      } catch (_) {}
+      if (!lang) {
+        lang = (navigator.language || 'ko').toLowerCase().startsWith('ko')
+          ? 'ko'
+          : 'en';
+      }
+      setLang(lang);
+    })();
+  </script>
+</body>
+</html>
