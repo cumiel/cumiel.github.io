@@ -25,6 +25,12 @@
       "banner": "img/nemo_banner.png",
       "mrec": "img/nemo_mrec.png",
       "url": "https://cumiel.github.io/nemo-app/"
+    },
+    {
+      "id": "timepixel",
+      "banner": "img/timepixel_banner.png",
+      "mrec": "img/timepixel_mrec.png",
+      "url": "https://cumiel.github.io/timepixel/"
     }
   ],
   "apps": {
