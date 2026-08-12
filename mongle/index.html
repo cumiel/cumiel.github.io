@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>몽글 — 비행이 편해지는 좌석 추천 · 항공편 실시간 추적</title>
+<meta name="description" content="어떤 좌석을 피해야 할지, 게이트는 어디인지, 짐은 몇 번 벨트인지. 몽글 하나로 비행의 처음부터 끝까지.">
+<meta property="og:title" content="몽글 Mongle">
+<meta property="og:description" content="항공 좌석 추천 · 기종 정보 · 항공편 실시간 추적">
+<meta property="og:image" content="https://cumiel.github.io/mongle/mongle-icon.png">
+<link rel="icon" type="image/png" href="mongle-icon.png">
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  /* ── 몽글 디자인 시스템: 클라우드 소프트 (앱 app_colors.dart 와 1:1) ── */
+  :root {
+    --bg: #F6FAFE; --card: #FFFFFF;
+    --sky50: #EFF7FF; --sky100: #DEEEFC; --sky400: #5BB3F0; --sky500: #3D9BE9; --sky600: #2382D6;
+    --ink: #16324A; --sub: #6E8BA3; --faint: #A9BFD1; --line: #E6EEF6;
+    --good: #2EC588; --good-bg: #E3F8EF; --warn: #F5A93B; --warn-bg: #FDF2DF;
+    --bad: #F2647C; --bad-bg: #FDE8EC; --neutral: #EDF3F9;
+    --grad: linear-gradient(135deg, var(--sky400), var(--sky600));
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+                 'Segoe UI', Roboto, 'Apple SD Gothic Neo', sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 22px; }
+
+  /* ── 헤더 (앱과 동일: 화이트, 컬러는 로고·포인트만) ── */
+  header {
+    background: var(--card); position: sticky; top: 0; z-index: 50;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; gap: 10px; padding: 14px 0; }
+  .nav img.cloud { width: 30px; height: auto; }
+  .nav .name { font-size: 20px; font-weight: 800; }
+  .nav .tag { font-size: 11.5px; color: var(--sub); margin-top: 2px; }
+  .nav .grow { flex: 1; }
+  /* KOR/ENG 필 토글 — 앱 헤더와 같은 모양 */
+  .lang { display: flex; background: var(--neutral); border-radius: 999px; padding: 3px; cursor: pointer; user-select: none; }
+  .lang span { font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 999px; color: var(--faint); }
+  .lang span.on { background: var(--card); color: var(--sky600); box-shadow: 0 1px 4px rgba(22,50,74,.10); }
+
+  /* ── 히어로 ── */
+  .hero { padding: 64px 0 30px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: center; }
+  .hero h1 { font-size: clamp(30px, 4.6vw, 44px); font-weight: 800; line-height: 1.25; letter-spacing: -.5px; }
+  .hero h1 .accent { color: var(--sky500); }
+  .hero .sub { margin-top: 16px; font-size: 16.5px; color: var(--sub); }
+  .badges { margin-top: 28px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink); color: #fff; border-radius: 14px; padding: 10px 18px;
+    font-size: 13.5px; font-weight: 700;
+  }
+  .badge svg { width: 18px; height: 18px; fill: #fff; }
+  .badge .soon { font-size: 10.5px; font-weight: 700; color: var(--faint); display: block; line-height: 1.2; }
+  .hero-note { margin-top: 14px; font-size: 12px; color: var(--faint); }
+
+  /* ── 폰 목업: 실제 추적 카드 축약 (전부 CSS — 스크린샷 아님) ── */
+  .phone {
+    width: 300px; margin: 0 auto; background: var(--card);
+    border-radius: 38px; border: 1.5px solid var(--line);
+    box-shadow: 0 26px 60px rgba(61,155,233,.20);
+    padding: 18px 16px 22px; position: relative;
+  }
+  .phone::before { /* 노치 */
+    content: ''; display: block; width: 86px; height: 5px; border-radius: 999px;
+    background: var(--line); margin: 0 auto 14px;
+  }
+  .tcard { background: var(--card); border-radius: 22px; border: 1px solid var(--line); padding: 16px 14px; }
+  .tcard .head { display: flex; align-items: center; justify-content: space-between; }
+  .tcard .head b { font-size: 13px; }
+  .chip { font-size: 10.5px; font-weight: 800; color: var(--good); background: var(--good-bg); border-radius: 999px; padding: 3px 9px; }
+  .route { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+  .route .port { text-align: center; }
+  .route .port b { font-size: 20px; display: block; line-height: 1.1; }
+  .route .port i { font-style: normal; font-size: 10px; color: var(--sub); }
+  .route .bar { flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--sky100) 0 6px, transparent 6px 11px); position: relative; }
+  .route .bar::after {
+    content: ''; position: absolute; left: 44%; top: -7px; width: 16px; height: 16px;
+    background: var(--sky500);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.5 15.5v-2l-8-5v-5a1.5 1.5 0 0 0-3 0v5l-8 5v2l8-2.5V19l-2.5 1.5V22l4-1 4 1v-1.5L13.5 19v-5.5z'/%3E%3C/svg%3E") center/contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.5 15.5v-2l-8-5v-5a1.5 1.5 0 0 0-3 0v5l-8 5v2l8-2.5V19l-2.5 1.5V22l4-1 4 1v-1.5L13.5 19v-5.5z'/%3E%3C/svg%3E") center/contain no-repeat;
+    transform: rotate(90deg);
+  }
+  .steps { display: flex; justify-content: space-between; margin: 16px 4px 0; }
+  .step { text-align: center; font-size: 9.5px; color: var(--sub); flex: 1; position: relative; }
+  .step .dot { width: 11px; height: 11px; border-radius: 999px; margin: 0 auto 3px; background: var(--line); }
+  .step.done .dot { background: var(--good); }
+  .step.now .dot { background: var(--sky500); box-shadow: 0 0 0 4px var(--sky100); }
+  .step b { display: block; color: var(--ink); font-size: 10px; }
+  .cells { margin-top: 14px; font-size: 10.5px; color: var(--sub); line-height: 1.9; }
+  .cells .ap { font-weight: 800; color: var(--sky600); font-size: 10px; }
+  .cells b { color: var(--ink); font-size: 11px; font-weight: 800; }
+  .pill { margin-top: 12px; background: var(--warn-bg); color: var(--warn); font-size: 10.5px; font-weight: 800; border-radius: 10px; padding: 7px 10px; text-align: center; }
+
+  /* ── 섹션 공통 ── */
+  section { padding: 58px 0; }
+  .sec-h { font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: -.3px; }
+  .sec-s { margin-top: 8px; color: var(--sub); font-size: 15px; }
+
+  /* ── 기능 그리드 ── */
+  .grid { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .fcard {
+    background: var(--card); border-radius: 24px; border: 1px solid var(--line);
+    padding: 24px 22px; box-shadow: 0 8px 24px rgba(22,50,74,.05);
+  }
+  .fcard .ic {
+    width: 42px; height: 42px; border-radius: 14px; background: var(--sky50);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .fcard .ic svg { width: 22px; height: 22px; stroke: var(--sky600); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .fcard h3 { font-size: 16px; font-weight: 800; }
+  .fcard p { margin-top: 6px; font-size: 13px; color: var(--sub); }
+
+  /* 좌석 미니 그리드 (실제 좌석 색상) */
+  .seatgrid { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; margin-top: 14px; max-width: 240px; }
+  .seatgrid i { aspect-ratio: 1; border-radius: 4px; background: var(--neutral); }
+  .seatgrid i.g { background: var(--good); } .seatgrid i.w { background: var(--warn); }
+  .seatgrid i.b { background: var(--bad); } .seatgrid i.aisle { background: transparent; }
+  .legend { display: flex; gap: 12px; margin-top: 10px; font-size: 11px; color: var(--sub); }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 4px; }
+
+  /* ── 추적 밴드 ── */
+  .band { background: var(--sky50); border-radius: 30px; padding: 44px 40px; }
+  .band .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 26px; }
+  .band h4 { font-size: 14.5px; font-weight: 800; margin-bottom: 6px; }
+  .band p { font-size: 12.5px; color: var(--sub); }
+  .band .num { font-size: 26px; font-weight: 800; color: var(--sky600); display: block; margin-bottom: 4px; }
+
+  /* ── 이용권 ── */
+  .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 26px; }
+  .plan { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 18px 16px; position: relative; }
+  .plan.hot { border-color: var(--sky500); background: var(--sky50); }
+  .plan .pname { font-size: 13.5px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+  .plan .ptag { font-size: 9.5px; font-weight: 800; color: #fff; background: var(--grad); border-radius: 999px; padding: 2px 8px; }
+  .plan .pprice { font-size: 19px; font-weight: 800; margin-top: 4px; }
+  .plan .pper { font-size: 11px; color: var(--faint); margin-top: 2px; }
+  .plan-note { margin-top: 16px; font-size: 12.5px; color: var(--sub); }
+
+  /* ── 푸터 ── */
+  footer { border-top: 1px solid var(--line); background: var(--card); padding: 34px 0 44px; margin-top: 30px; }
+  footer .cols { display: flex; gap: 40px; flex-wrap: wrap; justify-content: space-between; }
+  footer h5 { font-size: 12.5px; font-weight: 800; margin-bottom: 8px; }
+  footer p, footer a { font-size: 12px; color: var(--sub); text-decoration: none; }
+  footer a:hover { color: var(--sky600); }
+  footer .src { line-height: 1.9; }
+  footer .copy { margin-top: 26px; font-size: 11.5px; color: var(--faint); }
+
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 44px; }
+    .hero .badges { justify-content: center; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .band .cols { grid-template-columns: 1fr; }
+    .plans { grid-template-columns: 1fr 1fr; }
+    .seatgrid { margin-left: auto; margin-right: auto; }
+    .legend { justify-content: center; }
+  }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <img class="cloud" src="mongle-cloud.png" alt="몽글 구름 로고">
+    <div>
+      <div class="name">몽글</div>
+      <div class="tag" data-en="Travel above the clouds">구름 위 여행의 시작</div>
+    </div>
+    <div class="grow"></div>
+    <div class="lang" id="lang">
+      <span id="ko" class="on">KOR</span><span id="en">ENG</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 히어로 -->
+  <div class="hero">
+    <div>
+      <h1 data-en='Which seat to avoid,<br>which gate to run to —<br><span class="accent">Mongle knows.</span>'>
+        어떤 좌석을 피해야 할지,<br>게이트가 어디인지 —<br><span class="accent">몽글이 알려드려요</span>
+      </h1>
+      <p class="sub" data-en="Seat recommendations from real cabin layouts, aircraft info, and live flight tracking with gate, baggage-belt and delay alerts — all in one app.">
+        실제 기내 배치도 기반 좌석 추천, 기종 정보,
+        그리고 게이트·수하물 벨트·지연까지 짚어 주는 실시간 항공편 추적.
+        비행의 처음부터 끝까지 몽글 하나면 됩니다.
+      </p>
+      <div class="badges">
+        <span class="badge">
+          <svg viewBox="0 0 24 24"><path d="M17.05 12.54c-.03-2.9 2.37-4.29 2.48-4.36-1.35-1.97-3.45-2.24-4.2-2.27-1.79-.18-3.49 1.05-4.4 1.05-.9 0-2.3-1.02-3.79-1-1.95.03-3.75 1.13-4.75 2.88-2.03 3.52-.52 8.72 1.46 11.58.96 1.4 2.11 2.96 3.62 2.9 1.45-.06 2-.94 3.76-.94 1.75 0 2.25.94 3.79.91 1.57-.03 2.56-1.42 3.52-2.83 1.11-1.62 1.56-3.19 1.59-3.27-.04-.02-3.05-1.17-3.08-4.65zM14.16 4.1c.8-.97 1.34-2.32 1.19-3.66-1.15.05-2.55.77-3.38 1.74-.74.86-1.39 2.23-1.22 3.55 1.29.1 2.6-.65 3.41-1.63z"/></svg>
+          <span><span class="soon" data-en="Coming soon to">곧 출시</span>App Store</span>
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 24 24"><path d="M3.6 1.8c-.4.4-.6 1-.6 1.8v16.8c0 .8.2 1.4.6 1.8l.1.1 9.4-9.4v-.2L3.7 1.7l-.1.1zm12.7 12.7-3.1-3.1v-.2l3.1-3.1.1 0 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.7 2.1h-.1zm-.8.8L12.3 12 3.9 20.4c.35.37.92.4 1.6.03l10-5.13zM4.5 1.57c-.24-.13-.45-.16-.6-.1L12.3 12l3.2-3.2-11-6.23z"/></svg>
+          <span><span class="soon" data-en="Coming soon to">곧 출시</span>Google Play</span>
+        </span>
+      </div>
+      <p class="hero-note" data-en="Currently in final review — launching soon.">스토어 심사 준비 중이에요. 곧 만나요!</p>
+    </div>
+
+    <!-- 폰 목업: 실제 추적 카드의 축약판 (전부 코드로 그림) -->
+    <div class="phone" aria-hidden="true">
+      <div class="tcard">
+        <div class="head">
+          <b data-en="Tracking">추적 중인 항공편</b>
+          <span class="chip" data-en="Boarding">탑승중</span>
+        </div>
+        <div class="route">
+          <div class="port"><b>ICN</b><i data-en="Incheon 11:20">인천 11:20</i></div>
+          <div class="bar"></div>
+          <div class="port"><b>CDG</b><i data-en="Paris 18:20">파리 18:20</i></div>
+        </div>
+        <div class="steps">
+          <div class="step done"><span class="dot"></span><b data-en="Check-in">체크인</b>14:40</div>
+          <div class="step done"><span class="dot"></span><b data-en="Boarding">탑승</b>16:50</div>
+          <div class="step now"><span class="dot"></span><b data-en="Departure">출발</b>17:30</div>
+          <div class="step"><span class="dot"></span><b data-en="Arrival">도착</b>18:20</div>
+          <div class="step"><span class="dot"></span><b data-en="Baggage">수하물</b>—</div>
+        </div>
+        <div class="cells">
+          <span class="ap" data-en="✈ Incheon (ICN)">✈ 인천 (ICN)</span><br>
+          <span data-en="Terminal "><span>터미널 </span></span><b data-en="T2">제2터미널</b> ·
+          <span data-en="Gate ">게이트 </span><b>247</b> ·
+          <span data-en="Security ">보안검색 </span><b data-en="4 min">4분</b>
+        </div>
+        <div class="pill" data-en="Arriving ~21 min late (forecast)">도착 약 21분 지연 예상</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기능 -->
+  <section>
+    <h2 class="sec-h" data-en="Everything for the journey">비행에 필요한 전부</h2>
+    <p class="sec-s" data-en="From picking a seat to picking up your bags.">좌석을 고르는 순간부터 짐을 찾는 순간까지.</p>
+
+    <div class="grid">
+      <div class="fcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><path d="M4 11h16a1 1 0 0 1 1 1v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a1 1 0 0 1 1-1z"/><path d="M6 17v2M18 17v2"/></svg></div>
+        <h3 data-en="Seat picks — including ones to avoid">좌석 추천, 피해야 할 좌석까지</h3>
+        <p data-en="Real cabin layouts, not guesses. Good picks in green, watch-outs in amber, avoid in red — with reviews from real passengers.">
+          실제 기내 배치도로 봅니다. 추천은 초록, 주의는 주황, 비추는 빨강 —
+          실제 탑승객 리뷰까지.
+        </p>
+        <div class="seatgrid" aria-hidden="true">
+          <i class="g"></i><i></i><i></i><i class="aisle"></i><i class="w"></i><i></i><i class="w"></i><i class="aisle"></i><i></i><i></i><i class="g"></i>
+          <i class="g"></i><i></i><i></i><i class="aisle"></i><i></i><i></i><i></i><i class="aisle"></i><i></i><i></i><i class="g"></i>
+          <i class="b"></i><i class="b"></i><i></i><i class="aisle"></i><i></i><i class="w"></i><i></i><i class="aisle"></i><i></i><i class="b"></i><i class="b"></i>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--good)"></i><span data-en="Good">추천</span></span>
+          <span><i style="background:var(--warn)"></i><span data-en="Caution">주의</span></span>
+          <span><i style="background:var(--bad)"></i><span data-en="Avoid">비추</span></span>
+        </div>
+      </div>
+
+      <div class="fcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/></svg></div>
+        <h3 data-en="Live flight tracking">실시간 항공편 추적</h3>
+        <p data-en="Gate, check-in counter, baggage belt, arrivals hall — plus live aircraft position worldwide. Pull up your flight and everything follows.">
+          게이트·체크인 카운터·수하물 벨트·입국장 번호,
+          그리고 전 세계 실시간 항공기 위치까지.
+          편명 하나면 전부 따라옵니다.
+        </p>
+      </div>
+
+      <div class="fcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+        <h3 data-en="Alerts that find you">알림이 먼저 알려드려요</h3>
+        <p data-en="Delay, gate change, boarding call, departure countdown, bags on the belt. You don't watch the board — the board watches you.">
+          지연·게이트 변경·탑승 시작·출발 카운트다운·짐 나오기 시작.
+          전광판을 지켜보지 않아도 폰이 먼저 알려줍니다.
+        </p>
+      </div>
+
+      <div class="fcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M17 3h4v4"/><path d="M21 3l-7 7"/><path d="M7 21H3v-4"/><path d="M3 21l7-7"/><path d="M17 21h4v-4"/><path d="M21 21l-7-7"/><path d="M7 3H3v4"/><path d="M3 3l7 7"/></svg></div>
+        <h3 data-en="Connection guide">환승 안내</h3>
+        <p data-en="Tracking two legs? Mongle chains them: layover time, terminal transfer, what procedure awaits — and warns you when a delay eats your buffer.">
+          두 구간을 추적하면 여정으로 엮어서 환승 여유·터미널 이동·수속까지 안내.
+          앞 편이 지연되면 경고로 바뀝니다.
+        </p>
+      </div>
+
+      <div class="fcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+        <h3 data-en="Share live status">실시간 상황 공유</h3>
+        <p data-en="One link shows your flight live — no app needed. For whoever waits at arrivals, at home, or at the office.">
+          링크 하나로 내 항공편 상황을 실시간 공유.
+          앱 없이 열려서 마중 나오는 분도, 집에서 기다리는 가족도 바로 봅니다.
+        </p>
+      </div>
+
+      <div class="fcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M2 16l20-5"/><path d="M10 4l6 6.5"/><path d="M4 20h16"/><path d="M2 16l5 2.5"/></svg></div>
+        <h3 data-en="Aircraft info">기종 정보</h3>
+        <p data-en="What plane is this, really? Photos, specs, cabin environment — humidity, cabin altitude, window size — before you board.">
+          오늘 타는 비행기가 어떤 기종인지. 실사 사진과 스펙,
+          가습·여압·창문 크기 같은 기내 환경까지 미리 봅니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 추적 상세 밴드 -->
+  <section>
+    <div class="band">
+      <h2 class="sec-h" data-en="Airport-grade detail">공항 전광판 그대로, 더 자세하게</h2>
+      <p class="sec-s" data-en="Mongle reads the same feeds the airport uses — then adds what the board never shows.">
+        공항이 쓰는 데이터를 그대로 읽고, 전광판엔 없는 것까지 더합니다.
+      </p>
+      <div class="cols">
+        <div>
+          <span class="num">15</span>
+          <h4 data-en="Korean airports, full detail">국내 전 공항 상세</h4>
+          <p data-en="Incheon and all 14 KAC airports: gates, counters, belts, security wait, parking, airport buses.">
+            인천 + 전국 14개 공항. 게이트·카운터·벨트에
+            보안검색 대기·주차 여유·공항버스 막차까지.
+          </p>
+        </div>
+        <div>
+          <span class="num">100+</span>
+          <h4 data-en="Airports worldwide">해외 공항 커버리지</h4>
+          <p data-en="Live arrival predictions worldwide, gates and belts where airports publish them — checked honestly, airport by airport, before you pay.">
+            전 세계 도착 예측, 공항이 공개하는 곳은 게이트·벨트까지.
+            어디까지 나오는지 결제 전에 공항별로 확인할 수 있어요.
+          </p>
+        </div>
+        <div>
+          <span class="num">24/7</span>
+          <h4 data-en="Live position">실시간 위치</h4>
+          <p data-en="Your flight's actual position over the globe — progress and time remaining, not a guess.">
+            지금 비행기가 지구 어디쯤인지. 진행률과 남은 시간을
+            추정이 아니라 실제 위치로 보여줍니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 이용권 -->
+  <section>
+    <h2 class="sec-h" data-en="Pay for the days you fly — nothing renews">여행 기간만큼만, 자동 갱신 없이</h2>
+    <p class="sec-s" data-en="Passes are one-time purchases. Buy ahead, start when your trip begins — the clock only runs after you press start.">
+      이용권은 단건 결제예요. 미리 사 두고 여행 갈 때 시작하세요 —
+      기간은 '시작'을 누른 순간부터 셉니다.
+    </p>
+    <div class="plans">
+      <div class="plan">
+        <div class="pname" data-en="3-Day">3일권</div>
+        <div class="pprice">₩1,900</div>
+        <div class="pper" data-en="short hops">짧은 여행</div>
+      </div>
+      <div class="plan hot">
+        <div class="pname"><span data-en="7-Day">7일권</span> <span class="ptag" data-en="Popular">인기</span></div>
+        <div class="pprice">₩2,900</div>
+        <div class="pper" data-en="most round trips">왕복 여행 대부분</div>
+      </div>
+      <div class="plan">
+        <div class="pname" data-en="30-Day">30일권</div>
+        <div class="pprice">₩5,900</div>
+        <div class="pper" data-en="long trips">긴 여행</div>
+      </div>
+      <div class="plan">
+        <div class="pname"><span data-en="Annual">연간권</span> <span class="ptag" data-en="Frequent">출장족</span></div>
+        <div class="pprice">₩39,900</div>
+        <div class="pper" data-en="fly all year">일 년 내내</div>
+      </div>
+    </div>
+    <p class="plan-note" data-en="Free tier: seat layouts, aircraft info, and tracking one flight — no account hoops. Prices may vary by store region.">
+      무료로도 좌석 배치도·기종 정보·항공편 1편 추적까지 쓸 수 있어요.
+      가격은 스토어 국가에 따라 다를 수 있습니다.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5 data-en="Contact">문의</h5>
+        <p><a href="mailto:teddy@cumiel.com">teddy@cumiel.com</a></p>
+        <p style="margin-top:6px"><a href="https://cumiel.github.io" data-en="More apps by Cumiel">Cumiel 의 다른 앱 보기</a></p>
+      </div>
+      <div class="src">
+        <h5 data-en="Data sources">데이터 출처</h5>
+        <p>
+          <a href="https://www.data.go.kr" target="_blank" rel="noopener">인천국제공항공사·한국공항공사 (공공데이터포털)</a><br>
+          <a href="https://adsb.lol" target="_blank" rel="noopener">adsb.lol — live positions (ODbL 1.0)</a><br>
+          <a href="https://aerodatabox.com" target="_blank" rel="noopener">AeroDataBox</a> ·
+          <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> ·
+          <a href="https://ourairports.com" target="_blank" rel="noopener">OurAirports</a>
+        </p>
+      </div>
+    </div>
+    <p class="copy">© 2026 Cumiel. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // KOR/ENG 토글 — data-en 속성이 있는 요소의 원문(ko)을 보관했다가 맞바꾼다
+  const els = [...document.querySelectorAll('[data-en]')];
+  els.forEach(el => el.dataset.ko = el.innerHTML);
+  const ko = document.getElementById('ko'), en = document.getElementById('en');
+  function setLang(lang) {
+    els.forEach(el => el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.ko);
+    ko.classList.toggle('on', lang === 'ko');
+    en.classList.toggle('on', lang === 'en');
+    document.documentElement.lang = lang;
+    localStorage.setItem('mongle-lang', lang);
+  }
+  document.getElementById('lang').addEventListener('click', () =>
+    setLang(document.documentElement.lang === 'ko' ? 'en' : 'ko'));
+  // 브라우저 언어가 한국어가 아니면 영어로 시작
+  const saved = localStorage.getItem('mongle-lang');
+  if (saved) setLang(saved);
+  else if (!navigator.language.startsWith('ko')) setLang('en');
+</script>
+</body>
+</html>
