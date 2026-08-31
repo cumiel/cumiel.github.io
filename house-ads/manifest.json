@@ -42,7 +42,7 @@
   "apps": {
     "innrs": {
       "rotateSec": 20,
-      "show": ["linklass", "homlit", "nemo", "forestale", "innrs"]
+      "show": ["linklass", "homlit", "nemo", "forestale"]
     },
     "nemo": {
       "rotateSec": 20,
