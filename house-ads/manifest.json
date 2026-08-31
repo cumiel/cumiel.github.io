@@ -27,6 +27,12 @@
       "url": "https://cumiel.github.io/nemo-app/"
     },
     {
+      "id": "innrs",
+      "banner": "img/innrs_banner.png",
+      "mrec": "img/innrs_mrec.png",
+      "url": "https://cumiel.github.io/innrs/"
+    },
+    {
       "id": "timepixel",
       "banner": "img/timepixel_banner.png",
       "mrec": "img/timepixel_mrec.png",
@@ -36,23 +42,23 @@
   "apps": {
     "innrs": {
       "rotateSec": 20,
-      "show": ["linklass", "homlit", "nemo", "forestale"]
+      "show": ["linklass", "homlit", "nemo", "forestale", "innrs"]
     },
     "nemo": {
       "rotateSec": 20,
-      "show": ["linklass", "homlit", "forestale"]
+      "show": ["linklass", "homlit", "forestale", "innrs"]
     },
     "linklass": {
       "rotateSec": 20,
-      "show": ["homlit", "nemo", "forestale"]
+      "show": ["homlit", "nemo", "forestale", "innrs"]
     },
     "homlit": {
       "rotateSec": 20,
-      "show": ["linklass", "nemo", "forestale"]
+      "show": ["linklass", "nemo", "forestale", "innrs"]
     },
      "catchwave": { 
       "rotateSec": 20, 
-      "show": ["linklass", "nemo", "homlit", "forestale"], 
+      "show": ["linklass", "nemo", "homlit", "forestale", "innrs"], 
       "enabled": true 
     }
   }
