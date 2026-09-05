@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRAEMII 이벤트 부스 — 돌잔치·가족 행사 포토부스</title>
+<meta name="description" content="아기 사진으로 만든 단 하나의 네컷 프레임. 태블릿 한 대로 완성되는 돌잔치 포토부스, FRAEMII 이벤트 부스.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+@font-face{font-family:'SUIT Variable';font-weight:100 900;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations')}
+:root{
+  --bg:#FBFAF8; --ink:#22201D; --sub:#9C968C; --line:#E9E6E0;
+  --accent:#B9722E; --btn:#141311; --card:#FFFFFF;
+  --p1:#FFD2D6; --p2:#F4E0BE; --p3:#C4EBD3; --p4:#BEE7FD;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:'SUIT Variable','SUIT','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+
+/* ── 헤더 ── */
+header{border-bottom:1px solid var(--line);background:rgba(251,250,248,.92);
+  backdrop-filter:blur(8px);position:sticky;top:0;z-index:9}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-weight:800;letter-spacing:.28em;font-size:15px;text-decoration:none}
+.brand small{display:block;font-weight:600;letter-spacing:.18em;font-size:9px;color:var(--accent)}
+.nav a.cta{font-size:13px;font-weight:700;text-decoration:none;color:#fff;
+  background:var(--btn);padding:9px 18px;border-radius:12px}
+
+/* ── 히어로 ── */
+.hero{padding:72px 0 56px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--accent);margin-bottom:14px}
+h1{font-size:clamp(28px,4.6vw,42px);font-weight:800;line-height:1.3;letter-spacing:-.01em}
+.hero p.lead{margin-top:18px;font-size:16px;color:#5d574e;max-width:34em}
+.hero .btns{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14px;
+  padding:13px 26px;border-radius:12px}
+.btn.dark{background:var(--btn);color:#fff}
+.btn.ghost{border:1px solid var(--line);background:#fff}
+
+/* 네컷 스트립 목업 */
+.strip{width:200px;margin:0 auto;background:#191715;border-radius:6px;
+  padding:14px 14px 40px;box-shadow:0 24px 48px rgba(34,32,29,.18);
+  transform:rotate(3deg);position:relative}
+.strip .cut{height:96px;border-radius:3px;margin-bottom:10px;position:relative;overflow:hidden}
+.strip .cut::after{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 72'%3E%3Cpath fill='%2322201D' fill-opacity='.19' d='M50 10a14 14 0 1 0 .1 0zM22 72c0-19 12-30 28-30s28 11 28 30z'/%3E%3C/svg%3E") bottom center/auto 74% no-repeat}
+.strip .cut:nth-child(even)::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 72'%3E%3Cpath fill='%2322201D' fill-opacity='.19' d='M36 14a12 12 0 1 0 .1 0zM12 72c0-16 10-26 24-26s24 10 24 26zM66 7a13 13 0 1 0 .1 0zM42 72c0-18 11-28 24-28s24 10 24 28z'/%3E%3C/svg%3E") bottom center/auto 82% no-repeat}
+.strip .cut:nth-child(1){background:var(--p1)}
+.strip .cut:nth-child(2){background:var(--p2)}
+.strip .cut:nth-child(3){background:var(--p3)}
+.strip .cut:nth-child(4){background:var(--p4)}
+.strip .foot{position:absolute;left:0;right:0;bottom:12px;text-align:center;
+  color:#cfc9c0;font-size:9px;letter-spacing:.32em;font-weight:700}
+
+/* ── 섹션 공통 ── */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.sec-k{font-size:11px;font-weight:800;letter-spacing:.24em;color:var(--accent)}
+h2{margin-top:10px;font-size:clamp(21px,3vw,27px);font-weight:800;letter-spacing:-.01em}
+.sec-sub{margin-top:10px;color:#5d574e;max-width:38em}
+
+/* 흐름 4단계 */
+.steps{margin-top:34px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px 18px}
+.step b.no{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--ink);
+  color:#fff;font-size:12px;align-items:center;justify-content:center}
+.step h3{font-size:15px;font-weight:800;margin:12px 0 6px}
+.step p{font-size:13px;color:#6b655b}
+
+/* 두 열 가치 */
+.duo{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.duo .col{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:26px 24px}
+.duo h3{font-size:16px;font-weight:800;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.duo ul{list-style:none;margin-top:14px}
+.duo li{padding:8px 0 8px 24px;font-size:14px;position:relative;color:#4a453d}
+.duo li::before{content:'✓';position:absolute;left:2px;color:var(--accent);font-weight:800}
+
+/* 구성 */
+.pack{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pack .item{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px 20px}
+.pack .item h3{font-size:15px;font-weight:800}
+.pack .item p{margin-top:6px;font-size:13px;color:#6b655b}
+.pack .item .tag{display:inline-block;margin-bottom:10px;font-size:10px;font-weight:800;
+  letter-spacing:.14em;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+.pack .item .tag.opt{color:var(--accent);border-color:#ecd9c4}
+
+/* 확장 행사 */
+.chips{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap}
+.chips span{font-size:13px;font-weight:600;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:8px 16px}
+
+/* FAQ */
+.faq{margin-top:30px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:4px;
+  padding:0 22px;margin-bottom:10px}
+.faq summary{cursor:pointer;font-weight:700;font-size:14px;padding:16px 0;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'+';margin-right:12px;color:var(--accent);font-weight:800}
+.faq details[open] summary::before{content:'–'}
+.faq details p{padding:0 0 18px 24px;font-size:14px;color:#5d574e}
+
+/* CTA */
+.cta-box{margin:64px 0;background:var(--btn);border-radius:6px;color:#fff;
+  padding:52px 40px;text-align:center}
+.cta-box h2{color:#fff}
+.cta-box p{margin-top:12px;color:#b8b2a8;font-size:14px}
+.cta-box .btn{margin-top:26px;background:#fff;color:var(--ink)}
+footer{padding:34px 0 48px;color:var(--sub);font-size:12px;display:flex;
+  justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{text-decoration:none}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding:48px 0 40px}
+  .hero .art{order:-1}
+  .strip{width:170px}.strip .cut{height:80px}
+  .steps{grid-template-columns:1fr 1fr}
+  .duo,.pack{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+  <a class="brand" href="./index.html">FRAEMII<small>EVENT BOOTH</small></a>
+  <a class="cta" href="mailto:teddy@cumiel.com?subject=[FRAEMII] 이벤트 부스 문의">도입 문의</a>
+</div></header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div>
+      <div class="kicker">돌잔치 · 가족 행사 포토부스</div>
+      <h1>우리 아기 사진으로 만든<br>단 하나의 네컷 프레임</h1>
+      <p class="lead">행사장에 태블릿 한 대. 손님들이 직접 찍고, QR로 그 자리에서
+      받아 가고, 행사가 끝나면 그날의 모든 순간이 호스트에게 전달됩니다.
+      스냅 작가가 담지 못하는 손님들의 표정까지, 전부.</p>
+      <div class="btns">
+        <a class="btn dark" href="mailto:teddy@cumiel.com?subject=[FRAEMII] 이벤트 부스 문의">도입 문의하기</a>
+        <a class="btn ghost" href="#flow">이용 흐름 보기</a>
+      </div>
+    </div>
+    <div class="art">
+      <div class="strip" aria-hidden="true">
+        <div class="cut"></div><div class="cut"></div><div class="cut"></div><div class="cut"></div>
+        <div class="foot">FRAEMII</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="flow">
+    <div class="sec-k">HOW IT WORKS</div>
+    <h2>준비는 저희가, 추억은 손님들이</h2>
+    <div class="steps">
+      <div class="step"><b class="no">1</b>
+        <h3>전용 프레임 제작</h3>
+        <p>보내주신 아기 사진과 행사 컨셉으로 이날만의 네컷 프레임을 디자인합니다.</p></div>
+      <div class="step"><b class="no">2</b>
+        <h3>태블릿 거치</h3>
+        <p>행사장 포토존에 태블릿을 세워 둡니다. 안내 문구까지 세팅된 촬영 전용 화면.</p></div>
+      <div class="step"><b class="no">3</b>
+        <h3>찍고, QR로 바로 받기</h3>
+        <p>손님이 직접 촬영하면 사진과 메이킹 영상이 완성. QR을 스캔해 그 자리에서
+        자기 폰으로 가져갑니다. 앱 설치도, 연락처 교환도 필요 없습니다.</p></div>
+      <div class="step"><b class="no">4</b>
+        <h3>행사 후 전체 전달</h3>
+        <p>그날 찍힌 모든 사진을 호스트에게 한 번에 전달. 원하시면 인화·액자
+        출력까지 이어집니다.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-k">VALUE</div>
+    <h2>손님에게도, 호스트에게도</h2>
+    <div class="duo">
+      <div class="col">
+        <h3>손님이 가져가는 것</h3>
+        <ul>
+          <li>아기 얼굴이 담긴 기념 네컷 — 이 행사에서만 존재하는 디자인</li>
+          <li>찍는 모습이 그대로 담긴 메이킹 영상</li>
+          <li>QR 스캔 한 번으로 즉시 수령 — 앱 설치 불필요</li>
+          <li>기다림 없는 셀프 촬영, 몇 번이고 다시</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>호스트가 가져가는 것</h3>
+        <ul>
+          <li>스냅 작가 밖의 순간들 — 손님들이 직접 남긴 그날의 기록 전체</li>
+          <li>포토존이 곧 손님 놀이거리 — 행사 진행에 손이 가지 않는 부스</li>
+          <li>행사 후 전체 사진 일괄 전달</li>
+          <li>인화·액자 출력 서비스 (선택)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-k">PACKAGE</div>
+    <h2>구성</h2>
+    <p class="sec-sub">행사 규모와 방식에 맞춰 조정합니다. 기기는 보유하신
+    아이패드면 충분하고, 휴대폰으로도 진행할 수 있습니다 — 행사장이나
+    대행사의 태블릿을 활용하셔도 됩니다.</p>
+    <div class="pack">
+      <div class="item"><span class="tag">기본</span>
+        <h3>전용 프레임 디자인</h3>
+        <p>아기 사진 삽입, 이름·날짜 각인. 시안 확인 후 확정.</p></div>
+      <div class="item"><span class="tag">기본</span>
+        <h3>촬영 부스 세팅</h3>
+        <p>촬영 전용 잠금 화면, 자동 초기화, 현장 안내 문구.</p></div>
+      <div class="item"><span class="tag">기본</span>
+        <h3>QR 즉시 전달</h3>
+        <p>촬영 직후 QR 스캔으로 손님 폰에 사진·영상 전송.</p></div>
+      <div class="item"><span class="tag">기본</span>
+        <h3>전체 사진 전달</h3>
+        <p>행사 종료 후 그날의 모든 결과물을 호스트에게 일괄 전달.</p></div>
+      <div class="item"><span class="tag opt">옵션</span>
+        <h3>인화 · 액자 출력</h3>
+        <p>답례품·보관용 실물 출력. 수량 단위 견적.</p></div>
+    </div>
+    <div class="chips">
+      <span>돌잔치</span><span>결혼식</span><span>환갑·칠순</span>
+      <span>브라이덜 샤워</span><span>백일</span><span>가족 모임</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-k">FAQ</div>
+    <h2>자주 묻는 질문</h2>
+    <div class="faq">
+      <details><summary>손님이 앱을 설치해야 하나요?</summary>
+        <p>아니요. 촬영은 거치된 태블릿에서 하고, 결과물은 QR 스캔만으로
+        받아 갑니다. 손님 쪽 준비물은 없습니다.</p></details>
+      <details><summary>사진은 어떻게 관리되나요?</summary>
+        <p>행사별로 분리 보관되며 약정 기간이 지나면 삭제됩니다. 촬영 화면에
+        "촬영물은 호스트에게 전달됩니다" 동의 안내가 표시되어 손님 초상권
+        문제를 예방합니다.</p></details>
+      <details><summary>프레임 시안은 언제 받나요?</summary>
+        <p>사진과 문구를 주시면 행사 전 시안을 보내 드리고, 확인 후
+        확정합니다. 수정 횟수는 협의 시 안내드립니다.</p></details>
+      <details><summary>태블릿이 꼭 있어야 하나요?</summary>
+        <p>아니요. 보유하신 아이패드가 가장 좋지만 휴대폰으로도 동일하게
+        진행됩니다. 행사장이나 대행사에 비치된 태블릿을 활용하는 경우도
+        많습니다. 촬영 전용 화면 세팅은 어느 기기든 저희가 안내드립니다.</p></details>
+      <details><summary>행사장에 인터넷이 없어도 되나요?</summary>
+        <p>촬영 자체는 오프라인에서도 동작합니다. QR 즉시 전달에는 네트워크가
+        필요해 현장 여건을 사전에 함께 확인합니다.</p></details>
+    </div>
+  </section>
+
+  <div class="cta-box">
+    <h2>다가오는 행사에 FRAEMII 부스를</h2>
+    <p>날짜 · 장소 · 행사 종류를 알려주시면 하루 안에 구성과 견적을 회신드립니다.</p>
+    <a class="btn" href="mailto:teddy@cumiel.com?subject=[FRAEMII] 이벤트 부스 문의&body=행사 종류 :%0D%0A날짜 · 장소 :%0D%0A예상 인원 :%0D%0A문의 내용 :">도입 문의하기</a>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <span>© CUMIEL · FRAEMII</span>
+  <span><a href="./index.html">FRAEMII for Business</a> · <a href="./event-frame.html">페스티벌·콘서트 행사 프레임 →</a></span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRAEMII for Business — 행사 포토 솔루션</title>
+<meta name="description" content="네컷 포토 앱 FRAEMII의 행사 솔루션 — 돌잔치·가족 행사 부스, 페스티벌·콘서트 행사 프레임.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+@font-face{font-family:'SUIT Variable';font-weight:100 900;font-display:swap;
+  src:url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations')}
+:root{--bg:#FBFAF8;--ink:#22201D;--sub:#9C968C;--line:#E9E6E0;--accent:#B9722E;--btn:#141311}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);
+  font-family:'SUIT Variable','SUIT','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh;
+  display:flex;flex-direction:column}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px;width:100%}
+header{padding:64px 0 8px;text-align:center}
+.brand{font-weight:800;letter-spacing:.3em;font-size:22px}
+.brand em{font-style:normal;display:block;font-size:11px;letter-spacing:.22em;
+  color:var(--accent);margin-top:6px;font-weight:700}
+main{flex:1}
+.lead{text-align:center;color:#6b655b;font-size:15px;max-width:36em;margin:14px auto 0}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:44px 0 64px}
+a.card{display:block;text-decoration:none;border:1px solid var(--line);border-radius:6px;
+  overflow:hidden;background:#fff;transition:transform .15s ease, box-shadow .15s ease}
+a.card:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(34,32,29,.1)}
+.card .head{height:170px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden}
+.card.booth .head{background:linear-gradient(120deg,#FFE4E7,#FAEBD6,#DCF3E5,#DCF1FE)}
+.card.event .head{background:#141311}
+
+/* 미니 네컷 스트립 — 상세 페이지 히어로와 같은 목업의 축소판 */
+.mini{width:92px;border-radius:4px;padding:8px 8px 22px;position:relative;
+  box-shadow:0 14px 28px rgba(20,19,17,.28)}
+.card.booth .mini{background:#191715;transform:rotate(3deg) translateY(10px)}
+.card.event .mini{background:#FBFAF8;transform:rotate(-3deg) translateY(10px)}
+.mini .cut{height:44px;border-radius:2px;margin-bottom:5px;position:relative;overflow:hidden}
+.mini .cut::after{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 72'%3E%3Cpath fill='%2322201D' fill-opacity='.19' d='M50 10a14 14 0 1 0 .1 0zM22 72c0-19 12-30 28-30s28 11 28 30z'/%3E%3C/svg%3E") bottom center/auto 74% no-repeat}
+.mini .cut:nth-child(even)::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 72'%3E%3Cpath fill='%2322201D' fill-opacity='.19' d='M36 14a12 12 0 1 0 .1 0zM12 72c0-16 10-26 24-26s24 10 24 26zM66 7a13 13 0 1 0 .1 0zM42 72c0-18 11-28 24-28s24 10 24 28z'/%3E%3C/svg%3E") bottom center/auto 82% no-repeat}
+.card.booth .mini .cut:nth-child(1){background:#FFD2D6}
+.card.booth .mini .cut:nth-child(2){background:#F4E0BE}
+.card.booth .mini .cut:nth-child(3){background:#C4EBD3}
+.card.booth .mini .cut:nth-child(4){background:#BEE7FD}
+.card.event .mini .cut:nth-child(1){background:#BEE7FD}
+.card.event .mini .cut:nth-child(2){background:#FFD2D6}
+.card.event .mini .cut:nth-child(3){background:#F4E0BE}
+.card.event .mini .cut:nth-child(4){background:#C4EBD3}
+.mini .foot{position:absolute;left:0;right:0;bottom:7px;text-align:center;
+  font-size:6px;letter-spacing:.3em;font-weight:700}
+.card.booth .mini .foot{color:#cfc9c0}
+.card.event .mini .foot{color:#9c968c}
+
+/* 행사 카드 — 실제 QR */
+.card.event .qr{position:absolute;right:calc(50% - 96px);bottom:14px;width:56px;height:56px;
+  background:#fff;border-radius:6px;padding:6px;transform:rotate(5deg);
+  box-shadow:0 10px 22px rgba(0,0,0,.45)}
+.card.event .qr svg{display:block;width:100%;height:100%}
+.card .body{padding:22px 24px 26px}
+.card .k{font-size:10px;font-weight:800;letter-spacing:.22em;color:var(--accent)}
+.card h2{font-size:19px;font-weight:800;margin-top:8px;color:var(--ink)}
+.card p{margin-top:8px;font-size:13.5px;color:#6b655b}
+.card .go{display:inline-block;margin-top:16px;font-size:13px;font-weight:700;color:var(--ink)}
+footer{padding:0 0 44px;color:var(--sub);font-size:12px;text-align:center}
+footer a{color:inherit}
+@media (max-width:680px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="brand">FRAEMII<em>FOR BUSINESS</em></div>
+  <p class="lead">인생 네컷을 만드는 포토 앱 FRAEMII 의 행사 솔루션.
+  행사의 성격에 맞는 두 가지 방식을 제안합니다.</p>
+</header>
+
+<main class="wrap">
+  <div class="cards">
+    <a class="card booth" href="./booth.html">
+      <div class="head" aria-hidden="true">
+        <div class="mini">
+          <div class="cut"></div><div class="cut"></div><div class="cut"></div><div class="cut"></div>
+          <div class="foot">FRAEMII</div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="k">EVENT BOOTH</div>
+        <h2>돌잔치 · 가족 행사 부스</h2>
+        <p>아기 사진으로 만든 전용 네컷 프레임. 태블릿 한 대로 손님들이 찍고
+        QR로 받아 가는 포토부스 — 행사 후 전체 사진 전달과 출력까지.</p>
+        <span class="go">자세히 보기 →</span>
+      </div>
+    </a>
+    <a class="card event" href="./event-frame.html">
+      <div class="head" aria-hidden="true">
+        <div class="mini">
+          <div class="cut"></div><div class="cut"></div><div class="cut"></div><div class="cut"></div>
+          <div class="foot">FRAEMII</div>
+        </div>
+        <div class="qr"><svg viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;width:100%;height:100%"><path d="M0 0h7v1h-7zM10 0h2v1h-2zM14 0h1v1h-1zM17 0h3v1h-3zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h2v1h-2zM11 1h3v1h-3zM17 1h1v1h-1zM19 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM10 2h3v1h-3zM15 2h1v1h-1zM19 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h1v1h-1zM11 3h1v1h-1zM13 3h1v1h-1zM16 3h1v1h-1zM18 3h1v1h-1zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h4v1h-4zM16 4h5v1h-5zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h4v1h-4zM14 5h3v1h-3zM18 5h2v1h-2zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM9 7h1v1h-1zM11 7h2v1h-2zM15 7h1v1h-1zM17 7h2v1h-2zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM16 8h3v1h-3zM20 8h1v1h-1zM24 8h1v1h-1zM27 8h1v1h-1zM0 9h1v1h-1zM3 9h2v1h-2zM7 9h3v1h-3zM11 9h3v1h-3zM15 9h2v1h-2zM20 9h3v1h-3zM25 9h1v1h-1zM28 9h1v1h-1zM2 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h4v1h-4zM21 10h4v1h-4zM26 10h3v1h-3zM0 11h1v1h-1zM2 11h1v1h-1zM4 11h1v1h-1zM7 11h2v1h-2zM10 11h1v1h-1zM13 11h2v1h-2zM16 11h5v1h-5zM23 11h2v1h-2zM27 11h1v1h-1zM2 12h2v1h-2zM5 12h3v1h-3zM9 12h1v1h-1zM11 12h2v1h-2zM14 12h4v1h-4zM21 12h2v1h-2zM25 12h1v1h-1zM27 12h2v1h-2zM4 13h2v1h-2zM14 13h2v1h-2zM17 13h1v1h-1zM20 13h3v1h-3zM25 13h1v1h-1zM28 13h1v1h-1zM0 14h3v1h-3zM5 14h2v1h-2zM9 14h1v1h-1zM13 14h1v1h-1zM17 14h1v1h-1zM20 14h2v1h-2zM23 14h3v1h-3zM27 14h2v1h-2zM0 15h1v1h-1zM2 15h4v1h-4zM7 15h6v1h-6zM16 15h2v1h-2zM19 15h1v1h-1zM21 15h1v1h-1zM24 15h2v1h-2zM27 15h1v1h-1zM1 16h1v1h-1zM3 16h1v1h-1zM6 16h1v1h-1zM8 16h3v1h-3zM15 16h3v1h-3zM19 16h2v1h-2zM22 16h1v1h-1zM25 16h1v1h-1zM27 16h2v1h-2zM1 17h2v1h-2zM5 17h1v1h-1zM7 17h1v1h-1zM10 17h1v1h-1zM13 17h1v1h-1zM17 17h2v1h-2zM20 17h3v1h-3zM25 17h2v1h-2zM28 17h1v1h-1zM0 18h1v1h-1zM2 18h5v1h-5zM9 18h1v1h-1zM11 18h2v1h-2zM14 18h1v1h-1zM17 18h2v1h-2zM20 18h2v1h-2zM23 18h2v1h-2zM27 18h2v1h-2zM1 19h1v1h-1zM4 19h1v1h-1zM7 19h2v1h-2zM10 19h2v1h-2zM13 19h3v1h-3zM17 19h1v1h-1zM19 19h4v1h-4zM25 19h1v1h-1zM27 19h1v1h-1zM0 20h1v1h-1zM2 20h2v1h-2zM6 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM12 20h1v1h-1zM14 20h4v1h-4zM20 20h5v1h-5zM8 21h1v1h-1zM10 21h1v1h-1zM14 21h1v1h-1zM16 21h2v1h-2zM20 21h1v1h-1zM24 21h1v1h-1zM26 21h3v1h-3zM0 22h7v1h-7zM10 22h1v1h-1zM13 22h1v1h-1zM18 22h3v1h-3zM22 22h1v1h-1zM24 22h2v1h-2zM27 22h2v1h-2zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h2v1h-2zM12 23h1v1h-1zM15 23h1v1h-1zM17 23h2v1h-2zM20 23h1v1h-1zM24 23h2v1h-2zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h5v1h-5zM15 24h3v1h-3zM20 24h5v1h-5zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM9 25h1v1h-1zM11 25h1v1h-1zM16 25h2v1h-2zM24 25h1v1h-1zM26 25h3v1h-3zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM8 26h1v1h-1zM11 26h3v1h-3zM23 26h3v1h-3zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM9 27h2v1h-2zM12 27h2v1h-2zM15 27h6v1h-6zM24 27h1v1h-1zM27 27h1v1h-1zM0 28h7v1h-7zM8 28h2v1h-2zM14 28h4v1h-4zM19 28h3v1h-3zM24 28h1v1h-1zM27 28h2v1h-2z" fill="#141311"/></svg></div>
+      </div>
+      <div class="body">
+        <div class="k">EVENT FRAME</div>
+        <h2>페스티벌 · 콘서트 행사 프레임</h2>
+        <p>행사 디자인 네컷 프레임과 QR 제공. 관객의 폰이 포토부스가 되고,
+        SNS로 퍼지는 사진이 행사를 홍보합니다 — 기간 한정 운영, 리포트 제공.</p>
+        <span class="go">자세히 보기 →</span>
+      </div>
+    </a>
+  </div>
+</main>
+
+<footer class="wrap">
+  © CUMIEL · <a href="mailto:teddy@cumiel.com?subject=[FRAEMII] 행사 문의">teddy@cumiel.com</a>
+</footer>
+
+</body>
+</html>
