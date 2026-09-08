@@ -4,314 +4,390 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cumiel - Apps</title>
-  <meta name="description" content="Apps by Cumiel. CatchWave, FRAEMII and more.">
+  <meta name="description" content="일상을 함께하는 기술. 큐미엘이 만든 아홉 개의 앱 — CatchWave, Homlit, Linklass, Nemo, Forestale, Innrs, TimePixel, 몽글, FRAEMII.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cumiel.github.io/">
+  <meta property="og:title" content="Cumiel — 일상을 함께하는 기술">
+  <meta property="og:description" content="아침 라디오부터 친구와 찍는 네컷까지. 하루의 작은 순간을 위한 아홉 개의 앱.">
+  <meta property="og:image" content="https://cumiel.github.io/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'SUIT Variable';
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations');
+    }
+    :root {
+      --bg: #F5F8FA;
+      --surface: #FFFFFF;
+      --ink: #15202A;
+      --body: #3B4650;
+      --sub: #6A7580;
+      --line: #E1E7EC;
+      --accent: #14ABE2;
+      --accent-deep: #0B86B8;
+      --accent-soft: #E4F4FB;
+      --tint: var(--accent);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0A0A0C;
-      color: #fff;
+      font-family: 'SUIT Variable', 'SUIT', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-
-    /* Language Toggle */
-    .lang-switch {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 100;
-      cursor: pointer;
-      -webkit-user-select: none;
-      user-select: none;
-    }
-    .lang-switch .flag {
-      font-size: 13px;
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+    .mono {
+      font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .16em;
+      text-transform: uppercase;
       font-weight: 600;
-      color: #fff;
-      transition: opacity 0.2s;
     }
-    .lang-switch .flag.dim { opacity: 0.35; }
-    .lang-switch .track {
-      width: 44px;
-      height: 24px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 12px;
-      position: relative;
-      transition: background 0.2s;
-      backdrop-filter: blur(10px);
-    }
-    .lang-switch .track .thumb {
-      width: 18px;
-      height: 18px;
-      background: #fff;
-      border-radius: 50%;
-      position: absolute;
-      top: 2px;
-      left: 3px;
-      transition: left 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    }
-    body.lang-en .lang-switch .track .thumb { left: 21px; }
+    .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+    /* language */
     .en { display: none; }
     body.lang-en .ko { display: none; }
     body.lang-en .en { display: inline; }
 
-    /* Header */
-    .header {
-      text-align: center;
-      padding: 80px 20px 20px;
+    /* ── top bar ───────────────────────────── */
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px;
     }
-    .header h1 {
-      font-size: 40px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 8px;
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand img { width: 46px; height: auto; }
+    .brand b { font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+    .brand small {
+      display: block; font-size: 10px; color: var(--sub); letter-spacing: .18em; line-height: 1.2;
+      font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500;
     }
-    .header h1 span {
-      background: linear-gradient(135deg, #818CF8, #6366F1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .lang {
+      display: inline-flex; padding: 3px; border-radius: 999px;
+      background: #fff; border: 1px solid var(--line); cursor: pointer;
+      -webkit-user-select: none; user-select: none;
+      font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; color: var(--sub);
     }
-    .header p {
-      font-size: 17px;
-      color: rgba(255,255,255,0.4);
+    .lang:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .lang span { padding: 5px 11px; border-radius: 999px; transition: background .2s, color .2s; }
+    .lang .ko-opt { background: var(--ink); color: #fff; }
+    body.lang-en .lang .ko-opt { background: transparent; color: var(--sub); }
+    body.lang-en .lang .en-opt { background: var(--ink); color: #fff; }
+
+    /* ── hero ──────────────────────────────── */
+    .hero { padding-top: 72px; padding-bottom: 24px; }
+    .kicker { display: inline-block; font-size: 11px; color: var(--accent-deep); margin-bottom: 22px; }
+    h1 {
+      font-size: clamp(40px, 6.4vw, 72px);
+      font-weight: 800; line-height: 1.12; letter-spacing: -.035em;
+      text-wrap: balance; max-width: 12em;
+    }
+    h1 em { font-style: normal; color: var(--accent); }
+    .lead {
+      margin-top: 26px; font-size: 18px; color: var(--body); max-width: 34em; line-height: 1.7;
+      font-weight: 500;
+    }
+    .lead b { font-weight: 700; color: var(--ink); }
+
+    /* icon wave — echoes the squiggle in the mark */
+    .wave {
+      --ic: clamp(30px, 6.6vw, 64px);
+      --gap: clamp(5px, 1.5vw, 16px);
+      display: flex; gap: var(--gap); align-items: center;
+      margin: 64px 0 0; padding: 40px 0 34px;
+      position: relative;
+    }
+    .wave::before {
+      content: ''; position: absolute; left: 0; right: 0; top: 50%;
+      border-top: 1px dashed #CFD8E0;
+    }
+    .wave a {
+      position: relative; width: var(--ic); height: var(--ic); flex: 0 0 auto;
+      border-radius: 24%; overflow: hidden;
+      box-shadow: 0 10px 24px -8px rgba(21,32,42,.35), 0 0 0 1px rgba(21,32,42,.06);
+      transform: translateY(var(--y)) rotate(var(--r));
+      transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+      background: #fff;
+    }
+    .wave a img { width: 100%; height: 100%; object-fit: cover; }
+    .wave a:hover, .wave a:focus-visible {
+      transform: translateY(calc(var(--y) - 8px)) rotate(0deg) scale(1.08);
+      box-shadow: 0 22px 34px -12px rgba(21,32,42,.45), 0 0 0 1px rgba(21,32,42,.08);
+      z-index: 2; outline: none;
+    }
+    .wave a:nth-child(1) { --y: 6px;   --r: -5deg; }
+    .wave a:nth-child(2) { --y: -10px; --r: 3deg; }
+    .wave a:nth-child(3) { --y: -22px; --r: -2deg; }
+    .wave a:nth-child(4) { --y: -14px; --r: 4deg; }
+    .wave a:nth-child(5) { --y: 4px;   --r: -3deg; }
+    .wave a:nth-child(6) { --y: 18px;  --r: 2deg; }
+    .wave a:nth-child(7) { --y: 24px;  --r: -4deg; }
+    .wave a:nth-child(8) { --y: 10px;  --r: 5deg; }
+    .wave a:nth-child(9) { --y: -6px;  --r: -2deg; }
+    .wave .dot {
+      width: calc(var(--ic) * .28); height: calc(var(--ic) * .28); border-radius: 50%;
+      background: var(--accent); margin-left: var(--gap); flex: 0 0 auto;
+      transform: translateY(2px);
     }
 
-    /* App Grid */
-    .app-grid {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 60px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-      width: 100%;
+    /* ── catalogue ─────────────────────────── */
+    .cat { padding-top: 56px; padding-bottom: 24px; }
+    .cat-head {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--ink);
     }
-    .app-card {
-      background: #141418;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 20px;
-      padding: 32px;
-      text-decoration: none;
-      color: #fff;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 16px;
+    .cat-head h2 { font-size: 26px; font-weight: 800; letter-spacing: -.025em; line-height: 1.2; }
+    .cat-head .count { font-size: 11px; color: var(--sub); padding-bottom: 6px; white-space: nowrap; }
+
+    .row {
+      display: grid; grid-template-columns: 76px 1fr auto; align-items: center; gap: 26px;
+      padding: 26px 18px; margin: 0 -18px;
+      text-decoration: none; border-radius: 18px;
+      position: relative;
+      transition: background .25s;
     }
-    .app-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(129, 140, 248, 0.3);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    .row::before {
+      /* divider, inset to line up with the section header rule */
+      content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+      border-bottom: 1px solid var(--line);
     }
-    .app-icon {
-      width: 96px;
-      height: 96px;
-      border-radius: 22px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    .row::after {
+      /* soft tint in the app's own colour on hover */
+      content: ''; position: absolute; inset: 0; border-radius: 18px; pointer-events: none;
+      background: radial-gradient(120% 140% at 0% 50%, color-mix(in srgb, var(--tint) 14%, transparent), transparent 60%);
+      opacity: 0; transition: opacity .3s;
     }
-    .app-info h2 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 6px;
+    .row:hover::after, .row:focus-visible::after { opacity: 1; }
+    .row:focus-visible { outline: 2px solid var(--tint); outline-offset: -2px; }
+    .row .icon {
+      width: 76px; height: 76px; border-radius: 22px; overflow: hidden; background: #fff;
+      box-shadow: 0 8px 20px -8px rgba(21,32,42,.35), 0 0 0 1px rgba(21,32,42,.06);
+      transition: transform .3s cubic-bezier(.2,.8,.2,1);
     }
-    .app-info p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.5;
+    .row .icon img { width: 100%; height: 100%; object-fit: cover; }
+    .row:hover .icon { transform: translateY(-3px) scale(1.04); }
+    .row .meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+    .row h3 { font-size: 21px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+    .row .tag { font-size: 10px; color: var(--sub); padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: #fff; }
+    .row .tag.new { color: #fff; background: var(--tint); border-color: var(--tint); }
+    .row p { font-size: 15px; color: var(--body); line-height: 1.6; max-width: 40em; }
+    .row .go {
+      width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: #fff;
+      display: grid; place-items: center; color: var(--ink);
+      transition: background .25s, border-color .25s, color .25s, transform .3s;
     }
-    .app-tag {
-      display: inline-block;
-      background: rgba(129, 140, 248, 0.12);
-      color: #818CF8;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-top: 4px;
+    .row .go svg { width: 18px; height: 18px; }
+    .row:hover .go { background: var(--tint); border-color: var(--tint); color: #fff; transform: translateX(4px); }
+
+    .next {
+      display: flex; align-items: center; gap: 16px; padding: 30px 0 8px; color: var(--sub); font-size: 14px;
+    }
+    .next .pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(20,171,226,.5); animation: pulse 2.4s infinite; flex: 0 0 auto; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(20,171,226,.45); } 70% { box-shadow: 0 0 0 12px rgba(20,171,226,0); } 100% { box-shadow: 0 0 0 0 rgba(20,171,226,0); } }
+    .next a { color: var(--ink); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--line); }
+    .next a:hover { border-color: var(--ink); }
+
+    /* ── footer ────────────────────────────── */
+    footer { margin-top: auto; border-top: 1px solid var(--line); padding: 30px 0 44px; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--sub); }
+    footer .co { display: flex; align-items: center; gap: 10px; }
+    footer .co img { width: 30px; }
+    footer a { color: var(--ink); text-decoration: none; font-weight: 600; }
+    footer a:hover { color: var(--accent-deep); }
+
+    /* ── motion ────────────────────────────── */
+    .rise { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+    .rise.d1 { animation-delay: .06s; } .rise.d2 { animation-delay: .14s; } .rise.d3 { animation-delay: .24s; }
+    @keyframes rise { from { opacity: .3; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .rise, .next .pulse { animation: none; }
+      .wave a, .row, .row .icon, .row .go { transition: none; }
     }
 
-    /* Coming soon card */
-    .app-card.coming-soon {
-      border-style: dashed;
-      opacity: 0.5;
-      cursor: default;
-    }
-    .app-card.coming-soon:hover {
-      transform: none;
-      border-color: rgba(255,255,255,0.06);
-      box-shadow: none;
-    }
-    .placeholder-icon {
-      width: 96px;
-      height: 96px;
-      border-radius: 22px;
-      background: #1A1A1F;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      color: rgba(255,255,255,0.15);
-    }
-
-    /* Footer */
-    footer {
-      margin-top: auto;
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.25);
-      font-size: 13px;
-    }
-    footer a {
-      color: #818CF8;
-      text-decoration: none;
-    }
-    footer a:hover { text-decoration: underline; }
-
-    @media (max-width: 600px) {
-      .header { padding: 60px 20px 16px; }
-      .header h1 { font-size: 30px; }
-      .app-grid {
-        grid-template-columns: 1fr;
-        padding: 40px 20px;
-      }
+    /* ── responsive ────────────────────────── */
+    @media (max-width: 720px) {
+      .wrap { padding: 0 20px; }
+      .top { height: 66px; }
+      .brand img { width: 40px; }
+      .hero { padding-top: 44px; padding-bottom: 12px; }
+      .lead { font-size: 16px; margin-top: 20px; }
+      .wave { margin-top: 44px; padding: 30px 0 26px; }
+      .cat { padding-top: 40px; padding-bottom: 16px; }
+      .cat-head h2 { font-size: 22px; }
+      .row { grid-template-columns: 56px 1fr; gap: 16px 18px; padding: 22px 12px; margin: 0 -12px; }
+      .row::before { left: 12px; right: 12px; }
+      .row .icon { width: 56px; height: 56px; border-radius: 16px; }
+      .row h3 { font-size: 18px; }
+      .row p { font-size: 14px; }
+      .row .go { display: none; }
+      footer .wrap { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <div class="lang-switch" onclick="toggleLang()">
-    <span class="flag" id="flag-ko">🇰🇷 KR</span>
-    <div class="track"><div class="thumb"></div></div>
-    <span class="flag dim" id="flag-en">EN 🇺🇸</span>
-  </div>
-
-  <header class="header">
-    <h1><span>Cumiel</span></h1>
-    <p><span class="ko">일상을 함께하는 기술</span><span class="en">Apps for your everyday.</span></p>
+  <header class="wrap top">
+    <a class="brand" href="./">
+      <img src="cumiel-mark.png" alt="Cumiel" width="480" height="254">
+      <span><b>Cumiel</b><small>APPS FOR EVERYDAY</small></span>
+    </a>
+    <button class="lang" onclick="toggleLang()" aria-label="Language">
+      <span class="ko-opt">KR</span><span class="en-opt">EN</span>
+    </button>
   </header>
 
-  <section class="app-grid">
-    <a href="catchwave.html" class="app-card">
-      <img src="catchwave-icon.png" alt="CatchWave" class="app-icon">
-      <div class="app-info">
-        <h2>CatchWave</h2>
-        <p><span class="ko">전 세계 라디오를 실시간으로. KBS, MBC, SBS, NPR, BBC 등.</span><span class="en">Listen to radio stations from around the world. KBS, MBC, SBS, NPR, BBC and more.</span></p>
-      </div>
-      <span class="app-tag">Radio</span>
-    </a>
+  <main>
+    <section class="wrap hero">
+      <span class="kicker mono rise">Cumiel Inc. · Nine apps</span>
+      <h1 class="rise d1">
+        <span class="ko">일상을 함께하는<br>기술<em>.</em></span><span class="en">Apps for<br>your everyday<em>.</em></span>
+      </h1>
+      <p class="lead rise d2">
+        <span class="ko">아침에 켜는 라디오부터 친구와 찍는 네컷까지. 큐미엘은 하루의 작은 순간을 <b>조금 더 편하고 즐겁게</b> 만드는 앱을 만듭니다.</span>
+        <span class="en">From the morning radio to a photo booth with friends. Cumiel builds small apps that make the little moments of a day <b>a bit easier, and a bit more fun</b>.</span>
+      </p>
 
-    <a href="homlit.html" class="app-card">
-      <img src="homlit-icon.png" alt="Homlit" class="app-icon">
-      <div class="app-info">
-        <h2>Homlit</h2>
-        <p><span class="ko">관심 아파트에 새 매물이 올라오면 바로 확인! 네이버부동산 매매/전세/월세 매물 알리미.</span><span class="en">Get notified when new listings appear for your favorite apartments on Naver Real Estate.</span></p>
+      <div class="wave rise d3" aria-label="Cumiel apps">
+        <a href="catchwave.html" title="CatchWave"><img src="catchwave-icon.png" alt="CatchWave" width="512" height="512"></a>
+        <a href="homlit.html" title="Homlit"><img src="homlit-icon.png" alt="Homlit" width="1024" height="1024"></a>
+        <a href="linklass.html" title="Linklass"><img src="linklass-logo.png" alt="Linklass" width="1024" height="1024"></a>
+        <a href="nemo-app/" title="Nemo"><img src="nemo-app/nemo-logo.png" alt="Nemo" width="1024" height="1024"></a>
+        <a href="forestale/" title="Forestale"><img src="forestale/forestale-logo.png" alt="Forestale" width="1024" height="1024"></a>
+        <a href="innrs/" title="Innrs"><img src="innrs/innrs-logo.png" alt="Innrs" width="512" height="512"></a>
+        <a href="timepixel/" title="TimePixel"><img src="timepixel/timepixel-logo.png" alt="TimePixel" width="512" height="512"></a>
+        <a href="mongle/" title="몽글 Mongle"><img src="mongle/mongle-icon.png" alt="Mongle" width="1024" height="1024"></a>
+        <a href="fraemii/" title="FRAEMII"><img src="fraemii/icon.png" alt="FRAEMII" width="512" height="512"></a>
+        <span class="dot" aria-hidden="true"></span>
       </div>
-      <span class="app-tag">Real Estate</span>
-    </a>
+    </section>
 
-    <a href="linklass.html" class="app-card">
-      <img src="linklass-logo.png" alt="Linklass" class="app-icon">
-      <div class="app-info">
-        <h2>Linklass</h2>
-        <p><span class="ko">강사와 학생을 연결하는 수업 예약 앱. 시간표·수강권·출석을 하나로 관리.</span><span class="en">A lesson booking app connecting instructors and students. Manage schedule, credits, and attendance in one place.</span></p>
+    <section class="wrap cat" id="apps">
+      <div class="cat-head">
+        <h2><span class="ko">아홉 개의 앱</span><span class="en">Nine apps</span></h2>
+        <span class="count mono"><span class="ko">최신순 · 09</span><span class="en">Newest first · 09</span></span>
       </div>
-      <span class="app-tag">Education</span>
-    </a>
 
-    <a href="nemo-app/" class="app-card">
-      <img src="nemo-app/nemo-logo.png" alt="Nemo" class="app-icon">
-      <div class="app-info">
-        <h2>Nemo</h2>
-        <p><span class="ko">같이 쓰는 가계부, 같이 하는 정산. 스팟 모임은 회차별 1/N 더치 정산까지.</span><span class="en">Shared budgets and seamless settlements. Per-round Dutch split for spot meetups.</span></p>
-      </div>
-      <span class="app-tag">Finance</span>
-    </a>
+      <a href="fraemii/" class="row" style="--tint:#8E3FD6">
+        <span class="icon"><img src="fraemii/icon.png" alt="" width="512" height="512"></span>
+        <span>
+          <span class="meta"><h3>FRAEMII</h3><span class="tag mono new">New</span><span class="tag mono">Photo</span></span>
+          <p><span class="ko">내 폰 안의 포토부스. 프레임을 고르고 부스의 리듬으로 찍고, 마음에 드는 컷만 골라 완성하는 네컷 앱. 행사·명소 프레임까지.</span><span class="en">A photo booth in your pocket. Pick a frame, shoot to a booth's rhythm, keep only the cuts you love — plus event and landmark frames.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
 
-    <a href="forestale/" class="app-card">
-      <img src="forestale/forestale-logo.png" alt="Forestale" class="app-icon">
-      <div class="app-info">
-        <h2>Forestale</h2>
-        <p><span class="ko">아이가 그린 그림이 살아나 춤추는 숲속 마을. 100% 온디바이스 — 그림은 기기 밖으로 나가지 않아요.</span><span class="en">Kids' drawings come alive in a storybook forest village. 100% on-device — art never leaves the phone.</span></p>
-      </div>
-      <span class="app-tag">Kids &amp; Family</span>
-    </a>
+      <a href="mongle/" class="row" style="--tint:#2A8FE6">
+        <span class="icon"><img src="mongle/mongle-icon.png" alt="" width="1024" height="1024"></span>
+        <span>
+          <span class="meta"><h3>몽글 Mongle</h3><span class="tag mono">Travel</span></span>
+          <p><span class="ko">비행이 편해지는 좌석 추천과 항공편 실시간 추적. 게이트·수하물 벨트·지연 알림까지 몽글 하나로.</span><span class="en">Seat picks from real cabin layouts and live flight tracking — gates, baggage belts and delay alerts in one app.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
 
-    <a href="innrs/" class="app-card">
-      <img src="innrs/innrs-logo.png" alt="Innrs" class="app-icon">
-      <div class="app-info">
-        <h2>Innrs</h2>
-        <p><span class="ko">우리끼리, 모임의 시작. 같은 클럽 멤버끼리만 일정을 올리고 빈 자리를 채우는 폐쇄형 모임 앱.</span><span class="en">Members-only meetups. Post a time and place — only your club fills the open spots.</span></p>
-      </div>
-      <span class="app-tag">Community</span>
-    </a>
+      <a href="timepixel/" class="row" style="--tint:#3FBD92">
+        <span class="icon"><img src="timepixel/timepixel-logo.png" alt="" width="512" height="512"></span>
+        <span>
+          <span class="meta"><h3>TimePixel</h3><span class="tag mono">Productivity</span></span>
+          <p><span class="ko">타임박싱으로 시간 예측력을 기르고, 크루와 같은 시각에 동시 인증. 계획을 지키게 돕는 앱.</span><span class="en">Timeboxing that trains your time sense, with a crew that checks in together. Built to help you keep your plans.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
 
-    <a href="timepixel/" class="app-card">
-      <img src="timepixel/timepixel-logo.png" alt="TimePixel" class="app-icon">
-      <div class="app-info">
-        <h2>TimePixel</h2>
-        <p><span class="ko">타임박싱으로 시간 예측력을 기르고, 크루와 같은 시각에 동시 인증. 계획을 지키게 돕는 앱.</span><span class="en">Timeboxing that trains your time sense, with a crew that checks in together. Built to help you keep your plans.</span></p>
-      </div>
-      <span class="app-tag">Productivity</span>
-    </a>
+      <a href="innrs/" class="row" style="--tint:#2F6B5A">
+        <span class="icon"><img src="innrs/innrs-logo.png" alt="" width="512" height="512"></span>
+        <span>
+          <span class="meta"><h3>Innrs</h3><span class="tag mono">Community</span></span>
+          <p><span class="ko">우리끼리, 모임의 시작. 같은 클럽 멤버끼리만 일정을 올리고 빈 자리를 채우는 폐쇄형 모임 앱.</span><span class="en">Members-only meetups. Post a time and place — only your club fills the open spots.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
 
-    <a href="mongle/" class="app-card">
-      <img src="mongle/mongle-icon.png" alt="Mongle" class="app-icon">
-      <div class="app-info">
-        <h2>몽글 Mongle</h2>
-        <p><span class="ko">비행이 편해지는 좌석 추천과 항공편 실시간 추적. 게이트·수하물 벨트·지연 알림까지 몽글 하나로.</span><span class="en">Seat picks from real cabin layouts and live flight tracking — gates, baggage belts and delay alerts in one app.</span></p>
-      </div>
-      <span class="app-tag">Travel</span>
-    </a>
+      <a href="forestale/" class="row" style="--tint:#5B9A3C">
+        <span class="icon"><img src="forestale/forestale-logo.png" alt="" width="1024" height="1024"></span>
+        <span>
+          <span class="meta"><h3>Forestale</h3><span class="tag mono">Kids &amp; Family</span></span>
+          <p><span class="ko">아이가 그린 그림이 살아나 춤추는 숲속 마을. 100% 온디바이스 — 그림은 기기 밖으로 나가지 않아요.</span><span class="en">Kids' drawings come alive in a storybook forest village. 100% on-device — art never leaves the phone.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
 
-    <a href="fraemii/" class="app-card">
-      <img src="fraemii/icon.png" alt="FRAEMII" class="app-icon">
-      <div class="app-info">
-        <h2>FRAEMII</h2>
-        <p><span class="ko">내 폰 안의 포토부스. 프레임을 고르고 부스의 리듬으로 찍고, 마음에 드는 컷만 골라 완성하는 네컷 앱. 행사·명소 프레임까지.</span><span class="en">A photo booth in your pocket. Pick a frame, shoot to a booth's rhythm, keep only the cuts you love — plus event and landmark frames.</span></p>
-      </div>
-      <span class="app-tag">Photo</span>
-    </a>
+      <a href="nemo-app/" class="row" style="--tint:#10A37F">
+        <span class="icon"><img src="nemo-app/nemo-logo.png" alt="" width="1024" height="1024"></span>
+        <span>
+          <span class="meta"><h3>Nemo</h3><span class="tag mono">Finance</span></span>
+          <p><span class="ko">같이 쓰는 가계부, 같이 하는 정산. 스팟 모임은 회차별 1/N 더치 정산까지.</span><span class="en">Shared budgets and seamless settlements. Per-round Dutch split for spot meetups.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
 
-    <div class="app-card coming-soon">
-      <div class="placeholder-icon">+</div>
-      <div class="app-info">
-        <h2><span class="ko">준비 중</span><span class="en">Coming Soon</span></h2>
-        <p><span class="ko">새로운 앱을 준비하고 있습니다.</span><span class="en">New app in the works. Stay tuned!</span></p>
+      <a href="linklass.html" class="row" style="--tint:#2C3550">
+        <span class="icon"><img src="linklass-logo.png" alt="" width="1024" height="1024"></span>
+        <span>
+          <span class="meta"><h3>Linklass</h3><span class="tag mono">Education</span></span>
+          <p><span class="ko">강사와 학생을 연결하는 수업 예약 앱. 시간표·수강권·출석을 하나로 관리.</span><span class="en">A lesson booking app connecting instructors and students. Manage schedule, credits, and attendance in one place.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <a href="homlit.html" class="row" style="--tint:#1FA3E0">
+        <span class="icon"><img src="homlit-icon.png" alt="" width="1024" height="1024"></span>
+        <span>
+          <span class="meta"><h3>Homlit</h3><span class="tag mono">Real Estate</span></span>
+          <p><span class="ko">관심 아파트에 새 매물이 올라오면 바로 확인. 네이버부동산 매매·전세·월세 매물 알리미.</span><span class="en">Get notified when new listings appear for your favorite apartments on Naver Real Estate.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <a href="catchwave.html" class="row" style="--tint:#6D5BFF">
+        <span class="icon"><img src="catchwave-icon.png" alt="" width="512" height="512"></span>
+        <span>
+          <span class="meta"><h3>CatchWave</h3><span class="tag mono">Radio</span></span>
+          <p><span class="ko">전 세계 라디오를 실시간으로. KBS, MBC, SBS, NPR, BBC 등.</span><span class="en">Listen to radio stations from around the world. KBS, MBC, SBS, NPR, BBC and more.</span></p>
+        </span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <div class="next">
+        <span class="pulse" aria-hidden="true"></span>
+        <span><span class="ko">다음 앱을 만들고 있어요. 제안이나 제휴는 </span><span class="en">The next one is in the works. Ideas and partnerships: </span><a href="mailto:contact@cumiel.com">contact@cumiel.com</a></span>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
-    <p style="margin-top: 8px;">
-      <a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a>
-    </p>
+    <div class="wrap">
+      <span class="co"><img src="cumiel-mark.png" alt="" width="480" height="254"><span>© 2026 Cumiel Inc. <span class="ko">큐미엘 주식회사</span></span></span>
+      <span><a href="mailto:contact@cumiel.com"><span class="ko">문의하기</span><span class="en">Contact</span></a></span>
+    </div>
   </footer>
 
   <script>
+    function applyLang(isEn) {
+      document.body.classList.toggle('lang-en', isEn);
+      document.documentElement.lang = isEn ? 'en' : 'ko';
+    }
     function toggleLang() {
-      document.body.classList.toggle('lang-en');
-      var isEn = document.body.classList.contains('lang-en');
-      localStorage.setItem('lang', isEn ? 'en' : 'ko');
-      document.getElementById('flag-ko').classList.toggle('dim', isEn);
-      document.getElementById('flag-en').classList.toggle('dim', !isEn);
+      var isEn = !document.body.classList.contains('lang-en');
+      applyLang(isEn);
+      try { localStorage.setItem('lang', isEn ? 'en' : 'ko'); } catch (e) {}
     }
-    if (localStorage.getItem('lang') === 'en') {
-      document.body.classList.add('lang-en');
-      document.getElementById('flag-ko').classList.add('dim');
-      document.getElementById('flag-en').classList.remove('dim');
-    }
+    try { if (localStorage.getItem('lang') === 'en') applyLang(true); } catch (e) {}
   </script>
 
 </body>
