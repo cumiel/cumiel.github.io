@@ -22,228 +22,290 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'SUIT Variable';font-weight:100 900;font-display:swap;
   src:url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations')}
 :root{
-  --bg:#FBFAF8; --card:#FFFFFF; --ink:#22201D; --ink2:#3C3833; --sub:#9C968C; --muted:#B8B2A8;
-  --line:#E9E6E0; --line2:#DDD8CF; --accent:#B9722E; --accent-soft:#F6EBDD; --accent-bd:#E8D2B4;
-  --btn:#141311; --purple:#5B1A9E; --purple2:#8E3FD6; --purple-soft:#F1E9FB;
-  --shadow:0 24px 48px -16px rgba(34,32,29,.28), 0 4px 12px rgba(34,32,29,.10);
+  --bg:#FAF9FC; --surface:#FFFFFF; --ink:#1A1626; --body:#4A4458; --sub:#8A8399; --line:#E8E4F0; --line2:#D9D3E6;
+  --accent:#7A3BD9; --accent-deep:#5B1A9E; --accent-light:#B58BF2; --accent-soft:#F1EAFB; --accent-bd:#DCCBF3;
+  --night:#16121F; --night2:#231C33;
+  --shadow:0 30px 60px -24px rgba(26,22,38,.35), 0 6px 16px -8px rgba(26,22,38,.12);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);
-  font-family:'SUIT Variable','SUIT','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
-  line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh}
-.mono{font-family:'IBM Plex Mono','SUIT Variable',monospace;letter-spacing:.14em;text-transform:uppercase}
-a{color:inherit}
+  font-family:'SUIT Variable','SUIT',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word}
 img{max-width:100%;height:auto;display:block}
-
-/* ====== 언어 토글 ====== */
-.lang-switch{position:fixed;top:18px;right:18px;display:flex;align-items:center;gap:8px;z-index:100;
-  cursor:pointer;user-select:none;-webkit-user-select:none}
-.lang-switch .flag{font-size:12px;font-weight:700;color:var(--ink);transition:opacity .2s}
-.lang-switch .flag.dim{opacity:.35}
-.lang-switch .track{width:44px;height:24px;background:rgba(185,114,46,.12);border:1px solid rgba(185,114,46,.3);
-  border-radius:12px;position:relative;backdrop-filter:blur(10px)}
-.lang-switch .thumb{width:18px;height:18px;background:var(--accent);border-radius:50%;position:absolute;
-  top:2px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
-body.lang-en .lang-switch .thumb{left:21px}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 28px}
 .en{display:none}
 body.lang-en .ko{display:none}
 body.lang-en .en{display:inline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-/* ====== 히어로 ====== */
-.hero{position:relative;padding:84px 20px 120px;overflow:hidden;
-  background:
-    radial-gradient(circle at 12% 0%, rgba(185,114,46,.10), transparent 46%),
-    radial-gradient(circle at 88% 30%, rgba(142,63,214,.08), transparent 42%),
-    linear-gradient(180deg,#FFFFFF 0%,var(--bg) 100%)}
-.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
-.hero-left{max-width:540px}
-.brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.brand img{width:40px;height:40px;border-radius:10px;box-shadow:0 4px 12px rgba(34,32,29,.12)}
-.brand .name{font-weight:800;letter-spacing:.3em;font-size:16px}
-.pill{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);border:1px solid var(--accent-bd);
-  color:#8A4A14;font-size:11px;font-weight:700;padding:6px 12px;border-radius:999px;margin-bottom:18px}
-.pill::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%}
-.hero h1{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1.18;margin-bottom:18px;text-wrap:balance}
-.hero h1 .accent{color:var(--accent)}
-.hero .lead{font-size:17px;color:#5D574E;line-height:1.7;margin-bottom:28px;max-width:32em}
-.cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
-.badge{display:inline-flex;align-items:center;gap:9px;background:var(--btn);color:#fff;padding:12px 22px;
-  border-radius:14px;text-decoration:none;font-size:15px;font-weight:700;transition:transform .2s,box-shadow .2s}
-.badge:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(20,19,17,.22)}
+/* ── nav ─────────────────────────────── */
+.nav{position:sticky;top:0;z-index:20;background:rgba(250,249,252,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:9px;box-shadow:0 4px 12px rgba(26,22,38,.14)}
+.brand b{font-weight:800;letter-spacing:.3em;font-size:15px;padding-left:.3em}
+.links{display:flex;align-items:center;gap:22px;font-size:13.5px;font-weight:600}
+.links a{text-decoration:none;color:var(--body)}
+.links a:hover{color:var(--accent)}
+.links .biz-link{color:var(--accent-deep)}
+.lang{display:inline-flex;padding:3px;border-radius:999px;background:#fff;border:1px solid var(--line);cursor:pointer;
+  -webkit-user-select:none;user-select:none;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--sub)}
+.lang span{padding:5px 11px;border-radius:999px;transition:background .2s,color .2s}
+.lang .ko-opt{background:var(--ink);color:#fff}
+body.lang-en .lang .ko-opt{background:transparent;color:var(--sub)}
+body.lang-en .lang .en-opt{background:var(--ink);color:#fff}
+
+/* ── hero ────────────────────────────── */
+.hero{position:relative;padding:64px 0 40px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 55% at 78% 30%, rgba(122,59,217,.14), transparent 70%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--accent-deep);margin-bottom:22px}
+.kicker::before{content:'';width:18px;height:1px;background:var(--accent)}
+h1{font-size:clamp(38px,5.4vw,62px);font-weight:800;line-height:1.14;letter-spacing:-.035em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{margin-top:22px;font-size:17px;color:var(--body);line-height:1.75;max-width:30em;font-weight:500}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.badge{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:11px 20px 11px 16px;border-radius:14px;
+  text-decoration:none;font-size:15px;font-weight:700;line-height:1.1;transition:transform .2s,box-shadow .2s,background .2s}
+.badge:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(26,22,38,.5);background:#000}
 .badge svg{width:22px;height:22px;flex-shrink:0}
-.badge small{display:block;font-size:10px;font-weight:600;opacity:.7;letter-spacing:.04em;line-height:1.1}
-.badge span{line-height:1.15}
-.hero-meta{font-size:13px;color:var(--sub)}
+.badge small{display:block;font-size:10px;font-weight:600;opacity:.65;letter-spacing:.04em;margin-bottom:3px}
+.meta{margin-top:16px;font-size:12.5px;color:var(--sub);display:flex;gap:14px;flex-wrap:wrap}
+.meta>span::before{content:'·';margin-right:14px;color:var(--line2)}
+.meta>span:first-child::before{content:none}
 
-/* 히어로 오른쪽 — 실제 화면 두 장 */
-.hero-shots{position:relative;width:100%;max-width:440px;margin:0 auto;height:580px}
-.shot{position:absolute;width:232px;border-radius:30px;box-shadow:var(--shadow);transition:transform .3s;
-  background:#fff;border:1px solid rgba(34,32,29,.08)}
-.shot.back{right:0;top:0;transform:rotate(4deg)}
-.shot.back:hover{transform:rotate(4deg) translateY(-4px)}
-.shot.front{left:0;top:70px;transform:rotate(-4deg)}
-.shot.front:hover{transform:rotate(-4deg) translateY(-4px)}
+/* phone stack */
+.stack{position:relative;height:620px;max-width:480px;margin:0 auto;width:100%}
+.phone{position:absolute;border-radius:30px;overflow:hidden;background:#fff;border:1px solid rgba(26,22,38,.08);box-shadow:var(--shadow);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.phone img{width:100%;height:100%;object-fit:cover}
+.phone.main{width:250px;left:50%;top:40px;transform:translateX(-50%);z-index:3}
+.phone.l{width:200px;left:0;top:0;transform:rotate(-8deg);z-index:1;opacity:.96}
+.phone.r{width:200px;right:0;top:110px;transform:rotate(8deg);z-index:2;opacity:.96}
+.stack:hover .phone.l{transform:rotate(-10deg) translate(-8px,-6px)}
+.stack:hover .phone.r{transform:rotate(10deg) translate(8px,-6px)}
+.stack:hover .phone.main{transform:translateX(-50%) translateY(-8px)}
+.chip{position:absolute;z-index:4;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;
+  font-size:12.5px;font-weight:700;box-shadow:0 12px 24px -12px rgba(26,22,38,.35);display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.chip i{font-style:normal;color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em}
+.chip.c1{left:-6px;top:300px;animation:bob 5s ease-in-out infinite}
+.chip.c2{right:-8px;top:60px;animation:bob 6s ease-in-out infinite .8s}
+.chip.c3{left:34px;bottom:34px;animation:bob 5.5s ease-in-out infinite 1.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
-/* ====== 숫자 띠 ====== */
-.stats{max-width:1100px;margin:-60px auto 0;padding:0 20px;position:relative;z-index:2}
-.stats-inner{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 28px;
-  box-shadow:0 20px 40px -16px rgba(34,32,29,.16);display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.stat .v{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.stat .v em{font-style:normal;color:var(--accent)}
-.stat .k{font-size:12px;color:var(--sub);margin-top:2px}
+/* ── stats ───────────────────────────── */
+.stats{padding:24px 0 8px}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.stat{padding:22px 18px 22px 0;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat + .stat{padding-left:22px}
+.stat .v{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .v em{font-style:normal;color:var(--accent);font-size:.6em;margin-left:2px;font-weight:700}
+.stat .k{font-size:12.5px;color:var(--sub);margin-top:8px;line-height:1.5}
 
-/* ====== 섹션 ====== */
-.section{max-width:1100px;margin:0 auto;padding:88px 20px}
-.section-head{text-align:center;margin-bottom:40px}
-.eyebrow{display:inline-block;font-size:11px;font-weight:600;color:var(--accent);margin-bottom:10px}
-.section h2{font-size:32px;font-weight:800;letter-spacing:-.025em;margin-bottom:10px;text-wrap:balance}
-.section h2 .accent{color:var(--accent)}
-.section-desc{color:#6B655B;font-size:15px;max-width:34em;margin:0 auto;line-height:1.7}
+/* ── sections ────────────────────────── */
+.sec{padding:96px 0 0}
+.sec-head{max-width:38em;margin-bottom:40px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.eyebrow{display:inline-block;font-size:11px;color:var(--accent-deep);margin-bottom:12px}
+h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.2;text-wrap:balance}
+h2 em{font-style:normal;color:var(--accent)}
+.sec-desc{margin-top:14px;color:var(--body);font-size:15.5px;line-height:1.75}
 
-/* ====== 스포트라이트 ====== */
-.spotlight{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:44px 40px;
-  display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center;
-  box-shadow:0 20px 50px -30px rgba(34,32,29,.2)}
-.spotlight.reverse{grid-template-columns:1fr 1.15fr}
-.spotlight.reverse .copy{order:2}
-.spotlight .copy h3{font-size:22px;font-weight:800;margin-bottom:12px;letter-spacing:-.02em}
-.spotlight .copy p{color:#5D574E;font-size:15px;line-height:1.7;margin-bottom:16px}
-.points{list-style:none}
-.points li{display:flex;gap:12px;padding:9px 0;font-size:14px;color:var(--ink2);border-top:1px solid var(--line)}
-.points li:first-child{border-top:0}
-.points li .n{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:#8A4A14;
-  font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
-.points b{color:var(--ink)}
-.spot-shot{text-align:center}
-.spot-shot img{width:100%;max-width:250px;margin:0 auto;border-radius:30px;box-shadow:var(--shadow);border:1px solid rgba(34,32,29,.08)}
-.spot-caption{font-size:12px;color:var(--sub);margin-top:14px;line-height:1.5}
+/* signature — two column */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.duo.flip .copy{order:2}
+.duo h3{font-size:24px;font-weight:800;letter-spacing:-.025em;line-height:1.3;margin-bottom:14px;text-wrap:balance}
+.duo p{color:var(--body);font-size:15px;line-height:1.75}
+.points{list-style:none;margin-top:22px;border-top:1px solid var(--line)}
+.points li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--body);align-items:start}
+.points .n{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.08em;padding-top:4px}
+.points b{color:var(--ink);font-weight:800}
+.pair{position:relative;height:560px}
+.pair .phone{width:240px}
+.pair .phone.a{left:8%;top:0;transform:rotate(-5deg)}
+.pair .phone.b{right:8%;top:60px;transform:rotate(5deg);z-index:2}
+.pair:hover .phone.a{transform:rotate(-7deg) translateY(-6px)}
+.pair:hover .phone.b{transform:rotate(7deg) translateY(-6px)}
+.pair .tag{position:absolute;z-index:3;bottom:8px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;
+  font-size:12px;font-weight:700;padding:8px 14px;border-radius:999px;white-space:nowrap}
+.pair .tag i{font-style:normal;color:var(--accent-light);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;margin-right:8px}
 
-/* ====== 화면 갤러리 ====== */
-.gallery{display:flex;gap:22px;overflow-x:auto;padding:10px 4px 18px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.gallery::-webkit-scrollbar{height:8px}
-.gallery::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
-.gallery figure{flex:0 0 auto;width:212px;scroll-snap-align:center}
-.gallery img{width:100%;border-radius:26px;box-shadow:0 16px 36px -14px rgba(34,32,29,.3);border:1px solid rgba(34,32,29,.08)}
-.gallery figcaption{text-align:center;font-size:12.5px;color:#6B655B;margin-top:12px;font-weight:600}
-.gallery figcaption .step{color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-right:6px}
-.gallery-hint{text-align:center;font-size:12px;color:var(--muted);margin-top:6px}
+/* film strip gallery */
+.strip{margin-top:8px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:18px 0;position:relative}
+.strip::before,.strip::after{content:'';position:absolute;left:18px;right:18px;height:10px;
+  background:radial-gradient(circle, var(--line2) 0 3px, transparent 3.5px) 0 0/22px 10px repeat-x}
+.strip::before{top:8px}
+.strip::after{bottom:8px}
+.gallery{display:flex;gap:18px;overflow-x:auto;padding:14px 26px 12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.gallery::-webkit-scrollbar{height:6px}
+.gallery::-webkit-scrollbar-thumb{background:var(--line2);border-radius:3px}
+.gallery figure{flex:0 0 auto;width:200px;scroll-snap-align:center}
+.gallery img{width:100%;border-radius:24px;border:1px solid rgba(26,22,38,.08);box-shadow:0 18px 36px -18px rgba(26,22,38,.35)}
+.gallery figcaption{margin-top:12px;font-size:12.5px;color:var(--body);font-weight:600;display:flex;gap:8px;align-items:baseline}
+.gallery .step{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--accent);letter-spacing:.1em}
+.hint{text-align:center;font-size:12px;color:var(--sub);margin-top:14px}
 
-/* ====== 기능 카테고리 ====== */
-.feature-cat{margin-top:36px}
-.cat-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.cat-icon{width:34px;height:34px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;
-  background:var(--accent-soft);border:1px solid var(--accent-bd)}
-.cat-icon.purple{background:var(--purple-soft);border-color:#DCCBF3}
-.cat-icon.ink{background:#F1EEE8;border-color:var(--line2)}
-.cat-title{font-size:18px;font-weight:800;letter-spacing:-.01em}
-.cat-sub{font-size:12px;color:var(--sub);margin-left:auto}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.feat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;
-  transition:box-shadow .2s,transform .2s,border-color .2s}
-.feat:hover{border-color:var(--accent-bd);box-shadow:0 10px 26px rgba(185,114,46,.10);transform:translateY(-2px)}
-.feat .ico{font-size:22px;margin-bottom:8px}
-.feat .name{font-size:14px;font-weight:800;margin-bottom:4px}
-.feat .body{font-size:13px;color:#6B655B;line-height:1.6}
+/* features */
+.group{margin-top:44px}
+.group-head{display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--ink);margin-bottom:18px}
+.group-head h3{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.group-head .cnt{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.1em}
+.group-head .sub{margin-left:auto;font-size:12.5px;color:var(--sub)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid.four{grid-template-columns:repeat(4,1fr)}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.feat:hover{transform:translateY(-3px);border-color:var(--accent-bd);box-shadow:0 18px 36px -20px rgba(122,59,217,.35)}
+.feat .ic{width:36px;height:36px;border-radius:10px;background:var(--accent-soft);color:var(--accent-deep);display:grid;place-items:center;margin-bottom:14px}
+.feat .ic svg{width:18px;height:18px}
+.feat h4{font-size:15px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em}
+.feat p{font-size:13.5px;color:var(--body);line-height:1.65}
 
-/* ====== 행사 제휴 밴드 ====== */
-.biz{max-width:1100px;margin:0 auto;padding:0 20px 88px}
-.biz-inner{position:relative;overflow:hidden;background:var(--btn);color:#fff;border-radius:24px;padding:56px 48px;
-  display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
-.biz-inner::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 85% 20%, rgba(142,63,214,.35), transparent 45%),
-             radial-gradient(circle at 10% 100%, rgba(185,114,46,.25), transparent 40%)}
-.biz-inner > *{position:relative}
-.biz .eyebrow{color:#E8B54A}
-.biz h2{font-size:30px;font-weight:800;letter-spacing:-.025em;margin-bottom:12px;color:#fff}
-.biz p{color:#B8B2A8;font-size:15px;line-height:1.7;max-width:34em;margin-bottom:26px}
-.biz-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);text-decoration:none;
-  font-weight:800;font-size:15px;padding:14px 24px;border-radius:14px;transition:transform .2s,box-shadow .2s}
-.biz-btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(0,0,0,.35)}
-.biz-shots{position:relative;height:300px}
-.biz-shots img{position:absolute;width:150px;border-radius:22px;box-shadow:0 24px 48px -12px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.08)}
-.biz-shots img.a{left:10%;top:0;transform:rotate(-5deg)}
-.biz-shots img.b{right:10%;top:36px;transform:rotate(5deg)}
-.biz-kinds{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.biz-kinds span{font-size:12px;font-weight:600;color:#E6E0D6;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px}
+/* business band */
+.biz{padding:96px 0 0}
+.band{position:relative;overflow:hidden;background:var(--night);color:#fff;border-radius:26px;padding:60px 56px;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.band::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(50% 60% at 85% 15%, rgba(122,59,217,.55), transparent 70%),
+             radial-gradient(40% 50% at 15% 100%, rgba(91,26,158,.45), transparent 70%)}
+.band>*{position:relative}
+.band .eyebrow{color:var(--accent-light)}
+.band h2{color:#fff;font-size:clamp(26px,3.2vw,36px)}
+.band p{color:#B9B2C9;font-size:15px;line-height:1.75;max-width:32em;margin-top:14px}
+.band-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);text-decoration:none;font-weight:800;font-size:15px;
+  padding:14px 22px;border-radius:14px;margin-top:26px;transition:transform .2s,box-shadow .2s}
+.band-btn:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(0,0,0,.6)}
+.band-btn svg{width:18px;height:18px}
+.kinds{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.kinds>span{font-size:12px;font-weight:600;color:#E6E0F2;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 12px}
+.band-shots{position:relative;height:320px}
+.band-shots .phone{width:160px;border-color:rgba(255,255,255,.1);box-shadow:0 30px 60px -18px rgba(0,0,0,.7)}
+.band-shots .phone.a{left:12%;top:0;transform:rotate(-6deg)}
+.band-shots .phone.b{right:12%;top:40px;transform:rotate(6deg)}
 
-/* ====== 추천 칩 ====== */
-.target{max-width:1100px;margin:0 auto;padding:20px 20px 70px;text-align:center}
-.target h2{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
-.target .desc{color:#6B655B;font-size:15px;margin-bottom:26px}
-.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:13px}
+/* moments */
+.moments{padding:88px 0 0;text-align:center}
+.chips{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chips>span{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:10px 16px 10px 12px;font-size:13.5px;font-weight:600;color:var(--body)}
+.chips>span::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent)}
 
-/* ====== 푸터 ====== */
-footer{text-align:center;padding:44px 20px 56px;border-top:1px solid var(--line);color:var(--sub);font-size:13px;background:#F6F3EE}
-footer a{color:var(--accent);text-decoration:none}
-footer a:hover{text-decoration:underline}
-.foot-links{margin-top:10px}
-.foot-links a{margin:0 6px}
+/* footer */
+footer{margin-top:88px;border-top:1px solid var(--line);padding:32px 0 48px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--sub)}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+footer a{text-decoration:none;color:var(--ink);font-weight:600}
+footer a:hover{color:var(--accent)}
 
-@media (max-width:880px){
-  .hero-inner{grid-template-columns:1fr;gap:56px}
-  .hero h1{font-size:36px}
-  .hero-shots{height:540px;max-width:400px}
-  .stats-inner{grid-template-columns:repeat(2,1fr)}
-  .spotlight,.spotlight.reverse{grid-template-columns:1fr;padding:28px 22px}
-  .spotlight.reverse .copy{order:0}
-  .section{padding:64px 20px}
-  .section h2{font-size:26px}
-  .biz-inner{grid-template-columns:1fr;padding:40px 28px}
-  .biz-shots{height:260px}
+/* motion */
+.rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.16s}.rise.d3{animation-delay:.26s}
+@keyframes rise{from{opacity:.3;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise,.chip{animation:none}.phone,.feat,.badge,.band-btn{transition:none}}
+
+/* responsive */
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:48px}
+  .stack{height:560px;max-width:420px}
+  .phone.main{width:220px}
+  .phone.l,.phone.r{width:176px}
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
+  .stat:nth-child(4){border-top:1px solid var(--line)}
+  .duo,.duo.flip{grid-template-columns:1fr;gap:36px}
+  .duo.flip .copy{order:0}
+  .pair{height:520px}
+  .grid,.grid.four{grid-template-columns:repeat(2,1fr)}
+  .band{grid-template-columns:1fr;padding:44px 32px}
+  .band-shots{height:300px}
+  .links .plain{display:none}
 }
 @media (max-width:600px){
-  .hero{padding:64px 20px 100px}
-  .hero h1{font-size:31px}
-  .hero .lead{font-size:15px}
-  .hero-shots{height:470px;max-width:340px}
-  .shot{width:186px}
-  .shot.front{top:56px}
-  .stats-inner{padding:18px}
-  .stat .v{font-size:19px}
-  .gallery figure{width:186px}
-  .biz h2{font-size:24px}
-}
-@media (prefers-reduced-motion:reduce){
-  .shot,.feat,.badge,.biz-btn{transition:none}
+  .wrap{padding:0 20px}
+  .nav .wrap{height:62px}
+  .hero{padding:44px 0 24px}
+  .lead{font-size:15.5px}
+  .stack{height:470px;max-width:340px}
+  .phone.main{width:184px;top:30px}
+  .phone.l,.phone.r{width:146px}
+  .phone.r{top:90px}
+  .chip{font-size:11.5px;padding:7px 12px}
+  .chip.c1{top:250px}
+  .chip.c3{bottom:20px}
+  .sec{padding-top:72px}
+  .pair{height:440px}
+  .pair .phone{width:190px}
+  .grid,.grid.four{grid-template-columns:1fr}
+  .gallery figure{width:176px}
+  .band{padding:36px 22px;border-radius:20px}
+  .band-shots{height:250px}
+  .band-shots .phone{width:130px}
+  .moments{padding-top:64px}
+  footer{margin-top:64px}
+  footer .wrap{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
 <body>
 
-<div class="lang-switch" onclick="toggleLang()" role="button" aria-label="언어 전환">
-  <span class="flag" id="flag-ko">KR</span>
-  <div class="track"><div class="thumb"></div></div>
-  <span class="flag dim" id="flag-en">EN</span>
-</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M9 2h6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-vault" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v12h14V8M10 12h4"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a3 3 0 0 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a3 3 0 0 0 0-6z"/><path d="M13 5v2M13 11v2M13 17v2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v3M17 20h3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <img src="icon.png" alt="" width="512" height="512"><b>FRAEMII</b>
+    </a>
+    <nav class="links">
+      <a class="plain" href="#rhythm"><span class="ko">부스의 리듬</span><span class="en">The rhythm</span></a>
+      <a class="plain" href="#screens"><span class="ko">화면</span><span class="en">Screens</span></a>
+      <a class="plain" href="#landmark"><span class="ko">명소 프레임</span><span class="en">Landmarks</span></a>
+      <a class="biz-link" href="./business.html"><span class="ko">행사 제휴</span><span class="en">For events</span></a>
+      <button class="lang" onclick="toggleLang()" aria-label="Language"><span class="ko-opt">KR</span><span class="en-opt">EN</span></button>
+    </nav>
+  </div>
+</header>
 
 <!-- ============ 히어로 ============ -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="brand">
-        <img src="icon.png" alt="FRAEMII 앱 아이콘" width="40" height="40">
-        <span class="name">FRAEMII</span>
-      </div>
-      <span class="pill">
-        <span class="ko">내 폰 안의 포토부스</span>
-        <span class="en">A photo booth in your pocket</span>
-      </span>
-      <h1>
-        <span class="ko">당신의 순간을<br><span class="accent">프레임</span>에 담아보세요.</span>
-        <span class="en">Put your moment<br>in a <span class="accent">frame</span>.</span>
+  <div class="wrap">
+    <div>
+      <span class="kicker mono rise"><span class="ko">내 폰 안의 포토부스</span><span class="en">A photo booth in your pocket</span></span>
+      <h1 class="rise d1">
+        <span class="ko">당신의 순간을<br><em>프레임</em>에 담아보세요.</span>
+        <span class="en">Put your moment<br>in a <em>frame</em>.</span>
       </h1>
-      <p class="lead">
-        <span class="ko">프레임을 고르고, 부스의 리듬으로 찍고, 마음에 드는 컷만 골라 완성하는 네컷 앱. 계정도 가입도 없이 — 열면 바로 찍습니다.</span>
-        <span class="en">Pick a frame, shoot to the rhythm of a real booth, keep only the cuts you love. No account, no sign-up — open and shoot.</span>
+      <p class="lead rise d2">
+        <span class="ko">프레임을 고르고, 부스의 리듬으로 찍고, 마음에 드는 컷만 골라 완성하는 네컷 앱. 계정도 가입도 없이, 열면 바로 찍습니다.</span>
+        <span class="en">Pick a frame, shoot to the rhythm of a real booth, keep only the cuts you love. No account, no sign-up. Open and shoot.</span>
       </p>
-      <div class="cta-row">
+      <div class="cta rise d3">
         <a class="badge" href="#" id="ios-link" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           <span><small class="ko">곧 출시</small><small class="en">Coming soon</small>App Store</span>
@@ -253,272 +315,227 @@ footer a:hover{text-decoration:underline}
           <span><small class="ko">곧 출시</small><small class="en">Coming soon</small>Google Play</span>
         </a>
       </div>
-      <div class="hero-meta">
-        <span class="ko">iOS · Android · 무료 · 가입 없음 · 한국어/English</span>
-        <span class="en">iOS · Android · Free · No sign-up · Korean/English</span>
+      <div class="meta rise d3">
+        <span>iOS · Android</span>
+        <span><span class="ko">무료</span><span class="en">Free</span></span>
+        <span><span class="ko">가입 없음</span><span class="en">No sign-up</span></span>
+        <span><span class="ko">한국어 · English</span><span class="en">Korean · English</span></span>
       </div>
     </div>
 
-    <div class="hero-right">
-      <div class="hero-shots">
-        <img class="shot back" src="screens/shoot.jpg" alt="촬영 화면 — 카운트다운과 뷰파인더" loading="eager" width="1008" height="2181">
-        <img class="shot front" src="screens/save.png" alt="완성 화면 — 데이지 나이트 프레임의 네컷과 저장·공유·QR 버튼" loading="eager" width="1008" height="2181">
+    <div class="stack rise d2" aria-label="앱 화면">
+      <div class="phone l"><img src="screens/shoot.jpg" alt="촬영 화면 — 카운트다운과 뷰파인더" loading="eager" width="1008" height="2181"></div>
+      <div class="phone main"><img src="screens/save.png" alt="완성 화면 — 데이지 나이트 프레임의 네컷과 저장·공유·QR 버튼" loading="eager" width="1008" height="2181"></div>
+      <div class="phone r"><img src="screens/pick.jpg" alt="컷 고르기 화면 — 6장 중 4장" loading="eager" width="1008" height="2181"></div>
+      <span class="chip c1"><i>3 · 2 · 1</i><span class="ko">부스처럼 카운트다운</span><span class="en">Booth countdown</span></span>
+      <span class="chip c2"><i>6 → 4</i><span class="ko">넉넉히 찍고 고르기</span><span class="en">Shoot extra, choose</span></span>
+      <span class="chip c3"><i>QR</i><span class="ko">친구 폰으로 바로</span><span class="en">Straight to a friend's phone</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 숫자 ============ -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="v">35<em>+</em></div><div class="k"><span class="ko">기본 프레임 · 앱 업데이트 없이 늘어나요</span><span class="en">Built-in frames, growing without app updates</span></div></div>
+    <div class="stat"><div class="v">3<em class="ko">분할</em><em class="en">layouts</em></div><div class="k"><span class="ko">4×1 스트립 · 2×2 네컷 · 6컷 그리드</span><span class="en">4×1 strip · 2×2 · 6-cut grid</span></div></div>
+    <div class="stat"><div class="v">+2<em class="ko">장</em><em class="en">takes</em></div><div class="k"><span class="ko">넉넉히 찍고 마음에 드는 컷만</span><span class="en">Extra takes, keep only the best</span></div></div>
+    <div class="stat"><div class="v">0<em class="ko">가입</em><em class="en">sign-ups</em></div><div class="k"><span class="ko">계정도 로그인도 없이 바로</span><span class="en">No account, no login</span></div></div>
+  </div>
+</section>
+
+<!-- ============ 시그니처 ============ -->
+<section class="sec" id="rhythm">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow mono">Signature</span>
+      <h2><span class="ko">부스의 <em>리듬</em>을 그대로 폰에</span><span class="en">The <em>rhythm</em> of a real booth, on your phone</span></h2>
+      <p class="sec-desc"><span class="ko">셔터 한 번이면 카운트다운, 찰칵, 다음 포즈. 포즈를 바꾸는 그 틈까지가 경험입니다. 그리고 부스처럼 넉넉히 찍고 고릅니다.</span><span class="en">One tap: countdown, click, next pose. The pause between poses is part of it. And like a booth, you shoot extra and choose.</span></p>
+    </div>
+    <div class="duo">
+      <div class="copy">
+        <h3><span class="ko">6장 찍고 4장 고르기. 고른 순서가 곧 프레임 순서.</span><span class="en">Shoot six, keep four. The order you tap is the order in the frame.</span></h3>
+        <p><span class="ko">눈 감은 컷, 흔들린 컷은 버리면 됩니다. 컷마다 포즈 안내가 뜨고, 촬영 중엔 노출을 잠가 1컷은 노랗고 3컷은 파란 완성본이 나오지 않게 합니다.</span><span class="en">Toss the blink, toss the blur. Each take shows a pose prompt, and exposure locks during the sequence so cut 1 and cut 3 never come out in different colours.</span></p>
+        <ul class="points">
+          <li><span class="n">01</span><span><span class="ko"><b>카운트다운 3 · 5 · 10초</b> — 끄면 한 컷씩 수동으로</span><span class="en"><b>3 · 5 · 10s countdown</b>, or off for one shot at a time</span></span></li>
+          <li><span class="n">02</span><span><span class="ko"><b>촬영 중 카메라 전환</b> — 앞·뒤 카메라를 컷 사이에 바꿔도 됩니다</span><span class="en"><b>Switch cameras mid-sequence</b>, front or back between cuts</span></span></li>
+          <li><span class="n">03</span><span><span class="ko"><b>메이킹 영상</b> — 셔터 직전 몇 초가 프레임 안에서 움직이는 영상으로</span><span class="en"><b>Making-of video</b>: the seconds before each shutter, moving inside the frame</span></span></li>
+          <li><span class="n">04</span><span><span class="ko"><b>앨범 사진으로도</b> — 이미 찍은 여행 사진을 프레임에 담을 수 있어요</span><span class="en"><b>From your library too</b>: put photos you already took into a frame</span></span></li>
+        </ul>
+      </div>
+      <div class="pair">
+        <div class="phone a"><img src="screens/shoot.jpg" alt="촬영 화면 — 1/6, 노출 자동" loading="lazy" width="1008" height="2181"></div>
+        <div class="phone b"><img src="screens/pick.jpg" alt="컷 고르기 화면 — 6장 중 4장을 골라 프레임 순서대로 배치" loading="lazy" width="1008" height="2181"></div>
+        <span class="tag"><i>REAL</i><span class="ko">실제 촬영 · 컷 고르기 화면</span><span class="en">Real shoot and pick screens</span></span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 숫자 띠 ============ -->
-<div class="stats">
-  <div class="stats-inner">
-    <div class="stat">
-      <div class="v">35<em>+</em></div>
-      <div class="k"><span class="ko">기본 프레임 · 앱 업데이트 없이 늘어나요</span><span class="en">Built-in frames — more without app updates</span></div>
+<!-- ============ 화면 ============ -->
+<section class="sec" id="screens">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow mono">Screens</span>
+      <h2><span class="ko">고르고, 찍고, 담고. 화면으로 <em>미리 보기</em></span><span class="en">Pick, shoot, keep. <em>Screen by screen</em></span></h2>
+      <p class="sec-desc"><span class="ko">옆으로 넘기며 실제 화면을 구경해 보세요. 전부 앱에서 그대로 찍은 화면입니다.</span><span class="en">Swipe through the real screens. Every one captured straight from the app.</span></p>
     </div>
-    <div class="stat">
-      <div class="v">4 · 6<em>컷</em></div>
-      <div class="k"><span class="ko">스트립 · 네컷 · 6컷 그리드</span><span class="en">Strip · 2×2 · 6-cut grid</span></div>
+    <div class="strip">
+      <div class="gallery">
+        <figure><img src="screens/layout.png" alt="분할 선택 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">01</span><span class="ko">분할 고르기</span><span class="en">Pick a layout</span></figcaption></figure>
+        <figure><img src="screens/stage.png" alt="디자인 선택 무대" loading="lazy" width="1008" height="2181"><figcaption><span class="step">02</span><span class="ko">디자인 무대</span><span class="en">Design stage</span></figcaption></figure>
+        <figure><img src="screens/shoot.jpg" alt="촬영 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">03</span><span class="ko">부스 리듬 촬영</span><span class="en">Booth-rhythm shooting</span></figcaption></figure>
+        <figure><img src="screens/pick.jpg" alt="컷 고르기 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">04</span><span class="ko">컷 고르기</span><span class="en">Choose your cuts</span></figcaption></figure>
+        <figure><img src="screens/edit.png" alt="필터·배경 편집 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">05</span><span class="ko">필터 · 누끼 · 배경</span><span class="en">Filters · cut-out · background</span></figcaption></figure>
+        <figure><img src="screens/save.png" alt="저장·공유 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">06</span><span class="ko">저장 · 공유 · QR</span><span class="en">Save · share · QR</span></figcaption></figure>
+        <figure><img src="screens/event.png" alt="행사 프레임 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">+</span><span class="ko">행사 프레임</span><span class="en">Event frames</span></figcaption></figure>
+        <figure><img src="screens/landmark.png" alt="지역 명소 프레임 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">+</span><span class="ko">지역 명소 프레임</span><span class="en">Landmark frames</span></figcaption></figure>
+        <figure><img src="screens/mine.png" alt="나의 명소 프레임 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">+</span><span class="ko">나의 명소 프레임</span><span class="en">My landmark frames</span></figcaption></figure>
+      </div>
     </div>
-    <div class="stat">
-      <div class="v">+2<em>장</em></div>
-      <div class="k"><span class="ko">넉넉히 찍고 마음에 드는 컷만</span><span class="en">Extra takes — keep only the best</span></div>
-    </div>
-    <div class="stat">
-      <div class="v">0<em> 가입</em></div>
-      <div class="k"><span class="ko">계정도 로그인도 없이 바로</span><span class="en">No account, no login</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ 시그니처: 부스의 리듬 ============ -->
-<section class="section">
-  <div class="section-head">
-    <span class="eyebrow mono">Signature</span>
-    <h2>
-      <span class="ko">부스의 <span class="accent">리듬</span>을 그대로</span>
-      <span class="en">The <span class="accent">rhythm</span> of a real booth</span>
-    </h2>
-    <p class="section-desc">
-      <span class="ko">셔터 한 번이면 카운트다운 → 찰칵 → 다음 포즈. 포즈 바꿀 틈까지가 경험입니다. 그리고 부스처럼, 넉넉히 찍고 고릅니다.</span>
-      <span class="en">One tap: countdown → click → next pose. The pause between poses is part of it. And like a booth, you shoot extra and choose.</span>
-    </p>
-  </div>
-
-  <div class="spotlight">
-    <div class="copy">
-      <h3>
-        <span class="ko">6장 찍고 4장 고르기 — 고른 순서가 프레임 순서</span>
-        <span class="en">Shoot six, keep four — your order is the frame order</span>
-      </h3>
-      <p>
-        <span class="ko">눈 감은 컷, 흔들린 컷은 버리면 됩니다. 컷마다 포즈 안내가 뜨고, 촬영 중엔 노출을 잠가 1컷은 노랗고 3컷은 파란 완성본이 나오지 않게 합니다.</span>
-        <span class="en">Toss the blink, toss the blur. Each take shows a pose prompt, and exposure locks during the sequence so cut 1 and cut 3 never come out in different colours.</span>
-      </p>
-      <ul class="points">
-        <li><span class="n">1</span><span><span class="ko"><b>카운트다운 3 · 5 · 10초</b> — 끄면 한 컷씩 수동으로</span><span class="en"><b>3 · 5 · 10s countdown</b> — or off, one shot at a time</span></span></li>
-        <li><span class="n">2</span><span><span class="ko"><b>촬영 중 카메라 전환</b> — 앞·뒤 카메라를 컷 사이에 바꿔도 됩니다</span><span class="en"><b>Switch cameras mid-sequence</b> — front or back between cuts</span></span></li>
-        <li><span class="n">3</span><span><span class="ko"><b>메이킹 영상</b> — 셔터 직전 몇 초가 프레임 안에서 움직이는 영상으로</span><span class="en"><b>Making-of video</b> — the seconds before each shutter, moving inside the frame</span></span></li>
-        <li><span class="n">4</span><span><span class="ko"><b>앨범 사진으로도</b> — 이미 찍은 여행 사진을 프레임에 담을 수 있어요</span><span class="en"><b>From your library too</b> — put photos you already took into a frame</span></span></li>
-      </ul>
-    </div>
-    <div class="spot-shot">
-      <img src="screens/pick.jpg" alt="컷 고르기 화면 — 6장 중 4장을 골라 프레임 순서대로 배치" loading="lazy" width="1008" height="2181">
-      <p class="spot-caption">
-        <span class="ko">실제 컷 고르기 화면 — 위에 완성될 프레임이 바로 보이고, 아래에서 고른 순서가 곧 자리 순서예요.</span>
-        <span class="en">The real picking screen — the finished frame previews at the top; the order you tap is the order in the frame.</span>
-      </p>
-    </div>
+    <p class="hint"><span class="ko">← 옆으로 스크롤 →</span><span class="en">← scroll sideways →</span></p>
   </div>
 </section>
 
-<!-- ============ 화면 갤러리 ============ -->
-<section class="section" style="padding-top:0">
-  <div class="section-head">
-    <span class="eyebrow mono">Screens</span>
-    <h2>
-      <span class="ko">고르고, 찍고, 담고 — 화면으로 <span class="accent">미리 보기</span></span>
-      <span class="en">Pick, shoot, keep — <span class="accent">screen by screen</span></span>
-    </h2>
-    <p class="section-desc">
-      <span class="ko">옆으로 넘기며 실제 화면을 구경해 보세요. 전부 앱에서 그대로 찍은 화면입니다.</span>
-      <span class="en">Swipe through the real screens — every one captured straight from the app.</span>
-    </p>
-  </div>
-  <div class="gallery">
-    <figure><img src="screens/layout.png" alt="분할 선택 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">01</span><span class="ko">분할 고르기</span><span class="en">Pick a layout</span></figcaption></figure>
-    <figure><img src="screens/stage.png" alt="디자인 선택 무대" loading="lazy" width="1008" height="2181"><figcaption><span class="step">02</span><span class="ko">디자인 무대</span><span class="en">Design stage</span></figcaption></figure>
-    <figure><img src="screens/shoot.jpg" alt="촬영 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">03</span><span class="ko">부스 리듬 촬영</span><span class="en">Booth-rhythm shooting</span></figcaption></figure>
-    <figure><img src="screens/pick.jpg" alt="컷 고르기 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">04</span><span class="ko">컷 고르기</span><span class="en">Choose your cuts</span></figcaption></figure>
-    <figure><img src="screens/edit.png" alt="필터·배경 편집 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">05</span><span class="ko">필터 · 누끼 · 배경</span><span class="en">Filters · cut-out · background</span></figcaption></figure>
-    <figure><img src="screens/save.png" alt="저장·공유 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="step">06</span><span class="ko">저장 · 공유 · QR</span><span class="en">Save · share · QR</span></figcaption></figure>
-    <figure><img src="screens/event.png" alt="행사 프레임 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="ko">행사 프레임</span><span class="en">Event frames</span></figcaption></figure>
-    <figure><img src="screens/landmark.png" alt="지역 명소 프레임 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="ko">지역 명소 프레임</span><span class="en">Landmark frames</span></figcaption></figure>
-    <figure><img src="screens/mine.png" alt="나의 명소 프레임 화면" loading="lazy" width="1008" height="2181"><figcaption><span class="ko">나의 명소 프레임</span><span class="en">My landmark frames</span></figcaption></figure>
-  </div>
-  <p class="gallery-hint"><span class="ko">← 옆으로 스크롤 →</span><span class="en">← scroll sideways →</span></p>
-</section>
-
-<!-- ============ 지역 명소 스포트라이트 ============ -->
-<section class="section" style="padding-top:0">
-  <div class="spotlight reverse">
-    <div class="copy">
-      <span class="eyebrow mono">Landmark frames</span>
-      <h3>
-        <span class="ko">그 장소에 가야 열리는 프레임</span>
-        <span class="en">Frames that unlock only where you stand</span>
-      </h3>
-      <p>
-        <span class="ko">경복궁, 경주 동궁과월지, 안동 하회마을 — 명소마다 그곳의 프레임 세트가 있습니다. 반경 안에 들어가면 GET이 열리고, 한 번 받아 두면 어디서나 영원히 내 것. 여행의 도장 깨기처럼.</span>
-        <span class="en">Gyeongbokgung, Donggung &amp; Wolji, Hahoe Village — each landmark has its own set. Step inside the radius and GET unlocks; once you have it, it's yours anywhere, forever. Like collecting stamps.</span>
-      </p>
-      <ul class="points">
-        <li><span class="n">✓</span><span><span class="ko"><b>위치는 폰 안에서만</b> — 좌표는 어디에도 보내지 않아요</span><span class="en"><b>Location stays on your phone</b> — coordinates are never sent anywhere</span></span></li>
-        <li><span class="n">✓</span><span><span class="ko"><b>스트립 · 네컷 · 6컷</b> 세트를 한 번에</span><span class="en"><b>Strip · 2×2 · 6-cut</b> — the whole set at once</span></span></li>
-        <li><span class="n">✓</span><span><span class="ko"><b>나의 명소 프레임</b>에 모아 두고 언제든 촬영</span><span class="en"><b>My landmark frames</b> keeps them ready to shoot anytime</span></span></li>
-      </ul>
-    </div>
-    <div class="spot-shot">
-      <img src="screens/landmark.png" alt="지역 명소 프레임 홈 — 동궁과월지 GET, 경복궁 전부 보유, 하회마을 잠김" loading="lazy" width="1008" height="2181">
-      <p class="spot-caption">
-        <span class="ko">경주에 서 있을 때의 실제 화면 — 동궁과월지는 GET, 경복궁은 이미 보유, 하회마을은 101km 밖이라 잠김.</span>
-        <span class="en">The real screen standing in Gyeongju — Donggung is GET, Gyeongbokgung already owned, Hahoe locked 101 km away.</span>
-      </p>
+<!-- ============ 명소 프레임 ============ -->
+<section class="sec" id="landmark">
+  <div class="wrap">
+    <div class="duo flip">
+      <div class="copy">
+        <span class="eyebrow mono">Landmark frames</span>
+        <h3><span class="ko">그 장소에 가야 열리는 프레임</span><span class="en">Frames that unlock only where you stand</span></h3>
+        <p><span class="ko">경복궁, 경주 동궁과월지, 안동 하회마을. 명소마다 그곳만의 프레임 세트가 있습니다. 반경 안에 들어가면 GET이 열리고, 한 번 받아 두면 어디서나 영원히 내 것. 여행의 도장 깨기처럼.</span><span class="en">Gyeongbokgung, Donggung &amp; Wolji, Hahoe Village. Each landmark has its own set. Step inside the radius and GET unlocks; once you have it, it's yours anywhere, forever. Like collecting stamps.</span></p>
+        <ul class="points">
+          <li><span class="n">GPS</span><span><span class="ko"><b>위치는 폰 안에서만</b> — 좌표는 어디에도 보내지 않아요</span><span class="en"><b>Location stays on your phone</b>; coordinates are never sent anywhere</span></span></li>
+          <li><span class="n">SET</span><span><span class="ko"><b>스트립 · 네컷 · 6컷</b> 세트를 한 번에</span><span class="en"><b>Strip · 2×2 · 6-cut</b>, the whole set at once</span></span></li>
+          <li><span class="n">MINE</span><span><span class="ko"><b>나의 명소 프레임</b>에 모아 두고 언제든 촬영</span><span class="en"><b>My landmark frames</b> keeps them ready to shoot anytime</span></span></li>
+        </ul>
+      </div>
+      <div class="pair">
+        <div class="phone a"><img src="screens/landmark.png" alt="지역 명소 프레임 홈 — 동궁과월지 GET, 경복궁 전부 보유, 하회마을 잠김" loading="lazy" width="1008" height="2181"></div>
+        <div class="phone b"><img src="screens/mine.png" alt="나의 명소 프레임 — 경복궁 스트립·네컷·6컷" loading="lazy" width="1008" height="2181"></div>
+        <span class="tag"><i>GYEONGJU</i><span class="ko">경주에 서 있을 때의 실제 화면</span><span class="en">The real screen, standing in Gyeongju</span></span>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ 기능 ============ -->
-<section class="section" style="padding-top:0">
-  <div class="section-head">
-    <span class="eyebrow mono">Features</span>
-    <h2>
-      <span class="ko">프레임은 데이터, 그래서 끝없이 늘어납니다</span>
-      <span class="en">Frames are data — so they never stop growing</span>
-    </h2>
-  </div>
+<section class="sec" id="features">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow mono">Features</span>
+      <h2><span class="ko">프레임은 데이터, 그래서 <em>끝없이</em> 늘어납니다</span><span class="en">Frames are data, so they <em>never stop</em> growing</span></h2>
+    </div>
 
-  <div class="feature-cat">
-    <div class="cat-head">
-      <span class="cat-icon">📸</span>
-      <span class="cat-title"><span class="ko">촬영</span><span class="en">Shooting</span></span>
-      <span class="cat-sub"><span class="ko">부스처럼, 폰으로</span><span class="en">Like a booth, on your phone</span></span>
+    <div class="group">
+      <div class="group-head"><span class="cnt">01</span><h3><span class="ko">촬영</span><span class="en">Shooting</span></h3><span class="sub"><span class="ko">부스처럼, 폰으로</span><span class="en">Like a booth, on your phone</span></span></div>
+      <div class="grid">
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-timer"/></svg></span><h4><span class="ko">카운트다운 연속 촬영</span><span class="en">Countdown sequence</span></h4><p><span class="ko">3·5·10초 또는 끔. 셔터 한 번에 컷 수만큼 자동으로, 컷마다 포즈 안내.</span><span class="en">3·5·10s or off. One tap shoots the whole sequence with a pose prompt per cut.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-lock"/></svg></span><h4><span class="ko">노출 잠금</span><span class="en">Exposure lock</span></h4><p><span class="ko">첫 셔터에 노출을 잠가 컷마다 색이 달라지는 걸 막아요. 컷 간 편차가 화질보다 중요하니까.</span><span class="en">Locks exposure on the first shutter so cuts match. Consistency beats resolution.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-film"/></svg></span><h4><span class="ko">메이킹 영상</span><span class="en">Making-of video</span></h4><p><span class="ko">셔터 직전 4초가 완성된 프레임 안에서 컷마다 살아 움직여요. 공유할 때 같이 나갑니다.</span><span class="en">The 4 seconds before each shutter come alive inside the finished frame. Shares along with the photo.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cut"/></svg></span><h4><span class="ko">누끼 · 배경색 · 필터</span><span class="en">Cut-out · background · filters</span></h4><p><span class="ko">인물만 남기고 배경색을 고르거나, 원본 그대로. 웜·필름·모노·쿨 필터는 전체 컷에 한 번에.</span><span class="en">Keep the person and pick a backdrop, or leave it raw. Warm, film, mono, cool, applied to every cut at once.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-image"/></svg></span><h4><span class="ko">앨범 사진으로 만들기</span><span class="en">Make one from your library</span></h4><p><span class="ko">여행에서 이미 찍은 사진도 골라서 프레임에. 카메라 없이 고르기, 편집, 저장.</span><span class="en">Photos you already took, straight into a frame. No camera needed.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-vault"/></svg></span><h4><span class="ko">보관함 7일</span><span class="en">7-day vault</span></h4><p><span class="ko">완성본은 자동으로 보관되고 7일 뒤 정리돼요. 오래 남길 건 사진 앱에 고화질로.</span><span class="en">Finished strips are kept for 7 days, then tidied. Save keepers to your photo library in high res.</span></p></div>
+      </div>
     </div>
-    <div class="feat-grid">
-      <div class="feat"><div class="ico">⏱️</div><div class="name"><span class="ko">카운트다운 연속 촬영</span><span class="en">Countdown sequence</span></div><div class="body"><span class="ko">3·5·10초 또는 끔. 셔터 한 번에 컷 수만큼 자동으로, 컷마다 포즈 안내.</span><span class="en">3·5·10s or off. One tap shoots the whole sequence with a pose prompt per cut.</span></div></div>
-      <div class="feat"><div class="ico">🔒</div><div class="name"><span class="ko">노출 잠금</span><span class="en">Exposure lock</span></div><div class="body"><span class="ko">첫 셔터에 노출을 잠가 컷마다 색이 달라지는 걸 막아요. 컷 간 편차가 화질보다 중요하니까.</span><span class="en">Locks exposure on the first shutter so cuts match. Consistency beats resolution.</span></div></div>
-      <div class="feat"><div class="ico">🎞️</div><div class="name"><span class="ko">메이킹 영상</span><span class="en">Making-of video</span></div><div class="body"><span class="ko">셔터 직전 4초가 완성된 프레임 안에서 컷마다 살아 움직여요. 공유할 때 같이 나갑니다.</span><span class="en">The 4 seconds before each shutter come alive inside the finished frame. Shares along with the photo.</span></div></div>
-      <div class="feat"><div class="ico">✂️</div><div class="name"><span class="ko">누끼 · 배경색 · 필터</span><span class="en">Cut-out · background · filters</span></div><div class="body"><span class="ko">인물만 남기고 배경색을 고르거나, 원본 그대로. 웜·필름·모노·쿨 필터는 전체 컷에 한 번에.</span><span class="en">Keep the person and pick a backdrop, or leave it raw. Warm, film, mono, cool — applied to every cut at once.</span></div></div>
-      <div class="feat"><div class="ico">🖼️</div><div class="name"><span class="ko">앨범 사진으로 만들기</span><span class="en">Make one from your library</span></div><div class="body"><span class="ko">여행에서 이미 찍은 사진도 골라서 프레임에. 카메라 없이 고르기 → 편집 → 저장.</span><span class="en">Photos you already took, straight into a frame. No camera needed.</span></div></div>
-      <div class="feat"><div class="ico">🗂️</div><div class="name"><span class="ko">보관함 7일</span><span class="en">7-day vault</span></div><div class="body"><span class="ko">완성본은 자동으로 보관되고 7일 뒤 정리돼요. 오래 남길 건 사진 앱에 고화질로.</span><span class="en">Finished strips are kept for 7 days, then tidied. Save keepers to your photo library in high res.</span></div></div>
-    </div>
-  </div>
 
-  <div class="feature-cat">
-    <div class="cat-head">
-      <span class="cat-icon purple">🎟️</span>
-      <span class="cat-title"><span class="ko">프레임</span><span class="en">Frames</span></span>
-      <span class="cat-sub"><span class="ko">기본 35종 + 행사 + 명소</span><span class="en">35 built-in + events + landmarks</span></span>
+    <div class="group">
+      <div class="group-head"><span class="cnt">02</span><h3><span class="ko">프레임</span><span class="en">Frames</span></h3><span class="sub"><span class="ko">기본 35종 + 행사 + 명소</span><span class="en">35 built-in + events + landmarks</span></span></div>
+      <div class="grid four">
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-grid"/></svg></span><h4><span class="ko">3가지 분할, 35종 디자인</span><span class="en">3 layouts, 35 designs</span></h4><p><span class="ko">4×1 스트립 · 2×2 네컷 · 6컷 그리드. 데이지·체리·리본·필름·마리골드. 미니멀부터 장식까지.</span><span class="en">Strip · 2×2 · 6-cut. Daisy, cherry, ribbon, film, marigold. Minimal to decorative.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ticket"/></svg></span><h4><span class="ko">행사 프레임 · 기간 한정</span><span class="en">Event frames · limited time</span></h4><p><span class="ko">행사 코드를 넣으면 그 행사만의 프레임이 내려와요. D-day 뱃지, 기간이 끝나면 사라지고 찍은 사진은 남아요.</span><span class="en">Enter an event code and that event's frames arrive. D-day badge; when it ends the frame goes, your photos stay.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg></span><h4><span class="ko">지역 명소 프레임</span><span class="en">Landmark frames</span></h4><p><span class="ko">그 장소 반경 안에서만 GET. 받아 두면 영원히 내 것. 여행의 기념 도장처럼 모아요.</span><span class="en">GET only within the landmark's radius. Once yours, forever yours. Collect them like travel stamps.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-refresh"/></svg></span><h4><span class="ko">앱 업데이트 없이 새 프레임</span><span class="en">New frames, no app update</span></h4><p><span class="ko">프레임은 코드가 아니라 데이터. 새 디자인은 앱을 열 때 조용히 내려옵니다.</span><span class="en">Frames are data, not code. New designs arrive quietly when you open the app.</span></p></div>
+      </div>
     </div>
-    <div class="feat-grid">
-      <div class="feat"><div class="ico">🎨</div><div class="name"><span class="ko">3가지 분할, 35종 디자인</span><span class="en">3 layouts, 35 designs</span></div><div class="body"><span class="ko">4×1 스트립 · 2×2 네컷 · 6컷 그리드. 데이지·체리·리본·필름·마리골드… 미니멀부터 장식까지.</span><span class="en">Strip · 2×2 · 6-cut. Daisy, cherry, ribbon, film, marigold — minimal to decorative.</span></div></div>
-      <div class="feat"><div class="ico">🎫</div><div class="name"><span class="ko">행사 프레임 · 기간 한정</span><span class="en">Event frames · limited time</span></div><div class="body"><span class="ko">행사 코드를 넣으면 그 행사만의 프레임이 내려와요. D-day 뱃지, 기간이 끝나면 사라지고 찍은 사진은 남아요.</span><span class="en">Enter an event code and that event's frames arrive. D-day badge; when it ends the frame goes, your photos stay.</span></div></div>
-      <div class="feat"><div class="ico">📍</div><div class="name"><span class="ko">지역 명소 프레임</span><span class="en">Landmark frames</span></div><div class="body"><span class="ko">그 장소 반경 안에서만 GET. 받아 두면 영원히 내 것. 여행의 기념 도장처럼 모아요.</span><span class="en">GET only within the landmark's radius. Once yours, forever yours. Collect them like travel stamps.</span></div></div>
-      <div class="feat"><div class="ico">🔄</div><div class="name"><span class="ko">앱 업데이트 없이 새 프레임</span><span class="en">New frames, no app update</span></div><div class="body"><span class="ko">프레임은 코드가 아니라 데이터. 새 디자인은 앱을 열 때 조용히 내려옵니다.</span><span class="en">Frames are data, not code. New designs arrive quietly when you open the app.</span></div></div>
-    </div>
-  </div>
 
-  <div class="feature-cat">
-    <div class="cat-head">
-      <span class="cat-icon ink">🔗</span>
-      <span class="cat-title"><span class="ko">나눔</span><span class="en">Sharing</span></span>
-      <span class="cat-sub"><span class="ko">그 자리에서, 연락처 없이</span><span class="en">Right there, no contacts needed</span></span>
-    </div>
-    <div class="feat-grid">
-      <div class="feat"><div class="ico">💾</div><div class="name"><span class="ko">고화질 저장</span><span class="en">High-res save</span></div><div class="body"><span class="ko">사진 앱의 FRAEMII 앨범에 2~3배 해상도로. 인화해도 선명한 4×6.</span><span class="en">Into a FRAEMII album at 2–3× resolution. Crisp enough to print 4×6.</span></div></div>
-      <div class="feat"><div class="ico">📤</div><div class="name"><span class="ko">공유 시트</span><span class="en">Share sheet</span></div><div class="body"><span class="ko">사진과 메이킹 영상을 한 번에. 메신저든 SNS든 폰이 아는 곳 어디로나.</span><span class="en">Photo and making-of together, to any app your phone knows.</span></div></div>
-      <div class="feat"><div class="ico">🔳</div><div class="name"><span class="ko">QR로 전달</span><span class="en">Hand it over by QR</span></div><div class="body"><span class="ko">같이 찍은 친구가 QR을 스캔하면 자기 폰으로 바로. 연락처를 몰라도, 앱이 없어도. 7일 뒤 자동 삭제.</span><span class="en">Friends scan the QR and it lands on their phone — no contact, no app needed. Auto-deleted after 7 days.</span></div></div>
+    <div class="group">
+      <div class="group-head"><span class="cnt">03</span><h3><span class="ko">나눔</span><span class="en">Sharing</span></h3><span class="sub"><span class="ko">그 자리에서, 연락처 없이</span><span class="en">Right there, no contacts needed</span></span></div>
+      <div class="grid">
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-download"/></svg></span><h4><span class="ko">고화질 저장</span><span class="en">High-res save</span></h4><p><span class="ko">사진 앱의 FRAEMII 앨범에 2~3배 해상도로. 인화해도 선명한 4×6.</span><span class="en">Into a FRAEMII album at 2–3× resolution. Crisp enough to print 4×6.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-share"/></svg></span><h4><span class="ko">공유 시트</span><span class="en">Share sheet</span></h4><p><span class="ko">사진과 메이킹 영상을 한 번에. 메신저든 SNS든 폰이 아는 곳 어디로나.</span><span class="en">Photo and making-of together, to any app your phone knows.</span></p></div>
+        <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-qr"/></svg></span><h4><span class="ko">QR로 전달</span><span class="en">Hand it over by QR</span></h4><p><span class="ko">같이 찍은 친구가 QR을 스캔하면 자기 폰으로 바로. 연락처를 몰라도, 앱이 없어도. 7일 뒤 자동 삭제.</span><span class="en">Friends scan the QR and it lands on their phone. No contact, no app needed. Auto-deleted after 7 days.</span></p></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ 행사 제휴 ============ -->
-<div class="biz" id="business">
-  <div class="biz-inner">
-    <div>
-      <span class="eyebrow mono">For events &amp; venues</span>
-      <h2>
-        <span class="ko">행사장 전체가 포토부스가 됩니다</span>
-        <span class="en">Turn the whole venue into a photo booth</span>
-      </h2>
-      <p>
-        <span class="ko">돌잔치·결혼식엔 태블릿 한 대로 완성되는 부스 모드를, 페스티벌·팝업엔 QR 하나로 관객 모두의 폰에 내려가는 행사 프레임을. 실물 부스도, 대기줄도, 운영 인력도 없이.</span>
-        <span class="en">Booth mode on a single tablet for first birthdays and weddings; event frames that reach every guest's phone from one QR for festivals and pop-ups. No physical booth, no queue, no staff.</span>
-      </p>
-      <a class="biz-btn" href="./business.html">
-        <span class="ko">행사 제휴 알아보기</span><span class="en">Partner with us for events</span>
-        <span aria-hidden="true">→</span>
-      </a>
-      <div class="biz-kinds">
-        <span><span class="ko">돌잔치</span><span class="en">First birthdays</span></span>
-        <span><span class="ko">결혼식</span><span class="en">Weddings</span></span>
-        <span><span class="ko">페스티벌</span><span class="en">Festivals</span></span>
-        <span><span class="ko">콘서트 · 팬미팅</span><span class="en">Concerts · fan meetings</span></span>
-        <span><span class="ko">팝업 스토어</span><span class="en">Pop-up stores</span></span>
-        <span><span class="ko">러닝 · 스포츠 행사</span><span class="en">Runs · sports events</span></span>
+<section class="biz" id="business">
+  <div class="wrap">
+    <div class="band">
+      <div>
+        <span class="eyebrow mono">For events &amp; venues</span>
+        <h2><span class="ko">행사장 전체가 포토부스가 됩니다</span><span class="en">Turn the whole venue into a photo booth</span></h2>
+        <p><span class="ko">돌잔치·결혼식엔 태블릿 한 대로 완성되는 부스 모드를, 페스티벌·팝업엔 QR 하나로 관객 모두의 폰에 내려가는 행사 프레임을. 실물 부스도, 대기줄도, 운영 인력도 없이.</span><span class="en">Booth mode on a single tablet for first birthdays and weddings; event frames that reach every guest's phone from one QR for festivals and pop-ups. No physical booth, no queue, no staff.</span></p>
+        <a class="band-btn" href="./business.html"><span class="ko">행사 제휴 알아보기</span><span class="en">Partner with us for events</span><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></a>
+        <div class="kinds">
+          <span><span class="ko">돌잔치</span><span class="en">First birthdays</span></span>
+          <span><span class="ko">결혼식</span><span class="en">Weddings</span></span>
+          <span><span class="ko">페스티벌</span><span class="en">Festivals</span></span>
+          <span><span class="ko">콘서트 · 팬미팅</span><span class="en">Concerts · fan meetings</span></span>
+          <span><span class="ko">팝업 스토어</span><span class="en">Pop-up stores</span></span>
+          <span><span class="ko">러닝 · 스포츠 행사</span><span class="en">Runs · sports events</span></span>
+        </div>
+      </div>
+      <div class="band-shots" aria-hidden="true">
+        <div class="phone a"><img src="screens/booth-home.jpg" alt="" loading="lazy" width="1008" height="2181"></div>
+        <div class="phone b"><img src="screens/booth-qr.jpg" alt="" loading="lazy" width="1008" height="2181"></div>
       </div>
     </div>
-    <div class="biz-shots" aria-hidden="true">
-      <img class="a" src="screens/booth-home.jpg" alt="" loading="lazy" width="1008" height="2181">
-      <img class="b" src="screens/booth-qr.jpg" alt="" loading="lazy" width="1008" height="2181">
-    </div>
   </div>
-</div>
+</section>
 
-<!-- ============ 추천 ============ -->
-<section class="target">
-  <h2><span class="ko">이런 순간에 꺼내 보세요</span><span class="en">Moments made for it</span></h2>
-  <p class="desc"><span class="ko">부스는 거기까지 가야 하지만, 폰은 이미 손에 있으니까</span><span class="en">A booth is somewhere else. Your phone is already in your hand.</span></p>
-  <div class="chips">
-    <span class="chip"><span class="ko">☕ 카페에서 친구랑 "네컷 찍자"</span><span class="en">☕ "Let's do a strip" at the café</span></span>
-    <span class="chip"><span class="ko">✈️ 여행지에서, 명소 프레임 도장 깨기</span><span class="en">✈️ Collecting landmark frames on a trip</span></span>
-    <span class="chip"><span class="ko">💑 연인과 기념일</span><span class="en">💑 Anniversaries</span></span>
-    <span class="chip"><span class="ko">🎉 축제 · 콘서트 현장에서</span><span class="en">🎉 At the festival or concert</span></span>
-    <span class="chip"><span class="ko">🧸 아기 돌잔치 손님들과</span><span class="en">🧸 Guests at a first birthday</span></span>
-    <span class="chip"><span class="ko">🤳 혼자서도 필름 갤러리 감성으로</span><span class="en">🤳 Solo, film-gallery mood</span></span>
+<!-- ============ 순간 ============ -->
+<section class="moments">
+  <div class="wrap">
+    <div class="sec-head center" style="margin-bottom:0">
+      <span class="eyebrow mono">Moments</span>
+      <h2><span class="ko">이런 순간에 꺼내 보세요</span><span class="en">Moments made for it</span></h2>
+      <p class="sec-desc"><span class="ko">부스는 거기까지 가야 하지만, 폰은 이미 손에 있으니까.</span><span class="en">A booth is somewhere else. Your phone is already in your hand.</span></p>
+    </div>
+    <div class="chips">
+      <span><span class="ko">카페에서 친구랑 "네컷 찍자"</span><span class="en">"Let's do a strip" at the café</span></span>
+      <span><span class="ko">여행지에서 명소 프레임 도장 깨기</span><span class="en">Collecting landmark frames on a trip</span></span>
+      <span><span class="ko">연인과 기념일</span><span class="en">Anniversaries</span></span>
+      <span><span class="ko">축제 · 콘서트 현장에서</span><span class="en">At the festival or concert</span></span>
+      <span><span class="ko">아기 돌잔치 손님들과</span><span class="en">Guests at a first birthday</span></span>
+      <span><span class="ko">혼자서도 필름 갤러리 감성으로</span><span class="en">Solo, film-gallery mood</span></span>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 Cumiel Inc. All rights reserved.</p>
-  <p class="foot-links">
-    <a href="./privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy Policy</span></a>
-    &middot;
-    <a href="./business.html"><span class="ko">행사 제휴</span><span class="en">For events</span></a>
-    &middot;
-    <a href="mailto:teddy@cumiel.com?subject=[FRAEMII] 문의"><span class="ko">문의하기</span><span class="en">Contact</span></a>
-  </p>
+  <div class="wrap">
+    <span>© 2026 Cumiel Inc. <span class="ko">큐미엘 주식회사</span></span>
+    <nav>
+      <a href="../"><span class="ko">Cumiel 앱들</span><span class="en">All Cumiel apps</span></a>
+      <a href="./privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy Policy</span></a>
+      <a href="./business.html"><span class="ko">행사 제휴</span><span class="en">For events</span></a>
+      <a href="mailto:teddy@cumiel.com?subject=[FRAEMII] 문의"><span class="ko">문의하기</span><span class="en">Contact</span></a>
+    </nav>
+  </div>
 </footer>
 
 <script>
-function toggleLang(){
-  document.body.classList.toggle('lang-en');
-  var en = document.body.classList.contains('lang-en');
-  try{localStorage.setItem('fraemii-lang', en ? 'en' : 'ko');}catch(e){}
+function applyLang(en){
+  document.body.classList.toggle('lang-en', en);
   document.documentElement.lang = en ? 'en' : 'ko';
-  document.getElementById('flag-ko').classList.toggle('dim', en);
-  document.getElementById('flag-en').classList.toggle('dim', !en);
+}
+function toggleLang(){
+  var en = !document.body.classList.contains('lang-en');
+  applyLang(en);
+  try{localStorage.setItem('fraemii-lang', en ? 'en' : 'ko');}catch(e){}
 }
 (function(){
+  // 기본은 한국어. 토글로 바꾼 값만 기억한다.
   var saved = null;
   try{saved = localStorage.getItem('fraemii-lang');}catch(e){}
-  // 기본은 한국어 — 토글로 바꾼 값만 기억한다.
-  var en = saved === 'en';
-  if(en){
-    document.body.classList.add('lang-en');
-    document.documentElement.lang = 'en';
-    document.getElementById('flag-ko').classList.add('dim');
-    document.getElementById('flag-en').classList.remove('dim');
-  }
+  if(saved === 'en') applyLang(true);
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 })();
 </script>
 
