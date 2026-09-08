@@ -80,6 +80,8 @@ h1 em{font-style:normal;color:var(--accent)}
 .badge:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(26,22,38,.5);background:#000}
 .badge svg{width:22px;height:22px;flex-shrink:0}
 .badge small{display:block;font-size:10px;font-weight:600;opacity:.65;letter-spacing:.04em;margin-bottom:3px}
+/* 영어 전환(.en{display:inline})이 배지의 줄바꿈을 덮어쓰지 않게 */
+body.lang-en .badge small.en{display:block}
 .meta{margin-top:16px;font-size:12.5px;color:var(--sub);display:flex;gap:14px;flex-wrap:wrap}
 .meta>span::before{content:'·';margin-right:14px;color:var(--line2)}
 .meta>span:first-child::before{content:none}
