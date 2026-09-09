@@ -83,6 +83,14 @@ h2{margin-top:9px;font-size:clamp(20px,2.8vw,26px);font-weight:800;letter-spacin
 .f p{margin-top:5px;font-size:12.5px;color:#6B655B;line-height:1.5}
 .f.hi .n{background:var(--accent)}
 
+/* 현장 사진 — 어떤 자리에서 어떻게 쓰이는지 */
+.onsite{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.onsite figure{margin:0}
+.onsite img{width:100%;border-radius:12px;box-shadow:0 18px 38px -18px rgba(34,32,29,.45);
+  border:1px solid rgba(34,32,29,.08)}
+.onsite figcaption{margin-top:11px;font-size:12.5px;color:#6B655B;line-height:1.5}
+.onsite figcaption b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:3px}
+
 /* 실제 화면 */
 .screens{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .screens figure{text-align:center}
@@ -119,6 +127,7 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
   .flow::before{display:none}
   .duo{grid-template-columns:1fr}
   .screens{grid-template-columns:1fr 1fr}
+  .onsite{grid-template-columns:1fr}
 }
 @media screen and (max-width:520px){
   .flow{grid-template-columns:1fr 1fr}
@@ -149,6 +158,10 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
   .screens figcaption{font-size:9.5px;margin-top:6px}
   .screens img{max-width:125px;border-radius:12px;box-shadow:none;border:1px solid #ddd}
   .screens{margin-top:12px;gap:14px}
+  .onsite{margin-top:12px;gap:10px}
+  .onsite img{border-radius:8px;box-shadow:none;border:1px solid #ddd}
+  .onsite figcaption{font-size:9px;margin-top:5px}
+  .onsite figcaption b{font-size:9.5px}
   .sub{font-size:10px;margin-top:5px}
   .sec-k{font-size:9px}
   h2{font-size:16px;margin-top:5px}
@@ -174,7 +187,10 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
   section,.gist,.close{break-inside:avoid}
   /* 한 장에 다 넣으면 8px 글씨가 된다 — 읽히는 크기를 지키고 두 장으로 끊는다.
      1장: 히어로 · 요약 · 흐름 · 실제 화면 / 2장: 얻는 것 · 패키지 · 접수 */
-  section:nth-of-type(3){break-before:page;border-top:0;padding-top:0}
+  /* 인쇄본은 두고 가는 종이다 — 현장 사진과 히어로가 제품을 이미 보여 주므로
+     앱 화면 섹션은 빼고 두 장에 맞춘다. 웹에는 그대로 있다. */
+  section:nth-of-type(3){display:none}
+  section:nth-of-type(4){break-before:page;border-top:0;padding-top:0}
 }
 </style>
 </head>
@@ -224,6 +240,26 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
     <div class="f hi"><div class="n">03</div><h3>참가자가 스캔</h3><p>앱이 있으면 바로 열리며 코드가 자동 입력, 없으면 설치 페이지로 이어집니다</p></div>
     <div class="f hi"><div class="n">04</div><h3>자기 폰으로 촬영·공유</h3><p>행사 로고가 박힌 네컷과 메이킹 영상이 참가자의 SNS로 퍼집니다</p></div>
     <div class="f"><div class="n">05</div><h3>기간 종료 · 리포트</h3><p>계약 기간이 끝나면 프레임은 자동 회수. 사용량은 리포트로 정리해 드립니다</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-k mono">On site</div>
+  <h2>페스티벌에서, 마라톤에서, 지역 축제에서</h2>
+  <div class="sub">참가자 수가 늘어도 준비물은 같습니다. 인쇄물에 QR 하나를 더하면 그 자리가 포토존이 됩니다.</div>
+  <div class="onsite">
+    <figure>
+      <img src="screens/event-scene-shoot.jpg" alt="페스티벌에서 참가자들이 자기 폰으로 행사 프레임 네컷을 찍는 모습" width="1400" height="788">
+      <figcaption><b>자기 폰이 곧 부스</b>스캔하면 행사 프레임이 내려오고, 그 자리에서 카운트다운에 맞춰 찍습니다</figcaption>
+    </figure>
+    <figure>
+      <img src="screens/event-scene-run.jpg" alt="마라톤 피니시 구역에서 참가자가 현수막의 QR을 스캔하는 모습" width="1400" height="788">
+      <figcaption><b>마라톤 · 러닝</b>배번표와 현수막에 QR 하나. 완주 직후의 얼굴이 행사 로고와 함께 남습니다</figcaption>
+    </figure>
+    <figure>
+      <img src="screens/event-scene-festival.jpg" alt="지역 축제 현장에서 가족이 배너의 QR을 스캔하는 모습" width="1400" height="788">
+      <figcaption><b>지역 축제 · 공공 캠페인</b>가족 단위 참여가 그대로 참여 실적이 됩니다. 리포트로 정리해 드립니다</figcaption>
+    </figure>
   </div>
 </section>
 
