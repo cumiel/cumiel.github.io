@@ -33,7 +33,7 @@ a{color:inherit;text-decoration:none}
 .hero::after{content:'';position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(60% 70% at 50% 0%, rgba(232,162,92,.20), transparent 70%)}
 .hero .wrap{position:relative;z-index:1;padding:44px 26px 46px;
-  display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 .brand{font-weight:800;letter-spacing:.3em;font-size:14px}
 .brand em{font-style:normal;display:block;font-size:9px;letter-spacing:.22em;color:var(--glow);margin-top:5px;font-weight:700}
 .kicker{margin-top:26px;font-size:10.5px;font-weight:600;color:var(--glow)}
@@ -45,14 +45,15 @@ h1{margin-top:12px;font-size:clamp(29px,4.4vw,44px);font-weight:800;line-height:
 .btn.on{background:var(--cream);color:var(--ink)}
 .btn.off{border:1px solid rgba(251,250,248,.28);color:var(--cream)}
 
-/* 히어로 시각 — 태블릿 안에 부스 대기 화면 */
-.stagecut{position:relative;margin:0 auto;max-width:340px}
-.tablet{border-radius:20px;border:8px solid #000;box-shadow:var(--shadow);overflow:hidden;background:#000}
-.tablet img{width:100%}
-.qr{position:absolute;right:-18px;bottom:-22px;width:104px;border-radius:12px;
+/* 히어로 시각 — 실제 행사 장면 위에 그 태블릿에 뜬 앱 화면을 겹친다.
+   장면만 있으면 "무슨 서비스인지" 모르고, 앱 화면만 있으면 "어디에 쓰는지" 모른다. */
+.stagecut{position:relative;margin:0 auto;max-width:460px}
+.scene{border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(251,250,248,.14)}
+.scene img{width:100%}
+.qr{position:absolute;right:-14px;bottom:-24px;width:104px;border-radius:12px;
   box-shadow:0 18px 34px -12px rgba(0,0,0,.6);border:3px solid #fff}
 .tag{position:absolute;left:-10px;top:-12px;background:var(--glow);color:#241a0c;
-  font-size:10.5px;font-weight:800;padding:6px 12px;border-radius:999px;letter-spacing:.02em}
+  font-size:10.5px;font-weight:800;padding:6px 12px;border-radius:999px;letter-spacing:.02em;z-index:2}
 
 /* ── 한 줄 요약 3칸 ── */
 .gist{border-bottom:1px solid var(--line);background:#fff}
@@ -110,7 +111,7 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
 
 @media screen and (max-width:860px){
   .hero .wrap{grid-template-columns:1fr;gap:32px;padding:36px 26px 40px}
-  .stagecut{order:-1;max-width:260px}
+  .stagecut{order:-1;max-width:420px}
   .gist .wrap{grid-template-columns:1fr 1fr}
   .g:nth-child(2){border-right:0}
   .g:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
@@ -131,13 +132,13 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
   body{font-size:10px;line-height:1.45}
   .wrap{max-width:none;padding:0}
   .hero{color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .hero .wrap{padding:10px 10px;gap:14px;grid-template-columns:1.25fr .75fr}
+  .hero .wrap{padding:10px 10px;gap:14px;grid-template-columns:1.05fr .95fr}
   h1{font-size:23px;margin-top:7px}
   .hero p{font-size:11px;margin-top:10px}
   .kicker{margin-top:12px}
   .btns,.no-print{display:none!important}
-  .stagecut{max-width:168px}
-  .qr{width:52px;right:-9px;bottom:-11px;border-width:2px}
+  .stagecut{max-width:230px}
+  .qr{width:46px;right:-7px;bottom:-12px;border-width:2px}
   .gist .wrap{padding:0}
   .g{padding:7px 10px 7px 0}
   .g+.g{padding-left:12px}
@@ -195,8 +196,8 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
     </div>
     <div class="art">
       <div class="stagecut">
-        <span class="tag">행사 전용 프레임</span>
-        <div class="tablet"><img src="screens/booth-tablet.jpg" alt="태블릿에 뜬 부스 대기 화면 — 행사 프레임이 떠 있고 화면을 누르면 촬영이 시작된다" width="900" height="1200"></div>
+        <span class="tag">행사장 포토존</span>
+        <div class="scene"><img src="screens/booth-scene.jpg" alt="돌잔치장 포토존에 세워 둔 태블릿 앞에서 손님 두 사람이 웃으며 촬영하는 모습" width="1600" height="900"></div>
         <img class="qr" src="screens/booth-qr.jpg" alt="촬영이 끝나면 QR이 뜨고 손님이 스캔해 자기 폰으로 받아 간다" width="1008" height="2181">
       </div>
     </div>
