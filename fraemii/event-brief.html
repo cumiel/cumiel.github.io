@@ -101,6 +101,9 @@ h2{margin-top:9px;font-size:clamp(20px,2.8vw,26px);font-weight:800;letter-spacin
 
 /* 포함 / 준비물 */
 .duo{margin-top:26px;display:grid;grid-template-columns:1.25fr .75fr;gap:14px}
+.duo.three{grid-template-columns:repeat(3,1fr)}
+/* 모바일에서 가로 스크롤임을 알리는 힌트 — 화면 폭이 좁을 때만 보인다 */
+.swipe{display:none;margin-top:10px;font-size:11.5px;color:var(--sub)}
 .col{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 22px}
 .col h3{font-size:15px;font-weight:800;padding-bottom:11px;border-bottom:1px solid var(--line)}
 .col ul{list-style:none;margin-top:12px}
@@ -117,21 +120,60 @@ h2{margin-top:9px;font-size:clamp(20px,2.8vw,26px);font-weight:800;letter-spacin
 
 footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-@media screen and (max-width:860px){
-  .hero .wrap{grid-template-columns:1fr;gap:32px;padding:36px 26px 40px}
-  .stagecut{order:-1;max-width:420px}
-  .gist .wrap{grid-template-columns:1fr 1fr}
-  .g:nth-child(2){border-right:0}
-  .g:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
-  .flow{grid-template-columns:repeat(3,1fr);gap:18px}
-  .flow::before{display:none}
-  .duo{grid-template-columns:1fr}
-  .screens{grid-template-columns:1fr 1fr}
-  .onsite{grid-template-columns:1fr}
+@media screen and (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:26px;padding:32px 22px 36px}
+  .stagecut{max-width:460px}
+  .screens{grid-template-columns:repeat(3,1fr)}
+  .onsite{grid-template-columns:1fr 1fr}
 }
-@media screen and (max-width:520px){
-  .flow{grid-template-columns:1fr 1fr}
-  .screens{grid-template-columns:1fr}
+@media screen and (max-width:660px){
+  .wrap{padding:0 18px}
+  h1{font-size:clamp(26px,7.4vw,34px)}
+  .hero p{font-size:14.5px}
+  .hero .wrap{padding:28px 18px 32px}
+  .stagecut{max-width:100%}
+  .qr{width:84px;left:8px;bottom:-14px}
+
+  /* 요약 — 숫자와 설명을 한 줄에 나란히. 3칸을 세로로 쌓는다 */
+  .gist .wrap{grid-template-columns:1fr;padding:0 18px}
+  .g,.g+.g{padding:15px 0;border-right:0;border-top:1px solid var(--line)}
+  .g:first-child{border-top:0}
+  .g{display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:center}
+  .g .v{font-size:25px}
+  .g .k{margin-top:0;font-size:12.5px}
+
+  /* 흐름 — 가로 5칸은 좁은 화면에서 글자가 뭉갠다. 세로 단계 목록으로 */
+  section{padding:34px 0}
+  .flow{grid-template-columns:1fr;gap:0;margin-top:18px}
+  .flow::before{display:none}
+  .f{text-align:left;display:grid;grid-template-columns:32px 1fr;column-gap:13px;
+     padding:12px 0;border-top:1px solid var(--line)}
+  .f:first-child{border-top:0;padding-top:4px}
+  .f .n{width:32px;height:32px;border:0;font-size:11.5px;grid-row:1 / span 2;align-self:start}
+  .f h3{grid-column:2;margin-top:5px;font-size:14.5px}
+  .f p{grid-column:2;margin-top:3px;font-size:13px}
+
+  /* 현장 사진 · 카드 — 한 줄에 하나 */
+  .onsite{grid-template-columns:1fr;gap:22px}
+  .duo,.duo.three{grid-template-columns:1fr}
+  .col{padding:20px 20px}
+
+  /* 앱 화면 — 가로로 밀어 본다. 세로로 쌓으면 페이지가 한없이 길어진다 */
+  .screens{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:16px -18px 0;padding:0 18px 6px;-webkit-overflow-scrolling:touch}
+  .screens::-webkit-scrollbar{display:none}
+  .screens figure{flex:0 0 63%;scroll-snap-align:center}
+  .screens img{max-width:none}
+  .swipe{display:block}
+
+  .close{padding:24px 22px;gap:16px}
+  .close h2{font-size:19px}
+  .btn{padding:12px 20px;font-size:13px}
+  footer{padding:22px 0 34px}
+}
+@media screen and (max-width:400px){
+  .screens figure{flex:0 0 72%}
+  .g .v{font-size:22px}
 }
 
 /* ── 인쇄: A4 한 장 ── */
@@ -281,13 +323,14 @@ footer{padding:26px 0 40px;color:var(--sub);font-size:11.5px;display:flex;justif
       <figcaption><b>완성 · 공유</b>고화질 저장, 메이킹 영상, QR로 옆 사람에게. 로고가 박힌 채 퍼집니다</figcaption>
     </figure>
   </div>
+  <div class="swipe mono">← swipe →</div>
 </section>
 
 <section>
   <div class="sec-k mono">For organizers</div>
   <h2>주최측이 얻는 것</h2>
   <div class="sub">참여 실적이 숫자로 남습니다. 결과 보고와 차기 예산 근거로 그대로 쓰실 수 있습니다.</div>
-  <div class="duo" style="grid-template-columns:1fr 1fr 1fr">
+  <div class="duo three">
     <div class="col">
       <h3>확산</h3>
       <ul>
