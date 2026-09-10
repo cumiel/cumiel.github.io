@@ -63,12 +63,15 @@ a.card:hover{transform:translateY(-3px);box-shadow:0 22px 44px -18px rgba(34,32,
 .card .more::after{content:' →'}
 
 /* 비교표 */
-.compare{margin:40px 0 64px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
+.compare{margin:40px 0 14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
 .compare table{width:100%;border-collapse:collapse;font-size:14px}
 .compare th,.compare td{padding:14px 18px;text-align:left;border-top:1px solid var(--line);vertical-align:top}
 .compare thead th{border-top:0;background:#F6F3EE;font-size:12px;color:#6B655B;font-weight:700}
 .compare td:first-child{color:var(--sub);font-size:12px;font-weight:700;width:120px}
 .compare b{font-weight:800}
+/* 표 아래 조용한 한 줄 — 제작 방식과 직접 아트 반입 안내 */
+.compare-note{margin:0 0 60px;font-size:12.5px;color:var(--sub);line-height:1.75}
+.compare-note b{font-weight:700;color:var(--ink)}
 
 .back{display:inline-block;margin:0 0 56px;font-size:13px;color:#6B655B;text-decoration:none}
 .back:hover{color:var(--ink)}
@@ -137,14 +140,16 @@ footer a{text-decoration:none;color:var(--accent)}
       <tbody>
         <tr><td>대상</td><td>돌잔치 · 결혼식 · 환갑 · 브라이덜샤워 — 손님이 모이는 행사</td><td>페스티벌 · 콘서트 · 팬미팅 · 팝업 · 러닝 — 관객이 흩어져 있는 행사</td></tr>
         <tr><td>기기</td><td>주최측 태블릿(또는 폰) 한 대를 포토존에</td><td>없음 — 관객 · 참가자 각자의 폰</td></tr>
-        <tr><td>참여 준비</td><td><b>없음</b> · 찍고 QR 스캔만</td><td>QR 스캔 → 앱 설치, 코드는 자동 입력</td></tr>
-        <tr><td>결과물</td><td>사진 + 메이킹 영상, QR로 즉시 · 행사 후 호스트에게 전체 전달</td><td>사진 + 메이킹 영상이 각자 폰에 남고 SNS로 확산</td></tr>
-        <tr><td>운영</td><td>잠금된 촬영 전용 화면 · 자동 초기화 · PIN 종료</td><td>운영 0 — QR 인쇄·부착만</td></tr>
-        <tr><td>기간</td><td>행사 당일</td><td>계약 기간(D-day 표시) 후 자동 종료</td></tr>
+        <tr><td>참여 준비</td><td><b>없음</b> · 찍고 QR 스캔만</td><td>QR 스캔 (앱 설치, 코드는 자동 입력)</td></tr>
+        <tr><td>결과물</td><td>사진 + 메이킹 영상, QR로 즉시 · 행사 후 호스트에게 전체 전달</td><td>사진 + 메이킹 영상이 사용자 각자 폰에 남고 SNS로 확산</td></tr>
+        <tr><td>운영</td><td>부스 전용 화면 · 촬영 자동 초기화 · PIN 종료</td><td>QR 인쇄·부착만</td></tr>
+        <tr><td>기간</td><td>행사 당일</td><td>계약 기간 후 자동 종료</td></tr>
       </tbody>
     </table>
   </div>
-
+  <p class="compare-note">프레임 디자인은 AI를 활용해 제작합니다.
+  <b>직접 만드신 아트가 있다면</b> 그대로 프레임으로 만들어 드립니다.</p>
+  
   <a class="back" href="./index.html">← FRAEMII 앱 소개로</a>
 </main>
 
