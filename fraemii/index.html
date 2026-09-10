@@ -195,9 +195,11 @@ h2 em{font-style:normal;color:var(--accent)}
 .chips>span::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent)}
 
 /* 실사 — 앱 화면만으로는 "언제 어디서 쓰는지"가 안 온다 */
+/* 원본은 16:9 라 1080px 폭에서 580px 높이가 된다 — 너무 크다.
+   가로로 길게 잘라 밴드로 만든다. 피사체가 가운데라 center 크롭이 맞다. */
 .reallife{margin-top:34px;border-radius:20px;overflow:hidden;position:relative;
-  box-shadow:0 30px 60px -24px rgba(26,22,38,.45)}
-.reallife img{width:100%;display:block}
+  aspect-ratio:24/9;box-shadow:0 30px 60px -24px rgba(26,22,38,.45)}
+.reallife img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 42%}
 .reallife figcaption{position:absolute;left:0;right:0;bottom:0;padding:52px 26px 20px;
   background:linear-gradient(transparent,rgba(20,17,26,.82));color:#fff;font-size:14.5px;font-weight:600}
 
@@ -221,6 +223,7 @@ h2 em{font-style:normal;color:var(--accent)}
 @media (max-width:900px){
   .result{grid-template-columns:1fr;gap:26px}
   .moment-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .reallife{aspect-ratio:16/9}
   .reallife figcaption{padding:40px 18px 16px;font-size:13px}
 }
 @media (max-width:560px){
