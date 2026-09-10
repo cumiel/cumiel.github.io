@@ -195,12 +195,12 @@ h2 em{font-style:normal;color:var(--accent)}
 .chips>span::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent)}
 
 /* 실사 — 앱 화면만으로는 "언제 어디서 쓰는지"가 안 온다 */
-/* 원본은 16:9 라 1080px 폭에서 580px 높이가 된다 — 너무 크다.
-   가로로 길게 잘라 밴드로 만든다. 피사체가 가운데라 center 크롭이 맞다. */
-.reallife{margin-top:34px;border-radius:20px;overflow:hidden;position:relative;
-  aspect-ratio:24/9;box-shadow:0 30px 60px -24px rgba(26,22,38,.45)}
-.reallife img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 42%}
-.reallife figcaption{position:absolute;left:0;right:0;bottom:0;padding:52px 26px 20px;
+/* 컨테이너 폭(1080)을 다 쓰면 16:9 가 580px 높이라 사진이 화면을 잡아먹는다.
+   구도는 그대로 두고 폭만 좁혀 가운데로 모은다 — 양옆 여백이 액자가 된다. */
+.reallife{margin:34px auto 0;max-width:720px;border-radius:16px;overflow:hidden;position:relative;
+  box-shadow:0 26px 52px -22px rgba(26,22,38,.40)}
+.reallife img{width:100%;height:auto;display:block}
+.reallife figcaption{position:absolute;left:0;right:0;bottom:0;padding:46px 22px 17px;
   background:linear-gradient(transparent,rgba(20,17,26,.82));color:#fff;font-size:14.5px;font-weight:600}
 
 /* 결과물 — 만드는 과정만 있고 결과가 없었다 */
@@ -223,7 +223,7 @@ h2 em{font-style:normal;color:var(--accent)}
 @media (max-width:900px){
   .result{grid-template-columns:1fr;gap:26px}
   .moment-grid{grid-template-columns:1fr 1fr;gap:12px}
-  .reallife{aspect-ratio:16/9}
+  .reallife{max-width:none}
   .reallife figcaption{padding:40px 18px 16px;font-size:13px}
 }
 @media (max-width:560px){
