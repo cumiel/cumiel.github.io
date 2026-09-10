@@ -194,6 +194,40 @@ h2 em{font-style:normal;color:var(--accent)}
 .chips>span{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:10px 16px 10px 12px;font-size:13.5px;font-weight:600;color:var(--body)}
 .chips>span::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent)}
 
+/* 실사 — 앱 화면만으로는 "언제 어디서 쓰는지"가 안 온다 */
+.reallife{margin-top:34px;border-radius:20px;overflow:hidden;position:relative;
+  box-shadow:0 30px 60px -24px rgba(26,22,38,.45)}
+.reallife img{width:100%;display:block}
+.reallife figcaption{position:absolute;left:0;right:0;bottom:0;padding:52px 26px 20px;
+  background:linear-gradient(transparent,rgba(20,17,26,.82));color:#fff;font-size:14.5px;font-weight:600}
+
+/* 결과물 — 만드는 과정만 있고 결과가 없었다 */
+.result{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:34px}
+.result img{width:100%;border-radius:18px;box-shadow:0 26px 52px -22px rgba(26,22,38,.42)}
+.result h3{font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-.02em;line-height:1.35}
+.result p{margin-top:14px;color:var(--body);font-size:15px}
+.result ul{list-style:none;margin-top:18px}
+.result li{padding:9px 0 9px 24px;position:relative;font-size:14.5px;color:var(--body)}
+.result li::before{content:'';position:absolute;left:2px;top:17px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* 순간 — 텍스트 칩 대신 사진으로 */
+.moment-grid{margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left}
+.moment-grid figure{margin:0;border-radius:14px;overflow:hidden;position:relative;background:#000}
+.moment-grid img{width:100%;display:block;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.moment-grid figure:hover img{transform:scale(1.04)}
+.moment-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:38px 16px 14px;
+  background:linear-gradient(transparent,rgba(20,17,26,.85));color:#fff;font-size:13.5px;font-weight:600;line-height:1.45}
+
+@media (max-width:900px){
+  .result{grid-template-columns:1fr;gap:26px}
+  .moment-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .reallife figcaption{padding:40px 18px 16px;font-size:13px}
+}
+@media (max-width:560px){
+  .moment-grid{grid-template-columns:1fr}
+  .moment-grid figcaption{font-size:13px}
+}
+
 /* footer */
 footer{margin-top:88px;border-top:1px solid var(--line);padding:32px 0 48px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--sub)}
@@ -324,12 +358,45 @@ footer a:hover{color:var(--accent)}
 </section>
 
 <!-- ============ 숫자 ============ -->
+<section class="sec" style="padding-top:26px">
+  <div class="wrap">
+    <figure class="reallife">
+      <img src="screens/life-cafe.jpg" alt="카페에서 친구 두 사람이 폰을 들고 네컷을 찍는 모습. 화면에 카운트다운과 네 칸 프레임이 보인다" loading="lazy" width="1500" height="844">
+      <figcaption><span class="ko">부스를 찾아갈 필요 없이, 앉은 자리에서 바로.</span><span class="en">No booth to find. Right where you're sitting.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="stats">
   <div class="wrap">
     <div class="stat"><div class="v">35<em>+</em></div><div class="k"><span class="ko">기본 프레임, 앱 업데이트 없이 계속 늘어나요</span><span class="en">Built-in frames, with more added without an app update</span></div></div>
     <div class="stat"><div class="v">3<em class="ko">분할</em><em class="en">layouts</em></div><div class="k"><span class="ko">4×1 스트립 · 2×2 네컷 · 6컷 그리드</span><span class="en">Strip · 2×2 · 6-cut grid</span></div></div>
     <div class="stat"><div class="v">+2<em class="ko">장</em><em class="en">takes</em></div><div class="k"><span class="ko">여유 있게 찍고 마음에 드는 컷만 골라요</span><span class="en">Extra takes, so you keep only the best</span></div></div>
     <div class="stat"><div class="v"><span class="ko">0<em>원</em></span><span class="en">Free</span></div><div class="k"><span class="ko">무료 · 회원가입 없이 바로 시작해요</span><span class="en">No sign-up, no account</span></div></div>
+  </div>
+</section>
+
+<!-- ============ 결과물 ============ -->
+<section class="sec" id="result">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow mono">The keepsake</span>
+      <h2><span class="ko">찍고 나면 <em>이렇게</em> 남아요</span><span class="en">This is what you <em>keep</em></span></h2>
+      <p class="sec-desc"><span class="ko">고화질로 저장되고 워터마크가 없어요. 사진 앱의 FRAEMII 앨범에 모이고, 공유 시트로 바로 보낼 수 있어요.</span><span class="en">Saved in high resolution with no watermark, collected in a FRAEMII album, ready to share.</span></p>
+    </div>
+    <div class="result">
+      <img src="screens/life-result.jpg" alt="완성된 네컷이 뜬 폰을 두 손으로 들고 있는 모습" loading="lazy" width="1500" height="844">
+      <div>
+        <h3><span class="ko">부스에서 뽑은 그 한 장, 폰 안에</span><span class="en">That strip from the booth, on your phone</span></h3>
+        <p><span class="ko">미리보기와 저장본을 같은 렌더러가 그려요. 화면에서 본 그대로 저장됩니다.</span><span class="en">Preview and saved file are drawn by the same renderer. What you see is what you save.</span></p>
+        <ul>
+          <li><span class="ko">워터마크 없는 고화질 저장</span><span class="en">High-resolution save, no watermark</span></li>
+          <li><span class="ko">셔터 직전 몇 초가 담긴 메이킹 영상</span><span class="en">A making-of video of the seconds before each shutter</span></li>
+          <li><span class="ko">QR로 옆 사람에게 바로 전달</span><span class="en">Hand it to someone beside you by QR</span></li>
+          <li><span class="ko">보관함에 7일간 자동 보관</span><span class="en">Kept in the in-app vault for 7 days</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -389,6 +456,10 @@ footer a:hover{color:var(--accent)}
 <!-- ============ 명소 프레임 ============ -->
 <section class="sec" id="landmark">
   <div class="wrap">
+    <figure class="reallife" style="margin-bottom:34px">
+      <img src="screens/life-landmark.jpg" alt="경복궁에서 한복을 입고 폰으로 네컷을 찍는 모습" loading="lazy" width="1500" height="844">
+      <figcaption><span class="ko">그 자리에 서야 열립니다. 받아 두면 어디서든 쓸 수 있어요.</span><span class="en">Unlocks where you stand. Once yours, use it anywhere.</span></figcaption>
+    </figure>
     <div class="duo flip">
       <div class="copy">
         <span class="eyebrow mono">Landmark frames</span>
@@ -483,13 +554,19 @@ footer a:hover{color:var(--accent)}
       <h2><span class="ko">이런 순간에 꺼내 보세요</span><span class="en">Made for moments like these</span></h2>
       <p class="sec-desc"><span class="ko">포토부스는 찾아가야 하지만, 폰은 이미 손에 있으니까요.</span><span class="en">A photo booth is somewhere else. Your phone is already in your hand.</span></p>
     </div>
-    <div class="chips">
-      <span><span class="ko">카페에서 친구와 "네컷 찍자"</span><span class="en">"Let's take a photo strip" at the café</span></span>
-      <span><span class="ko">여행지에서 명소 프레임 모으기</span><span class="en">Collecting landmark frames on a trip</span></span>
-      <span><span class="ko">연인과의 기념일</span><span class="en">Anniversaries</span></span>
-      <span><span class="ko">축제 · 콘서트 현장에서</span><span class="en">At the festival or concert</span></span>
-      <span><span class="ko">돌잔치에 온 손님들과</span><span class="en">With guests at a first birthday</span></span>
-      <span><span class="ko">혼자서도 필름 카메라 감성으로</span><span class="en">Solo shots with a film-camera feel</span></span>
+    <div class="moment-grid">
+      <figure><img src="screens/life-cafe.jpg" alt="카페에서 친구와" loading="lazy" width="1500" height="844">
+        <figcaption><span class="ko">카페에서 친구와 "네컷 찍자"</span><span class="en">"Let's take a photo strip" at the café</span></figcaption></figure>
+      <figure><img src="screens/life-landmark.jpg" alt="경복궁에서 한복을 입고" loading="lazy" width="1500" height="844">
+        <figcaption><span class="ko">여행지에서 명소 프레임 모으기</span><span class="en">Collecting landmark frames on a trip</span></figcaption></figure>
+      <figure><img src="screens/life-couple.jpg" alt="야경이 보이는 테라스에서 연인과" loading="lazy" width="1500" height="844">
+        <figcaption><span class="ko">연인과의 기념일</span><span class="en">Anniversaries</span></figcaption></figure>
+      <figure><img src="screens/event-scene-shoot.jpg" alt="페스티벌 현장에서" loading="lazy" width="1400" height="788">
+        <figcaption><span class="ko">축제 · 콘서트 현장에서</span><span class="en">At the festival or concert</span></figcaption></figure>
+      <figure><img src="screens/booth-scene.jpg" alt="돌잔치 포토존에서" loading="lazy" width="1600" height="900">
+        <figcaption><span class="ko">돌잔치에 온 손님들과</span><span class="en">With guests at a first birthday</span></figcaption></figure>
+      <figure><img src="screens/life-solo.jpg" alt="비 오는 창가에서 혼자" loading="lazy" width="1500" height="844">
+        <figcaption><span class="ko">혼자서도 필름 카메라 감성으로</span><span class="en">Solo shots with a film-camera feel</span></figcaption></figure>
     </div>
   </div>
 </section>
