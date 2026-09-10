@@ -150,6 +150,8 @@ h2 em{font-style:normal;color:var(--accent)}
 .gallery figcaption{margin-top:12px;font-size:12.5px;color:var(--body);font-weight:600;display:flex;gap:8px;align-items:baseline}
 .gallery .step{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--accent);letter-spacing:.1em}
 .hint{text-align:center;font-size:12px;color:var(--sub);margin-top:14px}
+/* 프레임 그룹 아래 제작 방식 한 줄 — 기능 설명이 아니라 안내라 톤을 낮춘다 */
+.group-note{margin-top:14px;font-size:12.5px;color:var(--sub);line-height:1.7}
 
 /* features */
 .group{margin-top:44px}
@@ -485,7 +487,7 @@ footer a:hover{color:var(--accent)}
     
     <figure class="reallife">
       <div class="plate"><img src="screens/life-landmark.jpg" alt="경복궁에서 한복을 입고 폰으로 네컷을 찍는 모습" loading="lazy" width="1500" height="844"></div>
-      <figcaption><span class="ko">해당 장소에 방문해야 열립니다. 받아 두면 어디서든 쓸 수 있어요.</span><span class="en">Unlocks where you stand. Once yours, use it anywhere.</span></figcaption>
+      <figcaption><span class="ko">해당 장소에 방문해야 프레임이 열립니다. 받아 두면 어디서든 쓸 수 있어요.</span><span class="en">Unlocks where you stand. Once yours, use it anywhere.</span></figcaption>
     </figure>
   </div>
 </section>
@@ -518,6 +520,7 @@ footer a:hover{color:var(--accent)}
         <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pin"/></svg></span><h4><span class="ko">지역 명소 프레임</span><span class="en">Landmark frames</span></h4><p><span class="ko">그 장소 근처에서만 받을 수 있어요. 한 번 받으면 계속 내 것. 여행 도장처럼 모아 보세요.</span><span class="en">Available only when you're near the landmark. Once it's yours, it's yours for good. Collect them like travel stamps.</span></p></div>
         <div class="feat"><span class="ic"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-refresh"/></svg></span><h4><span class="ko">앱 업데이트 없이 새 프레임</span><span class="en">New frames, no app update</span></h4><p><span class="ko">프레임은 앞으로 계속 업데이트됩니다. 새 디자인은 앱을 열 때 자동으로 받아져요.</span><span class="en">Frames are data, not code. New designs arrive quietly whenever you open the app.</span></p></div>
       </div>
+      <p class="group-note"><span class="ko">프레임 디자인은 AI를 활용해 제작합니다.</span><span class="en">Frame designs are created with the help of AI.</span></p>
     </div>
 
     <div class="group">
