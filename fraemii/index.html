@@ -197,11 +197,13 @@ h2 em{font-style:normal;color:var(--accent)}
 /* 실사 — 앱 화면만으로는 "언제 어디서 쓰는지"가 안 온다 */
 /* 컨테이너 폭(1080)을 다 쓰면 16:9 가 580px 높이라 사진이 화면을 잡아먹는다.
    구도는 그대로 두고 폭만 좁혀 가운데로 모은다 — 양옆 여백이 액자가 된다. */
-.reallife{margin:34px auto 0;max-width:720px;border-radius:16px;overflow:hidden;position:relative;
-  box-shadow:0 26px 52px -22px rgba(26,22,38,.40)}
+/* 사진 위에 그라데이션 자막을 얹으면 배너처럼 보인다 — 캡션은 아래 여백에.
+   폭은 720px 로 묶어 양옆 여백이 액자가 되게 한다. */
+.reallife{margin:34px auto 0;max-width:720px}
+.reallife .plate{border-radius:16px;overflow:hidden;box-shadow:0 26px 52px -22px rgba(26,22,38,.40)}
 .reallife img{width:100%;height:auto;display:block}
-.reallife figcaption{position:absolute;left:0;right:0;bottom:0;padding:46px 22px 17px;
-  background:linear-gradient(transparent,rgba(20,17,26,.82));color:#fff;font-size:14.5px;font-weight:600}
+.reallife figcaption{margin-top:14px;text-align:center;color:var(--sub);
+  font-size:13.5px;font-weight:500;line-height:1.6}
 
 /* 결과물 — 만드는 과정만 있고 결과가 없었다 */
 .result{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:34px}
@@ -224,7 +226,7 @@ h2 em{font-style:normal;color:var(--accent)}
   .result{grid-template-columns:1fr;gap:26px}
   .moment-grid{grid-template-columns:1fr 1fr;gap:12px}
   .reallife{max-width:none}
-  .reallife figcaption{padding:40px 18px 16px;font-size:13px}
+  .reallife figcaption{margin-top:11px;font-size:12.5px}
 }
 @media (max-width:560px){
   .moment-grid{grid-template-columns:1fr}
@@ -364,7 +366,7 @@ footer a:hover{color:var(--accent)}
 <section class="sec" style="padding-top:26px">
   <div class="wrap">
     <figure class="reallife">
-      <img src="screens/life-cafe.jpg" alt="카페에서 친구 두 사람이 폰을 들고 네컷을 찍는 모습. 화면에 카운트다운과 네 칸 프레임이 보인다" loading="lazy" width="1500" height="844">
+      <div class="plate"><img src="screens/life-cafe.jpg" alt="카페에서 친구 두 사람이 폰을 들고 네컷을 찍는 모습. 화면에 카운트다운과 네 칸 프레임이 보인다" loading="lazy" width="1500" height="844"></div>
       <figcaption><span class="ko">부스를 찾아갈 필요 없이, 앉은 자리에서 바로.</span><span class="en">No booth to find. Right where you're sitting.</span></figcaption>
     </figure>
   </div>
@@ -459,10 +461,7 @@ footer a:hover{color:var(--accent)}
 <!-- ============ 명소 프레임 ============ -->
 <section class="sec" id="landmark">
   <div class="wrap">
-    <figure class="reallife" style="margin-bottom:34px">
-      <img src="screens/life-landmark.jpg" alt="경복궁에서 한복을 입고 폰으로 네컷을 찍는 모습" loading="lazy" width="1500" height="844">
-      <figcaption><span class="ko">그 자리에 서야 열립니다. 받아 두면 어디서든 쓸 수 있어요.</span><span class="en">Unlocks where you stand. Once yours, use it anywhere.</span></figcaption>
-    </figure>
+    
     <div class="duo flip">
       <div class="copy">
         <span class="eyebrow mono">Landmark frames</span>
@@ -474,11 +473,17 @@ footer a:hover{color:var(--accent)}
           <li><span class="n">MINE</span><span><span class="ko">받은 프레임은 <b>나의 명소 프레임</b>에 모여 언제든 꺼내 쓸 수 있어요</span><span class="en">Everything you've collected lives in <b>My Landmark Frames</b>, ready whenever you are</span></span></li>
         </ul>
       </div>
+    
       <div class="pair">
         <div class="phone a"><img src="screens/landmark.png" alt="지역 명소 프레임 홈 — 동궁과월지 GET, 경복궁 전부 보유, 하회마을 잠김" loading="lazy" width="1008" height="2181"></div>
         <div class="phone b"><img src="screens/mine.png" alt="나의 명소 프레임 — 경복궁 스트립·네컷·6컷" loading="lazy" width="1008" height="2181"></div>
       </div>
     </div>
+    
+    <figure class="reallife">
+      <div class="plate"><img src="screens/life-landmark.jpg" alt="경복궁에서 한복을 입고 폰으로 네컷을 찍는 모습" loading="lazy" width="1500" height="844"></div>
+      <figcaption><span class="ko">그 자리에 서야 열립니다. 받아 두면 어디서든 쓸 수 있어요.</span><span class="en">Unlocks where you stand. Once yours, use it anywhere.</span></figcaption>
+    </figure>
   </div>
 </section>
 
