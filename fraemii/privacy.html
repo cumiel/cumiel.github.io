@@ -69,7 +69,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 <!-- ─────────────────────────────  한국어  ───────────────────────────── -->
 <section id="ko">
   <h1>개인정보처리방침</h1>
-  <p class="meta">시행일 2026년 9월 8일 · 큐미엘 주식회사</p>
+  <p class="meta">시행일 2026년 9월 13일 · 큐미엘 주식회사</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
@@ -83,8 +83,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     위치를 읽어 기기 안에서 명소 좌표와 거리만 비교하며, 좌표를 서버로 보내거나 저장하지
     않습니다.</p>
     <p><strong>사진이 서버에 올라가는 경우는 하나뿐입니다.</strong> 사용자가 QR 전달을
-    선택했을 때(부스 모드에서는 QR 화면이 뜰 때)이며, 이렇게 올라간 사진은 <strong>7일
-    뒤 자동으로 삭제</strong>됩니다.</p>
+    선택했을 때(부스 모드에서는 QR 화면이 뜰 때)입니다. 올라간 사진은 <strong>7일 뒤</strong>
+    자동으로 삭제됩니다. 예외는 하나입니다 — <strong>주최측이 사진을 받기로 한
+    부스 행사</strong>(돌잔치·결혼식 등)에서는 주최측이 행사 뒤에 받아 갈 수 있도록
+    <strong>30일 뒤</strong> 삭제되며, 손님에게는 촬영 전 대기 화면에서 그 사실을
+    알립니다.</p>
   </div>
 
   <h2>1. 처리하는 정보와 목적</h2>
@@ -102,6 +105,13 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>QR 전달을 선택한 경우의 완성본(사진·메이킹 영상)</td>
       <td>같은 자리에 있는 사람에게 링크·QR 로 전달</td>
       <td>업로드 후 <strong>7일 뒤 자동 삭제</strong></td>
+    </tr>
+    <tr>
+      <td><strong>주최측이 사진을 받기로 한 부스 행사</strong>의 완성본(사진·메이킹 영상)</td>
+      <td>손님에게 QR 로 전달하고, <strong>행사 주최측에게 그날 사진 전체를
+      링크 하나로 전달</strong></td>
+      <td>업로드 후 <strong>30일 뒤 자동 삭제</strong>. 주최측이 행사가 끝난 뒤에
+      받아 가므로 일반 QR 보다 깁니다.</td>
     </tr>
     <tr>
       <td>현재 위치(위도·경도)</td>
@@ -143,11 +153,35 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <p>QR 전달을 선택하면 완성본이 임시 링크로 올라갑니다. <strong>이 링크를 아는 사람은
   누구나 해당 사진을 볼 수 있으므로</strong>, 그 자리에서 함께 찍은 사람에게만 QR 을
   보여 주세요. 링크와 파일은 업로드 7일 뒤 자동으로 삭제되며, 그전에 삭제를 원하시면
-  아래 연락처로 요청해 주시기 바랍니다.</p>
+  아래 연락처로 요청해 주시기 바랍니다. 행사 프레임을 받아 <strong>본인 폰으로</strong>
+  찍은 경우도 일반 전달과 같은 7일입니다.</p>
+  <p><strong>주최측이 사진을 받기로 한 부스 행사는 30일입니다.</strong> 돌잔치·결혼식처럼
+  행사 사진을 남기는 경우, 사진이 손님에게 QR 로 전달되는 동시에 행사가 끝날 때 주최측에게
+  그날 사진을 한 번에 볼 수 있는 링크로 전달됩니다. 이 링크와 사진은 30일 뒤 함께
+  삭제됩니다. 손님에게는 촬영을 시작하기 전 대기 화면에서 이 사실을 알립니다.
+  자세한 내용은 아래 4절을 봐 주세요.</p>
 
   <h2>4. 제3자 제공 및 처리위탁</h2>
-  <p>FRAEMII 는 이용자의 정보를 제3자에게 판매하거나 제공하지 않습니다. 서비스 운영을
-  위해 아래 업체에 처리를 위탁합니다.</p>
+  <p>FRAEMII 는 이용자의 정보를 <strong>판매하지 않으며</strong>, 광고·마케팅 목적으로
+  제공하지 않습니다. 제3자에게 제공하는 경우는 아래 하나뿐입니다.</p>
+  <table>
+    <tr>
+      <th>받는 곳</th><th>제공 항목</th><th>목적</th><th>보유·이용 기간</th>
+    </tr>
+    <tr>
+      <td>해당 행사의 주최측(부스를 설치한 사업자 또는 개인)</td>
+      <td>그 행사의 부스에서 촬영된 완성본(사진·메이킹 영상)</td>
+      <td>행사 사진을 주최측이 보관·전달</td>
+      <td>업로드 후 30일. 기간이 지나면 자동 삭제되며 링크도 열리지 않습니다.</td>
+    </tr>
+  </table>
+  <p class="note"><strong>부스 모드 중에서도 주최측이 사진을 받기로 한 행사에서만</strong>
+  발생합니다(돌잔치·결혼식처럼 사진을 남기는 행사). 브랜드 팝업처럼 주최측이 사진을
+  받지 않는 행사에서는 전달되지 않고, 보관도 일반과 같은 7일입니다. 일반 촬영과, 행사
+  프레임을 받아 본인 폰으로 찍은 사진도 전달되지 않습니다.
+  사진을 받는 행사에서는 <strong>손님이 촬영을 시작하기 전 대기 화면에
+  "촬영한 사진은 행사 주최측에게도 전달됩니다" 안내가 표시됩니다.</strong></p>
+  <p>서비스 운영을 위해 아래 업체에 처리를 위탁합니다.</p>
   <ul>
     <li><strong>Google LLC (Firebase)</strong> — 사용 통계(Analytics), 익명 인증(Auth),
     QR 전달 파일 저장(Cloud Storage), 프레임 배포(Hosting).
@@ -177,7 +211,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li>모든 통신은 HTTPS 로 암호화합니다.</li>
     <li>QR 전달 파일은 추측하기 어려운 무작위 식별자 경로에 저장되고, 덮어쓰기·삭제가
-    차단되며, 7일 수명 주기로 자동 삭제됩니다.</li>
+    차단되며, 수명 주기로 자동 삭제됩니다(일반 7일 · 주최측이 사진을 받는 부스 행사 30일).</li>
     <li>서버에 저장하는 정보를 최소화합니다 — 사진 원본, 위치, 연락처는 서비스 운영에
     필요한 범위를 넘어 보관하지 않습니다.</li>
   </ul>
@@ -190,6 +224,10 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   </ul>
 
   <h2>9. 방침의 변경</h2>
+  <p class="note"><strong>2026년 9월 13일 변경</strong> — 부스 모드로 찍은 사진의 보관
+  기간을 30일로 명시하고(그 전에는 모든 업로드를 7일로 적었습니다), 부스 모드에서
+  행사 주최측에게 사진이 전달된다는 사실을 4절에 추가했습니다. 서비스 동작은 바뀌지
+  않았고, 실제와 다르게 적혀 있던 안내를 바로잡은 것입니다.</p>
   <p>이 방침이 변경되는 경우 시행일과 변경 내용을 이 페이지에 게시합니다. 이용자에게
   불리한 변경은 시행 7일 전부터 안내합니다.</p>
 </section>
@@ -197,7 +235,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 <!-- ─────────────────────────────  English  ───────────────────────────── -->
 <section id="en" hidden>
   <h1>Privacy Policy</h1>
-  <p class="meta">Effective 8 September 2026 · Cumiel Inc.</p>
+  <p class="meta">Effective 13 September 2026 · Cumiel Inc.</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
@@ -212,7 +250,9 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     on the device itself. The coordinates are never transmitted or stored.</p>
     <p><strong>Photos reach our servers in exactly one case:</strong> when you choose QR
     delivery (or when the QR screen appears in booth mode). Those uploads are
-    <strong>deleted automatically after 7 days</strong>.</p>
+    <strong>deleted automatically after 7 days</strong>. Photos taken in
+    <strong>booth mode</strong> (one tablet placed at an event, guests shooting on it) are
+    kept for <strong>30 days</strong> so the event host can collect them afterwards.</p>
   </div>
 
   <h2>1. What we process, and why</h2>
@@ -228,6 +268,13 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>Finished photo and video, when you choose QR delivery</td>
       <td>Handing the photo to people who were there with you</td>
       <td><strong>Deleted automatically 7 days after upload</strong></td>
+    </tr>
+    <tr>
+      <td>Finished photos and making-of videos taken in <strong>booth mode</strong></td>
+      <td>Delivered to guests by QR, and <strong>to the event host as one link holding
+      the whole day's photos</strong></td>
+      <td><strong>Deleted automatically 30 days after upload</strong> — longer than normal
+      QR delivery because the host collects them after the event.</td>
     </tr>
     <tr>
       <td>Current location (latitude/longitude)</td>
@@ -270,11 +317,35 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <p>Choosing QR delivery uploads the finished photo to a temporary link.
   <strong>Anyone who has that link can view the photo</strong>, so only show the QR code to
   the people you took the photo with. The link and files are deleted automatically 7 days
-  after upload; to have them removed sooner, contact us at the address below.</p>
+  after upload (30 days in booth mode); to have them removed sooner, contact us at the
+  address below. Shooting with an event frame on <strong>your own phone</strong> follows
+  the normal 7 days.</p>
+  <p><strong>In booth mode the event host receives the whole day's photos.</strong> Photos
+  taken on a tablet placed at an event are delivered to the guest by QR and, when the event
+  ends, to the host as a single link holding that day's photos. The link and the photos are
+  deleted together after 30 days. See section 4.</p>
 
   <h2>4. Sharing and processors</h2>
-  <p>We do not sell or share your information with third parties. We use the following
-  processor to operate the service.</p>
+  <p>We <strong>never sell</strong> your information and never share it for advertising or
+  marketing. There is exactly one case in which we share it with a third party.</p>
+  <table>
+    <tr>
+      <th>Recipient</th><th>What</th><th>Why</th><th>Retention</th>
+    </tr>
+    <tr>
+      <td>The host of that event (the business or person who set up the booth)</td>
+      <td>Finished photos and making-of videos shot at that booth</td>
+      <td>So the host can keep and hand out the event's photos</td>
+      <td>30 days after upload, then deleted automatically; the link stops working.</td>
+    </tr>
+  </table>
+  <p class="note">This happens <strong>only at booths whose host has asked to receive the
+  photos</strong> (first birthdays, weddings and the like). At booths where the host does
+  not receive photos — a brand pop-up, say — nothing is shared and the photos follow the
+  normal 7 days. Normal shooting and event frames used on your own phone are never shared
+  either. Where photos are shared, the standby screen tells the guest before they start:
+  <strong>"Your photos are also shared with the event host."</strong></p>
+  <p>We use the following processor to operate the service.</p>
   <ul>
     <li><strong>Google LLC (Firebase)</strong> — analytics, anonymous authentication,
     storage for QR delivery, and frame distribution.
@@ -318,6 +389,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   </ul>
 
   <h2>9. Changes to this policy</h2>
+  <p class="note"><strong>Changed 13 September 2026</strong> — we now state that photos taken in booth mode are kept for 30 days (the policy previously said 7 days for every upload), and section 4 now discloses that booth photos are shared with the event host. Nothing about how the service works changed; the policy was simply wrong.</p>
   <p>If this policy changes we will post the new effective date and the changes on this
   page. Changes that disadvantage users will be announced at least 7 days in advance.</p>
 </section>
