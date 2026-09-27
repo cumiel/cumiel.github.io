@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FRAEMII 데이터 삭제 요청 · Delete Your Data</title>
-<meta name="description" content="네컷 포토 앱 FRAEMII 의 개인정보처리방침. 사진은 기기에서 처리하고, 위치는 전송하지 않습니다.">
+<meta name="description" content="FRAEMII 의 데이터 삭제 요청 방법 — 기기에서 직접 지우는 법과 서버에 올린 사진의 삭제를 요청하는 길. Delete your FRAEMII data.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
 @font-face{font-family:'SUIT Variable';font-weight:100 900;font-display:swap;
@@ -15,6 +15,10 @@ body{background:var(--bg);color:var(--ink);
   font-family:'SUIT Variable','SUIT','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   line-height:1.75;-webkit-font-smoothing:antialiased;min-height:100vh;
   display:flex;flex-direction:column}
+/* 언어별 서체 — 기본 스택에는 CJK 서체가 없어 일본어가 한국식 자형으로, 간체
+   한 단어가 두 글꼴로 그려진다(2026-09-26). SUIT 을 앞에 두면 라틴·숫자 톤은 같다. */
+html[lang^="ja"] body{font-family:'SUIT Variable','SUIT','Hiragino Sans','Yu Gothic UI','Noto Sans JP',sans-serif}
+html[lang^="zh"] body{font-family:'SUIT Variable','SUIT','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif}
 .wrap{max-width:760px;margin:0 auto;padding:0 24px;width:100%}
 header{padding:56px 0 0;text-align:center}
 .brand{font-weight:800;letter-spacing:.3em;font-size:20px}
@@ -22,7 +26,7 @@ header{padding:56px 0 0;text-align:center}
   color:var(--accent);margin-top:6px;font-weight:700}
 h1{font-size:26px;font-weight:800;letter-spacing:-.01em;margin:34px 0 6px;text-align:center}
 .meta{text-align:center;color:var(--sub);font-size:12px;letter-spacing:.02em}
-.toggle{display:flex;justify-content:center;gap:6px;margin:22px 0 6px}
+.toggle{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:22px 0 6px}
 .toggle button{font:inherit;font-size:12px;font-weight:700;letter-spacing:.06em;
   padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:#fff;
   color:var(--sub);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
@@ -74,12 +78,15 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
     <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="false">中文</button>
   </div>
 
   <div class="lead">
     <p><strong>FRAEMII 는 계정을 만들지 않습니다.</strong> 이름·이메일·전화번호를 받지 않으므로
     지울 "계정"이 없습니다. 사진 촬영과 편집은 전부 기기 안에서 이루어집니다.</p>
-    <p>서버에 남는 것은 <strong>두 가지</strong>뿐이고, 둘 다 아래 방법으로 지울 수 있습니다.</p>
+    <p>서버에 남는 것은 <strong>두 가지</strong>뿐이고, 둘 다 아래 방법으로 지울 수 있습니다.
+    (주최측이 사진을 받기로 한 부스 행사의 사진은 그 주최측에게도 전달됩니다 — 2절.)</p>
   </div>
 
   <h2>1. 기기 안의 사진 — 직접 지우기</h2>
@@ -90,9 +97,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <li><strong>앱 삭제</strong> — 앱을 지우면 보관함·설치한 프레임·익명 식별자가 함께 사라집니다.</li>
   </ul>
 
-  <h2>2. QR 전달로 올린 사진 — 7일 뒤 자동 삭제</h2>
+  <h2>2. QR 전달로 올린 사진 — 7일 뒤 자동 삭제 (부스 행사는 30일)</h2>
   <p>QR 전달을 선택했을 때만 완성본(사진·메이킹 영상)이 서버에 올라갑니다.
-  <strong>업로드 7일 뒤 자동으로 삭제</strong>되며, 그전에 지우고 싶으면 아래로 요청해 주세요.</p>
+  <strong>업로드 7일 뒤 자동으로 삭제</strong>되며, 그전에 지우고 싶으면 아래로 요청해 주세요.
+  <strong>주최측이 사진을 받기로 한 부스 행사</strong>(돌잔치·결혼식 등)에서 찍은 사진은 주최측이
+  행사 뒤에 받아 갈 수 있도록 <strong>30일 뒤</strong> 삭제되고 그 주최측에게도 전달됩니다 —
+  촬영 전 대기 화면에서 안내합니다. 자세한 것은 <a href="./privacy.html">개인정보처리방침</a> 4절에.</p>
   <ul>
     <li>제목: <strong>[FRAEMII] QR 사진 삭제 요청</strong></li>
     <li>본문에 <strong>QR 링크 주소</strong>를 넣어 주세요 (예: https://fraemii-cumiel.web.app/s/?id=k7f3q2).
@@ -131,12 +141,15 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
     <button type="button" data-lang="en" aria-pressed="true">English</button>
+    <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="false">中文</button>
   </div>
 
   <div class="lead">
     <p><strong>FRAEMII has no accounts.</strong> We never ask for your name, email or phone number,
     so there is no account to delete. Photos are captured and edited entirely on your device.</p>
-    <p>Only <strong>two things</strong> ever reach our servers, and both can be removed below.</p>
+    <p>Only <strong>two things</strong> ever reach our servers, and both can be removed below.
+    (Photos from a booth event where the host has arranged to receive them also go to that host — section 2.)</p>
   </div>
 
   <h2>1. Photos on your device — delete them yourself</h2>
@@ -147,9 +160,13 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <li><strong>Uninstall</strong> — removing the app also removes the vault, installed frames and the anonymous identifier.</li>
   </ul>
 
-  <h2>2. Photos you sent by QR — deleted after 7 days</h2>
+  <h2>2. Photos you sent by QR — deleted after 7 days (booth events: 30 days)</h2>
   <p>A finished photo and making-of video reach our servers only when you choose QR delivery.
-  They are <strong>deleted automatically 7 days after upload</strong>. To remove one sooner, email us.</p>
+  They are <strong>deleted automatically 7 days after upload</strong>. To remove one sooner, email us.
+  Photos taken at a <strong>booth event where the host has arranged to receive them</strong> (a first
+  birthday, a wedding) are deleted after <strong>30 days</strong> so the host can collect them, and are
+  delivered to that host — guests are told on the standby screen before they shoot. Details in
+  section 4 of the <a href="./privacy.html">privacy policy</a>.</p>
   <ul>
     <li>Subject: <strong>[FRAEMII] Delete QR photo</strong></li>
     <li>Include the <strong>QR link</strong> (for example https://fraemii-cumiel.web.app/s/?id=k7f3q2).
@@ -183,6 +200,135 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <p class="note">See the <a href="./privacy.html">Privacy Policy</a> for full details.</p>
 </section>
 
+<section id="ja" hidden>
+  <h1>データ削除のご依頼</h1>
+  <p class="meta">最終更新 2026年9月9日 · Cumiel Inc.</p>
+
+  <div class="toggle">
+    <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+  </div>
+
+  <div class="lead">
+    <p><strong>FRAEMII にはアカウントがありません。</strong>お名前・メールアドレス・電話番号をお伺いしないため、
+    削除するアカウントもありません。写真の撮影と編集はすべて端末内で行われます。</p>
+    <p>サーバーに届くものは<strong>2つ</strong>だけで、どちらも以下の方法で削除できます。
+    （主催者が写真を受け取ることになっているブースイベントの写真は、その主催者にも渡ります — 第2項。）</p>
+  </div>
+
+  <h2>1. 端末内の写真 — ご自身で削除</h2>
+  <p>撮影したカットと完成した写真は端末内にのみ残り、サーバーへ送信されることはありません。</p>
+  <ul>
+    <li><strong>アプリ内のライブラリ</strong> — 画面右上のライブラリを開き、項目をタップして削除します。削除しなくても7日後に自動で消えます。</li>
+    <li><strong>写真アプリに保存したファイル</strong> — 写真アプリ（ギャラリー）の FRAEMII アルバムから削除します。</li>
+    <li><strong>アプリの削除</strong> — アプリを削除すると、ライブラリ・インストールしたフレーム・匿名の識別子も一緒に消えます。</li>
+  </ul>
+
+  <h2>2. QR 受け渡しでアップロードした写真 — 7日後に自動削除（ブースイベントは30日）</h2>
+  <p>完成した写真とメイキング動画がサーバーへ届くのは、QR 受け渡しを選んだときだけです。
+  <strong>アップロードから7日後に自動的に削除</strong>されます。それより前に削除をご希望の場合は、下記までご連絡ください。
+  <strong>主催者が写真を受け取ることになっているブースイベント</strong>（1歳の誕生祝い・結婚式など）で撮影した写真は、
+  主催者がイベント終了後に受け取れるよう<strong>30日後</strong>に削除され、その主催者にも渡ります —
+  撮影前の待機画面でご案内します。詳しくは<a href="./privacy.html">個人情報保護方針</a>の第4項をご覧ください。</p>
+  <ul>
+    <li>件名: <strong>[FRAEMII] QR 写真の削除のご依頼</strong></li>
+    <li>本文に <strong>QR リンクのアドレス</strong>をご記入ください（例: https://fraemii-cumiel.web.app/s/?id=k7f3q2）。
+    リンクがその写真のアドレスですので、これだけで見つけられます。</li>
+  </ul>
+
+  <h2>3. 利用統計 — ご依頼により削除</h2>
+  <p>どのレイアウトとフレームを選んだか、保存・共有したかといった匿名の利用統計を
+  Firebase Analytics で収集しています。写真の内容や位置座標は含まれません。</p>
+  <ul>
+    <li>件名: <strong>[FRAEMII] 利用統計の削除のご依頼</strong></li>
+    <li>この統計はお名前やメールアドレスと結びついていません。本文に<strong>端末の機種と、おおよその利用時期</strong>を
+    お書きいただければ、該当する記録を探して削除します。QR 受け渡しをご利用になったことがあれば、そのリンクも
+    併せてお知らせいただくとより正確です。</li>
+    <li><strong>アプリを削除すると、以降の収集は直ちに停止します。</strong>すでに記録されたものは Firebase の
+    保存期間（最長14か月）を過ぎると失効します。</li>
+  </ul>
+
+  <h2>ご依頼の送り先</h2>
+  <div class="lead">
+    <p><strong><a href="mailto:contact@cumiel.com?subject=%5BFRAEMII%5D%20%E3%83%87%E3%83%BC%E3%82%BF%E5%89%8A%E9%99%A4%E3%81%AE%E3%81%94%E4%BE%9D%E9%A0%BC">contact@cumiel.com</a></strong></p>
+    <p><strong>7営業日以内</strong>に対応し、結果をご返信します。
+    ご本人からのご依頼かを確認するため、追加の情報をお伺いすることがあります。</p>
+  </div>
+
+  <h2>位置情報について</h2>
+  <p>現在地はご当地フレームを開くときにのみ読み取り、端末内でスポットの座標と照らし合わせたうえで破棄します。
+  座標を送信したり保存したりしないため、<strong>削除する位置情報の記録はありません</strong>。
+  権限は端末の設定からいつでも取り消せます。</p>
+
+  <p class="note">詳しい取り扱いは<a href="./privacy.html">プライバシーポリシー</a>をご覧ください。</p>
+</section>
+
+<section id="zh" hidden>
+  <h1>删除您的数据</h1>
+  <p class="meta">最后更新 2026年9月9日 · Cumiel Inc.</p>
+
+  <div class="toggle">
+    <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+  </div>
+
+  <div class="lead">
+    <p><strong>FRAEMII 不设账号。</strong>我们不会索取您的姓名、电子邮箱或电话号码，
+    因此没有需要删除的账号。照片的拍摄与编辑全部在您的设备上完成。</p>
+    <p>只有<strong>两项</strong>内容会到达我们的服务器，二者都可以按下述方式删除。
+    （主办方约定接收照片的拍照亭活动中拍的照片，也会交给该主办方 — 见第 2 节。）</p>
+  </div>
+
+  <h2>1. 设备上的照片 — 请自行删除</h2>
+  <p>您拍摄的单张照片和完成的成品只保存在设备上，不会发送到服务器。</p>
+  <ul>
+    <li><strong>应用内存档</strong> — 打开右上角的存档，点按条目即可删除。未删除的内容也会在 7 天后自动消失。</li>
+    <li><strong>保存到系统相册的文件</strong> — 在「照片」或「图库」的 FRAEMII 相册中删除。</li>
+    <li><strong>卸载应用</strong> — 卸载应用时，应用内存档、已安装的边框以及匿名标识符会一并删除。</li>
+  </ul>
+
+  <h2>2. 通过 QR 上传的照片 — 7 天后自动删除（拍照亭活动为 30 天）</h2>
+  <p>只有在您选择 QR 传送时，成品和花絮视频才会上传到我们的服务器。
+  它们会在<strong>上传 7 天后自动删除</strong>。若想更早删除，请通过下面的方式联系我们。
+  在<strong>主办方约定接收照片的拍照亭活动</strong>（周岁宴、婚礼等）中拍的照片，为了让主办方在活动后领取，
+  会在<strong>30 天后</strong>删除，并交给该主办方 — 拍摄前的待机画面会予以提示。详见
+  <a href="./privacy.html">隐私政策</a>第 4 节。</p>
+  <ul>
+    <li>主题：<strong>[FRAEMII] QR 照片删除请求</strong></li>
+    <li>请在正文中附上 <strong>QR 链接地址</strong>（例如 https://fraemii-cumiel.web.app/s/?id=k7f3q2）。
+    链接就是该照片的地址，仅凭它我们就能找到。</li>
+  </ul>
+
+  <h2>3. 使用统计 — 按请求删除</h2>
+  <p>我们通过 Firebase Analytics 收集匿名使用统计：您选择了哪种版式与边框、是否保存或分享。
+  其中不包含照片内容，也不包含您的位置坐标。</p>
+  <ul>
+    <li>主题：<strong>[FRAEMII] 使用统计删除请求</strong></li>
+    <li>这些统计不与您的姓名或电子邮箱关联。请在正文中写明<strong>设备型号和大致的使用时间</strong>，
+    我们会找到相应记录并删除。如果您使用过 QR 传送，一并提供该链接会更准确。</li>
+    <li><strong>卸载应用后，收集会立即停止。</strong>已经记录的内容将在 Firebase 的保存期限
+    （最长 14 个月）后失效。</li>
+  </ul>
+
+  <h2>请求发送至</h2>
+  <div class="lead">
+    <p><strong><a href="mailto:contact@cumiel.com?subject=%5BFRAEMII%5D%20%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4%E8%AF%B7%E6%B1%82">contact@cumiel.com</a></strong></p>
+    <p>我们会在<strong>7 个工作日内</strong>处理并回复结果。
+    为确认该请求确系您本人提出，我们可能会询问更多信息。</p>
+  </div>
+
+  <h2>关于位置信息</h2>
+  <p>仅在您打开地标边框时读取当前位置，并在设备内与地标坐标比较后丢弃。
+  坐标不会被传输或保存，因此<strong>没有可删除的位置信息记录</strong>。
+  您可以随时在设备设置中撤销该权限。</p>
+
+  <p class="note">详细的处理方式请参阅<a href="./privacy.html">隐私政策</a>。</p>
+</section>
+
 </main>
 
 <footer class="wrap">
@@ -191,20 +337,32 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 </footer>
 
 <script>
-// 언어 토글 — 브라우저 언어가 한국어가 아니면 영어로 연다.
-const sections = {ko: document.getElementById('ko'), en: document.getElementById('en')};
+// 언어 토글 — 순서: 주소의 #ko/#en/#ja/#zh → 기기 언어(ko·ja·zh, 나머지는 영어).
+// 고른 언어는 페이지끼리 오가는 링크에 #해시로 실어 보낸다 — 저장은 하지 않는다.
+const LANGS = ['ko', 'en', 'ja', 'zh'];
+const TITLES = {ko: 'FRAEMII 데이터 삭제 요청', en: 'FRAEMII · Delete Your Data', ja: 'FRAEMII データ削除のご依頼', zh: 'FRAEMII 删除您的数据'};
+const sections = {};
+LANGS.forEach(l => { sections[l] = document.getElementById(l); });
 function show(lang) {
-  sections.ko.hidden = lang !== 'ko';
-  sections.en.hidden = lang !== 'en';
-  document.documentElement.lang = lang;
+  if (!LANGS.includes(lang)) lang = 'en';
+  LANGS.forEach(l => { sections[l].hidden = l !== lang; });
+  // 간체는 zh 만으로는 브라우저가 한자를 일본식·번체 자형으로 그릴 수 있어 zh-Hans 로 못 박는다.
+  document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+  document.title = TITLES[lang];
   document.querySelectorAll('.toggle button').forEach(b => {
     b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   });
+  document.querySelectorAll('a[href$=".html"], a[href*=".html#"]').forEach(a => {
+    a.setAttribute('href', a.getAttribute('href').split('#')[0] + '#' + lang);
+  });
+  history.replaceState(null, '', '#' + lang);
 }
 document.querySelectorAll('.toggle button').forEach(b => {
   b.addEventListener('click', () => show(b.dataset.lang));
 });
-show((navigator.language || 'ko').toLowerCase().startsWith('ko') ? 'ko' : 'en');
+const fromHash = location.hash.replace('#', '').toLowerCase();
+const base = (navigator.language || 'en').toLowerCase().split('-')[0];
+show(LANGS.includes(fromHash) ? fromHash : (['ko', 'ja', 'zh'].includes(base) ? base : 'en'));
 </script>
 
 </body>

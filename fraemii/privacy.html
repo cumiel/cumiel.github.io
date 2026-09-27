@@ -15,6 +15,10 @@ body{background:var(--bg);color:var(--ink);
   font-family:'SUIT Variable','SUIT','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   line-height:1.75;-webkit-font-smoothing:antialiased;min-height:100vh;
   display:flex;flex-direction:column}
+/* 언어별 서체 — 기본 스택에는 CJK 서체가 없어 일본어가 한국식 자형으로, 간체
+   한 단어가 두 글꼴로 그려진다(2026-09-26). SUIT 을 앞에 두면 라틴·숫자 톤은 같다. */
+html[lang^="ja"] body{font-family:'SUIT Variable','SUIT','Hiragino Sans','Yu Gothic UI','Noto Sans JP',sans-serif}
+html[lang^="zh"] body{font-family:'SUIT Variable','SUIT','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif}
 .wrap{max-width:760px;margin:0 auto;padding:0 24px;width:100%}
 header{padding:56px 0 0;text-align:center}
 .brand{font-weight:800;letter-spacing:.3em;font-size:20px}
@@ -22,7 +26,7 @@ header{padding:56px 0 0;text-align:center}
   color:var(--accent);margin-top:6px;font-weight:700}
 h1{font-size:26px;font-weight:800;letter-spacing:-.01em;margin:34px 0 6px;text-align:center}
 .meta{text-align:center;color:var(--sub);font-size:12px;letter-spacing:.02em}
-.toggle{display:flex;justify-content:center;gap:6px;margin:22px 0 6px}
+.toggle{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:22px 0 6px}
 .toggle button{font:inherit;font-size:12px;font-weight:700;letter-spacing:.06em;
   padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:#fff;
   color:var(--sub);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
@@ -74,6 +78,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
     <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="false">中文</button>
   </div>
 
   <div class="lead">
@@ -234,7 +240,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li>큐미엘 주식회사 (Cumiel Inc.)</li>
     <li>보호책임자: 김진솔</li>
-    <li>이메일: <a href="mailto:contact@cumiel.com?subject=[FRAEMII] 개인정보 문의">contact@cumiel.com</a></li>
+    <li>이메일: <a href="mailto:contact@cumiel.com?subject=%5BFRAEMII%5D%20개인정보%20문의">contact@cumiel.com</a></li>
   </ul>
 
   <h2>9. 방침의 변경</h2>
@@ -254,6 +260,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
     <button type="button" data-lang="en" aria-pressed="true">English</button>
+    <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="false">中文</button>
   </div>
 
   <div class="lead">
@@ -264,9 +272,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     on the device itself. The coordinates are never transmitted or stored.</p>
     <p><strong>Photos reach our servers in exactly one case:</strong> when you choose QR
     delivery (or when the QR screen appears in booth mode). Those uploads are
-    <strong>deleted automatically after 7 days</strong>. Photos taken in
-    <strong>booth mode</strong> (one tablet placed at an event, guests shooting on it) are
-    kept for <strong>30 days</strong> so the event host can collect them afterwards.</p>
+    <strong>deleted automatically after 7 days</strong>. The one exception: photos from a
+    <strong>booth event where the host has arranged to receive them</strong> (one tablet placed
+    at a first-birthday party or wedding, guests shooting on it) are kept for
+    <strong>30 days</strong> so the host can collect them afterwards — guests are told this on
+    the standby screen before they shoot.</p>
   </div>
 
   <h2>1. What we process, and why</h2>
@@ -284,7 +294,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td><strong>Deleted automatically 7 days after upload</strong></td>
     </tr>
     <tr>
-      <td>Finished photos and making-of videos taken in <strong>booth mode</strong></td>
+      <td>Finished photos and making-of videos from a <strong>booth event where the host
+      receives the photos</strong></td>
       <td>Delivered to guests by QR, and <strong>to the event host as one link holding
       the whole day's photos</strong></td>
       <td><strong>Deleted automatically 30 days after upload</strong> — longer than normal
@@ -344,13 +355,14 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <p>Choosing QR delivery uploads the finished photo to a temporary link.
   <strong>Anyone who has that link can view the photo</strong>, so only show the QR code to
   the people you took the photo with. The link and files are deleted automatically 7 days
-  after upload (30 days in booth mode); to have them removed sooner, contact us at the
+  after upload; to have them removed sooner, contact us at the
   address below. Shooting with an event frame on <strong>your own phone</strong> follows
   the normal 7 days.</p>
-  <p><strong>In booth mode the event host receives the whole day's photos.</strong> Photos
-  taken on a tablet placed at an event are delivered to the guest by QR and, when the event
-  ends, to the host as a single link holding that day's photos. The link and the photos are
-  deleted together after 30 days. See section 4.</p>
+  <p><strong>A booth event where the host has arranged to receive photos keeps them for 30
+  days.</strong> At a first-birthday party or wedding, photos taken on the tablet are
+  delivered to the guest by QR and, when the event ends, to the host as a single link holding
+  that day's photos. The link and the photos are deleted together after 30 days. See
+  section 4.</p>
 
   <h2>4. Sharing and processors</h2>
   <p>We <strong>never sell</strong> your information and never share it for advertising or
@@ -392,7 +404,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <li>You can delete photos and the in-app vault yourself; uninstalling the app removes
     them.</li>
     <li>You may request immediate deletion of files uploaded for QR delivery, and access to
-    or deletion of your usage statistics. We act on such requests without delay.</li>
+    or deletion of your usage statistics. We act on such requests without delay — how to
+    is set out on the <a href="./delete-data.html">data deletion request</a> page.</li>
     <li>You can revoke permissions in device settings, or stop analytics collection by
     resetting your advertising identifier or uninstalling the app.</li>
   </ul>
@@ -406,7 +419,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li>All communication is encrypted with HTTPS.</li>
     <li>QR delivery files are stored under unguessable random identifiers, cannot be
-    overwritten or deleted by others, and expire on a 7-day lifecycle.</li>
+    overwritten or deleted by others, and expire on a lifecycle (7 days normally · 30 days
+    for a booth event where the host receives the photos).</li>
     <li>We minimise what is stored on servers — photos, location and contact details are
     not retained beyond what the service requires.</li>
   </ul>
@@ -415,13 +429,369 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li>Cumiel Inc. (큐미엘 주식회사)</li>
     <li>Data protection officer: Jinsol Kim</li>
-    <li>Email: <a href="mailto:contact@cumiel.com?subject=[FRAEMII] Privacy">contact@cumiel.com</a></li>
+    <li>Email: <a href="mailto:contact@cumiel.com?subject=%5BFRAEMII%5D%20Privacy">contact@cumiel.com</a></li>
   </ul>
 
   <h2>9. Changes to this policy</h2>
   <p class="note"><strong>Changed 13 September 2026</strong> — we now state that photos taken in booth mode are kept for 30 days (the policy previously said 7 days for every upload), and section 4 now discloses that booth photos are shared with the event host. Nothing about how the service works changed; the policy was simply wrong.</p>
   <p>If this policy changes we will post the new effective date and the changes on this
   page. Changes that disadvantage users will be announced at least 7 days in advance.</p>
+</section>
+
+<!-- ─────────────────────────────  日本語  ───────────────────────────── -->
+<section id="ja" hidden>
+  <h1>個人情報保護方針</h1>
+  <p class="meta">施行日 2026年9月13日 · Cumiel Inc.</p>
+
+  <div class="toggle">
+    <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+  </div>
+
+  <div class="lead">
+    <p><strong>FRAEMII にアカウントはありません。</strong>お名前・メールアドレス・電話番号を
+    お伺いすることはなく、写真の撮影と編集はすべて端末の中で行われます。</p>
+    <p><strong>位置情報が端末の外に出ることはありません。</strong>ご当地フレームを
+    開くときにだけ現在の位置を読み取り、端末の中でスポットの座標との距離だけを比べます。
+    座標をサーバーへ送信したり保存したりはしません。</p>
+    <p><strong>写真がサーバーへアップロードされるのは一つの場合だけです。</strong>利用者が
+    QR での受け渡しを選んだとき（ブースモードでは QR 画面が表示されたとき）です。
+    アップロードされた写真は<strong>7日後</strong>に自動的に削除されます。例外は一つです —
+    <strong>主催者が写真を受け取ることになっているブースイベント</strong>(1歳の誕生祝い・
+    結婚式など)では、主催者がイベントのあとに受け取れるように<strong>30日後</strong>に
+    削除され、お客様には撮影前の待機画面でその旨をお知らせします。</p>
+  </div>
+
+  <h2>1. 取り扱う情報と利用目的</h2>
+  <table>
+    <tr><th>項目</th><th>利用目的</th><th>保存期間</th></tr>
+    <tr>
+      <td>撮影・選択した写真、完成した4カット写真、メイキング動画</td>
+      <td>4カット写真の制作・編集・保存</td>
+      <td>端末内のライブラリに保存したのち<strong>7日後に自動削除</strong>。利用者が写真アプリに
+      保存したファイルは利用者の端末に残ります。</td>
+    </tr>
+    <tr>
+      <td>QR での受け渡しを選んだ場合の完成品（写真・メイキング動画）</td>
+      <td>その場に一緒にいる人へリンク・QR で受け渡す</td>
+      <td>アップロードから<strong>7日後に自動削除</strong></td>
+    </tr>
+    <tr>
+      <td><strong>主催者が写真を受け取ることになっているブースイベント</strong>の完成品
+      (写真・メイキング動画)</td>
+      <td>お客様へ QR で受け渡し、<strong>イベント主催者へその日の写真すべてを
+      1本のリンクで受け渡す</strong></td>
+      <td>アップロードから<strong>30日後に自動削除</strong>。主催者がイベントが終わったあとに
+      受け取るため、通常の QR より長くなっています。</td>
+    </tr>
+    <tr>
+      <td>現在の位置（緯度・経度）</td>
+      <td>ご当地フレームのロック解除の判定</td>
+      <td><strong>送信・保存しません。</strong>端末のメモリ上で最大2分間だけ使われ、
+      破棄されます。</td>
+    </tr>
+    <tr>
+      <td>匿名の識別子（Firebase 匿名認証）</td>
+      <td>QR 受け渡しのアップロード権限の確認 — 個人の識別には使いません</td>
+      <td>アプリを削除すると一緒に消えます</td>
+    </tr>
+    <tr>
+      <td>アプリの利用統計（どのレイアウト・フレームを選んだか、保存・共有したか、
+      位置情報の許可の状態など）</td>
+      <td>機能の改善・不具合の把握</td>
+      <td>Firebase Analytics の既定の保存期間（最長14か月）</td>
+    </tr>
+    <tr>
+      <td>端末情報（機種・OS バージョン・国・アプリインスタンス ID）</td>
+      <td>Firebase が統計を収集する過程で自動的に収集</td>
+      <td>上に同じ</td>
+    </tr>
+    <tr>
+      <td><strong>ブース・イベントフレームをご注文された方</strong>のお名前・ご連絡先・
+      メールアドレス、イベント情報（イベント名・日時・場所・予想人数）、制作のために
+      お送りいただいた写真・ロゴ・文言</td>
+      <td>お見積り、フレームの制作、試作案のお渡し、お問い合わせへの対応</td>
+      <td>制作のためにお預かりした写真・ロゴの原本は<strong>イベント終了後90日で削除</strong>
+      します。注文・決済の記録は韓国の電子商取引法に従って保存します（下記参照）。</td>
+    </tr>
+  </table>
+  <p class="note"><strong>ご注文された方に限り</strong>、韓国の「電子商取引等における
+  消費者保護に関する法律」に従い次の記録を保存します — 契約または申込みの撤回に関する記録
+  5年、代金の決済および財貨の供給に関する記録5年、消費者の苦情または紛争処理に関する記録
+  3年。アプリのみをご利用の場合は該当しません。</p>
+  <p class="note">利用統計に写真の内容や位置の座標が含まれることはありません。イベント
+  コードを入力した場合、そのコード文字列は統計に記録されます。</p>
+
+  <h2>2. アプリが求める権限</h2>
+  <ul>
+    <li><strong>カメラ</strong> — 4カット写真の撮影。拒否した場合は撮影機能だけが
+    使えなくなります。</li>
+    <li><strong>写真</strong> — 完成品を写真アプリに保存し、アルバムの写真をフレームに
+    入れます。</li>
+    <li><strong>位置情報（アプリ使用中のみ）</strong> — ご当地フレームのロック解除。
+    拒否してもアプリのそれ以外の機能はそのまま使えます。ご当地フレームだけが
+    ロックされたまま表示されます。</li>
+  </ul>
+  <p class="note">権限は端末の設定からいつでも取り消せます。FRAEMII がバックグラウンドで
+  位置情報を収集することはありません。</p>
+
+  <h2>3. QR 受け渡しリンクについて</h2>
+  <p>QR での受け渡しを選ぶと、完成品が一時的なリンクにアップロードされます。
+  <strong>このリンクを知っている人は誰でもその写真を見ることができます</strong>ので、
+  その場で一緒に撮った人にだけ QR をお見せください。リンクとファイルはアップロードから
+  7日後に自動的に削除されます。それより前の削除をご希望の場合は、下記の連絡先まで
+  ご依頼ください。イベントフレームを受け取って<strong>ご自身のスマートフォン</strong>で
+  撮影した場合も、通常の受け渡しと同じ7日です。</p>
+  <p><strong>主催者が写真を受け取ることになっているブースイベントは30日です。</strong>
+  1歳の誕生祝いや結婚式のようにイベントの写真を残す場合、写真がお客様へ QR で
+  受け渡されるのと同時に、イベントが終わるときに主催者へその日の写真をまとめて見られる
+  リンクで受け渡されます。このリンクと写真は30日後に一緒に削除されます。お客様には
+  撮影を始める前の待機画面でこの旨をお知らせします。詳しくは下の4節をご覧ください。</p>
+
+  <h2>4. 第三者提供および処理の委託</h2>
+  <p>FRAEMII は利用者の情報を<strong>販売しません</strong>し、広告・マーケティングの目的で
+  提供することもありません。第三者に提供するのは下記の一つだけです。</p>
+  <table>
+    <tr>
+      <th>提供先</th><th>提供する項目</th><th>目的</th><th>保有・利用期間</th>
+    </tr>
+    <tr>
+      <td>そのイベントの主催者（ブースを設置した事業者または個人）</td>
+      <td>そのイベントのブースで撮影された完成品（写真・メイキング動画）</td>
+      <td>イベントの写真を主催者が保管・受け渡すため</td>
+      <td>アップロードから30日。期間が過ぎると自動的に削除され、リンクも開けなくなります。</td>
+    </tr>
+  </table>
+  <p class="note"><strong>ブースモードのうち、主催者が写真を受け取ることになっている
+  イベントでのみ</strong>発生します（1歳の誕生祝いや結婚式のように写真を残すイベント）。
+  ブランドのポップアップのように主催者が写真を受け取らないイベントでは提供されず、
+  保存期間も通常と同じ7日です。通常の撮影や、イベントフレームを受け取ってご自身の
+  スマートフォンで撮った写真も提供されません。
+  写真を受け取るイベントでは、<strong>お客様が撮影を始める前の待機画面に
+  「撮影した写真はイベント主催者にも共有されます」という案内が表示されます。</strong></p>
+  <p>サービスの運営のため、下記の事業者に処理を委託しています。</p>
+  <ul>
+    <li><strong>Google LLC (Firebase)</strong> — 利用統計（Analytics）、匿名認証（Auth）、
+    QR 受け渡しファイルの保存（Cloud Storage）、フレームの配信（Hosting）。
+    <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase
+    のプライバシー</a> · <a href="https://policies.google.com/privacy" target="_blank"
+    rel="noopener">Google プライバシーポリシー</a></li>
+    <li><strong>ご注文された方に限り</strong> — 決済手段の提供会社（Toss Payments など）と
+    販売チャネル（Naver Smart Store など）に、決済・注文の処理に必要な範囲で委託します。
+    カード番号などの決済情報は当社では保管しません。</li>
+  </ul>
+  <p class="note">Firebase はデータを国外（米国などの Google データセンター）で処理します。
+  アプリをインストール・利用することにより、上記の処理の委託および国外移転に同意した
+  ものとみなします。</p>
+
+  <h2>5. 利用者の権利</h2>
+  <ul>
+    <li>端末内の写真・ライブラリは利用者ご自身で削除でき、アプリを削除すると一緒に
+    消えます。</li>
+    <li>QR 受け渡しでアップロードしたファイルの即時削除、利用統計の開示・削除を
+    ご請求いただけます。下記の連絡先へご依頼いただければ遅滞なく対応します。方法は
+    <a href="./delete-data.html">データ削除のご依頼</a>のページにまとめてあります。</li>
+    <li>端末の設定で権限を取り消すか、広告識別子のリセット・アプリの削除によって統計の
+    収集を止めることができます。</li>
+  </ul>
+
+  <h2>6. 子どもの個人情報</h2>
+  <p>FRAEMII は14歳未満の子どもを対象としておらず、子どもから故意に個人情報を収集する
+  ことはありません。14歳未満の子どもがアプリを利用する場合は、法定代理人の指導のもとで
+  ご利用ください。</p>
+
+  <h2>7. 安全性確保の措置</h2>
+  <ul>
+    <li>すべての通信を HTTPS で暗号化します。</li>
+    <li>QR 受け渡しのファイルは推測しにくいランダムな識別子のパスに保存され、上書き・削除が
+    遮断され、ライフサイクルによって自動的に削除されます（通常7日 · 主催者が写真を受け取る
+    ブースイベントは30日）。</li>
+    <li>サーバーに保存する情報を最小限にします — 写真の原本、位置情報、ご連絡先は、
+    サービスの運営に必要な範囲を超えて保管しません。</li>
+  </ul>
+
+  <h2>8. 個人情報保護責任者およびお問い合わせ</h2>
+  <ul>
+    <li>Cumiel Inc. (큐미엘 주식회사)</li>
+    <li>保護責任者：Jinsol Kim</li>
+    <li>メール：<a href="mailto:contact@cumiel.com?subject=%5BFRAEMII%5D%20個人情報に関するお問い合わせ">contact@cumiel.com</a></li>
+  </ul>
+
+  <h2>9. 方針の変更</h2>
+  <p class="note"><strong>2026年9月13日の変更</strong> — ブースモードで撮影した写真の保存
+  期間を30日と明記し（それ以前はすべてのアップロードを7日と記載していました）、ブース
+  モードでイベント主催者に写真が提供されることを4節に追記しました。サービスの動作は
+  変わっておらず、実際と異なって記載されていた案内を正したものです。</p>
+  <p>この方針が変更される場合は、施行日と変更の内容をこのページに掲示します。利用者に
+  不利な変更は施行の7日前からご案内します。</p>
+</section>
+
+<!-- ─────────────────────────────  中文(简体)  ───────────────────────────── -->
+<section id="zh" hidden>
+  <h1>隐私政策</h1>
+  <p class="meta">生效日 2026年9月13日 · Cumiel Inc.</p>
+
+  <div class="toggle">
+    <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+  </div>
+
+  <div class="lead">
+    <p><strong>FRAEMII 不设账号。</strong>我们不收集姓名、电子邮箱和电话号码，照片的拍摄与
+    编辑全部在设备内完成。</p>
+    <p><strong>位置信息不会离开您的设备。</strong>只有在打开本地地标边框时才读取当前位置，
+    并且只在设备内与地标坐标比较距离，不会将坐标发送到服务器或加以保存。</p>
+    <p><strong>照片上传到服务器的情形只有一种。</strong>即用户选择用 QR 传送时（在拍照亭模式下
+    为 QR 画面出现时）。上传的照片将在<strong>7 天后</strong>自动删除。例外只有一个 —
+    在<strong>主办方约定接收照片的拍照亭活动</strong>（周岁宴、婚礼等）中，为便于主办方在活动
+    结束后取回，照片将在<strong>30 天后</strong>删除，并会在拍摄前的待机画面上向客人说明
+    这一点。</p>
+  </div>
+
+  <h2>1. 处理的信息与使用目的</h2>
+  <table>
+    <tr><th>项目</th><th>使用目的</th><th>保存期限</th></tr>
+    <tr>
+      <td>拍摄与选择的照片、完成的四格照片、花絮视频</td>
+      <td>四格照片的制作、编辑与保存</td>
+      <td>保存在设备内的存档中，<strong>7 天后自动删除</strong>。用户保存到相册应用的文件
+      会留在用户的设备上。</td>
+    </tr>
+    <tr>
+      <td>选择 QR 传送时的成品（照片与花絮视频）</td>
+      <td>通过链接或 QR 传给在同一现场的人</td>
+      <td><strong>上传 7 天后自动删除</strong></td>
+    </tr>
+    <tr>
+      <td><strong>主办方约定接收照片的拍照亭活动</strong>的成品（照片与花絮视频）</td>
+      <td>通过 QR 传给客人，并<strong>用一个链接将当天的全部照片交给活动主办方</strong></td>
+      <td><strong>上传 30 天后自动删除</strong>。因主办方在活动结束后才取回，所以比一般的
+      QR 传送更长。</td>
+    </tr>
+    <tr>
+      <td>当前位置（纬度与经度）</td>
+      <td>判断本地地标边框是否解锁</td>
+      <td><strong>不发送、不保存。</strong>仅在设备内存中最多使用 2 分钟，随后丢弃。</td>
+    </tr>
+    <tr>
+      <td>匿名标识符（Firebase 匿名认证）</td>
+      <td>确认 QR 传送的上传权限 — 不用于识别个人</td>
+      <td>卸载应用后一并消失</td>
+    </tr>
+    <tr>
+      <td>应用使用统计（选择了哪种版式与边框、是否保存或分享、位置权限状态等）</td>
+      <td>改进功能、排查错误</td>
+      <td>Firebase Analytics 的默认保存期限（最长 14 个月）</td>
+    </tr>
+    <tr>
+      <td>设备信息（型号、系统版本、国家、应用实例 ID）</td>
+      <td>Firebase 在收集统计的过程中自动收集</td>
+      <td>同上</td>
+    </tr>
+    <tr>
+      <td><strong>订购拍照亭或活动边框的客户</strong>的姓名、联系方式、电子邮箱，活动信息
+      （活动名称、日期时间、地点、预计人数），以及为制作而提供的照片、标识与文案</td>
+      <td>报价、边框制作、样稿交付、咨询答复</td>
+      <td>为制作而收到的照片与标识原件将在<strong>活动结束 90 天后删除</strong>。订单与
+      支付记录依照韩国电子商务法保存（见下文）。</td>
+    </tr>
+  </table>
+  <p class="note"><strong>仅对下单的客户</strong>，依照韩国《电子商务等交易中的消费者保护法》
+  保存以下记录 — 有关合同或撤回要约的记录 5 年，有关货款支付与商品供应的记录 5 年，
+  有关消费者投诉或纠纷处理的记录 3 年。仅使用应用的情况不适用。</p>
+  <p class="note">使用统计中不包含照片的内容或位置坐标。如果输入了活动码，该代码字符串
+  会记录在统计中。</p>
+
+  <h2>2. 应用请求的权限</h2>
+  <ul>
+    <li><strong>相机</strong> — 拍摄四格照片。拒绝后只有拍摄功能无法使用。</li>
+    <li><strong>照片</strong> — 将成品保存到相册应用，并把相册中的照片放入边框。</li>
+    <li><strong>位置（仅在使用应用期间）</strong> — 解锁本地地标边框。即使拒绝，应用的
+    其余功能仍可照常使用，只有地标边框保持锁定显示。</li>
+  </ul>
+  <p class="note">您可以随时在设备设置中撤回权限。FRAEMII 不会在后台收集位置信息。</p>
+
+  <h2>3. 关于 QR 传送链接的说明</h2>
+  <p>选择 QR 传送后，成品会上传到一个临时链接。<strong>凡知道该链接的人都能查看这张
+  照片</strong>，因此请只向当场一起拍摄的人出示 QR。链接与文件将在上传 7 天后自动删除；
+  若希望提前删除，请通过下方的联系方式提出请求。领取活动边框后用<strong>本人手机</strong>
+  拍摄的情形，也与一般传送相同，为 7 天。</p>
+  <p><strong>主办方约定接收照片的拍照亭活动为 30 天。</strong>像周岁宴、婚礼这样要留存活动
+  照片的情形，照片在通过 QR 传给客人的同时，活动结束时也会以一个可一次查看当天照片的
+  链接交给主办方。该链接与照片将在 30 天后一并删除。我们会在客人开始拍摄前的待机画面上
+  说明这一点。详情请参阅下文第 4 节。</p>
+
+  <h2>4. 第三方共享与委托处理</h2>
+  <p>FRAEMII <strong>不出售</strong>用户的信息，也不为广告或营销目的提供。向第三方提供的
+  情形仅有以下一种。</p>
+  <table>
+    <tr>
+      <th>接收方</th><th>提供项目</th><th>目的</th><th>保有与使用期限</th>
+    </tr>
+    <tr>
+      <td>该活动的主办方（设置拍照亭的企业或个人）</td>
+      <td>在该活动拍照亭拍摄的成品（照片与花絮视频）</td>
+      <td>由主办方保管并交付活动照片</td>
+      <td>上传后 30 天。期限届满即自动删除，链接也将无法打开。</td>
+    </tr>
+  </table>
+  <p class="note"><strong>仅在拍照亭模式中主办方约定接收照片的活动</strong>才会发生（如周岁宴、
+  婚礼这类要留存照片的活动）。在品牌快闪店这类主办方不接收照片的活动中不会提供，保存期限
+  也与一般情形相同，为 7 天。一般拍摄，以及领取活动边框后用本人手机拍摄的照片，同样不会
+  提供。在接收照片的活动中，<strong>客人开始拍摄前的待机画面上会显示「拍摄的照片也会
+  提供给活动主办方」的提示。</strong></p>
+  <p>为运营服务，我们委托以下企业进行处理。</p>
+  <ul>
+    <li><strong>Google LLC (Firebase)</strong> — 使用统计（Analytics）、匿名认证（Auth）、
+    QR 传送文件的存储（Cloud Storage）、边框分发（Hosting）。
+    <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase
+    隐私保护</a> · <a href="https://policies.google.com/privacy" target="_blank"
+    rel="noopener">Google 隐私政策</a></li>
+    <li><strong>仅对下单的客户</strong> — 在处理支付与订单所必需的范围内，委托支付服务
+    提供商（如 Toss Payments）与销售渠道（如 Naver Smart Store）。我们不保存卡号等
+    支付信息。</li>
+  </ul>
+  <p class="note">Firebase 在韩国境外（美国等 Google 数据中心）处理数据。安装并使用本应用
+  即视为同意上述委托处理与跨境转移。</p>
+
+  <h2>5. 用户的权利</h2>
+  <ul>
+    <li>设备内的照片与存档可由用户自行删除，卸载应用后会一并清除。</li>
+    <li>您可以请求立即删除通过 QR 传送上传的文件，以及查阅或删除使用统计。通过下方的
+    联系方式提出请求后，我们会毫不迟延地处理。方法已整理在<a href="./delete-data.html">数据删除请求</a>页面。</li>
+    <li>您可以在设备设置中撤回权限，或通过重置广告标识符、卸载应用来停止统计收集。</li>
+  </ul>
+
+  <h2>6. 儿童的个人信息</h2>
+  <p>FRAEMII 不以未满 14 周岁的儿童为对象，也不会故意收集儿童的个人信息。未满 14 周岁的
+  儿童使用本应用时，请在法定代理人的指导下使用。</p>
+
+  <h2>7. 安全保障措施</h2>
+  <ul>
+    <li>所有通信均以 HTTPS 加密。</li>
+    <li>QR 传送文件保存在难以猜测的随机标识符路径下，覆盖与删除均被阻止，并通过生命周期
+    规则自动删除（一般 7 天 · 主办方接收照片的拍照亭活动 30 天）。</li>
+    <li>我们把保存在服务器上的信息降到最低 — 照片原件、位置信息与联系方式不会超出服务
+    运营所需的范围保存。</li>
+  </ul>
+
+  <h2>8. 个人信息保护负责人与联系方式</h2>
+  <ul>
+    <li>Cumiel Inc. (큐미엘 주식회사)</li>
+    <li>保护负责人：Jinsol Kim</li>
+    <li>电子邮箱：<a href="mailto:contact@cumiel.com?subject=%5BFRAEMII%5D%20个人信息咨询">contact@cumiel.com</a></li>
+  </ul>
+
+  <h2>9. 政策的变更</h2>
+  <p class="note"><strong>2026 年 9 月 13 日变更</strong> — 明确了拍照亭模式下拍摄的照片保存
+  期限为 30 天（此前将所有上传都写作 7 天），并在第 4 节中补充了拍照亭模式下照片会提供给
+  活动主办方这一事实。服务的运作方式没有改变，这只是更正了与实际不符的说明。</p>
+  <p>本政策如有变更，我们将在本页面公布生效日与变更内容。对用户不利的变更将自施行前
+  7 日起予以公告。</p>
 </section>
 
 </main>
@@ -432,20 +802,32 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 </footer>
 
 <script>
-// 언어 토글 — 브라우저 언어가 한국어가 아니면 영어로 연다.
-const sections = {ko: document.getElementById('ko'), en: document.getElementById('en')};
+// 언어 토글 — 순서: 주소의 #ko/#en/#ja/#zh → 기기 언어(ko·ja·zh, 나머지는 영어).
+// 고른 언어는 페이지끼리 오가는 링크에 #해시로 실어 보낸다 — 저장은 하지 않는다.
+const LANGS = ['ko', 'en', 'ja', 'zh'];
+const TITLES = {ko: 'FRAEMII 개인정보처리방침', en: 'FRAEMII Privacy Policy', ja: 'FRAEMII 個人情報保護方針', zh: 'FRAEMII 隐私政策'};
+const sections = {};
+LANGS.forEach(l => { sections[l] = document.getElementById(l); });
 function show(lang) {
-  sections.ko.hidden = lang !== 'ko';
-  sections.en.hidden = lang !== 'en';
-  document.documentElement.lang = lang;
+  if (!LANGS.includes(lang)) lang = 'en';
+  LANGS.forEach(l => { sections[l].hidden = l !== lang; });
+  // 간체는 zh 만으로는 브라우저가 한자를 일본식·번체 자형으로 그릴 수 있어 zh-Hans 로 못 박는다.
+  document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+  document.title = TITLES[lang];
   document.querySelectorAll('.toggle button').forEach(b => {
     b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   });
+  document.querySelectorAll('a[href$=".html"], a[href*=".html#"]').forEach(a => {
+    a.setAttribute('href', a.getAttribute('href').split('#')[0] + '#' + lang);
+  });
+  history.replaceState(null, '', '#' + lang);
 }
 document.querySelectorAll('.toggle button').forEach(b => {
   b.addEventListener('click', () => show(b.dataset.lang));
 });
-show((navigator.language || 'ko').toLowerCase().startsWith('ko') ? 'ko' : 'en');
+const fromHash = location.hash.replace('#', '').toLowerCase();
+const base = (navigator.language || 'en').toLowerCase().split('-')[0];
+show(LANGS.includes(fromHash) ? fromHash : (['ko', 'ja', 'zh'].includes(base) ? base : 'en'));
 </script>
 
 </body>
