@@ -73,7 +73,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 <!-- ─────────────────────────────  한국어  ───────────────────────────── -->
 <section id="ko">
   <h1>개인정보처리방침</h1>
-  <p class="meta">시행일 2026년 9월 13일 · 큐미엘 주식회사</p>
+  <p class="meta">시행일 2026년 10월 20일 · 큐미엘 주식회사</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
@@ -88,12 +88,13 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <p><strong>위치는 기기 밖으로 나가지 않습니다.</strong> 지역 명소 프레임을 열 때만 현재
     위치를 읽어 기기 안에서 명소 좌표와 거리만 비교하며, 좌표를 서버로 보내거나 저장하지
     않습니다.</p>
-    <p><strong>사진이 서버에 올라가는 경우는 하나뿐입니다.</strong> 사용자가 QR 전달을
-    선택했을 때(부스 모드에서는 QR 화면이 뜰 때)입니다. 올라간 사진은 <strong>7일 뒤</strong>
-    자동으로 삭제됩니다. 예외는 하나입니다 — <strong>주최측이 사진을 받기로 한
-    부스 행사</strong>(돌잔치·결혼식 등)에서는 주최측이 행사 뒤에 받아 갈 수 있도록
-    <strong>30일 뒤</strong> 삭제되며, 손님에게는 촬영 전 대기 화면에서 그 사실을
-    알립니다.</p>
+    <p><strong>사진이 서버에 올라가는 경우는 세 가지입니다.</strong> ① 사용자가 QR 전달을
+    선택했을 때(부스 모드에서는 QR 화면이 뜰 때) — <strong>7일 뒤</strong> 자동 삭제.
+    ② <strong>주최측이 사진을 받기로 한 부스 행사</strong>(돌잔치·결혼식 등) — 주최측이 행사
+    뒤에 받아 갈 수 있도록 <strong>30일 뒤</strong> 삭제되며, 손님에게는 촬영 전 대기 화면에서
+    그 사실을 알립니다. ③ <strong>랜선 네컷</strong> — 떨어져 있는 사람과 한 장을 만들 때 각자
+    찍은 칸(사진·짧은 영상)이 올라가 같은 세션의 참여자에게만 보이고 <strong>7일 뒤</strong>
+    삭제됩니다.</p>
   </div>
 
   <h2>1. 처리하는 정보와 목적</h2>
@@ -131,13 +132,20 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>앱을 삭제하면 함께 사라짐</td>
     </tr>
     <tr>
-      <td>앱 사용 통계(어떤 분할·프레임을 골랐는지, 저장·공유 여부, 위치 권한 상태 등)</td>
-      <td>기능 개선·오류 파악</td>
-      <td>Firebase Analytics 기본 보존 기간(최대 14개월)</td>
+      <td><strong>랜선 네컷</strong>에서 각자 찍은 칸(사진·짧은 영상), 호스트가 적은 이름(선택)</td>
+      <td>같은 세션의 참여자가 한 장의 네컷으로 완성</td>
+      <td>업로드 후 <strong>7일 뒤 자동 삭제</strong>. 실시간 영상은 중계만 되고 저장되지
+      않습니다.</td>
     </tr>
     <tr>
-      <td>기기 정보(모델·OS 버전·국가·앱 인스턴스 ID)</td>
-      <td>Firebase 가 통계 수집 과정에서 자동으로 수집</td>
+      <td>앱 사용 통계(화면 이동, 어떤 분할·프레임을 골랐는지, 저장·공유 여부, 위치 권한 상태
+      등 — 익명 식별자 기준)</td>
+      <td>기능 개선·오류 파악</td>
+      <td>당사 서버(Google Cloud 서울 리전)에 <strong>400일</strong> 보관 후 자동 삭제</td>
+    </tr>
+    <tr>
+      <td>앱 버전·플랫폼(iOS/Android)</td>
+      <td>사용 통계와 함께 기록</td>
       <td>위와 같음</td>
     </tr>
     <tr>
@@ -153,7 +161,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   대금 결제 및 재화 공급에 관한 기록 5년, 소비자 불만 또는 분쟁 처리에 관한 기록 3년.
   앱만 이용하시는 경우에는 해당하지 않습니다.</p>
   <p class="note">사용 통계에는 사진의 내용이나 위치 좌표가 포함되지 않습니다. 행사 코드를
-  입력한 경우 그 코드 문자열은 통계에 기록됩니다.</p>
+  입력한 경우 코드 자체가 아니라 되돌릴 수 없는 해시의 앞 8자리만 기록됩니다.</p>
 
   <h2>2. 앱이 요청하는 권한</h2>
   <ul>
@@ -177,6 +185,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   그날 사진을 한 번에 볼 수 있는 링크로 전달됩니다. 이 링크와 사진은 30일 뒤 함께
   삭제됩니다. 손님에게는 촬영을 시작하기 전 대기 화면에서 이 사실을 알립니다.
   자세한 내용은 아래 4절을 봐 주세요.</p>
+  <p><strong>랜선 네컷 링크는 초대받은 사람만 엽니다.</strong> 호스트가 만든 초대 링크를 받은
+  사람이 한 칸에 들어오며, 세션이 열려 있는 동안 참여자는 서로의 실시간 영상과 찍은 칸을
+  봅니다. 영상은 중계만 되고 저장되지 않으며, 찍은 칸의 사진·짧은 영상은 7일 뒤 삭제됩니다.
+  호스트는 참여자를 내보낼 수 있고, 내보내면 그 칸의 링크는 더 이상 쓸 수 없습니다. 호스트가
+  적은 이름은 초대 문구에 쓰이고 세션과 함께 7일 뒤 사라집니다.</p>
 
   <h2>4. 제3자 제공 및 처리위탁</h2>
   <p>FRAEMII 는 이용자의 정보를 <strong>판매하지 않으며</strong>, 광고·마케팅 목적으로
@@ -200,17 +213,23 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   "촬영한 사진은 행사 주최측에게도 전달됩니다" 안내가 표시됩니다.</strong></p>
   <p>서비스 운영을 위해 아래 업체에 처리를 위탁합니다.</p>
   <ul>
-    <li><strong>Google LLC (Firebase)</strong> — 사용 통계(Analytics), 익명 인증(Auth),
-    QR 전달 파일 저장(Cloud Storage), 프레임 배포(Hosting).
+    <li><strong>Google LLC (Firebase · Google Cloud)</strong> — 익명 인증(Auth), 사진·영상 저장
+    (Cloud Storage), 세션·공지·주문 데이터(Firestore), 사용 통계 집계(BigQuery), 서버 기능
+    (Cloud Functions), 프레임·페이지 배포(Hosting).
     <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase
     개인정보 보호</a> · <a href="https://policies.google.com/privacy" target="_blank"
     rel="noopener">Google 개인정보처리방침</a></li>
+    <li><strong>Cloudflare, Inc.</strong> — 랜선 네컷의 실시간 영상 중계. 영상은 중계만 되고
+    저장되지 않습니다. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare 개인정보처리방침</a></li>
     <li><strong>주문하신 분에 한해</strong> — 결제 수단 제공사(토스페이먼츠 등)와
     판매 채널(네이버 스마트스토어 등)에 결제·주문 처리를 위한 범위에서 위탁합니다.
     카드번호 등 결제 정보는 저희가 보관하지 않습니다.</li>
   </ul>
-  <p class="note">Firebase 는 데이터를 국외(미국 등 Google 데이터센터)에서 처리합니다.
-  앱을 설치·이용함으로써 위 처리위탁 및 국외 이전에 동의하는 것으로 봅니다.</p>
+  <p class="note"><strong>저장 위치.</strong> 사진·영상·사용 통계·세션·주문 자료는 Google Cloud
+  <strong>서울 리전</strong>(asia-northeast3)에 저장합니다. 다만 두 가지는 국외를 거칩니다 —
+  익명 인증 기록(이름·연락처가 없는 식별 번호)은 Google 이 미국 데이터센터에서 처리하고, 랜선
+  네컷의 실시간 영상은 Cloudflare 의 해외 서버를 거쳐 중계됩니다(저장되지 않음). 앱을
+  설치·이용함으로써 위 범위의 처리위탁 및 국외 처리에 동의하는 것으로 봅니다.</p>
 
   <h2>5. 이용자의 권리</h2>
   <ul>
@@ -218,8 +237,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     지워집니다.</li>
     <li>QR 전달로 올린 파일의 즉시 삭제, 사용 통계의 열람·삭제를 요청하실 수 있습니다.
     아래 연락처로 요청하시면 지체 없이 처리합니다. 방법은 <a href="./delete-data.html">데이터 삭제 요청</a> 페이지에 정리해 두었습니다.</li>
-    <li>기기 설정에서 권한을 철회하거나, 광고 식별자 초기화·앱 삭제로 통계 수집을 중단할
-    수 있습니다.</li>
+    <li>기기 설정에서 권한을 철회하거나, 앱을 삭제해 통계 수집을 중단할 수 있습니다. 광고
+    식별자는 쓰지 않습니다.</li>
   </ul>
 
   <h2>6. 아동의 개인정보</h2>
@@ -244,6 +263,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   </ul>
 
   <h2>9. 방침의 변경</h2>
+  <p class="note"><strong>2026년 10월 20일 변경</strong> — ① 앱 1.7.0 부터 Firebase Analytics 를
+  쓰지 않습니다. 사용 통계는 당사 서버(서울)에서만 집계하고 기기 모델·OS·국가·IP 기반 위치
+  추정·앱 인스턴스 ID 를 더 이상 수집하지 않으며, 보관 기간을 400일로 정했습니다. ② 랜선
+  네컷(1.6.0)에서 참여자끼리 사진·영상을 주고받는 것과 영상 중계를 Cloudflare 가 맡는 것을
+  1·3·4절에 적었습니다. ③ 데이터 저장 위치를 서울 리전으로 명시하고, 국외를 거치는 두 가지를
+  구체적으로 적었습니다.</p>
   <p class="note"><strong>2026년 9월 13일 변경</strong> — 부스 모드로 찍은 사진의 보관
   기간을 30일로 명시하고(그 전에는 모든 업로드를 7일로 적었습니다), 부스 모드에서
   행사 주최측에게 사진이 전달된다는 사실을 4절에 추가했습니다. 서비스 동작은 바뀌지
@@ -255,7 +280,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 <!-- ─────────────────────────────  English  ───────────────────────────── -->
 <section id="en" hidden>
   <h1>Privacy Policy</h1>
-  <p class="meta">Effective 13 September 2026 · Cumiel Inc.</p>
+  <p class="meta">Effective 20 October 2026 · Cumiel Inc.</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
@@ -270,13 +295,14 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <p><strong>Your location never leaves your device.</strong> When you open landmark
     frames the app reads your current position only to measure the distance to a landmark
     on the device itself. The coordinates are never transmitted or stored.</p>
-    <p><strong>Photos reach our servers in exactly one case:</strong> when you choose QR
-    delivery (or when the QR screen appears in booth mode). Those uploads are
-    <strong>deleted automatically after 7 days</strong>. The one exception: photos from a
-    <strong>booth event where the host has arranged to receive them</strong> (one tablet placed
-    at a first-birthday party or wedding, guests shooting on it) are kept for
-    <strong>30 days</strong> so the host can collect them afterwards — guests are told this on
-    the standby screen before they shoot.</p>
+    <p><strong>Photos reach our servers in three cases.</strong> ① When you choose QR delivery
+    (or when the QR screen appears in booth mode) — deleted automatically after
+    <strong>7 days</strong>. ② A <strong>booth event where the host has arranged to receive
+    photos</strong> (a first-birthday party or wedding) — kept for <strong>30 days</strong> so the
+    host can collect them afterwards; guests are told this on the standby screen before they
+    shoot. ③ <strong>Long-distance Photo</strong> — when you make one strip with people who are far
+    away, the slot each person shoots (a photo and a short clip) is uploaded, visible only to that
+    session's participants, and deleted after <strong>7 days</strong>.</p>
   </div>
 
   <h2>1. What we process, and why</h2>
@@ -313,14 +339,21 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>Removed when you uninstall the app</td>
     </tr>
     <tr>
-      <td>Usage statistics (which layout and frame you picked, whether you saved or shared,
-      location-permission status, and similar)</td>
-      <td>Improving features and diagnosing errors</td>
-      <td>Firebase Analytics default retention (up to 14 months)</td>
+      <td><strong>Long-distance Photo</strong> — the slot you shoot (a photo and a short clip) and
+      the host's optional name</td>
+      <td>Combined into one strip by the participants of that session</td>
+      <td><strong>Deleted 7 days</strong> after upload. Live video is relayed only, never stored.</td>
     </tr>
     <tr>
-      <td>Device information (model, OS version, country, app instance ID)</td>
-      <td>Collected automatically by Firebase as part of analytics</td>
+      <td>Usage statistics (screen views, which layout and frame you picked, whether you saved or
+      shared, location-permission status, and similar — keyed to the anonymous identifier)</td>
+      <td>Improving features and diagnosing errors</td>
+      <td>Kept on our own servers (Google Cloud, Seoul region) for <strong>400 days</strong>, then
+      deleted automatically</td>
+    </tr>
+    <tr>
+      <td>App version and platform (iOS/Android)</td>
+      <td>Recorded with usage statistics</td>
       <td>As above</td>
     </tr>
     <tr>
@@ -338,7 +371,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   consumer complaints or dispute resolution for 3 years. This does not apply if you only use
   the app.</p>
   <p class="note">Usage statistics never include the content of your photos or your
-  coordinates. If you enter an event code, that code string is recorded in analytics.</p>
+  coordinates. If you enter an event code, only the first 8 characters of a one-way hash of
+  the code are recorded — never the code itself.</p>
 
   <h2>2. Permissions the app requests</h2>
   <ul>
@@ -363,6 +397,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   delivered to the guest by QR and, when the event ends, to the host as a single link holding
   that day's photos. The link and the photos are deleted together after 30 days. See
   section 4.</p>
+  <p><strong>Long-distance Photo links open only for the people invited.</strong> Someone who
+  receives the host's invite link takes one slot, and while the session is open participants see
+  each other's live video and the slots they shot. Video is relayed only and never stored; slot
+  photos and clips are deleted after 7 days. The host can remove a participant, after which that
+  slot's link no longer works. The name a host types is used in the invitation text and disappears
+  with the session after 7 days.</p>
 
   <h2>4. Sharing and processors</h2>
   <p>We <strong>never sell</strong> your information and never share it for advertising or
@@ -386,18 +426,24 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <strong>"Your photos are also shared with the event host."</strong></p>
   <p>We use the following processors to operate the service.</p>
   <ul>
-    <li><strong>Google LLC (Firebase)</strong> — analytics, anonymous authentication,
-    storage for QR delivery, and frame distribution.
+    <li><strong>Google LLC (Firebase · Google Cloud)</strong> — anonymous authentication, photo and
+    video storage (Cloud Storage), session, notice and order data (Firestore), usage statistics
+    (BigQuery), server functions (Cloud Functions), and frame and page hosting.
     <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase
     privacy</a> · <a href="https://policies.google.com/privacy" target="_blank"
     rel="noopener">Google Privacy Policy</a></li>
+    <li><strong>Cloudflare, Inc.</strong> — relays the live video in Long-distance Photo. Video is
+    relayed only and never stored. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare privacy policy</a></li>
     <li><strong>For customers who place an order only</strong> — payment providers
     (such as Toss Payments) and sales channels (such as Naver Smart Store), limited to
     processing the order and payment. We do not store card numbers.</li>
   </ul>
-  <p class="note">Firebase processes data outside Korea, in Google data centres including
-  the United States. By installing and using the app you consent to this processing and
-  transfer.</p>
+  <p class="note"><strong>Where data is stored.</strong> Photos, videos, usage statistics, sessions
+  and order materials are stored in the Google Cloud <strong>Seoul region</strong> (asia-northeast3).
+  Two things pass outside Korea: anonymous authentication records (an identifier with no name or
+  contact details) are processed by Google in data centres in the United States, and the live video
+  in Long-distance Photo is relayed through Cloudflare's servers abroad (not stored). By installing
+  and using the app you consent to this processing within that scope.</p>
 
   <h2>5. Your rights</h2>
   <ul>
@@ -406,8 +452,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <li>You may request immediate deletion of files uploaded for QR delivery, and access to
     or deletion of your usage statistics. We act on such requests without delay — how to
     is set out on the <a href="./delete-data.html">data deletion request</a> page.</li>
-    <li>You can revoke permissions in device settings, or stop analytics collection by
-    resetting your advertising identifier or uninstalling the app.</li>
+    <li>You can revoke permissions in device settings, or stop usage statistics by uninstalling
+    the app. We do not use the advertising identifier.</li>
   </ul>
 
   <h2>6. Children</h2>
@@ -433,6 +479,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   </ul>
 
   <h2>9. Changes to this policy</h2>
+  <p class="note"><strong>Changed 20 October 2026</strong> — ① From app version 1.7.0 we no longer
+  use Firebase Analytics. Usage statistics are counted only on our own servers in Seoul; device
+  model, OS version, country, IP-based location estimates and the app instance ID are no longer
+  collected, and retention is set to 400 days. ② Sections 1, 3 and 4 now describe Long-distance
+  Photo (since 1.6.0): participants exchange photos and clips, and Cloudflare relays the live video.
+  ③ The storage region (Seoul) is stated, with the two items that pass outside Korea spelled out.</p>
   <p class="note"><strong>Changed 13 September 2026</strong> — we now state that photos taken in booth mode are kept for 30 days (the policy previously said 7 days for every upload), and section 4 now discloses that booth photos are shared with the event host. Nothing about how the service works changed; the policy was simply wrong.</p>
   <p>If this policy changes we will post the new effective date and the changes on this
   page. Changes that disadvantage users will be announced at least 7 days in advance.</p>
@@ -441,7 +493,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 <!-- ─────────────────────────────  日本語  ───────────────────────────── -->
 <section id="ja" hidden>
   <h1>個人情報保護方針</h1>
-  <p class="meta">施行日 2026年9月13日 · Cumiel Inc.</p>
+  <p class="meta">施行日 2026年10月20日 · Cumiel Inc.</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
@@ -456,12 +508,13 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <p><strong>位置情報が端末の外に出ることはありません。</strong>ご当地フレームを
     開くときにだけ現在の位置を読み取り、端末の中でスポットの座標との距離だけを比べます。
     座標をサーバーへ送信したり保存したりはしません。</p>
-    <p><strong>写真がサーバーへアップロードされるのは一つの場合だけです。</strong>利用者が
-    QR での受け渡しを選んだとき（ブースモードでは QR 画面が表示されたとき）です。
-    アップロードされた写真は<strong>7日後</strong>に自動的に削除されます。例外は一つです —
-    <strong>主催者が写真を受け取ることになっているブースイベント</strong>(1歳の誕生祝い・
-    結婚式など)では、主催者がイベントのあとに受け取れるように<strong>30日後</strong>に
-    削除され、お客様には撮影前の待機画面でその旨をお知らせします。</p>
+    <p><strong>写真がサーバーへアップロードされるのは三つの場合です。</strong>① 利用者が QR での
+    受け渡しを選んだとき（ブースモードでは QR 画面が表示されたとき）— <strong>7日後</strong>に
+    自動削除。② <strong>主催者が写真を受け取ることになっているブースイベント</strong>（1歳の
+    誕生祝い・結婚式など）— 主催者がイベントのあとに受け取れるように<strong>30日後</strong>に
+    削除され、お客様には撮影前の待機画面でその旨をお知らせします。③ <strong>オンラインで一緒に
+    撮る</strong>（離れた人と1枚を作る機能）— 各自が撮った枠（写真・短い動画）がアップロードされ、
+    同じセッションの参加者だけに見え、<strong>7日後</strong>に削除されます。</p>
   </div>
 
   <h2>1. 取り扱う情報と利用目的</h2>
@@ -498,14 +551,20 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>アプリを削除すると一緒に消えます</td>
     </tr>
     <tr>
-      <td>アプリの利用統計（どのレイアウト・フレームを選んだか、保存・共有したか、
-      位置情報の許可の状態など）</td>
-      <td>機能の改善・不具合の把握</td>
-      <td>Firebase Analytics の既定の保存期間（最長14か月）</td>
+      <td><strong>オンラインで一緒に撮る</strong>で各自が撮った枠（写真・短い動画）、ホストが
+      入力した名前（任意）</td>
+      <td>同じセッションの参加者が1枚のフォトに仕上げる</td>
+      <td>アップロードから<strong>7日後に自動削除</strong>。ライブ映像は中継のみで保存しません。</td>
     </tr>
     <tr>
-      <td>端末情報（機種・OS バージョン・国・アプリインスタンス ID）</td>
-      <td>Firebase が統計を収集する過程で自動的に収集</td>
+      <td>アプリの利用統計（画面の移動、どのレイアウト・フレームを選んだか、保存・共有したか、
+      位置情報の許可の状態など — 匿名識別子単位）</td>
+      <td>機能の改善・不具合の把握</td>
+      <td>当社サーバー（Google Cloud ソウルリージョン）に<strong>400日</strong>保存後、自動削除</td>
+    </tr>
+    <tr>
+      <td>アプリのバージョン・プラットフォーム（iOS/Android）</td>
+      <td>利用統計とともに記録</td>
       <td>上に同じ</td>
     </tr>
     <tr>
@@ -522,7 +581,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   5年、代金の決済および財貨の供給に関する記録5年、消費者の苦情または紛争処理に関する記録
   3年。アプリのみをご利用の場合は該当しません。</p>
   <p class="note">利用統計に写真の内容や位置の座標が含まれることはありません。イベント
-  コードを入力した場合、そのコード文字列は統計に記録されます。</p>
+  コードを入力した場合、コードそのものではなく、元に戻せないハッシュの先頭8文字だけが
+  記録されます。</p>
 
   <h2>2. アプリが求める権限</h2>
   <ul>
@@ -549,6 +609,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   受け渡されるのと同時に、イベントが終わるときに主催者へその日の写真をまとめて見られる
   リンクで受け渡されます。このリンクと写真は30日後に一緒に削除されます。お客様には
   撮影を始める前の待機画面でこの旨をお知らせします。詳しくは下の4節をご覧ください。</p>
+  <p><strong>「オンラインで一緒に撮る」のリンクは招待された人だけが開けます。</strong>ホストが
+  作った招待リンクを受け取った人が一つの枠に入り、セッションが開いている間、参加者はお互いの
+  ライブ映像と撮った枠を見ます。映像は中継のみで保存されず、撮った枠の写真・短い動画は7日後に
+  削除されます。ホストは参加者を退出させることができ、退出させるとその枠のリンクは使えなく
+  なります。ホストが入力した名前は招待文に使われ、セッションとともに7日後に消えます。</p>
 
   <h2>4. 第三者提供および処理の委託</h2>
   <p>FRAEMII は利用者の情報を<strong>販売しません</strong>し、広告・マーケティングの目的で
@@ -573,18 +638,24 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   「撮影した写真はイベント主催者にも共有されます」という案内が表示されます。</strong></p>
   <p>サービスの運営のため、下記の事業者に処理を委託しています。</p>
   <ul>
-    <li><strong>Google LLC (Firebase)</strong> — 利用統計（Analytics）、匿名認証（Auth）、
-    QR 受け渡しファイルの保存（Cloud Storage）、フレームの配信（Hosting）。
+    <li><strong>Google LLC (Firebase · Google Cloud)</strong> — 匿名認証（Auth）、写真・動画の保存
+    （Cloud Storage）、セッション・お知らせ・注文データ（Firestore）、利用統計の集計（BigQuery）、
+    サーバー機能（Cloud Functions）、フレーム・ページの配信（Hosting）。
     <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase
     のプライバシー</a> · <a href="https://policies.google.com/privacy" target="_blank"
     rel="noopener">Google プライバシーポリシー</a></li>
+    <li><strong>Cloudflare, Inc.</strong> — 「オンラインで一緒に撮る」のライブ映像の中継。映像は
+    中継のみで保存されません。<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare プライバシーポリシー</a></li>
     <li><strong>ご注文された方に限り</strong> — 決済手段の提供会社（Toss Payments など）と
     販売チャネル（Naver Smart Store など）に、決済・注文の処理に必要な範囲で委託します。
     カード番号などの決済情報は当社では保管しません。</li>
   </ul>
-  <p class="note">Firebase はデータを国外（米国などの Google データセンター）で処理します。
-  アプリをインストール・利用することにより、上記の処理の委託および国外移転に同意した
-  ものとみなします。</p>
+  <p class="note"><strong>保存場所。</strong>写真・動画・利用統計・セッション・注文資料は Google Cloud
+  の<strong>ソウルリージョン</strong>（asia-northeast3）に保存します。ただし二つは国外を経由します —
+  匿名認証の記録（氏名・連絡先のない識別番号）は Google が米国のデータセンターで処理し、
+  「オンラインで一緒に撮る」のライブ映像は Cloudflare の海外サーバーを経由して中継されます
+  （保存されません）。アプリをインストール・利用することにより、上記の範囲の処理の委託および
+  国外処理に同意したものとみなします。</p>
 
   <h2>5. 利用者の権利</h2>
   <ul>
@@ -593,8 +664,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <li>QR 受け渡しでアップロードしたファイルの即時削除、利用統計の開示・削除を
     ご請求いただけます。下記の連絡先へご依頼いただければ遅滞なく対応します。方法は
     <a href="./delete-data.html">データ削除のご依頼</a>のページにまとめてあります。</li>
-    <li>端末の設定で権限を取り消すか、広告識別子のリセット・アプリの削除によって統計の
-    収集を止めることができます。</li>
+    <li>端末の設定で権限を取り消すか、アプリを削除することで統計の収集を止めることができます。
+    広告識別子は使用しません。</li>
   </ul>
 
   <h2>6. 子どもの個人情報</h2>
@@ -620,6 +691,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   </ul>
 
   <h2>9. 方針の変更</h2>
+  <p class="note"><strong>2026年10月20日の変更</strong> — ① アプリ 1.7.0 から Firebase Analytics
+  を使用しません。利用統計は当社サーバー（ソウル）でのみ集計し、端末の機種・OS バージョン・国・
+  IP に基づく位置の推定・アプリインスタンス ID を収集しなくなり、保存期間を400日と定めました。
+  ② 「オンラインで一緒に撮る」（1.6.0）で参加者同士が写真・動画をやり取りすること、映像の中継を
+  Cloudflare が担うことを1・3・4節に記載しました。③ データの保存場所をソウルリージョンと明記し、
+  国外を経由する二つを具体的に記載しました。</p>
   <p class="note"><strong>2026年9月13日の変更</strong> — ブースモードで撮影した写真の保存
   期間を30日と明記し（それ以前はすべてのアップロードを7日と記載していました）、ブース
   モードでイベント主催者に写真が提供されることを4節に追記しました。サービスの動作は
@@ -631,7 +708,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 <!-- ─────────────────────────────  中文(简体)  ───────────────────────────── -->
 <section id="zh" hidden>
   <h1>隐私政策</h1>
-  <p class="meta">生效日 2026年9月13日 · Cumiel Inc.</p>
+  <p class="meta">生效日 2026年10月20日 · Cumiel Inc.</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
@@ -645,11 +722,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     编辑全部在设备内完成。</p>
     <p><strong>位置信息不会离开您的设备。</strong>只有在打开本地地标边框时才读取当前位置，
     并且只在设备内与地标坐标比较距离，不会将坐标发送到服务器或加以保存。</p>
-    <p><strong>照片上传到服务器的情形只有一种。</strong>即用户选择用 QR 传送时（在拍照亭模式下
-    为 QR 画面出现时）。上传的照片将在<strong>7 天后</strong>自动删除。例外只有一个 —
-    在<strong>主办方约定接收照片的拍照亭活动</strong>（周岁宴、婚礼等）中，为便于主办方在活动
-    结束后取回，照片将在<strong>30 天后</strong>删除，并会在拍摄前的待机画面上向客人说明
-    这一点。</p>
+    <p><strong>照片上传到服务器的情形有三种。</strong>① 用户选择用 QR 传送时（在拍照亭模式下为
+    QR 画面出现时）— <strong>7 天后</strong>自动删除。② <strong>主办方约定接收照片的拍照亭
+    活动</strong>（周岁宴、婚礼等）— 为便于主办方在活动结束后取回，照片将在<strong>30 天后</strong>
+    删除，并会在拍摄前的待机画面上向客人说明。③ <strong>云合拍</strong>（与远方的人合拍一张）—
+    每人拍摄的格子（照片与短视频）会上传，仅对同一会话的参与者可见，并在 <strong>7 天后</strong>
+    删除。</p>
   </div>
 
   <h2>1. 处理的信息与使用目的</h2>
@@ -683,13 +761,19 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>卸载应用后一并消失</td>
     </tr>
     <tr>
-      <td>应用使用统计（选择了哪种版式与边框、是否保存或分享、位置权限状态等）</td>
-      <td>改进功能、排查错误</td>
-      <td>Firebase Analytics 的默认保存期限（最长 14 个月）</td>
+      <td><strong>云合拍</strong>中每人拍摄的格子（照片与短视频）、发起人填写的名字（可选）</td>
+      <td>由同一会话的参与者合成一张四格照</td>
+      <td>上传后 <strong>7 天自动删除</strong>。实时视频仅中继，不保存。</td>
     </tr>
     <tr>
-      <td>设备信息（型号、系统版本、国家、应用实例 ID）</td>
-      <td>Firebase 在收集统计的过程中自动收集</td>
+      <td>应用使用统计（页面跳转、选择了哪种版式与边框、是否保存或分享、位置权限状态等 —
+      以匿名标识符为单位）</td>
+      <td>改进功能、排查错误</td>
+      <td>保存在我们自己的服务器（Google Cloud 首尔区域）<strong>400 天</strong>后自动删除</td>
+    </tr>
+    <tr>
+      <td>应用版本与平台（iOS/Android）</td>
+      <td>与使用统计一并记录</td>
       <td>同上</td>
     </tr>
     <tr>
@@ -703,8 +787,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <p class="note"><strong>仅对下单的客户</strong>，依照韩国《电子商务等交易中的消费者保护法》
   保存以下记录 — 有关合同或撤回要约的记录 5 年，有关货款支付与商品供应的记录 5 年，
   有关消费者投诉或纠纷处理的记录 3 年。仅使用应用的情况不适用。</p>
-  <p class="note">使用统计中不包含照片的内容或位置坐标。如果输入了活动码，该代码字符串
-  会记录在统计中。</p>
+  <p class="note">使用统计中不包含照片的内容或位置坐标。如果输入了活动码，记录的不是活动码
+  本身，而只是不可逆哈希值的前 8 位。</p>
 
   <h2>2. 应用请求的权限</h2>
   <ul>
@@ -724,6 +808,10 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   照片的情形，照片在通过 QR 传给客人的同时，活动结束时也会以一个可一次查看当天照片的
   链接交给主办方。该链接与照片将在 30 天后一并删除。我们会在客人开始拍摄前的待机画面上
   说明这一点。详情请参阅下文第 4 节。</p>
+  <p><strong>云合拍的链接只有受邀的人才能打开。</strong>收到发起人邀请链接的人进入一个格子，
+  会话开启期间，参与者可以看到彼此的实时视频和拍好的格子。视频仅中继、不保存，格子的照片与
+  短视频在 7 天后删除。发起人可以移除参与者，移除后该格子的链接即失效。发起人填写的名字用于
+  邀请文案，并随会话在 7 天后消失。</p>
 
   <h2>4. 第三方共享与委托处理</h2>
   <p>FRAEMII <strong>不出售</strong>用户的信息，也不为广告或营销目的提供。向第三方提供的
@@ -746,24 +834,29 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   提供给活动主办方」的提示。</strong></p>
   <p>为运营服务，我们委托以下企业进行处理。</p>
   <ul>
-    <li><strong>Google LLC (Firebase)</strong> — 使用统计（Analytics）、匿名认证（Auth）、
-    QR 传送文件的存储（Cloud Storage）、边框分发（Hosting）。
+    <li><strong>Google LLC (Firebase · Google Cloud)</strong> — 匿名认证（Auth）、照片与视频存储
+    （Cloud Storage）、会话、公告与订单数据（Firestore）、使用统计汇总（BigQuery）、服务器功能
+    （Cloud Functions）、边框与页面分发（Hosting）。
     <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase
     隐私保护</a> · <a href="https://policies.google.com/privacy" target="_blank"
     rel="noopener">Google 隐私政策</a></li>
+    <li><strong>Cloudflare, Inc.</strong> — 云合拍的实时视频中继。视频仅中继，不保存。
+    <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare 隐私政策</a></li>
     <li><strong>仅对下单的客户</strong> — 在处理支付与订单所必需的范围内，委托支付服务
     提供商（如 Toss Payments）与销售渠道（如 Naver Smart Store）。我们不保存卡号等
     支付信息。</li>
   </ul>
-  <p class="note">Firebase 在韩国境外（美国等 Google 数据中心）处理数据。安装并使用本应用
-  即视为同意上述委托处理与跨境转移。</p>
+  <p class="note"><strong>存储位置。</strong>照片、视频、使用统计、会话与订单资料保存在 Google Cloud
+  <strong>首尔区域</strong>（asia-northeast3）。有两项会经过境外：匿名认证记录（不含姓名与联系方式
+  的标识号）由 Google 在美国的数据中心处理；云合拍的实时视频经由 Cloudflare 的境外服务器中继
+  （不保存）。安装并使用本应用即视为同意上述范围内的委托处理与境外处理。</p>
 
   <h2>5. 用户的权利</h2>
   <ul>
     <li>设备内的照片与存档可由用户自行删除，卸载应用后会一并清除。</li>
     <li>您可以请求立即删除通过 QR 传送上传的文件，以及查阅或删除使用统计。通过下方的
     联系方式提出请求后，我们会毫不迟延地处理。方法已整理在<a href="./delete-data.html">数据删除请求</a>页面。</li>
-    <li>您可以在设备设置中撤回权限，或通过重置广告标识符、卸载应用来停止统计收集。</li>
+    <li>您可以在设备设置中撤回权限，或通过卸载应用来停止统计收集。我们不使用广告标识符。</li>
   </ul>
 
   <h2>6. 儿童的个人信息</h2>
@@ -787,6 +880,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   </ul>
 
   <h2>9. 政策的变更</h2>
+  <p class="note"><strong>2026 年 10 月 20 日变更</strong> — ① 自应用 1.7.0 起不再使用 Firebase
+  Analytics。使用统计仅在我们位于首尔的服务器上汇总，不再收集设备型号、系统版本、国家、基于 IP
+  的位置推测和应用实例 ID，并将保存期限定为 400 天。② 在第 1、3、4 节中补充了云合拍（1.6.0）：
+  参与者之间交换照片与视频，实时视频由 Cloudflare 中继。③ 明确了数据存储区域为首尔，并具体列出了
+  经过境外的两项。</p>
   <p class="note"><strong>2026 年 9 月 13 日变更</strong> — 明确了拍照亭模式下拍摄的照片保存
   期限为 30 天（此前将所有上传都写作 7 天），并在第 4 节中补充了拍照亭模式下照片会提供给
   活动主办方这一事实。服务的运作方式没有改变，这只是更正了与实际不符的说明。</p>
