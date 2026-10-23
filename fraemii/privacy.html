@@ -127,9 +127,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       버려집니다.</td>
     </tr>
     <tr>
-      <td>익명 식별자(Firebase 익명 인증)</td>
-      <td>QR 전달 업로드 권한 확인 — 개인 식별에 쓰지 않음</td>
-      <td>앱을 삭제하면 함께 사라짐</td>
+      <td>익명 식별자(Firebase 익명 인증) — 이름·연락처가 없는 무작위 번호</td>
+      <td>QR 전달·랜선 네컷 업로드 권한 확인, 사용 통계를 기기 단위로 묶기 — 개인 식별에 쓰지 않음.
+      <strong>Google 인증 서비스가 미국 데이터센터에서 발급·처리합니다</strong>(4절 저장 위치).</td>
+      <td>앱을 삭제하면 이 기기와의 연결이 끊어집니다. 번호 기록은 Google 인증 서비스에 남으며,
+      요청하시면 삭제합니다(5절).</td>
     </tr>
     <tr>
       <td><strong>랜선 네컷</strong>에서 각자 찍은 칸(사진·짧은 영상), 호스트가 적은 이름(선택)</td>
@@ -161,11 +163,21 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>제작을 위해 받은 사진·로고 원본은 <strong>행사 종료 후 90일 뒤 삭제</strong>.
       주문·결제 기록은 전자상거래법에 따라 보존합니다(아래 참고).</td>
     </tr>
+    <tr>
+      <td><strong>공공기관 주문(조달 계약)</strong>의 기관명, 담당 부서·담당자 이름·연락처·이메일,
+      검수 자료, 세금계산서 발행 정보, 대금 지급(정산) 기록</td>
+      <td>계약 이행, 검수, 세금계산서 발행, 대금 정산</td>
+      <td>정산(대금 지급)이 끝난 날부터 <strong>5년</strong> 보관 후 삭제(아래 참고).
+      제작용 사진·로고 원본은 위와 같이 행사 종료 후 90일에 삭제합니다.</td>
+    </tr>
   </table>
   <p class="note"><strong>주문하신 분에 한해</strong> 전자상거래 등에서의 소비자보호에
   관한 법률에 따라 다음 기록을 보존합니다 — 계약 또는 청약철회에 관한 기록 5년,
   대금 결제 및 재화 공급에 관한 기록 5년, 소비자 불만 또는 분쟁 처리에 관한 기록 3년.
   앱만 이용하시는 경우에는 해당하지 않습니다.</p>
+  <p class="note"><strong>공공기관 주문은 후불 정산</strong>이라 계약·검수·세금계산서·대금 지급 기록을
+  국세기본법·부가가치세법에 따라 <strong>정산이 끝난 날부터 5년</strong> 보관합니다. 기관 담당자의
+  이름·연락처는 이 기록에 포함된 범위에서만 남습니다.</p>
   <p class="note">사용 통계에는 사진의 내용이나 위치 좌표가 포함되지 않습니다. 행사 코드를
   입력한 경우 코드 자체가 아니라 되돌릴 수 없는 해시의 앞 8자리만 기록됩니다.</p>
 
@@ -241,7 +253,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li>기기 내 사진·보관함은 이용자가 직접 삭제할 수 있으며, 앱을 삭제하면 함께
     지워집니다.</li>
-    <li>QR 전달로 올린 파일의 즉시 삭제, 사용 통계의 열람·삭제를 요청하실 수 있습니다.
+    <li>QR 전달로 올린 파일의 즉시 삭제, 사용 통계와 익명 식별자의 열람·삭제를 요청하실 수 있습니다.
     아래 연락처로 요청하시면 지체 없이 처리합니다. 방법은 <a href="./delete-data.html">데이터 삭제 요청</a> 페이지에 정리해 두었습니다.</li>
     <li>기기 설정에서 권한을 철회하거나, 앱을 삭제해 통계 수집을 중단할 수 있습니다. 광고
     식별자는 쓰지 않습니다.</li>
@@ -271,7 +283,10 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <h2>9. 방침의 변경</h2>
   <p class="note"><strong>2026년 10월 23일 변경</strong> — 한정 프레임을 "친구 N명이 내 링크를 열면" 미션으로도
   열 수 있게 하면서, 초대 링크를 연 횟수와 중복을 거르기 위한 무작위 번호·IP 해시를 90일 동안 보관한다는 것을
-  1절 표에 적었습니다. 링크를 연 사람의 이름·연락처는 받지 않습니다.</p>
+  1절 표에 적었습니다. 링크를 연 사람의 이름·연락처는 받지 않습니다. 함께 — ① 익명 식별자가 Google
+  인증 서비스(미국)에서 처리된다는 것을 1절 표에도 적고, 앱을 지워도 번호 기록은 남으며 요청하면
+  삭제한다고 바로잡았습니다(전에는 "앱을 삭제하면 함께 사라짐"). ② 공공기관 주문(조달 계약)의 계약·검수·
+  세금계산서·정산 기록을 정산이 끝난 날부터 5년 보관한다는 것을 추가했습니다.</p>
   <p class="note"><strong>2026년 10월 20일 변경</strong> — ① 앱 1.7.0 부터 Firebase Analytics 를
   쓰지 않습니다. 사용 통계는 당사 서버(서울)에서만 집계하고 기기 모델·OS·국가·IP 기반 위치
   추정·앱 인스턴스 ID 를 더 이상 수집하지 않으며, 보관 기간을 400일로 정했습니다. ② 랜선
@@ -343,9 +358,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       two minutes, then discarded.</td>
     </tr>
     <tr>
-      <td>Anonymous identifier (Firebase Anonymous Auth)</td>
-      <td>Authorising QR uploads — not used to identify you</td>
-      <td>Removed when you uninstall the app</td>
+      <td>Anonymous identifier (Firebase Anonymous Auth) — a random number with no name or contact details</td>
+      <td>Authorising QR and Long-distance Photo uploads, and grouping usage statistics by device — not used
+      to identify you. <strong>Issued and processed by Google's authentication service in data centres in
+      the United States</strong> (see "Where data is stored" in section 4).</td>
+      <td>Uninstalling the app disconnects it from this device. The number itself stays in Google's
+      authentication service; we delete it on request (section 5).</td>
     </tr>
     <tr>
       <td><strong>Long-distance Photo</strong> — the slot you shoot (a photo and a short clip) and
@@ -380,12 +398,24 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>Source photos and logos are <strong>deleted 90 days after the event</strong>.
       Order and payment records are retained as required by Korean e-commerce law (see below).</td>
     </tr>
+    <tr>
+      <td><strong>Public-sector orders (procurement contracts)</strong> — the agency name, the
+      department and contact person's name, phone number and email, inspection materials, tax
+      invoice details and payment (settlement) records</td>
+      <td>Performing the contract, inspection, issuing tax invoices, settling payment</td>
+      <td>Kept for <strong>5 years</strong> from the date settlement (payment) is completed, then deleted
+      (see below). Source photos and logos are still deleted 90 days after the event.</td>
+    </tr>
   </table>
   <p class="note"><strong>For customers who place an order only</strong>, the Act on Consumer
   Protection in Electronic Commerce requires us to keep records of contracts and withdrawal
   of subscription for 5 years, records of payment and supply for 5 years, and records of
   consumer complaints or dispute resolution for 3 years. This does not apply if you only use
   the app.</p>
+  <p class="note"><strong>Public-sector orders are settled after delivery</strong>, so we keep the contract,
+  inspection, tax invoice and payment records for <strong>5 years from the date settlement is
+  completed</strong>, as required by the Framework Act on National Taxes and the Value-Added Tax Act.
+  The contact person's name and details are kept only as part of those records.</p>
   <p class="note">Usage statistics never include the content of your photos or your
   coordinates. If you enter an event code, only the first 8 characters of a one-way hash of
   the code are recorded — never the code itself.</p>
@@ -466,7 +496,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     <li>You can delete photos and the in-app vault yourself; uninstalling the app removes
     them.</li>
     <li>You may request immediate deletion of files uploaded for QR delivery, and access to
-    or deletion of your usage statistics. We act on such requests without delay — how to
+    or deletion of your usage statistics and anonymous identifier. We act on such requests without delay — how to
     is set out on the <a href="./delete-data.html">data deletion request</a> page.</li>
     <li>You can revoke permissions in device settings, or stop usage statistics by uninstalling
     the app. We do not use the advertising identifier.</li>
@@ -498,7 +528,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <p class="note"><strong>Changed 23 October 2026</strong> — Limited frames can now also be unlocked
   by having N friends open your link. Section 1 now lists the open count and the random number and IP
   hash used to avoid double counting, kept for 90 days. We do not collect the name or contact details
-  of anyone who opens the link.</p>
+  of anyone who opens the link. Also — ① Section 1 now states that the anonymous identifier is processed
+  by Google's authentication service in the United States, and corrects its retention: the number stays
+  after you uninstall and we delete it on request (previously "removed when you uninstall"). ② Added
+  that contract, inspection, tax invoice and settlement records for public-sector orders are kept for
+  5 years from settlement.</p>
   <p class="note"><strong>Changed 20 October 2026</strong> — ① From app version 1.7.0 we no longer
   use Firebase Analytics. Usage statistics are counted only on our own servers in Seoul; device
   model, OS version, country, IP-based location estimates and the app instance ID are no longer
@@ -566,9 +600,12 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       破棄されます。</td>
     </tr>
     <tr>
-      <td>匿名の識別子（Firebase 匿名認証）</td>
-      <td>QR 受け渡しのアップロード権限の確認 — 個人の識別には使いません</td>
-      <td>アプリを削除すると一緒に消えます</td>
+      <td>匿名の識別子（Firebase 匿名認証）— 氏名・連絡先を含まない乱数</td>
+      <td>QR 受け渡し・オンラインで一緒に撮るのアップロード権限の確認、利用統計を端末単位でまとめること —
+      個人の識別には使いません。<strong>Google の認証サービスが米国のデータセンターで発行・処理します</strong>
+      （第4節「保存場所」）。</td>
+      <td>アプリを削除するとこの端末との結びつきが切れます。番号の記録は Google の認証サービスに残り、
+      ご依頼があれば削除します（第5節）。</td>
     </tr>
     <tr>
       <td><strong>オンラインで一緒に撮る</strong>で各自が撮った枠（写真・短い動画）、ホストが
@@ -601,11 +638,21 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>制作のためにお預かりした写真・ロゴの原本は<strong>イベント終了後90日で削除</strong>
       します。注文・決済の記録は韓国の電子商取引法に従って保存します（下記参照）。</td>
     </tr>
+    <tr>
+      <td><strong>公共機関のご注文（調達契約）</strong>の機関名、担当部署・担当者のお名前・連絡先・
+      メールアドレス、検収資料、税金計算書の発行情報、代金支払い（精算）の記録</td>
+      <td>契約の履行、検収、税金計算書の発行、代金の精算</td>
+      <td>精算（代金の支払い）が完了した日から<strong>5年</strong>保存した後に削除します（下記参照）。
+      制作用の写真・ロゴの原本は上記のとおりイベント終了後90日で削除します。</td>
+    </tr>
   </table>
   <p class="note"><strong>ご注文された方に限り</strong>、韓国の「電子商取引等における
   消費者保護に関する法律」に従い次の記録を保存します — 契約または申込みの撤回に関する記録
   5年、代金の決済および財貨の供給に関する記録5年、消費者の苦情または紛争処理に関する記録
   3年。アプリのみをご利用の場合は該当しません。</p>
+  <p class="note"><strong>公共機関のご注文は後払いの精算</strong>のため、契約・検収・税金計算書・
+  代金支払いの記録を韓国の国税基本法・付加価値税法に従い<strong>精算完了日から5年</strong>保存します。
+  担当者のお名前・連絡先は、これらの記録に含まれる範囲でのみ残ります。</p>
   <p class="note">利用統計に写真の内容や位置の座標が含まれることはありません。イベント
   コードを入力した場合、コードそのものではなく、元に戻せないハッシュの先頭8文字だけが
   記録されます。</p>
@@ -687,7 +734,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li>端末内の写真・ライブラリは利用者ご自身で削除でき、アプリを削除すると一緒に
     消えます。</li>
-    <li>QR 受け渡しでアップロードしたファイルの即時削除、利用統計の開示・削除を
+    <li>QR 受け渡しでアップロードしたファイルの即時削除、利用統計と匿名の識別子の開示・削除を
     ご請求いただけます。下記の連絡先へご依頼いただければ遅滞なく対応します。方法は
     <a href="./delete-data.html">データ削除のご依頼</a>のページにまとめてあります。</li>
     <li>端末の設定で権限を取り消すか、アプリを削除することで統計の収集を止めることができます。
@@ -719,7 +766,10 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <h2>9. 方針の変更</h2>
   <p class="note"><strong>2026年10月23日の変更</strong> — 限定フレームを「友だちN人が自分のリンクを開く」ミッションでも
   開けるようにしたことに伴い、招待リンクが開かれた回数と、重複を除くための乱数・IPハッシュを90日間保管することを
-  第1節の表に記載しました。リンクを開いた方の氏名・連絡先は受け取りません。</p>
+  第1節の表に記載しました。リンクを開いた方の氏名・連絡先は受け取りません。あわせて — ① 匿名の識別子が
+  Google の認証サービス（米国）で処理されることを第1節の表にも記載し、アプリを削除しても番号の記録は残り、
+  ご依頼があれば削除すると訂正しました（以前は「アプリを削除すると一緒に消えます」）。② 公共機関のご注文
+  （調達契約）の契約・検収・税金計算書・精算の記録を精算完了日から5年保存することを追加しました。</p>
   <p class="note"><strong>2026年10月20日の変更</strong> — ① アプリ 1.7.0 から Firebase Analytics
   を使用しません。利用統計は当社サーバー（ソウル）でのみ集計し、端末の機種・OS バージョン・国・
   IP に基づく位置の推定・アプリインスタンス ID を収集しなくなり、保存期間を400日と定めました。
@@ -785,9 +835,11 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td><strong>不发送、不保存。</strong>仅在设备内存中最多使用 2 分钟，随后丢弃。</td>
     </tr>
     <tr>
-      <td>匿名标识符（Firebase 匿名认证）</td>
-      <td>确认 QR 传送的上传权限 — 不用于识别个人</td>
-      <td>卸载应用后一并消失</td>
+      <td>匿名标识符（Firebase 匿名认证）— 不含姓名与联系方式的随机编号</td>
+      <td>确认 QR 传送与云合拍的上传权限，并按设备汇总使用统计 — 不用于识别个人。
+      <strong>由 Google 认证服务在美国的数据中心签发与处理</strong>（见第 4 节"存储位置"）。</td>
+      <td>卸载应用后，该编号与本设备的关联即断开。编号记录保留在 Google 认证服务中，
+      如您提出请求，我们会删除（第 5 节）。</td>
     </tr>
     <tr>
       <td><strong>云合拍</strong>中每人拍摄的格子（照片与短视频）、发起人填写的名字（可选）</td>
@@ -818,10 +870,20 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
       <td>为制作而收到的照片与标识原件将在<strong>活动结束 90 天后删除</strong>。订单与
       支付记录依照韩国电子商务法保存（见下文）。</td>
     </tr>
+    <tr>
+      <td><strong>公共机关订单（采购合同）</strong>的机关名称，负责部门及负责人的姓名、联系方式、
+      电子邮箱，验收资料，税务发票开具信息，货款支付（结算）记录</td>
+      <td>履行合同、验收、开具税务发票、结算货款</td>
+      <td>自结算（货款支付）完成之日起保存 <strong>5 年</strong>后删除（见下文）。为制作而收到的照片与
+      标识原件仍按上文在活动结束 90 天后删除。</td>
+    </tr>
   </table>
   <p class="note"><strong>仅对下单的客户</strong>，依照韩国《电子商务等交易中的消费者保护法》
   保存以下记录 — 有关合同或撤回要约的记录 5 年，有关货款支付与商品供应的记录 5 年，
   有关消费者投诉或纠纷处理的记录 3 年。仅使用应用的情况不适用。</p>
+  <p class="note"><strong>公共机关订单为事后结算</strong>，因此依照韩国《国税基本法》《增值税法》，
+  合同、验收、税务发票与货款支付记录自<strong>结算完成之日起保存 5 年</strong>。负责人的姓名与联系方式
+  仅在这些记录所含的范围内保留。</p>
   <p class="note">使用统计中不包含照片的内容或位置坐标。如果输入了活动码，记录的不是活动码
   本身，而只是不可逆哈希值的前 8 位。</p>
 
@@ -889,7 +951,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <h2>5. 用户的权利</h2>
   <ul>
     <li>设备内的照片与存档可由用户自行删除，卸载应用后会一并清除。</li>
-    <li>您可以请求立即删除通过 QR 传送上传的文件，以及查阅或删除使用统计。通过下方的
+    <li>您可以请求立即删除通过 QR 传送上传的文件，以及查阅或删除使用统计与匿名标识符。通过下方的
     联系方式提出请求后，我们会毫不迟延地处理。方法已整理在<a href="./delete-data.html">数据删除请求</a>页面。</li>
     <li>您可以在设备设置中撤回权限，或通过卸载应用来停止统计收集。我们不使用广告标识符。</li>
   </ul>
@@ -917,7 +979,9 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <h2>9. 政策的变更</h2>
   <p class="note"><strong>2026 年 10 月 23 日变更</strong> — 限定边框现在也可以通过"让 N 位朋友打开你的链接"
   解锁。第 1 节表格中写明了邀请链接的打开次数，以及为避免重复计数而保存 90 天的随机编号和 IP 哈希值。
-  我们不收集打开链接者的姓名或联系方式。</p>
+  我们不收集打开链接者的姓名或联系方式。同时 — ① 在第 1 节表格中也写明匿名标识符由 Google 认证服务
+  （美国）处理，并更正了保存说明：卸载后编号记录仍会保留，提出请求即删除（此前写的是"卸载应用后一并消失"）。
+  ② 新增：公共机关订单（采购合同）的合同、验收、税务发票与结算记录自结算完成之日起保存 5 年。</p>
   <p class="note"><strong>2026 年 10 月 20 日变更</strong> — ① 自应用 1.7.0 起不再使用 Firebase
   Analytics。使用统计仅在我们位于首尔的服务器上汇总，不再收集设备型号、系统版本、国家、基于 IP
   的位置推测和应用实例 ID，并将保存期限定为 400 天。② 在第 1、3、4 节中补充了云合拍（1.6.0）：

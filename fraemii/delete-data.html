@@ -73,7 +73,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 <!-- ─────────────────────────────  한국어  ───────────────────────────── -->
 <section id="ko">
   <h1>데이터 삭제 요청</h1>
-  <p class="meta">최종 수정 2026년 9월 9일 · 큐미엘 주식회사</p>
+  <p class="meta">최종 수정 2026년 10월 23일 · 큐미엘 주식회사</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
@@ -94,7 +94,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li><strong>보관함</strong> — 앱 오른쪽 위 보관함에서 항목을 눌러 삭제. 지우지 않아도 7일 뒤 자동으로 사라집니다.</li>
     <li><strong>사진 앱에 저장한 파일</strong> — 사진 앱(갤러리)의 FRAEMII 앨범에서 삭제.</li>
-    <li><strong>앱 삭제</strong> — 앱을 지우면 보관함·설치한 프레임·익명 식별자가 함께 사라집니다.</li>
+    <li><strong>앱 삭제</strong> — 앱을 지우면 보관함·설치한 프레임이 함께 사라지고, 익명 식별자와 이 기기의 연결이 끊어집니다. 서버에 남은 번호 기록까지 지우려면 3절로 요청해 주세요.</li>
   </ul>
 
   <h2>2. QR 전달로 올린 사진 — 7일 뒤 자동 삭제 (부스 행사는 30일)</h2>
@@ -109,14 +109,19 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     링크가 곧 그 사진의 주소라 이것만 있으면 찾을 수 있습니다.</li>
   </ul>
 
-  <h2>3. 사용 통계 — 요청으로 삭제</h2>
-  <p>어떤 분할·프레임을 골랐는지, 저장·공유했는지 같은 익명 사용 통계를
-  Firebase Analytics 로 수집합니다. 사진의 내용이나 위치 좌표는 포함되지 않습니다.</p>
+  <h2>3. 사용 통계·익명 식별자 — 요청으로 삭제</h2>
+  <p>어떤 분할·프레임을 골랐는지, 저장·공유했는지 같은 익명 사용 통계를 <strong>당사 서버(Google Cloud
+  서울 리전)</strong>에서 집계하고 400일 뒤 자동으로 지웁니다. 외부 분석 도구는 쓰지 않습니다(앱 1.7.0 부터).
+  사진의 내용이나 위치 좌표는 포함되지 않습니다. 통계는 익명 식별자(이름·연락처가 없는 번호, Google 인증
+  서비스가 미국에서 처리) 단위로 묶입니다.</p>
   <ul>
     <li>제목: <strong>[FRAEMII] 사용 통계 삭제 요청</strong></li>
-    <li>이 통계는 이름·이메일과 연결되어 있지 않습니다. 본문에 <strong>기기 모델과 대략의 사용 기간</strong>을
-    적어 주시면 해당 기록을 찾아 삭제합니다. QR 전달을 쓰신 적이 있다면 그 링크를 함께 주시면 더 정확합니다.</li>
-    <li><strong>앱을 삭제하면 이후 수집이 즉시 멈춥니다.</strong> 남은 기록은 Firebase 보존 기간(최대 14개월) 뒤 만료됩니다.</li>
+    <li>이 통계는 이름·이메일과 연결되어 있지 않아, 기록을 찾으려면 그 기기의 흔적이 필요합니다.
+    <strong>랜선 네컷 링크</strong>와 몇 번 칸이었는지, 또는 <strong>QR 전달 링크</strong>와 올린 날짜, 그리고
+    <strong>iPhone/Android · 앱 버전 · 대략의 사용 기간</strong>을 적어 주세요. 그것으로 기록을 좁혀 그 기기의 통계와
+    익명 식별자를 지우고, 기기를 특정하지 못하면 그렇다고 회신합니다.</li>
+    <li><strong>앱을 삭제하면 이후 수집이 즉시 멈춥니다.</strong> 이미 남은 기록은 400일 뒤 자동으로 지워집니다.
+    1.6.0 이하 앱이 Google Analytics 로 보냈던 기록은 Google 의 보존 기간(최대 14개월) 뒤 만료됩니다.</li>
   </ul>
 
   <h2>요청 보내는 곳</h2>
@@ -136,7 +141,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 
 <section id="en" hidden>
   <h1>Delete Your Data</h1>
-  <p class="meta">Last updated 9 September 2026 · Cumiel Inc.</p>
+  <p class="meta">Last updated 23 October 2026 · Cumiel Inc.</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
@@ -157,7 +162,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li><strong>In-app vault</strong> — open the vault (top right) and delete an item. Anything left is removed automatically after 7 days.</li>
     <li><strong>Files saved to your photo library</strong> — delete them from the FRAEMII album in Photos or Gallery.</li>
-    <li><strong>Uninstall</strong> — removing the app also removes the vault, installed frames and the anonymous identifier.</li>
+    <li><strong>Uninstall</strong> — removing the app also removes the vault and installed frames, and disconnects the anonymous identifier from this device. To delete the number record on our side too, send a request as in section 3.</li>
   </ul>
 
   <h2>2. Photos you sent by QR — deleted after 7 days (booth events: 30 days)</h2>
@@ -173,16 +178,22 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     The link is the address of that photo, so it is all we need.</li>
   </ul>
 
-  <h2>3. Usage statistics — delete on request</h2>
-  <p>We collect anonymous usage statistics through Firebase Analytics: which layout and frame you picked,
-  whether you saved or shared. They never include the content of your photos or your coordinates.</p>
+  <h2>3. Usage statistics and anonymous identifier — delete on request</h2>
+  <p>Anonymous usage statistics — which layout and frame you picked, whether you saved or shared — are counted on
+  <strong>our own servers (Google Cloud, Seoul region)</strong> and deleted automatically after 400 days. We use no
+  third-party analytics tool (from app version 1.7.0). They never include the content of your photos or your
+  coordinates. Statistics are grouped by an anonymous identifier (a number with no name or contact details,
+  processed by Google's authentication service in the United States).</p>
   <ul>
     <li>Subject: <strong>[FRAEMII] Delete usage statistics</strong></li>
-    <li>These statistics are not linked to your name or email. Tell us your <strong>device model and roughly when
-    you used the app</strong> and we will find and delete the matching records. If you used QR delivery, sending that
-    link too makes it exact.</li>
-    <li><strong>Uninstalling stops collection immediately.</strong> Anything already recorded expires after Firebase's
-    retention period (up to 14 months).</li>
+    <li>These statistics are not linked to your name or email, so we need something from that device to find them.
+    Send a <strong>Long-distance Photo link</strong> and which slot you were in, or a <strong>QR delivery link</strong> and the
+    date you shared it, plus <strong>iPhone or Android, the app version and roughly when you used the app</strong>. We use
+    these to narrow down that device's statistics and anonymous identifier and delete them; if we cannot pin down the
+    device, we will tell you so.</li>
+    <li><strong>Uninstalling stops collection immediately.</strong> Anything already recorded is deleted automatically
+    after 400 days. Records sent to Google Analytics by app versions 1.6.0 and earlier expire after Google's retention
+    period (up to 14 months).</li>
   </ul>
 
   <h2>Where to send your request</h2>
@@ -202,7 +213,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 
 <section id="ja" hidden>
   <h1>データ削除のご依頼</h1>
-  <p class="meta">最終更新 2026年9月9日 · Cumiel Inc.</p>
+  <p class="meta">最終更新 2026年10月23日 · Cumiel Inc.</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
@@ -223,7 +234,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li><strong>アプリ内のライブラリ</strong> — 画面右上のライブラリを開き、項目をタップして削除します。削除しなくても7日後に自動で消えます。</li>
     <li><strong>写真アプリに保存したファイル</strong> — 写真アプリ（ギャラリー）の FRAEMII アルバムから削除します。</li>
-    <li><strong>アプリの削除</strong> — アプリを削除すると、ライブラリ・インストールしたフレーム・匿名の識別子も一緒に消えます。</li>
+    <li><strong>アプリの削除</strong> — アプリを削除すると、ライブラリ・インストールしたフレームも一緒に消え、匿名の識別子とこの端末の結びつきが切れます。サーバーに残る番号の記録まで削除するには、第3節の方法でご依頼ください。</li>
   </ul>
 
   <h2>2. QR 受け渡しでアップロードした写真 — 7日後に自動削除（ブースイベントは30日）</h2>
@@ -238,16 +249,20 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     リンクがその写真のアドレスですので、これだけで見つけられます。</li>
   </ul>
 
-  <h2>3. 利用統計 — ご依頼により削除</h2>
-  <p>どのレイアウトとフレームを選んだか、保存・共有したかといった匿名の利用統計を
-  Firebase Analytics で収集しています。写真の内容や位置座標は含まれません。</p>
+  <h2>3. 利用統計・匿名の識別子 — ご依頼により削除</h2>
+  <p>どのレイアウトとフレームを選んだか、保存・共有したかといった匿名の利用統計は<strong>当社サーバー
+  （Google Cloud ソウルリージョン）</strong>で集計し、400日後に自動で削除します。外部の分析ツールは使用していません
+  （アプリ 1.7.0 から）。写真の内容や位置座標は含まれません。統計は匿名の識別子（氏名・連絡先を含まない番号。
+  Google の認証サービスが米国で処理）ごとにまとめられます。</p>
   <ul>
     <li>件名: <strong>[FRAEMII] 利用統計の削除のご依頼</strong></li>
-    <li>この統計はお名前やメールアドレスと結びついていません。本文に<strong>端末の機種と、おおよその利用時期</strong>を
-    お書きいただければ、該当する記録を探して削除します。QR 受け渡しをご利用になったことがあれば、そのリンクも
-    併せてお知らせいただくとより正確です。</li>
-    <li><strong>アプリを削除すると、以降の収集は直ちに停止します。</strong>すでに記録されたものは Firebase の
-    保存期間（最長14か月）を過ぎると失効します。</li>
+    <li>この統計はお名前やメールアドレスと結びついていないため、記録を探すにはその端末の手がかりが必要です。
+    <strong>オンラインで一緒に撮るのリンク</strong>と何番の枠だったか、または<strong>QR 受け渡しのリンク</strong>と
+    共有した日付、そして<strong>iPhone/Android の別・アプリのバージョン・おおよその利用時期</strong>をお書きください。
+    それをもとにその端末の統計と匿名の識別子を絞り込んで削除し、端末を特定できなかった場合はその旨をご返信します。</li>
+    <li><strong>アプリを削除すると、以降の収集は直ちに停止します。</strong>すでに記録されたものは400日後に自動で
+    削除されます。1.6.0 以前のアプリが Google Analytics に送った記録は、Google の保存期間（最長14か月）を過ぎると
+    失効します。</li>
   </ul>
 
   <h2>ご依頼の送り先</h2>
@@ -267,7 +282,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
 
 <section id="zh" hidden>
   <h1>删除您的数据</h1>
-  <p class="meta">最后更新 2026年9月9日 · Cumiel Inc.</p>
+  <p class="meta">最后更新 2026年10月23日 · Cumiel Inc.</p>
 
   <div class="toggle">
     <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
@@ -288,7 +303,7 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
   <ul>
     <li><strong>应用内存档</strong> — 打开右上角的存档，点按条目即可删除。未删除的内容也会在 7 天后自动消失。</li>
     <li><strong>保存到系统相册的文件</strong> — 在「照片」或「图库」的 FRAEMII 相册中删除。</li>
-    <li><strong>卸载应用</strong> — 卸载应用时，应用内存档、已安装的边框以及匿名标识符会一并删除。</li>
+    <li><strong>卸载应用</strong> — 卸载应用时，应用内存档与已安装的边框会一并删除，匿名标识符与本设备的关联也随之断开。如需连服务器上的编号记录一起删除，请按第 3 节提出请求。</li>
   </ul>
 
   <h2>2. 通过 QR 上传的照片 — 7 天后自动删除（拍照亭活动为 30 天）</h2>
@@ -303,15 +318,17 @@ footer{border-top:1px solid var(--line);padding:22px 0 40px;text-align:center;
     链接就是该照片的地址，仅凭它我们就能找到。</li>
   </ul>
 
-  <h2>3. 使用统计 — 按请求删除</h2>
-  <p>我们通过 Firebase Analytics 收集匿名使用统计：您选择了哪种版式与边框、是否保存或分享。
-  其中不包含照片内容，也不包含您的位置坐标。</p>
+  <h2>3. 使用统计与匿名标识符 — 按请求删除</h2>
+  <p>您选择了哪种版式与边框、是否保存或分享等匿名使用统计，由<strong>我们自己的服务器（Google Cloud
+  首尔区域）</strong>汇总，400 天后自动删除。我们不使用第三方分析工具（自应用 1.7.0 起）。其中不包含照片内容，
+  也不包含您的位置坐标。统计按匿名标识符（不含姓名与联系方式的编号，由 Google 认证服务在美国处理）汇总。</p>
   <ul>
     <li>主题：<strong>[FRAEMII] 使用统计删除请求</strong></li>
-    <li>这些统计不与您的姓名或电子邮箱关联。请在正文中写明<strong>设备型号和大致的使用时间</strong>，
-    我们会找到相应记录并删除。如果您使用过 QR 传送，一并提供该链接会更准确。</li>
-    <li><strong>卸载应用后，收集会立即停止。</strong>已经记录的内容将在 Firebase 的保存期限
-    （最长 14 个月）后失效。</li>
+    <li>这些统计不与您的姓名或电子邮箱关联，因此需要该设备的线索才能找到记录。请提供<strong>云合拍链接</strong>及您所在的
+    格子编号，或<strong>QR 传送链接</strong>及分享日期，并写明<strong>iPhone 或 Android、应用版本以及大致的使用时间</strong>。
+    我们会据此缩小范围，删除该设备的统计与匿名标识符；如果无法确定设备，我们也会如实回复。</li>
+    <li><strong>卸载应用后，收集会立即停止。</strong>已记录的内容将在 400 天后自动删除。1.6.0 及更早版本的应用
+    发送给 Google Analytics 的记录，将在 Google 的保存期限（最长 14 个月）后失效。</li>
   </ul>
 
   <h2>请求发送至</h2>
